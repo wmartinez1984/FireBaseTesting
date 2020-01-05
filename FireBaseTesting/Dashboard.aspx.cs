@@ -20,7 +20,7 @@ namespace FireBaseTesting
                 webClient.Headers.Add("Content-Type", "application/json");
                 //string reply = webClient.UploadString(settings.UrlMessageSend + settings.Apitoken + settings.Instance, "POST", "{\n\t\"phone\":" + phone + ",\n\t\"body\":\"" + settings.AnswerPhrase + "\"\n}");
                 var json = webClient.DownloadString("https://firestore.googleapis.com/v1/projects/apptecnicos-9a471/databases/(default)/documents/prueba");
-                Response.Write(json);
+               // Response.Write(json);
             }
         }
     }
