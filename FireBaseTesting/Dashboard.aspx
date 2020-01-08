@@ -3,6 +3,10 @@
 <html lang="en">
 <head>
     <title>Dashboard</title>
+
+     <!--Mensajes...-->
+    <script src="Scripts/sweetalert-dev.js"></script>
+    <link href="css/sweetalert.css" rel="stylesheet" />
     <!--Necesarios para...-->
     <script src="https://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +20,10 @@
     <link href="css/StyleSheet1.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+     <!--Calendar...-->
+     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <style>
         /* Add a gray background color and some padding to the footer */
         footer {
@@ -68,6 +76,32 @@
                         Operaciones, gráfica general
                     </strong>
                 </p>
+                <table>
+                    <tr>
+                        <td>
+                            <p>Fecha inicio</p>
+                            <input id="datepicker" style="width:170px;" readonly="readonly"  />
+                            <script>
+                                $('#datepicker').datepicker({
+                                    uiLibrary: 'bootstrap'
+                                });
+                            </script>
+                        </td>
+                        <td>
+                            <p>Fecha fin</p>
+                            <input id="datepickerEnd" style="width:170px;" readonly="readonly"  />
+                            <script>
+                                $('#datepickerEnd').datepicker({
+                                    uiLibrary: 'bootstrap'
+                                });
+                            </script>
+                        </td>
+                        <td>
+                            <p style="color:transparent">.</p>
+                            &nbsp;&nbsp;<input id="btnSearch" type="button" value="Buscar"  class="btn-success" style="height:35px;width:100px;" onclick="return LoadDateRange();"/>                           
+                        </td>
+                    </tr>
+                </table>
                 <div id="map" style="width: 100%; height: 600px;">
 
                 </div>
@@ -108,6 +142,7 @@
                         <th>Foto</th>
                         <th>Direción</th>
                         <th>Total</th>
+                        <th>Creado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -185,7 +220,7 @@
                 var pTotal = 0;
                 $.each(data, function (index, item) {
                     locations.push(['"' + item.direccion + '" <br/>  "' + item.estado + '"<br/><img  style="width:200px;height:200px;"  src="' + item.urlFoto + '"/>', item.latitude, item.longitude, 4, item.estado]);
-                    $('#tableData').append("<tr><td style='text-align:left;'>" + item.latitude + "</td>  <td style='text-align:left;'>" + item.longitude + "</td> <td style='text-align:center;'>" + item.estado + "</td> <td style='text-align:center;'><img  style='width: 200px; height: 200px; '  src='" + item.urlFoto + "'/></td> <td style='text-align:center;'>" + item.direccion + "</td> <td style='text-align:center;'>" + item.total + "</td></tr>");
+                    $('#tableData').append("<tr><td style='text-align:left;'>" + item.latitude + "</td>  <td style='text-align:left;'>" + item.longitude + "</td> <td style='text-align:center;'>" + item.estado + "</td> <td style='text-align:center;'><img  style='width: 200px; height: 200px; '  src='" + item.urlFoto + "'/></td> <td style='text-align:center;'>" + item.direccion + "</td> <td style='text-align:center;'>" + item.total + "</td> <td style='text-align:center;'>" + item.creado + "</td> </tr>");
                     count += 1;
                     DataTotal.push([item.total]);
                     DataBar.push([item.total, item.direccion, item.nombreTecnico]);
@@ -218,7 +253,7 @@
 
                     var sURL = "";
                     if (estado == "cerrado")
-                        sURL = 'http://maps.google.com/mapfiles/ms/icons/green.png';
+                        sURL = 'http://maps.google.com/mapfiles/ms/icons/   .png';
                     if (estado == "trabajando")
                         sURL = 'http://maps.google.com/mapfiles/ms/icons/yellow.png';
                     if (estado == "nuevo")
@@ -249,6 +284,113 @@
                 //alert('test');
             }
         });
+    </script>
+
+     <script>
+         function LoadDateRange() {
+
+             if (document.getElementById('datepicker').value != "" && document.getElementById('datepickerEnd').value != "") {
+
+                 document.getElementById("map").innerHTML = "";
+                 document.getElementById("IdlBar").innerHTML = "";
+                 $("#tableData tbody tr").each(function () {
+                     this.parentNode.removeChild(this);
+                 });
+
+                 $.ajax({
+                     url: 'Dashboard.ashx?action=LoadDataDateRange&startDate=' + document.getElementById('datepicker').value + '&EndDate=' + document.getElementById('datepickerEnd').value + '',
+                     type: 'POST',
+                     success: function (data) {
+                         var count = 0;
+                         var itemRow = "<table class='table-responsive'>";
+                         var tableData = $("tableData");
+                         var locations = [];
+                         var DataBar = [];
+                         var DataTotal = [];
+                         var TotalMax = 0;
+                         var pTotal = 0;
+                         $.each(data, function (index, item) {
+                             locations.push(['"' + item.direccion + '" <br/>  "' + item.estado + '"<br/><img  style="width:200px;height:200px;"  src="' + item.urlFoto + '"/>', item.latitude, item.longitude, 4, item.estado]);
+                             $('#tableData').append("<tr><td style='text-align:left;'>" + item.latitude + "</td>  <td style='text-align:left;'>" + item.longitude + "</td> <td style='text-align:center;'>" + item.estado + "</td> <td style='text-align:center;'><img  style='width: 200px; height: 200px; '  src='" + item.urlFoto + "'/></td> <td style='text-align:center;'>" + item.direccion + "</td> <td style='text-align:center;'>" + item.total + "</td> <td style='text-align:center;'>" + item.creado + "</td> </tr>");
+                             count += 1;
+                             DataTotal.push([item.total]);
+                             DataBar.push([item.total, item.direccion, item.nombreTecnico]);
+
+                         });
+                         itemRow += "</table>";
+
+                         if (count <= 0) {
+                             swal('', 'No se encontraron datos para el rango de fecha seleccionado', 'error');
+                         }
+                         else {
+                             swal('', 'Datos consultados correctamente!, total registros consultados: '+ count +'', 'success');
+                             document.getElementById('datepicker').value = "";
+                             document.getElementById('datepickerEnd').value = "";
+                         }
+                             
+
+                         TotalMax = Math.max.apply(null, DataTotal);
+
+                         for (i = 0; i < DataBar.length; i++) {
+
+                             pTotal = ((DataBar[i][0] * 100) / TotalMax);
+                             var pTotalpase = parseInt(pTotal);
+                             $("#IdlBar").append("<dd style='text-align:left;' class='percentage percentage-" + pTotalpase + "' title='" + DataBar[i][1] + "' ><span class='text' >" + DataBar[i][2] + ": <br/> $ " + DataBar[i][0] + "</span></dd>");
+
+                         }
+
+                         var map = new google.maps.Map(document.getElementById('map'), {
+                             zoom: 7,
+                             center: new google.maps.LatLng(6.247197832423961, -75.6102218851447),
+                             mapTypeId: google.maps.MapTypeId.ROADMAP
+                         });
+
+                         var infowindow = new google.maps.InfoWindow();
+
+                         var marker, i;
+
+                         for (i = 0; i < locations.length; i++) {
+                             var estado = locations[i][4];
+
+                             var sURL = "";
+                             if (estado == "cerrado")
+                                 sURL = 'http://maps.google.com/mapfiles/ms/icons/   .png';
+                             if (estado == "trabajando")
+                                 sURL = 'http://maps.google.com/mapfiles/ms/icons/yellow.png';
+                             if (estado == "nuevo")
+                                 sURL = 'http://maps.google.com/mapfiles/ms/icons/red.png';
+
+                             marker = new google.maps.Marker({
+                                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                                 icon: {
+                                     url: sURL,
+                                     labelOrigin: new google.maps.Point(15, 10)
+                                 },
+                                 map: map
+                             });
+
+                             google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                 return function () {
+                                     infowindow.setContent(locations[i][0]);
+                                     infowindow.open(map, marker);
+                                 }
+                             })(marker, i));
+
+                         }
+                         //document.getElementById("divLocation").innerHTML = locations;
+
+                     },
+                     error: function (data) {
+                         swal('', 'Error al intentar recuperar los datos, vuelva a intentarlo por favor', 'error');
+                         //alert('Error');
+                     }
+                 });
+             }
+             else {
+                 swal('', 'Debe seleccionar el rango de fecha que desea consultar', 'error');
+             }
+         }
+        
     </script>
 </body>
 </html>
