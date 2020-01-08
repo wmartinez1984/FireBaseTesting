@@ -36,7 +36,7 @@ namespace FireBaseTesting
         public string GetDataFront(HttpContext parametro)
         {
             System.Collections.Generic.List<object> Rows = new System.Collections.Generic.List<object>();
-            List<Documents> listDocumentsData = new List<Documents>();
+            
             using (WebClient webClient = new System.Net.WebClient())
             {
                 string latitude = "";
@@ -126,36 +126,12 @@ namespace FireBaseTesting
 
 
             }
-
-
-           
+            
             return (new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Rows));
 
         }
 
-        public class Documents
-        {
-
-            string _latitude;
-            string _longitude;
-            string _urlFoto;
-            string _nombreTecnico;
-            string _estado;
-            string _direccion;
-            string _total;
-
-            public Documents(string latitude, string longitude, string estado, string direccion, string total)
-            {
-                _latitude = latitude;
-                _longitude = longitude;
-                _urlFoto = latitude;
-                _nombreTecnico = longitude;
-                _estado = estado;
-                _direccion = direccion;
-                _total = total;
-            }
-
-        }
+     
 
         public bool IsReusable
         {
