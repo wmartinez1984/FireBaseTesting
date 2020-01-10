@@ -318,6 +318,11 @@ namespace FireBaseTesting
                                     cliente = property_.Value.ToString();
                                 }
 
+                                if (property.Key.Equals("valor"))
+                                {
+                                    valor = decimal.Parse( property_.Value.ToString());
+                                }
+
 
                             }
                         }

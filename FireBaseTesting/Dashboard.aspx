@@ -198,6 +198,10 @@
                         <th>Direción</th>
                         <th>Total</th>
                         <th>Creado</th>
+                        <th>Técnico</th>
+                        <th>Total</th>
+                        <th>Valor cotizado</th>
+                        <th>Cliente </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -268,7 +272,7 @@
                 var pTotal = 0;
                 $.each(data, function (index, item) {
                     locations.push(['Cliente: "' + item.cliente + '" <br/>  Dirección: "' + item.direccion + '" <br/> Técnico: "' + item.nombreTecnico + '"<br/> Estado: "' + item.estado + '"<br/> Fecha: "' + item.creado + '"<br/><img  style="width:200px;height:200px;"  src="' + item.urlFoto + '"/>', item.latitude, item.longitude, 4, item.estado]);
-                    $('#tableData').append("<tr><td style='text-align:left;'>" + item.latitude + "</td>  <td style='text-align:left;'>" + item.longitude + "</td> <td style='text-align:center;'>" + item.estado + "</td> <td style='text-align:center;'><img  style='width: 200px; height: 200px; '  src='" + item.urlFoto + "'/></td> <td style='text-align:center;'>" + item.direccion + "</td> <td style='text-align:center;'>" + item.total + "</td> <td style='text-align:center;'>" + item.creado + "</td> </tr>");
+                    $('#tableData').append("<tr><td style='text-align:left;'>" + item.latitude + "</td>  <td style='text-align:left;'>" + item.longitude + "</td> <td style='text-align:center;'>" + item.estado + "</td> <td style='text-align:center;'><img  style='width: 200px; height: 200px; '  src='" + item.urlFoto + "'/></td> <td style='text-align:center;'>" + item.direccion + "</td> <td style='text-align:center;'>" + item.total + "</td> <td style='text-align:center;'>" + item.creado + "</td> <td style='text-align:center;'>" + item.nombreTecnico + "</td> <td style='text-align:center;'>" + item.total + "</td> <td style='text-align:center;'>" + item.valor + "</td> <td style='text-align:center;'>" + item.cliente + "</td> </tr>");
                     count += 1;
                     DataTotal.push([item.total]);
                     DataBar.push([item.total, item.direccion, item.nombreTecnico]);
@@ -360,7 +364,7 @@
                          var pTotal = 0;
                          $.each(data, function (index, item) {
                              locations.push(['Cliente: "' + item.cliente + '" <br/>  Dirección: "' + item.direccion + '" <br/> Técnico: "' + item.nombreTecnico + '"<br/> Estado: "' + item.estado + '"<br/> Fecha: "' + item.creado + '"<br/><img  style="width:200px;height:200px;"  src="' + item.urlFoto + '"/>', item.latitude, item.longitude, 4, item.estado]);
-                             $('#tableData').append("<tr><td style='text-align:left;'>" + item.latitude + "</td>  <td style='text-align:left;'>" + item.longitude + "</td> <td style='text-align:center;'>" + item.estado + "</td> <td style='text-align:center;'><img  style='width: 200px; height: 200px; '  src='" + item.urlFoto + "'/></td> <td style='text-align:center;'>" + item.direccion + "</td> <td style='text-align:center;'>" + item.total + "</td> <td style='text-align:center;'>" + item.creado + "</td> </tr>");
+                             $('#tableData').append("<tr><td style='text-align:left;'>" + item.latitude + "</td>  <td style='text-align:left;'>" + item.longitude + "</td> <td style='text-align:center;'>" + item.estado + "</td> <td style='text-align:center;'><img  style='width: 200px; height: 200px; '  src='" + item.urlFoto + "'/></td> <td style='text-align:center;'>" + item.direccion + "</td> <td style='text-align:center;'>" + item.total + "</td> <td style='text-align:center;'>" + item.creado + "</td> <td style='text-align:center;'>" + item.nombreTecnico + "</td> <td style='text-align:center;'>" + item.total + "</td> <td style='text-align:center;'>" + item.valor + "</td> <td style='text-align:center;'>" + item.cliente + "</td></tr>");
                              count += 1;
                              DataTotal.push([item.total]);
                              DataBar.push([item.total, item.direccion, item.nombreTecnico]);
@@ -506,7 +510,7 @@
                              var pTotalValorCotpase = parseInt(pTotalValorCot);
                              var pTotalCumplimientopase = parseInt(pTotalCumplimiento);
 
-                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + DataBar[i][2] + "</div> <strong></strong> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + DataBar[i][1] + "</div> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + DataBar[i][3] + "</div>  <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + DataBar[i][4] + "</div> </div> <br/>");
+                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + DataBar[i][2] + "</div> <strong></strong> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + DataBar[i][3] + "</div> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + DataBar[i][1] + "</div>   <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + DataBar[i][4] + "</div> </div> <br/>");
 
                          }
 
@@ -581,16 +585,17 @@
                          for (i = 0; i < DataBar.length; i++) {
 
                              pTotalPuntos = ((DataBar[i][2] * 100) / TotalMaxPuntos);
-                             pTotal = ((DataBar[i][1] * 100) / TotalMax);
+                             pTotal = ((DataBar[i][1] * 100) / pTotalMaxValorCot);
                              pTotalValorCot = ((DataBar[i][3] * 100) / pTotalMaxValorCot);
                              pTotalCumplimiento = ((DataBar[i][4] * 100) / pTotalMaxCumplimiento);
+                            
 
                              var pTotalpase = parseInt(pTotalPuntos);
                              var pTotalPuntospase = parseInt(pTotal);
                              var pTotalValorCotpase = parseInt(pTotalValorCot);
                              var pTotalCumplimientopase = parseInt(pTotalCumplimiento);
 
-                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + DataBar[i][2] + "</div> <strong></strong> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + DataBar[i][1] + "</div> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + DataBar[i][3] + "</div>  <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + DataBar[i][4] + "</div> </div> <br/>");
+                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + parseInt(DataBar[i][2]).toLocaleString() + "</div> <strong></strong> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + parseInt(DataBar[i][3]).toLocaleString() + "</div> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + parseInt(DataBar[i][1]).toLocaleString() + "</div>   <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + parseInt(DataBar[i][4]).toLocaleString() + "</div> </div> <br/>");
 
                          }
 
