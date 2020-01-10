@@ -42,6 +42,47 @@
                 display: none;
             }
         }
+
+        
+        /* Style de las gráficas*/
+        .containerGraf {
+            width: 100%;
+            background-color: rgba(211, 208, 208, 0.78);
+        }
+
+
+        .Back {
+            text-align: right;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            color: white;
+        }
+
+        .valorcotizado {
+            background-color: #b6ff00;
+            color: #808080
+        }
+
+        .valorreal {
+            background-color: #00ff21;
+            color: #808080
+        }
+
+        .CantidadPuntos {
+            background-color: #085f9e;
+            color: #ffffff
+        }
+
+        .NumeroIncumplimientos {
+            background-color: #d21010;
+            color: #d21010
+        }
+
+        .NumeroCumplimientos {
+            background-color: #067715;
+            color: #ffffff
+        }
+
     </style>
 </head>
 <body>
@@ -98,11 +139,11 @@
                         </td>
                         <td>
                             <p style="color:transparent">.</p>
-                            &nbsp;&nbsp;<input id="btnSearch" type="button" value="Buscar"  class="btn-success" style="height:35px;width:100px;" onclick="return LoadDateRange();"/>                           
+                            &nbsp;&nbsp;<input id="btnSearch" type="button" value="Buscar"  class="btn-success" style="height:35px;width:100px;" onclick="return LoadDateRange(); "/>                           
                         </td>
                     </tr>
                 </table>
-                <div id="map" style="width: 100%; height: 600px;">
+                <div id="map" style="width: 100%; height: 900px;">
 
                 </div>
             </div>
@@ -112,20 +153,34 @@
                         Datos de productividad
                     </strong>
                 </p>
+                <table >
+                        <tr>
+                            <td style="background-color:#085f9e;height:30px;border:dotted;border-width:9px;border-color:white;">
+                                <p style="color:transparent;font-size:10px;color:white;"> Cant.Puntos </p>
+                            </td>
+
+                            <td style="background-color:#00ff21;height:30px;border:dotted;border-width:9px;border-color:white;">
+                                <p style="color:transparent;font-size:10px;color:#808080;"> Valor.Real </p>
+                            </td>
+                            <td style="background-color:#b6ff00;height:30px;border:dotted;border-width:9px;border-color:white;">
+                                <p style="color:transparent;font-size:10px;color:#808080;"> Valor.Cotizado </p>
+                            </td>
+                            <td style="background-color:#067715;height:30px;border:dotted;border-width:9px;border-color:white;">
+                                <p style="color:transparent;font-size:10px;color:white;"> Cumplimiento </p>
+                            </td>
+                        </tr>
+                    </table>
                 <!--Datos de productividad-->
-                <div class="col-sm-12" style="height:600px;overflow-y:scroll;overflow-x:auto;" >
+                <div class="col-sm-12" style="height:1000px;overflow-y:scroll;overflow-x:auto;" >
+                   
+                    <div id="DivGrag">
+                        
+                    </div>
                      <dl id="IdlBar" >
                         <dt style="text-align:left;">
                            
-                        </dt>
-                        <%--<dd class="percentage percentage-11" ><span class="text">Dato 1: $ 11.33</span></dd>--%>
-                        <%--<dd class="percentage percentage-49"><span class="text">Dato 2: $ 11.33</span></dd>
-                        <dd class="percentage percentage-16"><span class="text">Dato 3: $ 11.33</span></dd>
-                        <dd class="percentage percentage-59"><span class="text">Dato 4: $ 11.33</span></dd>
-                        <dd class="percentage percentage-2"><span class="text">Dato 5: $ 11.33</span></dd>
-                        <dd class="percentage percentage-90"><span class="text">Dato 6: $ 90.33</span></dd>--%>
+                        </dt>                     
                     </dl>
-
                 </div>
             </div>
         </div>
@@ -146,14 +201,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Anna</td>
-                        <td>Pitt</td>
-                        <td>35</td>
-                        <td>New York</td>
-                        <td>USA</td>
-                    </tr>
+                   
                 </tbody>
             </table>
         </div>
@@ -219,7 +267,7 @@
                 var TotalMax = 0;
                 var pTotal = 0;
                 $.each(data, function (index, item) {
-                    locations.push(['"' + item.direccion + '" <br/>  "' + item.estado + '"<br/><img  style="width:200px;height:200px;"  src="' + item.urlFoto + '"/>', item.latitude, item.longitude, 4, item.estado]);
+                    locations.push(['Cliente: "' + item.cliente + '" <br/>  Dirección: "' + item.direccion + '" <br/> Técnico: "' + item.nombreTecnico + '"<br/> Estado: "' + item.estado + '"<br/> Fecha: "' + item.creado + '"<br/><img  style="width:200px;height:200px;"  src="' + item.urlFoto + '"/>', item.latitude, item.longitude, 4, item.estado]);
                     $('#tableData').append("<tr><td style='text-align:left;'>" + item.latitude + "</td>  <td style='text-align:left;'>" + item.longitude + "</td> <td style='text-align:center;'>" + item.estado + "</td> <td style='text-align:center;'><img  style='width: 200px; height: 200px; '  src='" + item.urlFoto + "'/></td> <td style='text-align:center;'>" + item.direccion + "</td> <td style='text-align:center;'>" + item.total + "</td> <td style='text-align:center;'>" + item.creado + "</td> </tr>");
                     count += 1;
                     DataTotal.push([item.total]);
@@ -227,16 +275,17 @@
 
                 });
                 itemRow += "</table>";
-
+                if (count > 0)
+                    LoadDataGroupByGrafALL();
                 TotalMax = Math.max.apply(null, DataTotal);
                
-                for (i = 0; i < DataBar.length; i++) {
+                //for (i = 0; i < DataBar.length; i++) {
 
-                     pTotal = ((DataBar[i][0] * 100) / TotalMax);
-                     var pTotalpase = parseInt(pTotal);
-                     $("#IdlBar").append("<dd style='text-align:left;' class='percentage percentage-" + pTotalpase + "' title='" + DataBar[i][1] + "' ><span class='text' >" + DataBar[i][2] + ": <br/> $ " + DataBar[i][0] + "</span></dd>");
+                //     pTotal = ((DataBar[i][0] * 100) / TotalMax);
+                //     var pTotalpase = parseInt(pTotal);
+                //     $("#IdlBar").append("<dd style='text-align:left;' class='percentage percentage-" + pTotalpase + "' title='" + DataBar[i][1] + "' ><span class='text' >" + DataBar[i][2] + ": <br/> $ " + DataBar[i][0] + "</span></dd>");
                    
-                }
+                //}
 
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 7,
@@ -247,13 +296,13 @@
                 var infowindow = new google.maps.InfoWindow();
 
                 var marker, i;
-
+                
                 for (i = 0; i < locations.length; i++) {
                     var estado = locations[i][4];
-
+                   // alert(locations[i][1]+ "--"+ locations[i][2]);
                     var sURL = "";
                     if (estado == "cerrado")
-                        sURL = 'http://maps.google.com/mapfiles/ms/icons/   .png';
+                        sURL = 'http://maps.google.com/mapfiles/ms/icons/green.png';
                     if (estado == "trabajando")
                         sURL = 'http://maps.google.com/mapfiles/ms/icons/yellow.png';
                     if (estado == "nuevo")
@@ -310,7 +359,7 @@
                          var TotalMax = 0;
                          var pTotal = 0;
                          $.each(data, function (index, item) {
-                             locations.push(['"' + item.direccion + '" <br/>  "' + item.estado + '"<br/><img  style="width:200px;height:200px;"  src="' + item.urlFoto + '"/>', item.latitude, item.longitude, 4, item.estado]);
+                             locations.push(['Cliente: "' + item.cliente + '" <br/>  Dirección: "' + item.direccion + '" <br/> Técnico: "' + item.nombreTecnico + '"<br/> Estado: "' + item.estado + '"<br/> Fecha: "' + item.creado + '"<br/><img  style="width:200px;height:200px;"  src="' + item.urlFoto + '"/>', item.latitude, item.longitude, 4, item.estado]);
                              $('#tableData').append("<tr><td style='text-align:left;'>" + item.latitude + "</td>  <td style='text-align:left;'>" + item.longitude + "</td> <td style='text-align:center;'>" + item.estado + "</td> <td style='text-align:center;'><img  style='width: 200px; height: 200px; '  src='" + item.urlFoto + "'/></td> <td style='text-align:center;'>" + item.direccion + "</td> <td style='text-align:center;'>" + item.total + "</td> <td style='text-align:center;'>" + item.creado + "</td> </tr>");
                              count += 1;
                              DataTotal.push([item.total]);
@@ -323,21 +372,21 @@
                              swal('', 'No se encontraron datos para el rango de fecha seleccionado', 'error');
                          }
                          else {
-                             swal('', 'Datos consultados correctamente!, total registros consultados: '+ count +'', 'success');
-                             document.getElementById('datepicker').value = "";
-                             document.getElementById('datepickerEnd').value = "";
+                             swal('', 'Datos consultados correctamente!, total registros consultados: ' + count + '', 'success');
+                             LoadDateRangeGroupByGraf();
+                            
                          }
                              
 
                          TotalMax = Math.max.apply(null, DataTotal);
 
-                         for (i = 0; i < DataBar.length; i++) {
+                         //for (i = 0; i < DataBar.length; i++) {
 
-                             pTotal = ((DataBar[i][0] * 100) / TotalMax);
-                             var pTotalpase = parseInt(pTotal);
-                             $("#IdlBar").append("<dd style='text-align:left;' class='percentage percentage-" + pTotalpase + "' title='" + DataBar[i][1] + "' ><span class='text' >" + DataBar[i][2] + ": <br/> $ " + DataBar[i][0] + "</span></dd>");
+                         //    pTotal = ((DataBar[i][0] * 100) / TotalMax);
+                         //    var pTotalpase = parseInt(pTotal);
+                         //    $("#IdlBar").append("<dd style='text-align:left;' class='percentage percentage-" + pTotalpase + "' title='" + DataBar[i][1] + "' ><span class='text' >" + DataBar[i][2] + ": <br/> $ " + DataBar[i][0] + "</span></dd>");
 
-                         }
+                         //}
 
                          var map = new google.maps.Map(document.getElementById('map'), {
                              zoom: 7,
@@ -354,7 +403,7 @@
 
                              var sURL = "";
                              if (estado == "cerrado")
-                                 sURL = 'http://maps.google.com/mapfiles/ms/icons/   .png';
+                                 sURL = 'http://maps.google.com/mapfiles/ms/icons/green.png';
                              if (estado == "trabajando")
                                  sURL = 'http://maps.google.com/mapfiles/ms/icons/yellow.png';
                              if (estado == "nuevo")
@@ -390,7 +439,174 @@
                  swal('', 'Debe seleccionar el rango de fecha que desea consultar', 'error');
              }
          }
+
         
     </script>
+
+      <script>
+         function LoadDateRangeGroupByGraf() {
+
+             if (document.getElementById('datepicker').value != "" && document.getElementById('datepickerEnd').value != "") {
+                 document.getElementById('DivGrag').innerHTML = "";
+                 $.ajax({
+                     url: 'Dashboard.ashx?action=LoadDataGroupByGraf&startDate=' + document.getElementById('datepicker').value + '&EndDate=' + document.getElementById('datepickerEnd').value + '',
+                     type: 'POST',
+                     success: function (data) {
+                         var count = 0;                         
+                         var locations = [];
+                         var DataBar = [];
+                         var DataTotal = [];
+                         var DataPuntos = [];
+                         var DataValorCot = [];
+                         var DataCumplimiento = [];
+                         var TotalMax = 0;
+                         var TotalMaxPuntos = 0;
+                         var pTotalPuntos = 0;
+                         var pTotal = 0;
+                         var pTotalMaxValorCot = 0;
+                         var pTotalValorCot = 0;
+                         var pTotalMaxCumplimiento = 0;
+                         var pTotalCumplimiento = 0;
+                         $.each(data, function (index, item) {
+                             count += 1;
+                             DataTotal.push([item.Total]);
+                             DataPuntos.push([item.Puntos]);
+                             DataValorCot.push([item.ValorCot]);
+                             DataCumplimiento.push([item.Cumplimiento]);
+
+                             DataBar.push([item.NombreTecnico, item.Total, item.Puntos, item.ValorCot,  item.Cumplimiento, item.InCumplimiento,]);
+
+                         });
+                         
+
+                         if (count <= 0) {
+                             swal('', 'No se encontraron datos para el rango de fecha seleccionado', 'error');
+                         }
+                         else {
+                             //swal('', 'Datos TOTALES consultados correctamente!, total registros consultados: '+ count +'', 'success');
+                             document.getElementById('datepicker').value = "";
+                             document.getElementById('datepickerEnd').value = "";
+                         }
+                             
+
+                         TotalMax = Math.max.apply(null, DataTotal); //Valor más alto
+                         TotalMaxPuntos = Math.max.apply(null, DataPuntos); //Valor más alto
+                         pTotalMaxValorCot = Math.max.apply(null, DataValorCot); //Valor más alto
+                         pTotalMaxCumplimiento = Math.max.apply(null, DataCumplimiento); //Valor más alto
+
+                         for (i = 0; i < DataBar.length; i++) {
+
+                             pTotalPuntos = ((DataBar[i][2] * 100) / TotalMaxPuntos);
+                             pTotal = ((DataBar[i][1] * 100) / TotalMax);
+                             pTotalValorCot = ((DataBar[i][3] * 100) / pTotalMaxValorCot);
+                             pTotalCumplimiento = ((DataBar[i][4] * 100) / pTotalMaxCumplimiento);
+
+                             var pTotalpase = parseInt(pTotalPuntos);
+                             var pTotalPuntospase = parseInt(pTotal);
+                             var pTotalValorCotpase = parseInt(pTotalValorCot);
+                             var pTotalCumplimientopase = parseInt(pTotalCumplimiento);
+
+                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + DataBar[i][2] + "</div> <strong></strong> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + DataBar[i][1] + "</div> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + DataBar[i][3] + "</div>  <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + DataBar[i][4] + "</div> </div> <br/>");
+
+                         }
+
+                         //document.getElementById("divLocation").innerHTML = locations;
+
+                     },
+                     error: function (data) {
+                         swal('', 'Error al intentar recuperar los datos, vuelva a intentarlo por favor', 'error');
+                         //alert('Error');
+                     }
+                 });
+
+                  document.getElementById('datepicker').value = "";
+                  document.getElementById('datepickerEnd').value = "";
+             }
+             else {
+                 swal('', 'Debe seleccionar el rango de fecha que desea consultar', 'error');
+             }
+          }
+        </script>
+
+         <script>
+         function LoadDataGroupByGrafALL() {
+             
+                 document.getElementById('DivGrag').innerHTML = "";
+                 $.ajax({
+                     url: 'Dashboard.ashx?action=LoadDataGroupByGrafAll',
+                     type: 'POST',
+                     success: function (data) {
+                         var count = 0;                         
+                         var locations = [];
+                         var DataBar = [];
+                         var DataTotal = [];
+                         var DataPuntos = [];
+                         var DataValorCot = [];
+                         var DataCumplimiento = [];
+                         var TotalMax = 0;
+                         var TotalMaxPuntos = 0;
+                         var pTotalPuntos = 0;
+                         var pTotal = 0;
+                         var pTotalMaxValorCot = 0;
+                         var pTotalValorCot = 0;
+                         var pTotalMaxCumplimiento = 0;
+                         var pTotalCumplimiento = 0;
+                         $.each(data, function (index, item) {
+                             count += 1;
+                             DataTotal.push([item.Total]);
+                             DataPuntos.push([item.Puntos]);
+                             DataValorCot.push([item.ValorCot]);
+                             DataCumplimiento.push([item.Cumplimiento]);
+
+                             DataBar.push([item.NombreTecnico, item.Total, item.Puntos, item.ValorCot,  item.Cumplimiento, item.InCumplimiento,]);
+
+                         });
+                         
+
+                         if (count <= 0) {
+                             swal('', 'No se encontraron datos para el rango de fecha seleccionado', 'error');
+                         }
+                         else {
+                            // swal('', 'Datos TOTALES consultados correctamente!, total registros consultados: '+ count +'', 'success');
+                             document.getElementById('datepicker').value = "";
+                             document.getElementById('datepickerEnd').value = "";
+                         }
+                             
+
+                         TotalMax = Math.max.apply(null, DataTotal); //Valor más alto
+                         TotalMaxPuntos = Math.max.apply(null, DataPuntos); //Valor más alto
+                         pTotalMaxValorCot = Math.max.apply(null, DataValorCot); //Valor más alto
+                         pTotalMaxCumplimiento = Math.max.apply(null, DataCumplimiento); //Valor más alto
+
+                         for (i = 0; i < DataBar.length; i++) {
+
+                             pTotalPuntos = ((DataBar[i][2] * 100) / TotalMaxPuntos);
+                             pTotal = ((DataBar[i][1] * 100) / TotalMax);
+                             pTotalValorCot = ((DataBar[i][3] * 100) / pTotalMaxValorCot);
+                             pTotalCumplimiento = ((DataBar[i][4] * 100) / pTotalMaxCumplimiento);
+
+                             var pTotalpase = parseInt(pTotalPuntos);
+                             var pTotalPuntospase = parseInt(pTotal);
+                             var pTotalValorCotpase = parseInt(pTotalValorCot);
+                             var pTotalCumplimientopase = parseInt(pTotalCumplimiento);
+
+                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + DataBar[i][2] + "</div> <strong></strong> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + DataBar[i][1] + "</div> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + DataBar[i][3] + "</div>  <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + DataBar[i][4] + "</div> </div> <br/>");
+
+                         }
+
+                         //document.getElementById("divLocation").innerHTML = locations;
+
+                     },
+                     error: function (data) {
+                         swal('', 'Error al intentar recuperar los datos, vuelva a intentarlo por favor', 'error');
+                         //alert('Error');
+                     }
+                 });
+
+                  document.getElementById('datepicker').value = "";
+                  document.getElementById('datepickerEnd').value = "";
+             
+          }
+        </script>
 </body>
 </html>
