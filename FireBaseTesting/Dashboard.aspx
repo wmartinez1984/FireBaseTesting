@@ -510,7 +510,7 @@
                              var pTotalValorCotpase = parseInt(pTotalValorCot);
                              var pTotalCumplimientopase = parseInt(pTotalCumplimiento);
 
-                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + DataBar[i][2] + "</div> <strong></strong> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + DataBar[i][3] + "</div> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + DataBar[i][1] + "</div>   <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + DataBar[i][4] + "</div> </div> <br/>");
+                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + parseInt(DataBar[i][2]).toLocaleString() + "</div> <strong></strong> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + parseInt(DataBar[i][3]).toLocaleString() + "</div> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + parseInt(DataBar[i][1]).toLocaleString() + "</div>   <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + parseInt(DataBar[i][4]).toLocaleString() + "</div> </div> <br/>");
 
                          }
 
