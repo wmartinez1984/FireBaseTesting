@@ -75,7 +75,7 @@
 
         .NumeroIncumplimientos {
             background-color: #d21010;
-            color: #d21010
+            color: white
         }
 
         .NumeroCumplimientos {
@@ -167,6 +167,9 @@
                             </td>
                             <td style="background-color:#067715;height:30px;border:dotted;border-width:9px;border-color:white;">
                                 <p style="color:transparent;font-size:10px;color:white;"> Cumplimiento </p>
+                            </td>
+                            <td style="background-color:#d21010;height:30px;border:dotted;border-width:9px;border-color:white;">
+                                <p style="color:transparent;font-size:10px;color:white;"> Incumplimiento </p>
                             </td>
                         </tr>
                     </table>
@@ -471,6 +474,7 @@
                          var pTotalValorCot = 0;
                          var pTotalMaxCumplimiento = 0;
                          var pTotalCumplimiento = 0;
+                         var pTotalIncumplimiento = 0;
                          $.each(data, function (index, item) {
                              count += 1;
                              DataTotal.push([item.Total]);
@@ -478,8 +482,8 @@
                              DataValorCot.push([item.ValorCot]);
                              DataCumplimiento.push([item.Cumplimiento]);
 
-                             DataBar.push([item.NombreTecnico, item.Total, item.Puntos, item.ValorCot,  item.Cumplimiento, item.InCumplimiento,]);
-
+                             //DataBar.push([item.NombreTecnico, item.Total, item.Puntos, item.ValorCot,  item.Cumplimiento, item.InCumplimiento,]);
+                             DataBar.push([item.NombreTecnico, item.Total, item.Puntos, item.ValorCot, item.Cumplimiento, item.InCumplimiento, item.CountGroup,]);
                          });
                          
 
@@ -501,17 +505,19 @@
                          for (i = 0; i < DataBar.length; i++) {
 
                              pTotalPuntos = ((DataBar[i][2] * 100) / TotalMaxPuntos);
-                             pTotal = ((DataBar[i][1] * 100) / TotalMax);
+                             pTotal = ((DataBar[i][1] * 100) / pTotalMaxValorCot);
                              pTotalValorCot = ((DataBar[i][3] * 100) / pTotalMaxValorCot);
-                             pTotalCumplimiento = ((DataBar[i][4] * 100) / pTotalMaxCumplimiento);
+                             pTotalCumplimiento = ((DataBar[i][4] * 100) / DataBar[i][6]);
+                             pTotalIncumplimiento = ((DataBar[i][5] * 100) / DataBar[i][6]);
 
                              var pTotalpase = parseInt(pTotalPuntos);
                              var pTotalPuntospase = parseInt(pTotal);
                              var pTotalValorCotpase = parseInt(pTotalValorCot);
                              var pTotalCumplimientopase = parseInt(pTotalCumplimiento);
+                             var pTotalIncumplimientopase = parseInt(pTotalIncumplimiento);
 
-                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + parseInt(DataBar[i][2]).toLocaleString() + "</div> <strong></strong> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + parseInt(DataBar[i][3]).toLocaleString() + "</div> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + parseInt(DataBar[i][1]).toLocaleString() + "</div>   <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + parseInt(DataBar[i][4]).toLocaleString() + "</div> </div> <br/>");
-
+                             //$("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + parseInt(DataBar[i][2]).toLocaleString() + "</div> <strong></strong> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + parseInt(DataBar[i][3]).toLocaleString() + "</div> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + parseInt(DataBar[i][1]).toLocaleString() + "</div>   <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + parseInt(DataBar[i][4]).toLocaleString() + "</div> </div> <br/>");
+                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + parseInt(DataBar[i][2]).toLocaleString() + "</div> <strong></strong> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + parseInt(DataBar[i][3]).toLocaleString() + "</div> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + parseInt(DataBar[i][1]).toLocaleString() + "</div>   <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + parseInt(DataBar[i][4]).toLocaleString() + "</div>  <div class='Back NumeroIncumplimientos' style='width:" + pTotalIncumplimientopase + "%'>" + parseInt(DataBar[i][5]).toLocaleString() + "</div> </div> <br/>");
                          }
 
                          //document.getElementById("divLocation").innerHTML = locations;
@@ -547,23 +553,28 @@
                          var DataPuntos = [];
                          var DataValorCot = [];
                          var DataCumplimiento = [];
+                         var DataIncumplimiento = [];
                          var TotalMax = 0;
                          var TotalMaxPuntos = 0;
+                         var TotalIncumplimientos = 0;
                          var pTotalPuntos = 0;
                          var pTotal = 0;
                          var pTotalMaxValorCot = 0;
                          var pTotalValorCot = 0;
                          var pTotalMaxCumplimiento = 0;
                          var pTotalCumplimiento = 0;
+                         var pTotalIncumplimiento = 0;
                          $.each(data, function (index, item) {
-                             count += 1;
+                             
                              DataTotal.push([item.Total]);
                              DataPuntos.push([item.Puntos]);
                              DataValorCot.push([item.ValorCot]);
                              DataCumplimiento.push([item.Cumplimiento]);
+                            
 
-                             DataBar.push([item.NombreTecnico, item.Total, item.Puntos, item.ValorCot,  item.Cumplimiento, item.InCumplimiento,]);
+                             DataBar.push([item.NombreTecnico, item.Total, item.Puntos, item.ValorCot, item.Cumplimiento, item.InCumplimiento, item.CountGroup]);
 
+                             count += 1;
                          });
                          
 
@@ -571,7 +582,7 @@
                              swal('', 'No se encontraron datos para el rango de fecha seleccionado', 'error');
                          }
                          else {
-                            // swal('', 'Datos TOTALES consultados correctamente!, total registros consultados: '+ count +'', 'success');
+                            
                              document.getElementById('datepicker').value = "";
                              document.getElementById('datepickerEnd').value = "";
                          }
@@ -580,22 +591,24 @@
                          TotalMax = Math.max.apply(null, DataTotal); //Valor más alto
                          TotalMaxPuntos = Math.max.apply(null, DataPuntos); //Valor más alto
                          pTotalMaxValorCot = Math.max.apply(null, DataValorCot); //Valor más alto
-                         pTotalMaxCumplimiento = Math.max.apply(null, DataCumplimiento); //Valor más alto
+                         //pTotalMaxCumplimiento = Math.max.apply(null, DataCumplimiento); //Valor más alto
 
                          for (i = 0; i < DataBar.length; i++) {
 
                              pTotalPuntos = ((DataBar[i][2] * 100) / TotalMaxPuntos);
                              pTotal = ((DataBar[i][1] * 100) / pTotalMaxValorCot);
                              pTotalValorCot = ((DataBar[i][3] * 100) / pTotalMaxValorCot);
-                             pTotalCumplimiento = ((DataBar[i][4] * 100) / pTotalMaxCumplimiento);
-                            
+                             pTotalCumplimiento = ((DataBar[i][4] * 100) / DataBar[i][6]);
+                             pTotalIncumplimiento = ((DataBar[i][5] * 100) / DataBar[i][6]);
+                             
 
                              var pTotalpase = parseInt(pTotalPuntos);
                              var pTotalPuntospase = parseInt(pTotal);
                              var pTotalValorCotpase = parseInt(pTotalValorCot);
                              var pTotalCumplimientopase = parseInt(pTotalCumplimiento);
+                             var pTotalIncumplimientopase = parseInt(pTotalIncumplimiento);
 
-                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + parseInt(DataBar[i][2]).toLocaleString() + "</div> <strong></strong> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + parseInt(DataBar[i][3]).toLocaleString() + "</div> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + parseInt(DataBar[i][1]).toLocaleString() + "</div>   <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + parseInt(DataBar[i][4]).toLocaleString() + "</div> </div> <br/>");
+                             $("#DivGrag").append("<strong>Ténico: " + DataBar[i][0] + " </strong>  <div class='containerGraf'> <div class='Back CantidadPuntos' style='width:" + pTotalpase + "%'>" + parseInt(DataBar[i][2]).toLocaleString() + "</div> <strong></strong> <div class='Back valorcotizado' style='width:" + pTotalValorCotpase + "%'>" + parseInt(DataBar[i][3]).toLocaleString() + "</div> <div class='Back valorreal' style='width:" + pTotalPuntospase + "%'>" + parseInt(DataBar[i][1]).toLocaleString() + "</div>   <div class='Back NumeroCumplimientos' style='width:" + pTotalCumplimientopase + "%'>" + parseInt(DataBar[i][4]).toLocaleString() + "</div>  <div class='Back NumeroIncumplimientos' style='width:" + pTotalIncumplimientopase + "%'>" + parseInt(DataBar[i][5]).toLocaleString() + "</div> </div> <br/>");
 
                          }
 

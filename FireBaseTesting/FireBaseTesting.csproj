@@ -122,6 +122,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\StyleSheet1.css" />
     <Content Include="css\sweetalert.css" />
+    <Content Include="dafault_enable.html" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -146,6 +147,8 @@
     <None Include="Properties\PublishProfiles\salesservice - Web Deploy2.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="HtmlPage2.html" />
+    <Content Include="HtmlPage3.html" />
     <Content Include="Images\american-express.png" />
     <Content Include="Images\client.png" />
     <Content Include="Images\Courtesy.png" />

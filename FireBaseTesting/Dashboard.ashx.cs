@@ -174,8 +174,14 @@ namespace FireBaseTesting
                                     cliente = property_.Value.ToString();
                                 }
 
-                                cumplimiento = 1;
-                                incumplimiento = 0;
+                                if (property.Key.Equals("cumplimiento"))
+                                {
+                                    cumplimiento = int.Parse(property_.Value.ToString());
+                                    if (cumplimiento == 0)
+                                        incumplimiento = 1;
+                                }
+
+                                
 
                             }
                         }
@@ -479,8 +485,12 @@ namespace FireBaseTesting
                                     puntos = int.Parse(property_.Value.ToString());
                                 }
 
-                                cumplimiento = 1;
-                                incumplimiento = 0;
+                                if (property.Key.Equals("cumplimiento"))
+                                {
+                                    cumplimiento = int.Parse(property_.Value.ToString());
+                                    if (cumplimiento == 0)
+                                        incumplimiento = 1;
+                                }
 
                             }
                         }
@@ -520,7 +530,7 @@ namespace FireBaseTesting
                                 ValorCot = tecnicoGroup.Sum(x => x.valor),
                                 Cumplimiento = tecnicoGroup.Sum(x => x.cumplimiento),
                                 InCumplimiento = tecnicoGroup.Sum(x => x.incumplimiento),
-
+                                CountGroup = tecnicoGroup.Count(),
                             } ;
 
             var sortedList = TotalesTecnicos.OrderBy(tec => tec.Puntos).ToList();
@@ -546,7 +556,7 @@ namespace FireBaseTesting
                 Decimal total = 0;
                 decimal valor = 0;
                 int puntos = 0;
-                int cumplimiento = 1;
+                int cumplimiento = 0;
                 int incumplimiento = 0;
                 string cliente = "";
 
@@ -632,8 +642,13 @@ namespace FireBaseTesting
                                     puntos = int.Parse(property_.Value.ToString());
                                 }
 
-                                cumplimiento = 1;
-                                incumplimiento = 0;
+                                if (property.Key.Equals("cumplimiento"))
+                                {
+                                    cumplimiento = int.Parse(property_.Value.ToString());
+                                    if (cumplimiento == 0)
+                                        incumplimiento = 1;
+                                }
+                               
 
                             }
                         }
@@ -674,7 +689,7 @@ namespace FireBaseTesting
                                 ValorCot = tecnicoGroup.Sum(x => x.valor),
                                 Cumplimiento = tecnicoGroup.Sum(x => x.cumplimiento),
                                 InCumplimiento = tecnicoGroup.Sum(x => x.incumplimiento),
-
+                                CountGroup = tecnicoGroup.Count(),
                             };
 
             var sortedList = TotalesTecnicos.OrderBy(tec => tec.Puntos).ToList();
@@ -700,6 +715,7 @@ namespace FireBaseTesting
             public int incumplimiento { get; set; }
             public string cliente { get; set; }
             public DateTime creado { get; set; }
+            public int CountGroup { get; set; }
         };
 
 
