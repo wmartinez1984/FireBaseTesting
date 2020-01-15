@@ -577,7 +577,6 @@ namespace FireBaseTesting
                     foreach (KeyValuePair<string, JToken> property in FireBaseTable)
                     {
 
-
                         if (property.Key.Equals("ubicacion"))
                         {
                             IList<JToken> resultsUbicacion;
