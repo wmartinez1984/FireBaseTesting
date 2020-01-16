@@ -250,6 +250,7 @@
     <None Include="Properties\PublishProfiles\salesservice - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - Web Deploy2.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="googlec1a4c00a8c6aa807.html" />
     <Content Include="HtmlPage1.html" />
     <Content Include="HtmlPage2.html" />
     <Content Include="HtmlPage3.html" />
@@ -281,6 +282,7 @@
     <Content Include="login.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\DataReports.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -309,6 +311,13 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="Temporizadores\css\style.css" />
+    <Content Include="Temporizadores\js\Timer.js" />
+    <Content Include="Temporizadores\css\Timer.css" />
+    <Content Include="Temporizadores\js\JavaScript.js" />
+    <Content Include="Temporizadores\login.aspx" />
+    <Content Include="Temporizadores\css\temporizador.css" />
+    <Content Include="Temporizadores\Temporizador.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -372,6 +381,20 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\Temporizador.aspx.cs">
+      <DependentUpon>Temporizador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\Temporizador.aspx.designer.cs">
+      <DependentUpon>Temporizador.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

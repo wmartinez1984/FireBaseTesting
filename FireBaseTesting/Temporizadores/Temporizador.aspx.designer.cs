@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace FireBaseTesting
+namespace FireBaseTesting.Temporizadores
 {
 
 
-    public partial class Dashboard
+    public partial class Temporizador
     {
     }
 }

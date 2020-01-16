@@ -73,6 +73,20 @@ namespace FireBaseTesting
 
             }
 
+            if (Action.Equals("LoadDataQualificationAll"))
+            {
+
+                string callback = context.Request.QueryString["callback"];
+                string json = GetDataFrontDataQualificationGropByGrafAll(context);
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = string.Format("{0}({1});", callback, json);
+                }
+                context.Response.ContentType = "text/json";
+                context.Response.Write(json);
+
+            }
+
         }
 
         public string GetDataFront(HttpContext parametro)
@@ -698,6 +712,93 @@ namespace FireBaseTesting
             return (new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(sortedList));
 
         }
+
+        public string GetDataFrontDataQualificationGropByGrafAll(HttpContext parametro)
+        {
+
+            var Tecnicos = new List<Tecnico>();
+            using (WebClient webClient = new System.Net.WebClient())
+            {
+
+                string tecnico = "";
+                Decimal promedio = 0;      
+                DateTime creado = DateTime.Now;
+
+                webClient.Encoding = Encoding.UTF8;
+                webClient.Encoding = UTF8Encoding.UTF8;
+                webClient.Headers.Add("Content-Type", "application/json");
+                var json = webClient.DownloadString("https://firestore.googleapis.com/v1/projects/apptecnicos-9a471/databases/(default)/documents/calificacion");
+                JObject FireBaseSearch = JObject.Parse(json);
+                IList<JToken> results = FireBaseSearch["documents"].Children()["fields"].ToList();
+
+                foreach (JToken result in results)
+                {
+
+                    JObject FireBaseTable = JObject.Parse(result.ToString());
+                    foreach (KeyValuePair<string, JToken> property in FireBaseTable)
+                    {
+
+                        
+                            JObject FireBaseValorCampo = JObject.Parse(property.Value.ToString());
+                            foreach (KeyValuePair<string, JToken> property_ in FireBaseValorCampo)
+                            {
+
+                                if (property.Key.Equals("createdAt"))
+                                {
+                                    creado = DateTimeOffset.Parse(property_.Value.ToString()).UtcDateTime;
+                                }
+                                                               
+                                if (property.Key.Equals("promedio"))
+                                {
+                                    promedio = decimal.Parse(property_.Value.ToString());
+                                }
+
+                                if (property.Key.Equals("tecnico"))
+                                {
+                                    tecnico = property_.Value.ToString();
+                                }
+
+                            }
+                        
+
+                    }
+
+                    if (creado >= DateTime.Now.AddMonths(-1))
+                    {
+                        Tecnicos.Add(
+                                new Tecnico
+                                {
+                                    nombreTecnico = tecnico,
+                                    total = promedio,
+                                  
+                                }
+                        );
+
+
+                    }
+                }
+
+
+            }
+
+            var TotalesTecnicos =
+                            from tecnico in Tecnicos
+                            group tecnico by tecnico.nombreTecnico into tecnicoGroup
+
+                            select new
+                            {
+                                NombreTecnico = tecnicoGroup.Key,
+                                Total = tecnicoGroup.Sum(x => x.total) / tecnicoGroup.Count(),
+                                CountGroup = tecnicoGroup.Count(),
+                            };
+
+            var sortedList = TotalesTecnicos.OrderBy(tec => tec.Total).ToList();
+            sortedList.Sort((tec, tec2) => tec2.Total.CompareTo(tec.Total));
+
+            return (new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(sortedList));
+
+        }
+
 
         public class Tecnico
         {
