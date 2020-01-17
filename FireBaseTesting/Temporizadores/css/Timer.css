@@ -1,15 +1,26 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
 
-html, body {
+/*html, body {
     display: flex;
-    /*width: 100%;
-    height: 100%;*/
+    width: 100%;
+    height: 100%;
     justify-content: center;
     align-items: center;
     background-color: #388a43;
     overflow: hidden;
-}
+}*/
 
+.divCard {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #388a43;
+    overflow: hidden;
+    width: 50%;
+    margin: auto;
+}
     body:after {
         content: "";
         position: absolute;
