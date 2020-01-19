@@ -1,14 +1,14 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
 
-/*html, body {
-    display: flex;
+html, body {
+    /*display: flex;
     width: 100%;
-    height: 100%;
+    height: 100%;*/
     justify-content: center;
     align-items: center;
     background-color: #388a43;
     overflow: hidden;
-}*/
+}
 
 .divCard {
     display: flex;
@@ -21,7 +21,22 @@
     width: 50%;
     margin: auto;
 }
-    body:after {
+    /*body:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding-bottom: 50%;
+        width: 57.7%;
+        background-color: #343F4F;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: rotate(-30deg) skewX(30deg);
+        transform: rotate(-30deg) skewX(30deg);
+        z-index: 1;
+    }*/
+
+    .divCard:after {
         content: "";
         position: absolute;
         top: 0;
@@ -36,20 +51,21 @@
         z-index: 1;
     }
 
-    body:before {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 0;
-        padding-bottom: 50%;
-        width: 57.7%;
-        background-color: #343F4F;
-        -webkit-transform-origin: 0 0;
-        transform-origin: 0 0;
-        -webkit-transform: rotate(-30deg) skewX(30deg);
-        transform: rotate(-30deg) skewX(30deg);
-        z-index: 1;
-    }
+
+.divCard:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-bottom: 50%;
+    width: 57.7%;
+    background-color: #343F4F;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: rotate(-30deg) skewX(30deg);
+    transform: rotate(-30deg) skewX(30deg);
+    z-index: 1;
+}
 
 .card {
     position: relative;

@@ -12,6 +12,22 @@ namespace FireBaseTesting.Temporizadores
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            string a = "";
+        }
+
+        protected void submit_Click(object sender, EventArgs e)
+        {
+
+            if (username.Value.Equals("Nivel1"))
+            {
+                Response.Redirect("Temporizador");
+            }
+            else if (username.Value.Equals("Nivel2"))
+            {
+                Response.Redirect("Data");
+            }
+            else
+                spanMessage.InnerText = "Usuario no válido";
         }
     }
 }
