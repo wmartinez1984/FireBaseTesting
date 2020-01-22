@@ -67,20 +67,25 @@
           }
         }
         </style>
+     <!--Mensajes...-->
+    <script src="Scripts/sweetalert-dev.js"></script>
+    <link href="css/sweetalert.css" rel="stylesheet" />
  </head>
+
 <body>
 
-<form action="Dashboard.aspx" method="post">
+<form runat="server">
     <div style="text-align:center;width:80%;margin:auto;background-color:#f4f2f2">
             <div class="imgcontainer">
                 <img src="images/img_avatar2.png" alt="Avatar" class="avatar" >
             </div>
             <div class="container" style="text-align:center;width:40%;margin:auto;">
                 <label for="uname"><b>Usuario:</b></label>
-                <input type="text" placeholder="Capture usuario" name="uname" required  style="width:100%;">
+                <input type="text" placeholder="Capture usuario" runat="server" id="txtUsername" name="uname" required  style="width:100%;">
                 <label for="psw"><b>Contraseña:</b></label>
-                <input type="password" placeholder="Capture Password" name="psw" required>                 
-                <button type="submit"> Iniciar</button>       
+                <input type="password" placeholder="Capture Password" name="psw" required runat="server" id="txtPassword">  
+                <asp:Button ID="submit" runat="server" Text="Iniciar" CssClass="button" OnClick="submit_Click" style="background-color:#4CAF50;cursor:pointer;" Width="50%" Height="50px"/>
+ 
             </div>
         <br />
     </div> 

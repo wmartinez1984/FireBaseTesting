@@ -18,7 +18,15 @@ namespace FireBaseTesting
         protected void Page_Load(object sender, EventArgs e)
         {
           
-            
+            if(!IsPostBack)
+            {
+                if (Session["Username"] != null)
+                {
+
+                }
+                else
+                    Response.Redirect("login");
+            }
         }
       
     }

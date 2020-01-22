@@ -1,141 +1,238 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Data.aspx.cs" Inherits="FireBaseTesting.Temporizadores.Data" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en" >
 <head>
-    <meta charset="utf-8" />
-    <title></title>
-      <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-      <link rel="stylesheet" href="./style.css">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Operaciones</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
 
+<link href="css/sweetalert.css" rel="stylesheet" />
+<script src="js/sweetalert-dev.js"></script>
+
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<link rel="stylesheet" type="text/css" href="css/custom-bars.css" />
 
 </head>
-<body style="background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));">
-  
+<body>
+<%--	 onload="swal('Bienvenido', 'Los datos ingresados son correctos, puede continuar...', 'success');"--%>
+<!-- partial:index.partial.html -->
+<div class="cards">
+	
+	<div class="contact">Datos de Operación</div>
+	<div class="contact-form">
+		<a href="#" class="close"><i class="fa fa-times"></i></a>
+		<form>
+			<div class="control"><input type="text"  id="name"/><label for="name">OP Actual</label></div>
+			<div class="control"><input type="text"  id="email"/><label for="email">Lavado</label></div>
+			<div class="control"><input type="text"  id="url"/><label for="url">NNN</label></div>
+			<div class="control"><textarea name="" id="message"></textarea><label for="message">NNN</label></div>
+			<div class="control submit" onclick="swal('Datos correctos', 'Los datos ingresados son correctos, puede continuar...', 'success');"><input type="submit" /></div>
+		</form>
+	</div>
+
+	 <div class="card active" id="overview">
+		<a class="card-toggle" >Inicio <i class="fa fa-arrow-circle-left"></i></a>
+		<div class="card-content">			
+			<div class="row">
+				<div class="left col" style="text-align:center;">					
+				  <h2 style="color:#1d4189;"><strong>Líneas de producción</strong> </h2>							
+				  <div class="progress-factor flexy-item" style="width:500px;">
+						<div class="progress-bar">
+							<div class="bar has-rotation has-colors navy ruler" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="bar-0_0">
+								<div class="tooltip white"></div>
+								<div class="bar-face face-position roof percentage"></div>
+								<div class="bar-face face-position back percentage"></div>
+								<div class="bar-face face-position floor percentage volume-lights"></div>
+								<div class="bar-face face-position right"></div>
+								<div class="bar-face face-position left"></div>
+								<div class="bar-face face-position front percentage volume-lights shine"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="progress-factor flexy-item" style="width:500px;">
+						<div class="progress-bar">
+							<div class="bar has-rotation has-colors orange ruler-3" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100">
+								<div class="tooltip white"></div>
+								<div class="bar-face face-position roof percentage"></div>
+								<div class="bar-face face-position back percentage"></div>
+								<div class="bar-face face-position floor percentage volume-lights"></div>
+								<div class="bar-face face-position left"></div>
+								<div class="bar-face face-position right"></div>
+								<div class="bar-face face-position front percentage volume-lights shine"></div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="progress-factor flexy-item" style="width:500px;">
+						<div class="progress-bar" >
+							<div class="bar has-rotation has-colors navy ruler" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+								<div class="tooltip"></div>
+								<div class="bar-face face-position roof percentage"></div>
+								<div class="bar-face face-position back percentage"></div>
+								<div class="bar-face face-position floor percentage volume-lights"></div>
+								<div class="bar-face face-position left"></div>
+								<div class="bar-face face-position right"></div>
+								<div class="bar-face face-position front percentage volume-lights shine"></div>
+							</div>
+						</div>
+				  </div>			
+				
+				</div>
+
+				<div class="right col" style="text-align:center;">					
+						<h2><strong style="color:#186635">Datos</strong> </h2>	
+					<h2><strong style="color:#186635">.....</strong> </h2>	
+					
+				</div>
+			</div>
+		</div>
+	</div> 
+	
+	<div class="card" id="dribbble">
+		<a class="card-toggle"><i><span class="fa fa-list"></span></i></a>
+		<div class="card-content">
+			<div class="row">
+				<div class="left col">
+					<h2>Línea <strong>No 1</strong></h2>				
+					 <div class="progress-factor flexy-item" style="width:100px;">
+					<div class="progress-bar">
+							<div class="bar has-rotation has-colors navy ruler" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="bar-0_L1">
+								<div class="tooltip white"></div>
+								<div class="bar-face face-position roof percentage"></div>
+								<div class="bar-face face-position back percentage"></div>
+								<div class="bar-face face-position floor percentage volume-lights"></div>
+								<div class="bar-face face-position right"></div>
+								<div class="bar-face face-position left"></div>
+								<div class="bar-face face-position front percentage volume-lights shine"></div>
+							</div>
+					</div>
+					</div>
+					<br /><br />
+					<span style="color:white;font-size:30px;"> <strong>Paradas</strong> </span> <br />
+					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+				</div>
+
+				<div class="right col">
+					<span style="color:white;font-size:30px;"> <strong>Datos</strong> </span><br />
+					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+				</div>
+			</div>
+		</div>
+	</div> 
+	
+	<div class="card" id="behance">
+		<a class="card-toggle"><i><span class="fa fa-list"></span></i></a>
+		<div class="card-content">
+			<div class="row">
+				<div class="left col">
+					<h2>Línea <strong>No 2</strong></h2>
+					<div class="progress-factor flexy-item" style="width:100px;">
+						<div class="progress-bar">
+							<div class="bar has-rotation has-colors orange ruler-3" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100">
+								<div class="tooltip white"></div>
+								<div class="bar-face face-position roof percentage"></div>
+								<div class="bar-face face-position back percentage"></div>
+								<div class="bar-face face-position floor percentage volume-lights"></div>
+								<div class="bar-face face-position left"></div>
+								<div class="bar-face face-position right"></div>
+								<div class="bar-face face-position front percentage volume-lights shine"></div>
+							</div>
+						</div>
+					</div>
+					<br /><br />
+					<span style="color:white;font-size:30px;"> <strong>Paradas</strong> </span> <br />
+					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+				</div>
+				<div class="right col">
+				   <span style="color:white;font-size:30px;"> <strong>Datos</strong> </span><br />
+					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card" id="linkedin">
+		<a class="card-toggle"><i><span class="fa fa-list"></span></i></a>
+		<div class="card-content">
+			<div class="row">
+				<div class="left col">
+				<h2>Línea <strong>No 3</strong></h2>
+				    <div class="progress-factor flexy-item" style="width:100px;">
+						<div class="progress-bar" >
+							<div class="bar has-rotation has-colors navy ruler" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+								<div class="tooltip"></div>
+								<div class="bar-face face-position roof percentage"></div>
+								<div class="bar-face face-position back percentage"></div>
+								<div class="bar-face face-position floor percentage volume-lights"></div>
+								<div class="bar-face face-position left"></div>
+								<div class="bar-face face-position right"></div>
+								<div class="bar-face face-position front percentage volume-lights shine"></div>
+							</div>
+						</div>
+				    </div>
+					<br /><br />
+					<span style="color:white;font-size:30px;"> <strong>Paradas</strong> </span> <br />
+					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+				</div>
+				<div class="right col">
+					 <span style="color:white;font-size:30px;"> <strong>Datos</strong> </span><br />
+					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card" id="twitter">
+		<a class="card-toggle"><i><span class="fa fa-calendar-check-o"></span></i></a>
+		<div class="card-content">
+			<div class="row">
+				<div class="left col">
+					<h2>Datos de <strong> Incio y finalización de operación</strong></h2>
+				
+					<p>Fugit veniam, animi architecto doloribus veritatis vitae sint doloremque possimus quae. Pariatur libero, veniam voluptatibus alias distinctio qui nostrum debitis voluptate amet hic repellat officiis nam quos vel doloremque praesentium.</p>
+				</div>
+				<div class="right col"><img src="https://dl.dropboxusercontent.com/u/26808427/cdn/preview.jpg" alt="" /></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card" id="twitter2" >
+		
+		<div class="card-content">
+			<div class="row">				
+				<div class="right col">
+					<h2>My <strong>Twitter</strong></h2>
+				
+					<p>Fugit veniam, animi architecto doloribus veritatis vitae sint doloremque possimus quae. Pariatur libero, veniam voluptatibus alias distinctio qui nostrum debitis voluptate amet hic repellat officiis nam quos vel doloremque praesentium.</p>
+				</div>
+				<div class="right col"><img src="https://dl.dropboxusercontent.com/u/26808427/cdn/preview.jpg" alt="" /></div>
+			</div>
+		</div>
+	</div>
+	<a class="card-toggle" href="login.aspx"  style="width:90%;text-align:right;"><i><span class="fa fa-sign-out" style="width:200px;color:black;font-size:21px;">Log out</span></i></a>
+</div>
 <!-- partial -->
-  
-    <table style="width:100%;margin-top:-24px;"  class="table">
-       
-        <tr> 
-            <td style="width:30%;text-align:center;border-radius: 22% / 82%;" >
-                <p style="color:#6e1414;font-size:30px;text-align:center;">
-                  <strong>
-                      Lavados
-                  </strong> 
-                </p>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script  src="./script.js"></script>
 
-                <div id="app4" class="button">
-                      <zz-button-progress text="Enjuague" ref="zzUpload" v-on:progress="moveProgress" v-on:progress-finished="endProgress"  style="background-color:rgb(232, 41, 26);"></zz-button-progress>
-                 </div>
-                 <br />
-                <div id="app5" class="button">
-                      <zz-button-progress text="CIP" ref="zzUpload" v-on:progress="moveProgress" v-on:progress-finished="endProgress" style="background-color:#ff6a00;"></zz-button-progress>
-                 </div>
-                 <br />
-                 <div id="app6" class="button">
-                      <zz-button-progress text="CIP Ácido" ref="zzUpload" v-on:progress="moveProgress" v-on:progress-finished="endProgress" style="background-color: #83174c;"></zz-button-progress>
-                 </div>
-            </td>
-            <td style="                    text-align: right;
-                    text-align: center;
-                    background-color: transparent;">                
-                    <a href="login.aspx" style="margin-top: -360px;">
-                        <img src="Images/Fruselva.png"  style="width:300px;margin-top:-560px;"/>
-                    </a>
-                
-                <p style="text-align:left;width:100%;">
-                        <strong style="font-size:30px;">
-                               Datos<br />
-                        </strong> 
-                        OP Actual: <br />
-                        Lavado:<br />
-                        OP Siguiente:<br />
-                        Término de Producción:
-                   
-              
-            </td>
-            <td style="width:30%;text-align:center;border-radius: 12% / 32%;">
-                <p style="text-align:center;font-size:30px;color:#6e1414">
-                   <strong>
-                       Paradas
-                   </strong> 
-                </p>
-                 <div id="app"  class="button">
-                      <zz-button-progress text="Mínima" ref="zzUpload" v-on:progress="moveProgress" v-on:progress-finished="endProgress"  style="background-color:#f7ce39;"></zz-button-progress>
-                 </div>
-                <br />
-                 <div id="app2" class="button">
-                      <zz-button-progress text="Media" ref="zzUpload" v-on:progress="moveProgress" v-on:progress-finished="endProgress" style="background-color:#24189d;"></zz-button-progress>
-                 </div>
-                 <br />
-                 <div id="app3" class="button">
-                      <zz-button-progress text="Mantenimiento" ref="zzUpload" v-on:progress="moveProgress" v-on:progress-finished="endProgress" style="background-color:turquoise;"></zz-button-progress>
-                 </div>
+	<!-- /container -->
+	<script src="js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+        $("#change-color .bar").hover(function () {
+            // $(this).toggleClass('active');
+            $(this).find('.front').toggleClass('shine');
+        });
+		// $("#change-color .bar").click(function(){
+		//     $(this).toggleClass('sleep');
+		// });
+	</script>
 
-                 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script><script  src="./script.js"></script>
-                <br />
-            </td>
-        </tr>
-       
-        </table> 
-    <table style="width:100%;margin-top:-24px;" class="table2">
-        <tr>
-            <td style="width: 30%; height: 110px; cursor: pointer; border-radius: 22% / 22%;" id="L1">
-                 <p style="color:#ffffff;font-size:20px;text-align:center;">
-                  <strong>
-                      Línea 1
-                  </strong> 
-                </p>
-            </td>
-            <td style="height: 110px; cursor: pointer; border-radius: 2% / 32%" id="L2">
-                <p style="color:#ffffff;font-size:20px;text-align:center;">
-                  <strong>
-                      Línea 2
-                  </strong> 
-                </p>
-            </td>
-            <td style="width:30%;cursor:pointer;height: 110px;  border-radius: 12% / 92%" id="L3">
-                <p style="color:#ffffff;font-size:20px;text-align:center;">
-                  <strong>
-                      Línea 3
-                  </strong> 
-                </p>
-            </td>
-        </tr>
-    </table>
-   
-    <style>
-        table {
-            border-collapse: separate;
-            border-spacing: 15px;
-        }
-        .table td:hover {
-              background-color:transparent;
-        }
-        .table td {
-            background-color:rgba(255, 255, 255, 0.34);
-        }
-        
-
-        table2 {
-            border-collapse: separate;
-            border-spacing: 15px;
-            background-color: #388a43;
-        }
-        .table2 td:hover {
-              background-color: rgba(32, 63, 17, 0.32);
-        }
-      
-        .table2 td {
-            background-color:#21612a;
-        }
-
-        .button:hover {background-color: rgba(155, 133, 133, 0.50)}
-    </style>
-    
-
-     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'>
-     </script><script  src="js/jsbtn1.js"></script>
 </body>
 </html>

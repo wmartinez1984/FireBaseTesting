@@ -1,58 +1,72 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="FireBaseTesting.Temporizadores.login" ValidateRequest="true" %>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Login</title>
-
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css' />
+    <link rel="stylesheet" href="./style.css" />
+    <link href="css/sweetalert.css" rel="stylesheet" />
+    <script src="js/sweetalert-dev.js"></script>
     <script>
         function Loginvalidate() {
 
-            if (document.getElementById('username').value == "Nivel1") {
-                alert('Bienvenido Nivel 1');
+            if (document.getElementById('username').value == "Nivel1") {               
+                
                 window.location.href = 'data';
                 document.getElementById('spanMessage').innerHTML = "";
             }
 
             else if (document.getElementById('username').value == "Nivel2") {
-                alert('Bienvenido Nivel 2');
+               
+               
                 document.getElementById('spanMessage').innerHTML = "";
                 window.location.href = 'Temporizador';
             }
             else {
-                document.getElementById('spanMessage').innerHTML = "Usuario no válido";
+                swal('Usuario o contraseña no válidos', '', 'error');
             }
         }
     </script>
 </head>
-<body style="background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));">
-    <form onsubmit="return false" runat="server">
-        <img src="Images/Fruselva.png"  style="width:300px;margin-top:-560px;"/>
-          <div class="form-item">
-            <label>Username</label>
-            <div class="input-wrapper">
-              <input type="text" id="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"  runat="server"/>
-            </div>
-          </div>
-          <div class="form-item">
-            <label>Password</label>
-            <div class="input-wrapper">
-              <input type="password" id="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" runat="server"/>
-              <button type="button" id="eyeball">
-                <div class="eye"></div>
-              </button>
-              <div id="beam"></div>
-            </div>
-          </div>
-        
-        <span id="spanMessage"  runat="server" style="color:red;">
-        </span>
+<body>
+    <div class="cards">
+        <div class="card active" id="overview">
+            <a class="card-toggle" style="font-size:13px;">Inicio<i class="fa fa-arrow-circle-left"></i></a>
+            <div class="card-content">
+                <div class="row"  style="text-align:center;">
+                    <div class="right col" style="text-align:center;width:100%;">
+                       
+                        <form onsubmit="return false" runat="server">
+                            <br />
+                            <img src="Images/Fruselva.png" style="width:300px;margin-top:-560px;" />
+                            <div class="form-item">
+                                <label>Username</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" runat="server" style="width:250px;" />
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label>Password</label>
+                                <div class="input-wrapper">
+                                    <input type="password" id="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" runat="server" style="width:250px;" />
+                                  
+                                </div>
+                            </div>
 
-        <asp:Button ID="submit" runat="server" Text="Inciar" OnClientClick="Loginvalidate();" style="background-color:#388a43;" CssClass="button"/>
-    </form>
+                            <span id="spanMessage" runat="server" style="color:red;">
+                            </span>                            
+                            <asp:Button ID="submit" runat="server" Text="Inciar" OnClientClick="Loginvalidate();" style="background-color:#388a43;" CssClass="button" />
+                        </form>
 
+                    </div>
+                    <div class="right col">
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
     <style>
          .button:hover {background-color: rgba(155, 133, 133, 0.50)}
                 :root {
@@ -74,7 +88,7 @@
                 body {
                   display: grid;
                   place-items: center;
-                  background: var(--bgColor);
+                  
                 }
                 body.show-password {
                   --bgColor: black;
@@ -102,12 +116,12 @@
                   font-family: monospace;
                   color: var(--inputColor);
                 }
-                label:focus,
-                input:focus,
-                button:focus {
-                  outline: 3px solid var(--outlineColor);
-                  outline-offset: 2px;
-                }
+                    label:focus,
+                    input:focus,
+                    button:focus {
+                        outline: 3px solid var(--outlineColor);
+                        outline-offset: 2px;
+                    }
                 label::-moz-focus-inner,
                 input::-moz-focus-inner,
                 button::-moz-focus-inner {
@@ -233,31 +247,12 @@
                 .show-password [id="beam"] {
                   background: var(--beamColor);
                 }
-
     </style>
-
-    <script>
-        const root = document.documentElement;
-        const eye = document.getElementById('eyeball');
-        const beam = document.getElementById('beam');
-        const passwordInput = document.getElementById('password');
-
-        root.addEventListener('mousemove', (e) => {
-            let rect = beam.getBoundingClientRect();
-            let mouseX = rect.right + (rect.width / 2);
-            let mouseY = rect.top + (rect.height / 2);
-            let rad = Math.atan2(mouseX - e.pageX, mouseY - e.pageY);
-            let degrees = (rad * (20 / Math.PI) * -1) - 350;
-
-            root.style.setProperty('--beamDegrees', `${degrees}deg`);
-        });
-
-        eye.addEventListener('click', e => {
-            e.preventDefault();
-            document.body.classList.toggle('show-password');
-            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password'
-            passwordInput.focus();
-        });
-    </script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+        <script src="./script.js"></script>
+        
+       
 </body>
+
 </html>
+
