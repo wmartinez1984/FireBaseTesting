@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace FireBaseTesting.Temporizadores
+namespace FireBaseTesting.ActivosFinancieros
 {
 
 

@@ -114,6 +114,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="ActivosFinancieros\css\style.css" />
+    <Content Include="ActivosFinancieros\login.aspx" />
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\font-awesome.min.css" />
@@ -346,7 +348,9 @@
     <Content Include="Temporizadores\login.aspx" />
     <Content Include="Temporizadores\css\temporizador.css" />
     <Content Include="Temporizadores\script.js" />
+    <Content Include="Temporizadores\scriptLogin.js" />
     <Content Include="Temporizadores\style.css" />
+    <Content Include="Temporizadores\styleLogin.css" />
     <Content Include="Temporizadores\Temporizador.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -354,6 +358,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivosFinancieros\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFinancieros\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>

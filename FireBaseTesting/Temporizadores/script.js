@@ -42,3 +42,5 @@ $(".contact-form input[type=submit], .contact-form .close").on("click",function(
 	e.preventDefault();
 	$(".contact-form").toggleClass("active")
 });
+
+
