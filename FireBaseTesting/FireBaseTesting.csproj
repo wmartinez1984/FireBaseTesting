@@ -46,12 +46,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FireSharp, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FireSharp.2.0.4\lib\portable-net45+sl5+wp8+win8\FireSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="FireSharp.Serialization.JsonNet, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FireSharp.Serialization.JsonNet.1.1.0\lib\net45\FireSharp.Serialization.JsonNet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -114,7 +141,80 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="ActivosFinancieros\contactform\contactform.js" />
+    <Content Include="ActivosFinancieros\contactform\Readme.txt" />
+    <Content Include="ActivosFinancieros\css\scss-files.txt" />
     <Content Include="ActivosFinancieros\css\style.css" />
+    <Content Include="ActivosFinancieros\css\sweetalert.css" />
+    <Content Include="ActivosFinancieros\Home.aspx" />
+    <Content Include="ActivosFinancieros\img\about-img.png" />
+    <Content Include="ActivosFinancieros\img\apple-touch-icon.png" />
+    <Content Include="ActivosFinancieros\img\blog\blog-image-1.jpg" />
+    <Content Include="ActivosFinancieros\img\blog\blog-image-2.jpg" />
+    <Content Include="ActivosFinancieros\img\blog\blog-image-3.jpg" />
+    <Content Include="ActivosFinancieros\img\favicon.png" />
+    <Content Include="ActivosFinancieros\img\hero-bg.png" />
+    <Content Include="ActivosFinancieros\img\hero-img.png" />
+    <Content Include="ActivosFinancieros\img\newsletter-bg.jpg" />
+    <Content Include="ActivosFinancieros\img\screen\1.jpg" />
+    <Content Include="ActivosFinancieros\img\screen\2.jpg" />
+    <Content Include="ActivosFinancieros\img\screen\3.jpg" />
+    <Content Include="ActivosFinancieros\img\screen\4.jpg" />
+    <Content Include="ActivosFinancieros\img\screen\5.jpg" />
+    <Content Include="ActivosFinancieros\img\screen\6.jpg" />
+    <Content Include="ActivosFinancieros\img\screen\7.jpg" />
+    <Content Include="ActivosFinancieros\img\screen\8.jpg" />
+    <Content Include="ActivosFinancieros\img\screen\9.jpg" />
+    <Content Include="ActivosFinancieros\img\svg\asteroid.svg" />
+    <Content Include="ActivosFinancieros\img\svg\cloud-computing.svg" />
+    <Content Include="ActivosFinancieros\img\svg\cloud.svg" />
+    <Content Include="ActivosFinancieros\img\svg\code.svg" />
+    <Content Include="ActivosFinancieros\img\svg\design-tool.svg" />
+    <Content Include="ActivosFinancieros\img\svg\paint-palette.svg" />
+    <Content Include="ActivosFinancieros\img\svg\pixel.svg" />
+    <Content Include="ActivosFinancieros\img\svg\planet.svg" />
+    <Content Include="ActivosFinancieros\img\svg\tools.svg" />
+    <Content Include="ActivosFinancieros\img\svg\vector.svg" />
+    <Content Include="ActivosFinancieros\img\team\1.jpg" />
+    <Content Include="ActivosFinancieros\img\team\2.jpg" />
+    <Content Include="ActivosFinancieros\img\team\3.jpg" />
+    <Content Include="ActivosFinancieros\img\team\4.jpg" />
+    <Content Include="ActivosFinancieros\img\video-bg.jpg" />
+    <Content Include="ActivosFinancieros\index.html" />
+    <Content Include="ActivosFinancieros\js\main.js" />
+    <Content Include="ActivosFinancieros\js\sweetalert-dev.js" />
+    <Content Include="ActivosFinancieros\lib\animate\animate.css" />
+    <Content Include="ActivosFinancieros\lib\animate\animate.min.css" />
+    <Content Include="ActivosFinancieros\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="ActivosFinancieros\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="ActivosFinancieros\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="ActivosFinancieros\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="ActivosFinancieros\lib\easing\easing.js" />
+    <Content Include="ActivosFinancieros\lib\easing\easing.min.js" />
+    <Content Include="ActivosFinancieros\lib\font-awesome\css\font-awesome.css" />
+    <Content Include="ActivosFinancieros\lib\font-awesome\css\font-awesome.min.css" />
+    <Content Include="ActivosFinancieros\lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="ActivosFinancieros\lib\jquery\jquery-migrate.min.js" />
+    <Content Include="ActivosFinancieros\lib\jquery\jquery.min.js" />
+    <Content Include="ActivosFinancieros\lib\modal-video\css\modal-video.min.css" />
+    <Content Include="ActivosFinancieros\lib\modal-video\js\modal-video.js" />
+    <Content Include="ActivosFinancieros\lib\modal-video\js\modal-video.min.js" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\assets\ajax-loader.gif" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\assets\owl.carousel.css" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\assets\owl.carousel.min.css" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\assets\owl.theme.default.css" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\assets\owl.theme.default.min.css" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\assets\owl.theme.green.css" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\assets\owl.theme.green.min.css" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\assets\owl.video.play.png" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\links.php" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\owl.carousel.js" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\owl.carousel.min.js" />
+    <Content Include="ActivosFinancieros\lib\superfish\hoverIntent.js" />
+    <Content Include="ActivosFinancieros\lib\superfish\superfish.js" />
+    <Content Include="ActivosFinancieros\lib\superfish\superfish.min.js" />
+    <Content Include="ActivosFinancieros\lib\wow\wow.js" />
+    <Content Include="ActivosFinancieros\lib\wow\wow.min.js" />
     <Content Include="ActivosFinancieros\login.aspx" />
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\bootstrap.min.css" />
@@ -247,6 +347,12 @@
     <Content Include="assets\images\sliders\slider-3a.psd" />
     <Content Include="assets\images\sliders\slider-6.psd" />
     <Content Include="assets\js\revolution\info.cfg" />
+    <Content Include="ActivosFinancieros\lib\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="ActivosFinancieros\lib\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="ActivosFinancieros\lib\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="ActivosFinancieros\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="ActivosFinancieros\lib\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="ActivosFinancieros\lib\owlcarousel\LICENSE" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP1.pubxml" />
@@ -318,11 +424,17 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="sitemap.xml" />
+    <Content Include="Temporizadores\contactform\contactform.js" />
+    <Content Include="Temporizadores\contactform\Readme.txt" />
+    <Content Include="Temporizadores\Controles\Comandos.ascx" />
+    <Content Include="Temporizadores\Controles\DataOP.ascx" />
+    <Content Include="Temporizadores\Controles\DataOPL1.ascx" />
     <Content Include="Temporizadores\css\component.css" />
     <Content Include="Temporizadores\css\cssbtn1.css" />
     <Content Include="Temporizadores\css\custom-bars.css" />
     <Content Include="Temporizadores\css\demo.css" />
     <Content Include="Temporizadores\css\normalize.css" />
+    <Content Include="Temporizadores\css\scss-files.txt" />
     <Content Include="Temporizadores\css\style.css" />
     <Content Include="Temporizadores\css\stylebtn1.css" />
     <Content Include="Temporizadores\css\sweetalert.css" />
@@ -336,19 +448,87 @@
     <Content Include="Temporizadores\HtmlPage1.html" />
     <Content Include="Temporizadores\Images\Fruselva.jpeg" />
     <Content Include="Temporizadores\Images\Fruselva.png" />
+    <Content Include="Temporizadores\img\about-img.png" />
+    <Content Include="Temporizadores\img\apple-touch-icon.png" />
+    <Content Include="Temporizadores\img\blog\blog-image-1.jpg" />
+    <Content Include="Temporizadores\img\blog\blog-image-2.jpg" />
+    <Content Include="Temporizadores\img\blog\blog-image-3.jpg" />
+    <Content Include="Temporizadores\img\favicon.png" />
+    <Content Include="Temporizadores\img\hero-bg.png" />
+    <Content Include="Temporizadores\img\hero-img.png" />
+    <Content Include="Temporizadores\img\newsletter-bg.jpg" />
+    <Content Include="Temporizadores\img\screen\1.jpg" />
+    <Content Include="Temporizadores\img\screen\2.jpg" />
+    <Content Include="Temporizadores\img\screen\3.jpg" />
+    <Content Include="Temporizadores\img\screen\4.jpg" />
+    <Content Include="Temporizadores\img\screen\5.jpg" />
+    <Content Include="Temporizadores\img\screen\6.jpg" />
+    <Content Include="Temporizadores\img\screen\7.jpg" />
+    <Content Include="Temporizadores\img\screen\8.jpg" />
+    <Content Include="Temporizadores\img\screen\9.jpg" />
+    <Content Include="Temporizadores\img\svg\asteroid.svg" />
+    <Content Include="Temporizadores\img\svg\cloud-computing.svg" />
+    <Content Include="Temporizadores\img\svg\cloud.svg" />
+    <Content Include="Temporizadores\img\svg\code.svg" />
+    <Content Include="Temporizadores\img\svg\design-tool.svg" />
+    <Content Include="Temporizadores\img\svg\paint-palette.svg" />
+    <Content Include="Temporizadores\img\svg\pixel.svg" />
+    <Content Include="Temporizadores\img\svg\planet.svg" />
+    <Content Include="Temporizadores\img\svg\tools.svg" />
+    <Content Include="Temporizadores\img\svg\vector.svg" />
+    <Content Include="Temporizadores\img\team\1.jpg" />
+    <Content Include="Temporizadores\img\team\2.jpg" />
+    <Content Include="Temporizadores\img\team\3.jpg" />
+    <Content Include="Temporizadores\img\team\4.jpg" />
+    <Content Include="Temporizadores\img\video-bg.jpg" />
     <Content Include="Temporizadores\index.html" />
+    <Content Include="Temporizadores\js\DataOP.js" />
     <Content Include="Temporizadores\js\jquery-2.1.1.min.js" />
     <Content Include="Temporizadores\js\jsbtn1.js" />
+    <Content Include="Temporizadores\js\main.js" />
     <Content Include="Temporizadores\js\script.js" />
     <Content Include="Temporizadores\js\sweetalert-dev.js" />
     <Content Include="Temporizadores\js\Timer.js" />
     <Content Include="Temporizadores\css\Timer.css" />
     <Content Include="Temporizadores\js\JavaScript.js" />
     <Content Include="Temporizadores\L1.aspx" />
+    <Content Include="Temporizadores\lib\animate\animate.css" />
+    <Content Include="Temporizadores\lib\animate\animate.min.css" />
+    <Content Include="Temporizadores\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="Temporizadores\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Temporizadores\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Temporizadores\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Temporizadores\lib\easing\easing.js" />
+    <Content Include="Temporizadores\lib\easing\easing.min.js" />
+    <Content Include="Temporizadores\lib\font-awesome\css\font-awesome.css" />
+    <Content Include="Temporizadores\lib\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Temporizadores\lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Temporizadores\lib\jquery\jquery-migrate.min.js" />
+    <Content Include="Temporizadores\lib\jquery\jquery.min.js" />
+    <Content Include="Temporizadores\lib\modal-video\css\modal-video.min.css" />
+    <Content Include="Temporizadores\lib\modal-video\js\modal-video.js" />
+    <Content Include="Temporizadores\lib\modal-video\js\modal-video.min.js" />
+    <Content Include="Temporizadores\lib\owlcarousel\assets\ajax-loader.gif" />
+    <Content Include="Temporizadores\lib\owlcarousel\assets\owl.carousel.css" />
+    <Content Include="Temporizadores\lib\owlcarousel\assets\owl.carousel.min.css" />
+    <Content Include="Temporizadores\lib\owlcarousel\assets\owl.theme.default.css" />
+    <Content Include="Temporizadores\lib\owlcarousel\assets\owl.theme.default.min.css" />
+    <Content Include="Temporizadores\lib\owlcarousel\assets\owl.theme.green.css" />
+    <Content Include="Temporizadores\lib\owlcarousel\assets\owl.theme.green.min.css" />
+    <Content Include="Temporizadores\lib\owlcarousel\assets\owl.video.play.png" />
+    <Content Include="Temporizadores\lib\owlcarousel\links.php" />
+    <Content Include="Temporizadores\lib\owlcarousel\owl.carousel.js" />
+    <Content Include="Temporizadores\lib\owlcarousel\owl.carousel.min.js" />
+    <Content Include="Temporizadores\lib\superfish\hoverIntent.js" />
+    <Content Include="Temporizadores\lib\superfish\superfish.js" />
+    <Content Include="Temporizadores\lib\superfish\superfish.min.js" />
+    <Content Include="Temporizadores\lib\wow\wow.js" />
+    <Content Include="Temporizadores\lib\wow\wow.min.js" />
     <Content Include="Temporizadores\login.aspx" />
     <Content Include="Temporizadores\css\temporizador.css" />
     <Content Include="Temporizadores\script.js" />
     <Content Include="Temporizadores\scriptLogin.js" />
+    <Content Include="Temporizadores\styleMonitor.css" />
     <Content Include="Temporizadores\style.css" />
     <Content Include="Temporizadores\styleLogin.css" />
     <Content Include="Temporizadores\Temporizador.aspx" />
@@ -358,6 +538,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivosFinancieros\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFinancieros\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ActivosFinancieros\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -374,6 +561,7 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -408,7 +596,11 @@
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ProductionOrderDAL.cs" />
+    <Compile Include="ProductionOrderEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -423,12 +615,37 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="Temporizadores\Class1.cs" />
+    <Compile Include="Temporizadores\Controles\Comandos.ascx.cs">
+      <DependentUpon>Comandos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\Comandos.ascx.designer.cs">
+      <DependentUpon>Comandos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\DataOP.ascx.cs">
+      <DependentUpon>DataOP.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\DataOP.ascx.designer.cs">
+      <DependentUpon>DataOP.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\DataOPL1.ascx.cs">
+      <DependentUpon>DataOPL1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\DataOPL1.ascx.designer.cs">
+      <DependentUpon>DataOPL1.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Temporizadores\Data.aspx.cs">
       <DependentUpon>Data.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Temporizadores\Data.aspx.designer.cs">
       <DependentUpon>Data.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\DataOP.ashx.cs">
+      <DependentUpon>DataOP.ashx</DependentUpon>
     </Compile>
     <Compile Include="Temporizadores\L1.aspx.cs">
       <DependentUpon>L1.aspx</DependentUpon>
@@ -460,6 +677,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
@@ -476,6 +694,13 @@
     <Content Include="Temporizadores\fonts\font-awesome-4.3.0\fonts\fontawesome-webfont.woff" />
     <Content Include="Temporizadores\fonts\font-awesome-4.3.0\fonts\fontawesome-webfont.woff2" />
     <Content Include="Temporizadores\fonts\font-awesome-4.3.0\fonts\FontAwesome.otf" />
+    <Content Include="Temporizadores\lib\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Temporizadores\lib\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Temporizadores\lib\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Temporizadores\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Temporizadores\lib\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Temporizadores\lib\owlcarousel\LICENSE" />
+    <Content Include="Temporizadores\DataOP.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -517,6 +742,11 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

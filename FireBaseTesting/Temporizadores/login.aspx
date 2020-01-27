@@ -20,10 +20,9 @@
             }
 
             else if (document.getElementById('username').value == "Nivel2") {
-               
-               
-                document.getElementById('spanMessage').innerHTML = "";
+                                
                 window.location.href = 'Temporizador';
+                document.getElementById('spanMessage').innerHTML = "";
             }
             else {
                 swal('Usuario o contraseña no válidos', '', 'error');

@@ -1,20 +1,30 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Data.aspx.cs" Inherits="FireBaseTesting.Temporizadores.Data" %>
 
+<%@ Register Src="~/Temporizadores/Controles/DataOP.ascx" TagPrefix="uc1" TagName="DataOP1" %>
+<%@ Register Src="~/Temporizadores/Controles/Comandos.ascx" TagPrefix="uc1" TagName="Comandos" %>
+
+
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
   <title>Operaciones</title>
 
-	<style>
+	
+	<%--NECESARIOS PARA EJECUTAR AJAX,  JSON--%>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script src="js/DataOP.js"></script>
 
-	</style>
+	<%--NECESARIOS PARA DISEÑO--%>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
+    <script src="js/sweetalert-dev.js"></script>
 
+	<%--NECESARIOS PARA DISEÑO Y MENSAJES DEL SISTEMA--%>
 	<link href="css/sweetalert.css" rel="stylesheet" />
-	<script src="js/sweetalert-dev.js"></script>
-
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
@@ -28,133 +38,254 @@
 </head>
 <body>
 
-<div class="cards">
-	
-	<div class="contact">Configuración de Operación</div>
+<div class="cards" >
+
+	<div class="contact"> <i><span class="fa fa-gear" style="color:#808080; width:300px; font-size:17px;" id="ConfiguracionA">Configuración de Operación</span></i> </div>
 	<div class="contact-form">
-		<a href="#" class="close"><i class="fa fa-times"></i></a>
+		<a href="#" class="close" id="closeA"><i class="fa fa-times"></i></a>
 		<form>
-			<div class="control">
+		<%--	<div class="control">
 				<span class="open-modal">
-				   <i ><span class="fa fa-calendar-check-o" style="color:#808080; width:230px; font-size:17px;">+ Programación de OP</span></i>
+				   <i ><span">+ Programación de OP</span></i>
 				</span>
-			</div>		
+			</div>	--%>	
+	   <div class="modal-content">
+		
+		<table>
+			<tr>
+				
+				<td colspan="3" style="text-align:left;">
+					<div class="searchBox" style="">
+					  <input class="searchInput" type="text" name="" id="txtsearchInput" placeholder="Consultar" />
+					  <button class="searchButton" onclick="DataClient(); return false;">
+						<i class="material-icons">
+						  OP
+						</i>
+					  </button>
+					</div>
+					<br />
+					<br />
+				</td>
+				
+			</tr>
+			<tr>
+				<td>
+						<br />
+						OP consultada: 
+					
+				</td>
+				<td colspan="2">
+					<span id="spnOP" style="font-size:14px;"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					
+						NAVI: 
+					
+					
+				</td>
+				<td colspan="2">
+					<span id="spnNAVI" style="font-size:14px;"></span>
+				</td>
+			</tr>
 
-			<div class="control">
-				<span>
-				   <i ><span class="fa fa-life-ring" style="color:#808080; width:330px; font-size:27px;">Datos de la OP Actual</span></i>
-				</span>
-			</div>	
+			<tr>
+				<td>
+					
+						Nombre del producto: 
+					
+				</td>
+				<td colspan="2">
+					<span id="spnNombreProducto" style="font-size:14px;"></span>
+				</td>
+			</tr>
 
-			<div class="control">
-				<p>
-				Consultar OP: 
-				</p>
-				<p>
-					OP: 
-				</p>
-				<p>
-					Producto: 
-				</p>
-				<p>
-					Kilógramos: 
-				</p>
-				<p>
-					..............: 
-				</p>
-			</div>	
+			<tr>
+				<td>
+					
+						Unidades a Fabricar: 
+					
+				</td>
+				<td colspan="2">
+					<span id="spnCantidad" style="font-size:14px;"></span>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					
+						Cliente: 
+					
+				</td>
+				<td colspan="2">
+				<span id="spnCliente" style="font-size:14px;"></span>
+				</td>
+			</tr>
+			<tr>
+					<td>
+						Tipo de Lavado:
+					</td>
+					<td >
+						 <select id="normal-select-7" class="select-css" onchange=" CambiarLavado();" >
+					      <option value="45" class="select-dropdown__list-item">Enjugaue</option>
+						  <option value="135" class="select-dropdown__list-item">CIP</option>
+						  <option value="180" class="select-dropdown__list-item">CIP acido</option>						 	 
+						 </select>
+					</td>
+					<td style="text-align:center;">
+						<span style="color:#4FC3A1" id="spLavado"><strong>45 minutos</strong> </span>
+					</td>
+	       </tr>
+
+		</table>
+		
+			<table>
+				
+				
+				<tr>
+					<td colspan="3" style="text-align:left; ">
+						<br />
+                        <input id="btnInciar" type="button" value="Iniciar" onclick="SaveOp(); return false;" style="background-color:#4FC3A1;border-radius:10px;border-color:#4FC3A1;width:100px;"/>
+						
+					</td>
+				</tr>
+			</table>
 			
-			<br /><br />
-			<div class="control submit" onclick="swal('Datos correctos', 'Los datos ingresados son correctos, puede continuar...', 'success');"><input type="submit" /></div>
+		   
+			 <script>
+                 function CambiarLavado() {
+
+                     document.getElementById('spLavado').innerHTML = document.getElementById('normal-select-7').value + " Minutos";
+                 }
+			 </script>
+		  
+		
+		<br />
+        <input id="HiddenEstadoOP" type="hidden" />
+		<table class="fl-table" style="width:100%;" id="TableOP">
+			<thead>
+			<tr>
+				<th>OP</th>
+				<th>NAVI</th>
+				<th>Nombre del producto</th>
+				<th>Unidades a Fabricar</th>
+				<th>Cliente</th>
+				<th>Lavado</th>
+				<th>Estado OP</th>
+				
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>DATA TEST 1</td>
+				<td>DATA TEST 1</td>
+				<td>DATA TEST 1</td>
+				<td>DATA TEST 1</td>
+				<td>DATA TEST 1</td>
+				<td>DATA TEST 1</td>
+				<td>Pendiente</td>
+				
+			</tr>
+			
+			<tbody>
+		</table>			
+	  </div>		
+			
+		<br />
+		<br />
+			
 		</form>
 	</div>
 
 	 <div class="card active" id="overview">
 		<a class="card-toggle" >Inicio <i class="fa fa-arrow-circle-left"></i></a>
 		<div class="card-content">			
-			<div class="row">
+			<div class="row" style="width:100%;">
+				 <%--<h3 style="color:#186635;font-size:15px;width:200px;"><strong>En proceso L1:</strong> </h3>	
+				 <br />
+				 <h3 style="color:#5f0909;font-size:15px;"><strong>En proceso L2:</strong> </h3>	
+				<br />
+				<br />
+				<h3 style="color:#5f0909;font-size:15px;"><strong>En proceso L3:</strong> </h3>	--%>
 				<div class="left col" style="text-align:left;">					
-				  <h3 style="color:#1d4189;font-size:30px;"><strong>Líneas de producción</strong> </h3>							
-				  <div class="progress-factor flexy-item" style="width:500px;margin-top:-55px;">
+				 	
+				  
+				  <div class="progress-factor flexy-item" style="margin-top:-70px;width:500px;cursor:pointer;" onclick="OpenModalNew(1);">
 						<div class="progress-bar">
-							<div class="bar has-rotation has-colors navy ruler" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="bar-0_0">
+							<div class="bar has-rotation has-colors navy ruler" style="background-color:#cc3105" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-1">
 								<div class="tooltip white"></div>
-								<div class="bar-face face-position roof percentage"></div>
+								<div class="bar-face face-position roof percentage" style="background-color:#45b817"><h3 style="color:white;font-size:25px;"><strong id="spanEstatusL1"></strong> </h3></div>
 								<div class="bar-face face-position back percentage"></div>
 								<div class="bar-face face-position floor percentage volume-lights"></div>
 								<div class="bar-face face-position right"></div>
 								<div class="bar-face face-position left"></div>
 								<div class="bar-face face-position front percentage volume-lights shine"></div>
+								<h3 style="color:white;font-size:25px;"><strong> Línea de producción 1</strong> </h3>
 							</div>
-						</div>
-					</div>
-
-					<div class="progress-factor flexy-item" style="width:500px;">
-						<div class="progress-bar">
-							<div class="bar has-rotation has-colors orange ruler-3" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100">
-								<div class="tooltip white"></div>
-								<div class="bar-face face-position roof percentage"></div>
-								<div class="bar-face face-position back percentage"></div>
-								<div class="bar-face face-position floor percentage volume-lights"></div>
-								<div class="bar-face face-position left"></div>
-								<div class="bar-face face-position right"></div>
-								<div class="bar-face face-position front percentage volume-lights shine"></div>
-							</div>
+							
 						</div>
 					</div>
 					
+					<br />
 					<div class="progress-factor flexy-item" style="width:500px;">
-						<div class="progress-bar" >
-							<div class="bar has-rotation has-colors navy ruler" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-								<div class="tooltip"></div>
-								<div class="bar-face face-position roof percentage"></div>
+						<div class="progress-bar">
+							<div class="bar has-rotation has-colors orange ruler-3" style="background-color:#4e10b1" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-2">
+								<div class="tooltip white" ></div>
+								<div class="bar-face face-position roof percentage" style="background-color:#ff6a00"><h3 style="color:white;font-size:25px;"><strong id="spanEstatusL2"></strong> </h3></div>
 								<div class="bar-face face-position back percentage"></div>
 								<div class="bar-face face-position floor percentage volume-lights"></div>
 								<div class="bar-face face-position left"></div>
-								<div class="bar-face face-position right"></div>
+								<div class="bar-face face-position right" ></div>
 								<div class="bar-face face-position front percentage volume-lights shine"></div>
+								<h3 style="color:white;font-size:25px;"><strong> Línea de producción 2</strong> </h3>
 							</div>
 						</div>
-				  </div>			
-				
+					</div>
+					<br />
+					<div class="progress-factor flexy-item" style="width:500px;">
+						<div class="progress-bar">
+							<div class="bar has-rotation has-colors navy ruler" style="background-color:#cc3105" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-3">
+								<div class="tooltip white"></div>
+								<div class="bar-face face-position roof percentage" style="background-color:#45b817"><h3 style="color:white;font-size:25px;"><strong id="spanEstatusL3"></strong> </h3></div>
+								<div class="bar-face face-position back percentage"></div>
+								<div class="bar-face face-position floor percentage volume-lights"></div>
+								<div class="bar-face face-position right"></div>
+								<div class="bar-face face-position left"></div>
+								<div class="bar-face face-position front percentage volume-lights shine"></div>
+								<h3 style="color:white;font-size:25px;"><strong> Línea de producción 3</strong> </h3>
+							</div>
+						</div>
+					</div>	
+					<br />
+					<div style="display:none;">
+						<input type="text"  id="txtL"/>
+						<input type="text"  id="txtL1"/>
+						<input type="text"  id="txtL2"/>
+						<input type="text"  id="txtL3"/>
+					</div>
+					
 				</div>
 
-				<div class="right col" style="text-align:center;border-left:dashed;border-color:#1d4189; border-width:10px;">					
-						<h3><strong style="color:#ff6a00;font-size:30px;">Datos de OP Actual</strong> </h3>	
-					   <h2><strong style="color:#186635">.....</strong> </h2>	
-					
+				<div class="right col" style="text-align:right;border-color:#1d4189; border-width:10px;">			
+						<uc1:DataOP1 runat="server" id="DataOP1" />	
 				</div>
 			</div>
 		</div>
 	</div> 
 	
-	<div class="card" id="dribbble">
+	<div class="card" id="dribbble" onclick="document.getElementById('txtL').value = 1; ">
 		<a class="card-toggle"><i><span class="fa fa-list"></span></i></a>
 		<div class="card-content">
 			<div class="row">
-				<div class="left col" style="text-align:left;">
+				<div class="left col" style="text-align: left;">
 					<h3>Línea <strong>No 1</strong></h3>				
-					 <div class="progress-factor flexy-item" style="width:100px;">
-						<div class="progress-bar">
-								<div class="bar has-rotation has-colors navy ruler" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="bar-0_L1">
-									<div class="tooltip white"></div>
-									<div class="bar-face face-position roof percentage"></div>
-									<div class="bar-face face-position back percentage"></div>
-									<div class="bar-face face-position floor percentage volume-lights"></div>
-									<div class="bar-face face-position right"></div>
-									<div class="bar-face face-position left"></div>
-									<div class="bar-face face-position front percentage volume-lights shine"></div>
-								</div>
-						</div>
-					</div>
-					<br /><br />
-					<span style="color:white;font-size:30px;"> <strong>Paradas</strong> </span> <br />
-					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+					
+					<uc1:Comandos runat="server" id="Comandos" />
 				</div>
 
 				<div class="right col">
-					<span style="color:white;font-size:30px;"> <strong>Datos</strong> </span><br />
-					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+					<uc1:DataOP1 runat="server" id="DataOP2" />	
 				</div>
 				
 			</div>
@@ -162,64 +293,31 @@
 
 	</div> 
 	
-	<div class="card" id="behance">
+	<div class="card" id="behance" onclick="document.getElementById('txtL').value = 2; ">
 		<a class="card-toggle"><i><span class="fa fa-list"></span></i></a>
 		<div class="card-content">
 			<div class="row">
 				<div class="left col">
 					<h3>Línea <strong>No 2</strong></h3>
-					<div class="progress-factor flexy-item" style="width:100px;">
-						<div class="progress-bar">
-							<div class="bar has-rotation has-colors orange ruler-3" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100">
-								<div class="tooltip white"></div>
-								<div class="bar-face face-position roof percentage"></div>
-								<div class="bar-face face-position back percentage"></div>
-								<div class="bar-face face-position floor percentage volume-lights"></div>
-								<div class="bar-face face-position left"></div>
-								<div class="bar-face face-position right"></div>
-								<div class="bar-face face-position front percentage volume-lights shine"></div>
-							</div>
-						</div>
-					</div>
-					<br /><br />
-					<span style="color:white;font-size:30px;"> <strong>Paradas</strong> </span> <br />
-					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+					<uc1:Comandos runat="server" id="Comandos1" />
 				</div>
 				<div class="right col">
-				   <span style="				           color: white;
-				           font-size: 30px;"> <strong>Datos</strong> </span><br />
-					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+				  <uc1:DataOP1 runat="server" id="DataOP3" />						
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="card" id="linkedin">
+	<div class="card" id="linkedin" onclick="document.getElementById('txtL').value = 3; ">
 		<a class="card-toggle"><i><span class="fa fa-list"></span></i></a>
-		<div class="card-content">
-			<div class="row">
+		<div class="card-content" >
+			<div class="row" style="text-align:left;">
 				<div class="left col">
 				<h3>Línea <strong>No 3</strong></h3>
-				    <div class="progress-factor flexy-item" style="width:100px;">
-						<div class="progress-bar" >
-							<div class="bar has-rotation has-colors navy ruler" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-								<div class="tooltip"></div>
-								<div class="bar-face face-position roof percentage"></div>
-								<div class="bar-face face-position back percentage"></div>
-								<div class="bar-face face-position floor percentage volume-lights"></div>
-								<div class="bar-face face-position left"></div>
-								<div class="bar-face face-position right"></div>
-								<div class="bar-face face-position front percentage volume-lights shine"></div>
-							</div>
-						</div>
-				    </div>
-					<br /><br />
-					<span style="color:white;font-size:30px;"> <strong>Paradas</strong> </span> <br />
-					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+				    <uc1:Comandos runat="server" id="Comandos2" />
 				</div>
 				<div class="right col">
-					 <span style="color:white;font-size:30px;"> <strong>Datos</strong> </span><br />
-					<span style="color:white;font-size:30px;"> <strong>....</strong> </span>
+					 <uc1:DataOP1 runat="server" id="DataOP4" />	
 				</div>
 			</div>
 		</div>
@@ -526,7 +624,9 @@
 					</tr>
 					</table>
 				</div>
-				<div class="right col"><img src="https://dl.dropboxusercontent.com/u/26808427/cdn/preview.jpg" alt="" /></div>
+				<div class="right col">
+					  <uc1:DataOP1 runat="server" id="DataOP5" />			
+			   </div>
 			</div>
 		</div>
 	</div>
@@ -554,174 +654,8 @@
 	<a class="close-modal" href="javascript:void(0)">
 	<i class="fa fa-times"></i>
 	</a>
-	<div class="modal-content">
-		
-		<table>
-			<tr>
-				
-				<td colspan="3" style="text-align:left;">
-					<div class="searchBox" style="">
-					  <input class="searchInput" type="text" name="" placeholder="Consultar" />
-					  <button class="searchButton" href="#">
-						<i class="material-icons">
-						  OP
-						</i>
-					  </button>
-					</div>
-					<br />
-					<br />
-				</td>
-				
-			</tr>
-			<tr>
-				<td>
-					
-						OP consultada: 
-					
-				</td>
-				<td colspan="2">
-				
-				</td>
-			</tr>
-			<tr>
-				<td>
-					
-						Producto: 
-					
-				</td>
-				<td colspan="2">
-				
-				</td>
-			</tr>
-
-			<tr>
-				<td>
-					
-						Kilógramos: 
-					
-				</td>
-				<td colspan="2">
-					
-				</td>
-			</tr>
-
-			<tr>
-				<td>
-					
-						NAVI: 
-					
-				</td>
-				<td colspan="2">
-				
-				</td>
-			</tr>
-
-		</table>
-		
-			<table>
-				
-				<tr>
-					<td>
-						<div class="control"><label for="message">Tipo de Lavado</label></div>
-					</td>
-					<td >
-						 <select id="normal-select-7" class="select-css" onchange=" CambiarLavado();" >
-					      <option value="45" class="select-dropdown__list-item">Enjugaue</option>
-						  <option value="135" class="select-dropdown__list-item">CIP</option>
-						  <option value="180" class="select-dropdown__list-item">CIP acido</option>						 	 
-						 </select>
-					</td>
-					<td style="text-align:center;">
-						<span style="color:#4FC3A1" id="spLavado"><strong>45 minutos</strong> </span>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3" style="text-align:left; ">
-						<br />
-						<i onclick="swal('OP Agregada', 'Se agregó correctamente la OP a la Cola de producción', 'success');">
-							<span class="fa fa-save" style="font-size:20px;cursor:pointer; " ">Agregar</span>
-
-						</i>
-					</td>
-				</tr>
-			</table>
-			
-		   
-			 <script>
-				 function CambiarLavado() {
-
-					 document.getElementById('spLavado').innerHTML = document.getElementById('normal-select-7').value + " Minutos";
-				 }
-			 </script>
-		  
-		
-		<br />
-		<table class="fl-table" style="width:100%;">
-			<thead>
-			<tr>
-				<th>OP</th>
-				<th>Producto</th>
-				<th>Kilógramos</th>
-				<th>NAVI</th>
-				<th>Lavado programado</th>
-				<th>Estatus OP</th>
-				<th>Opciones</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>Pendiente</td>
-				<td>
-					<a style="cursor:pointer;">
-						<i>
-							<span class="fa fa-edit">Editar</span>
-
-						</i>
-				    </a>
-				</td>
-			</tr>
-			<tr>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>Envasando</td>
-				<td>
-					<a style="cursor:pointer;">
-						<i>
-							<span class="fa fa-edit">Editar</span>
-
-						</i>
-				    </a>
-				</td>
-			</tr>
-			<tr>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>DATA TEST 1</td>
-				<td>Terminada</td>
-				<td>
-					<a style="cursor:pointer;">
-						<i>
-							<span class="fa fa-edit">Editar</span>
-
-						</i>
-				    </a>
-				</td>
-			</tr>
-        
-       
-			<tbody>
-		</table>
-			
+	<div>
+		....
 	</div>
 </div>
 
@@ -755,8 +689,73 @@
             });
         }
         openModalBox();
+        // 
+        
+        function OpenModalNew(Lp) {
+            var modal = $(".modal, #mask");
+            modal.fadeIn(300);
+        }
 
+       
+       
+        //var Bar = document.getElementById('bar-1');
+        //var ProgressBarValue_ = 0;
+        //var ProgressExe = setInterval(ProgressBar, 200);
+       
+        function ProgressBar() {
 
+            var ProgressBarValue = Bar.getAttribute("aria-valuenow");
+           
+            if (ProgressBarValue <= 100) {
+                ProgressBarValue_ += 10;
+            }
+            else {
+                ProgressBarValue_ = 0;
+            }
+
+            Bar.setAttribute("aria-valuenow", ProgressBarValue_);
+           
+        }
+
+        //var Bar2 = document.getElementById('bar-2');
+        //var ProgressBarValue2_ = 0;
+        //var ProgressExe2 = setInterval(ProgressBar2, 300);
+
+        function ProgressBar2() {
+
+            var ProgressBarValue2 = Bar2.getAttribute("aria-valuenow");
+
+            if (ProgressBarValue2 <= 100) {
+                ProgressBarValue2_ += 10;
+            }
+            else {
+                ProgressBarValue2_ = 0;
+            }
+
+            Bar2.setAttribute("aria-valuenow", ProgressBarValue2_);
+
+        }
+
+        //var Bar3 = document.getElementById('bar-3');
+        //var ProgressBarValue3_ = 0;
+        //var ProgressExe3 = setInterval(ProgressBar3, 400);
+
+        function ProgressBar3() {
+
+            var ProgressBarValue3 = Bar3.getAttribute("aria-valuenow");
+
+            if (ProgressBarValue3 <= 100) {
+                ProgressBarValue3_ += 10;
+            }
+            else {
+                ProgressBarValue3_ = 0;
+            }
+
+            Bar3.setAttribute("aria-valuenow", ProgressBarValue3_);
+
+        }
+
+        OPResgistradasSelect();					
 	</script>
 
 

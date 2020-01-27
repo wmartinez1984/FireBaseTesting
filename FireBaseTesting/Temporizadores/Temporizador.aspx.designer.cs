@@ -13,5 +13,14 @@ namespace FireBaseTesting.Temporizadores
 
     public partial class Temporizador
     {
+
+        /// <summary>
+        /// Control DataOP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::FireBaseTesting.Temporizadores.Controles.DataOP DataOP;
     }
 }
