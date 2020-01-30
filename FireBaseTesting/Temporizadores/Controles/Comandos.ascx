@@ -68,7 +68,7 @@
         <td style="text-align:left;">            
             <div class="button" >
                   <a onclick="return false;">
-                    <span id="Inciar" style="background-color:#08692d;border-radius:20px;"  >Inciar</span>
+                    <span id="Inciar" style="background-color:#08692d;border-radius:30px;"  >Inciar Envasado</span>
                     <svg
                       class="load"
                       version="1.1"

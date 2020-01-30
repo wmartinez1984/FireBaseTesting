@@ -1,11 +1,109 @@
-﻿function OPMonitoreada() {
+﻿function EjecutarParadaL3() {
+    ParadaLineasdeProduccion(document.getElementById('SelectParadasL3').value);
+}
+
+
+function EjecutarParadaL2() {
+    ParadaLineasdeProduccion(document.getElementById('SelectParadasL2').value);
+}
+
+function EjecutarParadaL1() {    
+    ParadaLineasdeProduccion(document.getElementById('SelectParadasL1').value);
+}
+
+function ParadaLineasdeProduccion(tiempo) {
+    //verifico si ya está denida
+    if (document.getElementById('txtL').value == 1 && document.getElementById('txtL1').value == 3) {
+        swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 1  ya está denida', 'warning');
+        return false;
+    }
+
+    if (document.getElementById('txtL').value == 2 && document.getElementById('txtL2').value == 3) {
+        swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 2  ya está denida', 'warning');
+        return false;
+    }
+
+    if (document.getElementById('txtL').value == 3 && document.getElementById('txtL3').value == 3) {
+        swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 3  ya está denida', 'warning');
+        return false;
+    }
+
+    // si la línea seleccionada es la 1 y el estatus es Envasando, podemos  continuar, de lo contrario , no
+    if (document.getElementById('txtL').value == 1 && document.getElementById('txtL1').value != 2) {
+        swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 1 debe estar Envasando para poder detenerla', 'warning');
+        return false;
+    }
+
+    if (document.getElementById('txtL').value == 2 && document.getElementById('txtL2').value != 2) {
+        swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 2 debe estar Envasando para poder detenerla', 'warning');
+        return false;
+    }
+
+    if (document.getElementById('txtL').value == 3 && document.getElementById('txtL3').value != 2) {
+        swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 3 debe estar Envasando para poder detenerla', 'warning');
+        return false;
+    }
+
+    var message = "";
+
+    try {
+
+
+        if (document.getElementById('txtL').value == "") {
+            message += "Debe seleccionar la línea que desea iniciar\n";
+
+        }
+
+        if (message != "") {
+            swal('Por favor verifique lo siguiente: ', message, 'warning');
+            return false;
+        }
+        else {
+            swal('Deteniendo Línea...', 'Estamos deteniendo la Línea No ' + document.getElementById('txtL').value + ', por favor espere, no cierre esta ventana hasta que el proceso termine', 'warning');
+            $.ajax({
+                type: "POST",
+                url: "DataOP.ashx?Action=DetenerLinea&OP=" + document.getElementsByName('DataspanOP')[0].value + "&ProductoOP=" + document.getElementsByName('NAVI')[0].value + "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value + "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value + "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value + "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value + "&DescripLavado=" + document.getElementById('normal-select-7').innerText + "&L1=" + document.getElementById('txtL1').value + "&L2=" + document.getElementById('txtL2').value + "&L3=" + document.getElementById('txtL3').value + "&LP=" + document.getElementById('txtL').value + "&Tiempo=" + tiempo + "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    OPResgistradasSelect();
+                    swal('Línea DETENIDA', 'La Línea de producción No. ' + document.getElementById('txtL').value + ' fue DETENIDA correctamente ', 'success');
+                    return false;
+
+                },
+                failure: function (r) {
+                    swal('Error:', 'Error al DETENER la Línea de producción No ' + document.getElementById('txtL').value + ', por favor verifique los datos y vuelva a intentarlo', 'error');
+                    return false;
+                },
+                error: function (r) {
+                    swal('Error:', 'Error al DETENER la Línea, por favor verifique los datos y vuelva a intentarlo', 'error');
+                    return false;
+                }
+
+            });
+            return false;
+        }
+
+        return false;
+    }
+    catch (err) {
+        swal('Error:', 'Error al registrar la OP, por favor verifique los datos y vuelva a intentarlo', 'error');
+        return false;
+    }
+
+    return false;
+
+}
+
+function OPMonitoreada() {
 
     document.getElementById('messageUpdateData').innerHTML = "Consultando estado de la información...";
 
     try {
         $.ajax({
             type: "POST",
-            url: "DataOP.ashx?Action=OPRegistradas",
+            url: "DataOP.ashx?Action=OPRegistradasFinalLinea",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -108,6 +206,7 @@
                         if (estatusOPL == 6) {
                             estatusOPL_ = "Reiniciando"
                         }
+
                         document.getElementById('spanEstatusL3').innerHTML = "ESTADO:" + estatusOPL_;
 
                     }
@@ -117,8 +216,15 @@
                     // swal('OP válida \n' + item.OP + '', 'Producto: ' + item.Descripcion + '\n\n Hemos terminado de consultar la información de la OP, presione “Ok” para continuar', 'success');
                     return true;
                 });
-                if (!exists)
-                    document.getElementById('messageUpdateData').innerHTML = "";
+                if (!exists) {
+
+                    document.getElementById('spanEstatusL1').innerHTML = "";
+                    document.getElementById('spanEstatusL2').innerHTML = "";
+                    document.getElementById('spanEstatusL3').innerHTML = "";
+                    swal('Oops', 'No existe una OP en proceso', 'warning');
+                    document.getElementById('messageUpdateData').innerHTML = "No existe una OP en proceso";
+                }
+                    
             },
             failure: function (r) {
                 //alert('Error al recuperar los permisos...');
@@ -143,6 +249,21 @@
 }
 
 function IniciarLinea() {
+
+    if (document.getElementById('txtL').value == 1 && document.getElementById('txtL1').value == 2) {
+        swal('Oops!', 'La línea No 1 ya está iniciada', 'warning');
+        return false;
+    }
+
+    if (document.getElementById('txtL').value == 2 && document.getElementById('txtL2').value == 2) {
+        swal('Oops!', 'La línea No 2 ya está iniciada', 'warning');
+        return false;
+    }
+
+    if (document.getElementById('txtL').value == 3 && document.getElementById('txtL3').value == 2) {
+        swal('Oops!', 'La línea No 3 ya está iniciada', 'warning');
+        return false;
+    }
 
     if (document.getElementById('txtL').value == 1)
         document.getElementById('txtL1').value = 2; // si la línea seleccionada es la 1, entonces ponemos el valor de la línea en 2 = Envasando
@@ -207,7 +328,7 @@ function IniciarLinea() {
 }
 
 function OPResgistradasSelect() {
-
+   
     document.getElementById('HiddenEstadoOP').value = 5;
     $("#TableOP tbody tr").each(function () {
             this.parentNode.removeChild(this);
@@ -219,10 +340,12 @@ function OPResgistradasSelect() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
+                    
                     var exists = false;
                     var count = 0;
                     $.each(data, function (index, item) {
                         exists = true;
+                        
                         var estatusOP = item.EestadoOP;
                         var estatusOP_ = "";
                         if (estatusOP == 1) {
@@ -323,6 +446,9 @@ function OPResgistradasSelect() {
                             if (estatusOPL == 3) {
                                 estatusOPL_ = "Detenida"
                             }
+                            if (estatusOPL == 4) {
+                                estatusOPL_ = "Lavando"
+                            }
                             if (estatusOPL == 6) {
                                 estatusOPL_ = "Reiniciando"
                             }
@@ -340,6 +466,10 @@ function OPResgistradasSelect() {
                             }
                             if (estatusOPL == 3) {
                                 estatusOPL_ = "Detenida"
+                            }
+
+                            if (estatusOPL == 4) {
+                                estatusOPL_ = "Lavando"
                             }
 
                             if (estatusOPL == 6) {

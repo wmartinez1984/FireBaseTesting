@@ -143,11 +143,14 @@
     <Content Include="About.aspx" />
     <Content Include="ActivosFinancieros\contactform\contactform.js" />
     <Content Include="ActivosFinancieros\contactform\Readme.txt" />
+    <Content Include="ActivosFinancieros\css\botones.css" />
     <Content Include="ActivosFinancieros\css\scss-files.txt" />
     <Content Include="ActivosFinancieros\css\style.css" />
+    <Content Include="ActivosFinancieros\css\StyleSheet1.css" />
     <Content Include="ActivosFinancieros\css\sweetalert.css" />
     <Content Include="ActivosFinancieros\Home.aspx" />
     <Content Include="ActivosFinancieros\img\about-img.png" />
+    <Content Include="ActivosFinancieros\img\admin.png" />
     <Content Include="ActivosFinancieros\img\apple-touch-icon.png" />
     <Content Include="ActivosFinancieros\img\blog\blog-image-1.jpg" />
     <Content Include="ActivosFinancieros\img\blog\blog-image-2.jpg" />
@@ -156,6 +159,7 @@
     <Content Include="ActivosFinancieros\img\hero-bg.png" />
     <Content Include="ActivosFinancieros\img\hero-img.png" />
     <Content Include="ActivosFinancieros\img\newsletter-bg.jpg" />
+    <Content Include="ActivosFinancieros\img\plagc3.png" />
     <Content Include="ActivosFinancieros\img\screen\1.jpg" />
     <Content Include="ActivosFinancieros\img\screen\2.jpg" />
     <Content Include="ActivosFinancieros\img\screen\3.jpg" />
@@ -180,6 +184,7 @@
     <Content Include="ActivosFinancieros\img\team\3.jpg" />
     <Content Include="ActivosFinancieros\img\team\4.jpg" />
     <Content Include="ActivosFinancieros\img\video-bg.jpg" />
+    <Content Include="ActivosFinancieros\img\vitrine.png" />
     <Content Include="ActivosFinancieros\index.html" />
     <Content Include="ActivosFinancieros\js\main.js" />
     <Content Include="ActivosFinancieros\js\sweetalert-dev.js" />
@@ -216,6 +221,7 @@
     <Content Include="ActivosFinancieros\lib\wow\wow.js" />
     <Content Include="ActivosFinancieros\lib\wow\wow.min.js" />
     <Content Include="ActivosFinancieros\login.aspx" />
+    <Content Include="ActivosFinancieros\Simulador.aspx" />
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\font-awesome.min.css" />
@@ -426,6 +432,9 @@
     <Content Include="sitemap.xml" />
     <Content Include="Temporizadores\contactform\contactform.js" />
     <Content Include="Temporizadores\contactform\Readme.txt" />
+    <Content Include="Temporizadores\Controles\ComandoDetener.ascx" />
+    <Content Include="Temporizadores\Controles\ComandoDetenerL2.ascx" />
+    <Content Include="Temporizadores\Controles\ComandoDetenerL3.ascx" />
     <Content Include="Temporizadores\Controles\Comandos.ascx" />
     <Content Include="Temporizadores\Controles\DataOP.ascx" />
     <Content Include="Temporizadores\Controles\DataOPL1.ascx" />
@@ -439,6 +448,7 @@
     <Content Include="Temporizadores\css\stylebtn1.css" />
     <Content Include="Temporizadores\css\sweetalert.css" />
     <Content Include="Temporizadores\Data.aspx" />
+    <Content Include="Temporizadores\EndLine.aspx" />
     <Content Include="Temporizadores\favicon.ico" />
     <Content Include="Temporizadores\fonts\codropsicons\codropsicons.svg" />
     <Content Include="Temporizadores\fonts\codropsicons\license.txt" />
@@ -446,6 +456,7 @@
     <Content Include="Temporizadores\fonts\font-awesome-4.3.0\css\font-awesome.min.css" />
     <Content Include="Temporizadores\fonts\font-awesome-4.3.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Temporizadores\HtmlPage1.html" />
+    <Content Include="Temporizadores\HtmlPage2.html" />
     <Content Include="Temporizadores\Images\Fruselva.jpeg" />
     <Content Include="Temporizadores\Images\Fruselva.png" />
     <Content Include="Temporizadores\img\about-img.png" />
@@ -524,6 +535,7 @@
     <Content Include="Temporizadores\lib\superfish\superfish.min.js" />
     <Content Include="Temporizadores\lib\wow\wow.js" />
     <Content Include="Temporizadores\lib\wow\wow.min.js" />
+    <Content Include="Temporizadores\Linestart.aspx" />
     <Content Include="Temporizadores\login.aspx" />
     <Content Include="Temporizadores\css\temporizador.css" />
     <Content Include="Temporizadores\script.js" />
@@ -551,6 +563,13 @@
     </Compile>
     <Compile Include="ActivosFinancieros\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFinancieros\Simulador.aspx.cs">
+      <DependentUpon>Simulador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFinancieros\Simulador.aspx.designer.cs">
+      <DependentUpon>Simulador.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -616,6 +635,27 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Temporizadores\Class1.cs" />
+    <Compile Include="Temporizadores\Controles\ComandoDetener.ascx.cs">
+      <DependentUpon>ComandoDetener.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\ComandoDetener.ascx.designer.cs">
+      <DependentUpon>ComandoDetener.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\ComandoDetenerL2.ascx.cs">
+      <DependentUpon>ComandoDetenerL2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\ComandoDetenerL2.ascx.designer.cs">
+      <DependentUpon>ComandoDetenerL2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\ComandoDetenerL3.ascx.cs">
+      <DependentUpon>ComandoDetenerL3.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\ComandoDetenerL3.ascx.designer.cs">
+      <DependentUpon>ComandoDetenerL3.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Temporizadores\Controles\Comandos.ascx.cs">
       <DependentUpon>Comandos.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -647,12 +687,26 @@
     <Compile Include="Temporizadores\DataOP.ashx.cs">
       <DependentUpon>DataOP.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Temporizadores\EndLine.aspx.cs">
+      <DependentUpon>EndLine.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\EndLine.aspx.designer.cs">
+      <DependentUpon>EndLine.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Temporizadores\L1.aspx.cs">
       <DependentUpon>L1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Temporizadores\L1.aspx.designer.cs">
       <DependentUpon>L1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\Linestart.aspx.cs">
+      <DependentUpon>Linestart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\Linestart.aspx.designer.cs">
+      <DependentUpon>Linestart.aspx</DependentUpon>
     </Compile>
     <Compile Include="Temporizadores\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>

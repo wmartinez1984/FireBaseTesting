@@ -29,7 +29,11 @@ namespace FireBaseTesting
         public string CantFabricados { get; set; }
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
-       
+        public DateTime FechaParadaL1 { get; set; }
+        public DateTime FechaParadaL2 { get; set; }
+        public DateTime FechaParadaL3 { get; set; }
+        public DateTime FechaInicioLavado { get; set; }
+
 
     }
 }

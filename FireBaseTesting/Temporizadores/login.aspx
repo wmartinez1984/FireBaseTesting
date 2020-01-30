@@ -15,13 +15,13 @@
 
             if (document.getElementById('username').value == "Nivel1") {               
                 
-                window.location.href = 'data';
+                window.location.href = 'Linestart';
                 document.getElementById('spanMessage').innerHTML = "";
             }
 
             else if (document.getElementById('username').value == "Nivel2") {
                                 
-                window.location.href = 'Temporizador';
+                window.location.href = 'EndLine';
                 document.getElementById('spanMessage').innerHTML = "";
             }
             else {

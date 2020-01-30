@@ -52,7 +52,7 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
           <li class="menu-active"><a href="#hero">Home</a></li>
-          <li><a href="#about-us">Simulaciones</a></li>
+          <li><a href="Simulador.aspx">Simulador</a></li>
           <li><a href="#features">Reportes</a></li>
            <li><a href="login.aspx">Salir</a></li>
         
@@ -90,10 +90,10 @@
     <div class="container">
       <div class="row">
 
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4" style="cursor:pointer;">
           <div class="feature-block">
 
-            <img src="img/svg/cloud.svg" alt="img" class="img-fluid">
+            <img src="img/admin.png" alt="img" class="img-fluid">
             <h4>Configuración de API KEY</h4>
             <p>En esta sección podrá configurar su API Key </p>
             <a href="#">Configurar</a>
@@ -101,10 +101,10 @@
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4" style="cursor:pointer;">
           <div class="feature-block">
 
-            <img src="img/svg/planet.svg" alt="img" class="img-fluid">
+            <img src="img/vitrine.png" alt="img" class="img-fluid">
             <h4>Configuración de Activos</h4>
             <p>En esta sección podrá configurar sus Activos</p>
             <a href="#">Configurar</a>
@@ -112,10 +112,10 @@
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4" style="cursor:pointer;">
           <div class="feature-block">
 
-            <img src="img/svg/asteroid.svg" alt="img" class="img-fluid">
+            <img src="img/plagc3.png" alt="img" class="img-fluid">
             <h4>Alta de Usuarios</h4>
             <p>En esta sección usted puede dar de alta y baja usuarios del sistema</p>
             <a href="#">Configurar</a>

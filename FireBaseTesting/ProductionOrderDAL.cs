@@ -56,7 +56,12 @@ namespace FireBaseTesting
                         productionOrderEntity_.HoraFinalizacion = productionOrder.HoraFinalizacion;
                         productionOrderEntity_.CantFabricados = productionOrder.CantFabricados;
                         productionOrderEntity_.FechaCreacion = productionOrder.FechaCreacion;
-                        productionOrderEntity_.FechaModificacion = DateTimeOffset.Parse(productionOrder.FechaModificacion.ToString()).UtcDateTime;
+                        productionOrderEntity_.FechaModificacion = productionOrder.FechaModificacion;
+
+                        productionOrderEntity_.FechaParadaL1 = productionOrder.FechaParadaL1;
+                        productionOrderEntity_.FechaParadaL2 = productionOrder.FechaParadaL2;
+                        productionOrderEntity_.FechaParadaL3 = productionOrder.FechaParadaL3;
+                        productionOrderEntity_.FechaInicioLavado = productionOrder.FechaInicioLavado;
 
                         data.Add(productionOrderEntity_);
                     }

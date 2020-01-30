@@ -15,25 +15,17 @@ namespace FireBaseTesting.Temporizadores
 {
     public partial class Data : System.Web.UI.Page
     {
-        IFirebaseConfig config = new FirebaseConfig
-        {
-            AuthSecret = "iBcbS7xIoCfCEj2lc8mAdFBNV4ZqqS599tMOVdCQ",
-            BasePath = "https://fruselvaclient.firebaseio.com/",
-        };
-        IFirebaseClient client;
+       
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //if(!IsPostBack)
+            //{
+            //    Session.Add("UserName", "Test");
+            //}
            
-
         }
 
-        public class DataOP
-        {
-            public Guid Id { get; set; }
-            public string name { get; set; }
-            public string OpName { get; set; }
-            public string Cliente { get; set; }
-        }
+        
     }
 }
