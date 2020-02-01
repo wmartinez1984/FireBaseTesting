@@ -37,9 +37,6 @@
 	<link rel="stylesheet" type="text/css" href="css/component.css" />
 	<link rel="stylesheet" type="text/css" href="css/custom-bars.css" />
 
-
-	
-
 </head>
 <body>
 
@@ -49,11 +46,7 @@
 	<div class="contact-form">
 		<a href="#" class="close" id="closeA"><i class="fa fa-times"></i></a>
 		<form>
-		<%--	<div class="control">
-				<span class="open-modal">
-				   <i ><span">+ Programación de OP</span></i>
-				</span>
-			</div>	--%>	
+	
 	   <div class="modal-content">
 		
 		<table>
@@ -290,8 +283,8 @@
 					<uc1:ComandoDetener1 runat="server" id="ComandoDetener" />
 				</div>
 
-				<div class="right col">
-					<uc1:DataOP1 runat="server" id="DataOP2" />	
+				<div class="right col" >
+					<uc1:DataOP1 runat="server" id="DataOP2" style="color:#ff6a00"/>	
 				</div>
 				
 			</div>
@@ -664,13 +657,39 @@
 	</a>
 	<div>
 		<span>Seleccione el tipo de parada:</span>
-		<select id="SelectParadasL1" class="select-css" style="width:100%;">
+		<select id="SelectParadas" class="select-css" style="width:100%;">
                     <option value="30">Parada Minima</option>
                     <option value="45">Parada Media</option>
                     <option value="60">Parada por mantenimiento</option>
          </select>
 		<br />
-		<input class="btn" type="button" value="Detener" onclick="EjecutarParadaL1();" style="background-color:#ff0000; color:#ffffff;  font-size:30px;border-radius:5px;">
+		<input class="btn" type="button" value="Parar" onclick="EjecutarParada();" style="background-color:#ff0000; color:#ffffff;  font-size:30px;border-radius:5px; width:100%;">
+	</div>
+</div>
+
+<div id="mask2"></div>
+<div class="modal2">
+	<a class="close-modal2" href="javascript:void(0)" id="Modal2Close">
+	<i class="fa fa-times"></i>
+	</a>
+	<div>
+	
+		<span>Seleccione el tipo de parada con la que desea reiniciar:</span>
+		<select id="SelectParadasR" class="select-css" style="width:100%;">
+                    <option value="30">Parada Minima</option>
+                    <option value="45">Parada Media</option>
+                    <option value="60">Parada por mantenimiento</option>
+         </select>
+		<br />
+		<table>
+			<tr>
+				<td colspan="2">
+					<input class="btn" type="button" value="Reiniciar" onclick="EjecutarReinicioDeParada();" style="background-color:#ff0000; color:#ffffff;  font-size:15px;border-radius:5px; width:100%;">
+				</td>
+				
+			</tr>
+		</table>
+		
 	</div>
 </div>
 
@@ -705,10 +724,42 @@
         }
         openModalBox();
         // 
+
+        function openModalBox2() {
+            var modal2 = $(".modal2, #mask2");
+            $(".open-modal2").on("click", function () {
+                modal2.fadeIn(300);
+            });
+            $(".close-modal2, #mask").on("click", function () {
+                modal2.fadeOut(800);
+            });
+        }
+        openModalBox2();
         
         function OpenModalNew(Lp) {
             var modal = $(".modal, #mask");
             modal.fadeIn(300);
+        }
+
+        function OpenModalNew2() {
+            //verifico si ya está denida, sólo así podrá reiniciar línea
+            if (document.getElementById('txtL').value == 1 && document.getElementById('txtL1').value != 3) {
+                swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 1  actualmente no está parada, esta opción sólo se usa cuándo se desea reiniciar el tiempo de parada', 'warning');
+                return false;
+            }
+
+            if (document.getElementById('txtL').value == 2 && document.getElementById('txtL2').value != 3) {
+                swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 2  actualmente no está parada, esta opción sólo se usa cuándo se desea reiniciar el tiempo de parada', 'warning');
+                return false;
+            }
+
+            if (document.getElementById('txtL').value == 3 && document.getElementById('txtL3').value != 3) {
+                swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 3  actualmente no está parada, esta opción sólo se usa cuándo se desea reiniciar el tiempo de parada', 'warning');
+                return false;
+            }
+
+            var modal2 = $(".modal2, #mask2");
+            modal2.fadeIn(300);
         }
 
        

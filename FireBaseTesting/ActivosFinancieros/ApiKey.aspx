@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="FireBaseTesting.ActivosFinancieros.Home" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApiKey.aspx.cs" Inherits="FireBaseTesting.ActivosFinancieros.ApiKey" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +9,7 @@
   <meta content="" name="keywords">
   <meta content="" name="description">
   
+
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -29,16 +30,21 @@
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/botones.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- =======================================================
-    Theme Name: eStartup
-    Theme URL: https://bootstrapmade.com/estartup-bootstrap-landing-page-template/
-    Author: BootstrapMade.com
-    License: https://bootstrapmade.com/license/
-  ======================================================= -->
+ <%--NECESARIOS PARA EJECUTAR AJAX,  JSON--%>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script src="ACTFData.js"></script>
+     
+    <%--NECESARIOS PARA  MENSAJES DEL SISTEMA--%>
+    <script src="js/sweetalert-dev.js"></script>
+	<link href="css/sweetalert.css" rel="stylesheet" />
 </head>
 
-<body>
+<body onload="KeyListData();">
 
   <header id="header" class="header header-hide">
     <div class="container">
@@ -51,16 +57,74 @@
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="#hero">Home</a></li>
+          <li class="menu-active"><a href="Home.aspx">Home</a></li>
           <li><a href="Simulador.aspx">Simulador</a></li>
           <li><a href="ApiKey.aspx">Api Key</a></li>
           <li><a href="#features">Reportes</a></li>
-          <li><a href="login.aspx">Salir</a></li>
+           <li><a href="login.aspx">Salir</a></li>
         
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
   </header><!-- #header -->
+
+<br />
+<br />
+  <!--==========================
+    Form Section
+  ============================-->
+
+    <link
+     href="https://fonts.googleapis.com/css?family=Montserrat"
+   rel="stylesheet"/>
+        <div class="wrapper">
+          <div class="container">
+            <h1>Registrar Key's del API:</h1>
+
+            <br />
+            <form>
+
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="inputPassword4">API Key</label>
+                  <input type="text" class="form-control" id="txtApiKey"  value="" style="width:300px;"/>                  
+                  <div class="line"></div>
+                </div>
+              </div>
+               
+              <p style="width:100%;text-align:right;">
+                 <button class="w3-button w3-block w3-teal" style="width:200px;" onclick="SaveKeys(); return false;">Guardar</button>
+              </p>
+
+                <div class="bs-example container" data-example-id="striped-table">
+                  <table class="table table-striped table-bordered table-hover" id="KeytableList">
+                    <thead>
+                      <tr>
+                        <th style="text-align:center;">#</th>
+                        <th style="text-align:center;">Api Key</th>
+                        <th style="text-align:center;">Fecha Creación</th>
+                        <th style="text-align:center;">Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                    <tfoot>
+                      <tr class="note">
+                        <th style="text-align:center;">Total Key</th>
+                        <td colspan="1" style="text-align:center;">
+                          <span id="spanTotal"></span>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+
+
+            </form>
+          </div>
+        </div>
+
 
   <!--==========================
     Hero Section
@@ -68,70 +132,10 @@
   <section id="hero" class="wow fadeIn">
     <div class="hero-container">
       <h1>Activos Financieros</h1>
-      <h2>Administre, calcule y tome decisiones con sus activos financieros </h2>
       <img src="img/hero-img.png" alt="Hero Imgs">
       
     </div>
   </section><!-- #hero -->
-
-  <!--==========================
-    Get Started Section
-  ============================-->
-  <section id="get-started" class="padd-section text-center wow fadeInUp">
-
-    <div class="container">
-      <div class="section-title text-center">
-
-        <h2>Opciones del Sistema</h2>
-        <p class="separator"> Seleccione una de las siguientes opciones </p>
-
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-
-        <div class="col-md-6 col-lg-4" style="cursor:pointer;">
-          <div class="feature-block">
-
-            <img src="img/admin.png" alt="img" class="img-fluid">
-            <h4>Configuración de API KEY</h4>
-            <p>En esta sección podrá configurar su API Key </p>
-            <a href="#">Configurar</a>
-
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4" style="cursor:pointer;">
-          <div class="feature-block">
-
-            <img src="img/vitrine.png" alt="img" class="img-fluid">
-            <h4>Configuración de Activos</h4>
-            <p>En esta sección podrá configurar sus Activos</p>
-            <a href="#">Configurar</a>
-
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4" style="cursor:pointer;">
-          <div class="feature-block">
-
-            <img src="img/plagc3.png" alt="img" class="img-fluid">
-            <h4>Alta de Usuarios</h4>
-            <p>En esta sección usted puede dar de alta y baja usuarios del sistema</p>
-            <a href="#">Configurar</a>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </section>
-
-
-
-
 
   <!--==========================
     Footer
@@ -199,7 +203,28 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
+  
+ <script>
+     function checkValue(element) {
+         // check if the input has any value (if we've typed into it)
+         if ($(element).val()) $(element).addClass("has-value");
+         else $(element).removeClass("has-value");
+     }
 
+     $(document).ready(function () {
+         // Run on page load
+         $(".form-control").each(function () {
+             checkValue(this);
+         });
+         // Run on input exit
+         $(".form-control").blur(function () {
+             checkValue(this);
+         });
+     });
+
+ </script>
 </body>
 </html>
+
+
 

@@ -250,10 +250,10 @@ https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css
 	background-color: #fff;
 	display: none;
 	position: fixed;
-	top: 20px;
-	left: 20%;
+	top: 35%;
+	left: 40%;
 	width: 300px;
-	height: 400px;
+	height: 250px;
 	overflow-y:auto;
 	margin-left: 20px;
 	margin-top: 10px;
@@ -494,5 +494,75 @@ h2 {
 	.searchBox:hover > .searchInput {
 		width: 150px;
 		padding: 0 6px;
+	}
+}
+
+
+
+/************************************POP UP DE ORDEN DE PRODUCCIÓN  MODAL 2 */
+/* CDN Font Awesome :
+https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css
+*/
+.open-modal2 {
+	cursor: pointer;
+	color: blue;
+	font-size: 30px;
+}
+
+#mask2 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	background: black;
+	z-index: 98;
+	opacity: 0.8;
+}
+
+.modal2 {
+	background-color: #fff;
+	display: none;
+	position: fixed;
+	top: 35%;
+	left: 40%;
+	width: 300px;
+	height: 250px;
+	overflow-y: auto;
+	margin-left: 20px;
+	margin-top: 10px;
+	padding: 40px;
+	z-index: 99;
+}
+
+.close-modal2 {
+	color: #000;
+	text-decoration: none;
+	float: right;
+	position: absolute;
+	top: 10px;
+	right: 20px
+}
+
+@media (max-width : 37.500rem) {
+	.modal2 {
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 1.250rem
+	}
+
+	.close-modal2 {
+		display: block;
+		position: relative;
+		padding: 5px 10px 20px 0
+	}
+
+	.modal-content2 {
+		clear: both;
+		padding-right: 1.25rem
 	}
 }

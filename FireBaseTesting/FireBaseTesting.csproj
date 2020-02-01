@@ -141,6 +141,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="ActivosFinancieros\ACTFData.js" />
+    <Content Include="ActivosFinancieros\ApiKey.aspx" />
     <Content Include="ActivosFinancieros\contactform\contactform.js" />
     <Content Include="ActivosFinancieros\contactform\Readme.txt" />
     <Content Include="ActivosFinancieros\css\botones.css" />
@@ -359,6 +361,7 @@
     <Content Include="ActivosFinancieros\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="ActivosFinancieros\lib\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="ActivosFinancieros\lib\owlcarousel\LICENSE" />
+    <Content Include="ActivosFinancieros\ApiKey.aspx.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP1.pubxml" />
@@ -550,6 +553,18 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ACTFDALKeys.cs" />
+    <Compile Include="ACTFKeyss.cs" />
+    <Compile Include="ActivosFinancieros\ApiKey.aspx.ashx.cs">
+      <DependentUpon>ApiKey.aspx.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFinancieros\ApiKey.aspx.cs">
+      <DependentUpon>ApiKey.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFinancieros\ApiKey.aspx.designer.cs">
+      <DependentUpon>ApiKey.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ActivosFinancieros\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -47,47 +47,45 @@ p {
 }
 
 </style>
-<br />
-<br />
-<br />
-<br />
 <div class="container"> 
-    <table style="width:100%;text-align:left;">
-         
-        <tr>
+    <table style="width:100%;text-align:left;">        
+        
+         <tr>
             <td colspan="2">
-                <div><h3 style="font-size:30px;">Establecer parada de la Línea 1</h3><span id="time"></span></div>
+                <input class="btn" type="button" value="Iniciar" onclick="IniciarLinea();" style="background-color:#058616;color:#ffffff; font-size:40px;border-radius:10px;width:350px; height:110px;">
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input class="btn" type="button" value="Parada" onclick="OpenModalNew(1);" style="background-color:#ff0000; color:#ffffff;  font-size:40px;border-radius:10px; width:350px; height:110px;">
+                <br />
+            </td>
+            <td>
+               
             </td>
         </tr>
         <tr>
 
             <td>
-                <select id="SelectParadasL3" class="select-css" style="width:100%;">
-                    <option value="30">Parada Minima</option>
-                    <option value="45">Parada Media</option>
-                    <option value="60">Parada por mantenimiento</option>
-                </select>
-            </td>
-            <td>
-                   
-	                <input class="btn" type="button" value="Start" onclick="IniciarLinea();" style="background-color:#058616;color:#ffffff">
-	                <input class="btn" type="button" value="Stop" onclick="EjecutarParadaL3();" style="background-color:#ff0000; color:#ffffff;">
-	                <input class="btn" type="button" value="Reset" onclick="reset()" style="background-color:#ffd800">
+                 <input class="btn" type="button" value="Reiniciar Parada" onclick="OpenModalNew2();" style="background-color:#ffd800; font-size:40px;border-radius:10px; width:350px; height:110px;">
            
             </td>
+            <td>                     
+	            
+            </td>
 
         </tr>
         <tr>
             <td colspan="2">
-                <div id="countdownL3"></div>
+                 <div id="countdownL3" style="font-size:30px;"></div>
             </td>
         </tr>
     </table>
 </div>
 
-
 <script>
-        var endL3 = new Date('01/29/2020 5:31 PM');
+        var endL3 = new Date('01/29/2019 5:31 PM');
         var _secondL3 = 1000;
         var _minuteL3 = _secondL3 * 60;
         var _hourL3 = _minuteL3 * 60;

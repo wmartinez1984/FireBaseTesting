@@ -1,14 +1,82 @@
-﻿function EjecutarParadaL3() {
-    ParadaLineasdeProduccion(document.getElementById('SelectParadasL3').value);
+﻿
+function EjecutarReinicioDeParada() {
+    ReinicioParadaLineasdeProduccion(document.getElementById('SelectParadasR').value);
 }
 
+function ReinicioParadaLineasdeProduccion(tiempo) {
+    //verifico si ya está denida, sólo así podrá reiniciar línea
+    if (document.getElementById('txtL').value == 1 && document.getElementById('txtL1').value != 3) {
+        swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 1  actualmente no está denida, esta opción sólo se usa cuándo se desea reiniciar el tiempo de parada', 'warning');
+        return false;
+    }
 
-function EjecutarParadaL2() {
-    ParadaLineasdeProduccion(document.getElementById('SelectParadasL2').value);
+    if (document.getElementById('txtL').value == 2 && document.getElementById('txtL2').value != 3) {
+        swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 2  actualmente no está denida, esta opción sólo se usa cuándo se desea reiniciar el tiempo de parada', 'warning');
+        return false;
+    }
+
+    if (document.getElementById('txtL').value == 3 && document.getElementById('txtL3').value != 3) {
+        swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 3  actualmente no está denida, esta opción sólo se usa cuándo se desea reiniciar el tiempo de parada', 'warning');
+        return false;
+    }
+
+    
+
+    var message = "";
+
+    try {
+
+
+        if (document.getElementById('txtL').value == "") {
+            message += "Debe seleccionar la línea que desea iniciar\n";
+
+        }
+
+        if (message != "") {
+            swal('Por favor verifique lo siguiente: ', message, 'warning');
+            return false;
+        }
+        else {
+            swal('Deteniendo Línea...', 'Estamos reiniciando la parada de la Línea No ' + document.getElementById('txtL').value + ', por favor espere, no cierre esta ventana hasta que el proceso termine', 'warning');
+            $.ajax({
+                type: "POST",
+                url: "DataOP.ashx?Action=DetenerLinea&OP=" + document.getElementsByName('DataspanOP')[0].value + "&ProductoOP=" + document.getElementsByName('NAVI')[0].value + "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value + "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value + "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value + "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value + "&DescripLavado=" + document.getElementById('normal-select-7').innerText + "&L1=" + document.getElementById('txtL1').value + "&L2=" + document.getElementById('txtL2').value + "&L3=" + document.getElementById('txtL3').value + "&LP=" + document.getElementById('txtL').value + "&Tiempo=" + tiempo + "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    OPResgistradasSelect();
+                    swal('Línea DETENIDA', 'La Línea de producción No. ' + document.getElementById('txtL').value + ' fue DETENIDA correctamente ', 'success');
+                    document.getElementById('Modal2Close').click();
+                    return false;
+
+                },
+                failure: function (r) {
+                    swal('Error:', 'Error al REINICIAR la parada de la Línea de producción No ' + document.getElementById('txtL').value + ', por favor verifique los datos y vuelva a intentarlo', 'error');
+                    return false;
+                },
+                error: function (r) {
+                    swal('Error:', 'Error al  REINICIAR la parada de la Línea, por favor verifique los datos y vuelva a intentarlo', 'error');
+                    return false;
+                }
+
+            });
+            return false;
+        }
+
+        return false;
+    }
+    catch (err) {
+        swal('Error:', 'Error al  REINICIAR la parada de la Línea, por favor verifique los datos y vuelva a intentarlo', 'error');
+        return false;
+    }
+
+    return false;
+
 }
 
-function EjecutarParadaL1() {    
-    ParadaLineasdeProduccion(document.getElementById('SelectParadasL1').value);
+function EjecutarParada() {
+    ParadaLineasdeProduccion(document.getElementById('SelectParadas').value);
 }
 
 function ParadaLineasdeProduccion(tiempo) {
@@ -227,14 +295,14 @@ function OPMonitoreada() {
                     
             },
             failure: function (r) {
-                //alert('Error al recuperar los permisos...');
-                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
-                return false;
+                ////alert('Error al recuperar los permisos...');
+                //swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                //return false;
             },
             error: function (r) {
-                // alert(r.error + " Permisos");
-                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
-                return false;
+                //// alert(r.error + " Permisos");
+                //swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                //return false;
             }
 
         });

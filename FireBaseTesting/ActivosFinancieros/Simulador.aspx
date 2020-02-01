@@ -30,7 +30,7 @@
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/botones.css" rel="stylesheet" />
-
+  
   <!-- =======================================================
     Theme Name: eStartup
     Theme URL: https://bootstrapmade.com/estartup-bootstrap-landing-page-template/
@@ -54,8 +54,9 @@
         <ul class="nav-menu">
           <li class="menu-active"><a href="Home.aspx">Home</a></li>
           <li><a href="Simulador.aspx">Simulador</a></li>
+          <li><a href="ApiKey.aspx">Api Key</a></li>
           <li><a href="#features">Reportes</a></li>
-           <li><a href="login.aspx">Salir</a></li>
+          <li><a href="login.aspx">Salir</a></li>
         
         </ul>
       </nav><!-- #nav-menu-container -->

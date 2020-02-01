@@ -52,23 +52,23 @@ p {
         
         <tr>
             <td colspan="2">
-                <input class="btn" type="button" value="Iniciar" onclick="IniciarLinea();" style="background-color:#058616;color:#ffffff; font-size:40px;border-radius:10px;width:300px; height:110px;">
+                <input class="btn" type="button" value="Iniciar" onclick="IniciarLinea();" style="background-color:#058616;color:#ffffff; font-size:40px;border-radius:10px;width:350px; height:110px;">
+                <br />
             </td>
         </tr>
         <tr>
             <td>
-                <input class="btn" type="button" value="Detener" onclick="OpenModalNew(1);" style="background-color:#ff0000; color:#ffffff;  font-size:40px;border-radius:10px; width:300px; height:110px;">
-                
+                <input class="btn" type="button" value="Parada" onclick="OpenModalNew(1);" style="background-color:#ff0000; color:#ffffff;  font-size:40px;border-radius:10px; width:350px; height:110px;">
+                <br />
             </td>
             <td>
-                <div id="countdownL1"></div>
+               
             </td>
         </tr>
         <tr>
 
             <td>
-                 <input class="btn" type="button" value="ReIniciar" onclick="reset()" style="background-color:#ffd800; font-size:40px;border-radius:10px; width:300px; height:110px;">
-           
+                 <input class="btn" type="button" value="Reiniciar Parada" onclick="OpenModalNew2();" style="background-color:#ffd800; font-size:40px;border-radius:10px; width:350px; height:110px;">                
             </td>
             <td>                     
 	            
@@ -77,7 +77,7 @@ p {
         </tr>
         <tr>
             <td colspan="2">
-                
+                 <div id="countdownL1" style="font-size:30px;"></div>
             </td>
         </tr>
     </table>
@@ -85,7 +85,7 @@ p {
 
 
 <script>
-        var endL1 = new Date('01/29/2022 5:31 PM');
+        var endL1 = new Date('01/29/2019 5:31 PM');
         var _secondL1 = 1000;
         var _minuteL1 = _secondL1 * 60;
         var _hourL1 = _minuteL1 * 60;

@@ -167,9 +167,9 @@ namespace FireBaseTesting.Temporizadores
 
             data.TiempoLavado = int.Parse(context.Request.QueryString["TiempoLavado"]);
             data.DescripLavado = context.Request.QueryString["DescripLavado"];
-            data.HoraInicio = context.Request.QueryString["HoraInicio"];
-            data.HoraFinalizacion = context.Request.QueryString["HoraFinalizacion"];
-            data.CantFabricados = context.Request.QueryString["CantFabricados"];
+            data.HoraInicio = Settings.HoraInicio;
+            data.HoraFinalizacion = Settings.HoraFinalizacion;
+            data.CantFabricados = "0";
             data.FechaCreacion = Settings.FechaCreacion;
             data.FechaModificacion = DateTime.Now;
             data.FechaInicioLavado = Settings.FechaInicioLavado;
@@ -220,9 +220,9 @@ namespace FireBaseTesting.Temporizadores
             data.MinParadaL3 = Settings.MinParadaL3;
             data.TiempoLavado = int.Parse(context.Request.QueryString["TiempoLavado"]);
             data.DescripLavado = context.Request.QueryString["DescripLavado"];
-            data.HoraInicio = context.Request.QueryString["HoraInicio"];
-            data.HoraFinalizacion = context.Request.QueryString["HoraFinalizacion"];
-            data.CantFabricados = context.Request.QueryString["CantFabricados"];
+            data.HoraInicio = Settings.HoraInicio;
+            data.HoraFinalizacion = Settings.HoraFinalizacion;
+            data.CantFabricados = context.Request.QueryString["Cantidad"];
             data.FechaCreacion =   Settings.FechaCreacion;
             data.FechaModificacion = DateTime.Now;
 
