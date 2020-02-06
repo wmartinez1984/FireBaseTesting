@@ -34,6 +34,34 @@ namespace FireBaseTesting
         public DateTime FechaParadaL3 { get; set; }
         public DateTime FechaInicioLavado { get; set; }
 
+        //Campos nuevos para  el inicio y fin de la OP
+        //Campos OP1
+        public string InicioHoraL1 { get; set; }
+        public string InicioMinutosL1 { get; set; }
+        public DateTime InicioFechaL1 { get; set; }
+        public string FinHoraL1 { get; set; }
+        public string FinMinutosL1 { get; set; }
+        public DateTime FinFechaL1 { get; set; }
+
+        //Campos OP2
+        public string InicioHoraL2 { get; set; }
+        public string InicioMinutosL2 { get; set; }
+        public DateTime InicioFechaL2 { get; set; }
+        public string FinHoraL2 { get; set; }
+        public string FinMinutosL2 { get; set; }
+        public DateTime FinFechaL2 { get; set; }
+
+
+        //Campos OP3
+        public string InicioHoraL3 { get; set; }
+        public string InicioMinutosL3 { get; set; }
+        public DateTime InicioFechaL3 { get; set; }
+        public string FinHoraL3 { get; set; }
+        public string FinMinutosL3 { get; set; }
+        public DateTime FinFechaL3 { get; set; }
+
+
+
 
     }
 }

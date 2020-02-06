@@ -49,11 +49,33 @@ namespace FireBaseTesting
         public static DateTime FechaParadaL3;
         public static DateTime FechaInicioLavado;
 
-        /// <summary>
-        /// TimeToDateTime
-        /// </summary>
-        /// <param name="unixtime"></param>
-        /// <returns></returns>
+        //Campos nuevos para  el inicio y fin de la OP
+        //Campos OP1
+        public static string InicioHoraL1;
+        public static string InicioMinutosL1;
+        public static DateTime InicioFechaL1;
+        public static string FinHoraL1;
+        public static string FinMinutosL1;
+        public static DateTime FinFechaL1;
+
+        //Campos OP2
+        public static string InicioHoraL2;
+        public static string InicioMinutosL2;
+        public static DateTime InicioFechaL2;
+        public static string FinHoraL2;
+        public static string FinMinutosL2;
+        public static DateTime FinFechaL2;
+
+
+        //Campos OP3
+        public static string InicioHoraL3;
+        public static string InicioMinutosL3;
+        public static DateTime InicioFechaL3;
+        public static string FinHoraL3;
+        public static string FinMinutosL3;
+        public static DateTime FinFechaL3;
+
+      
 
         public SqlConnection cnxSQL = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
         /// <summary>

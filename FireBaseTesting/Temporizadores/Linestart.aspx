@@ -4,10 +4,7 @@
 <%@ Register Src="~/Temporizadores/Controles/ComandoDetener.ascx" TagPrefix="uc1" TagName="ComandoDetener1" %>
 <%@ Register Src="~/Temporizadores/Controles/ComandoDetenerL2.ascx" TagPrefix="uc1" TagName="ComandoDetenerL2_" %>
 <%@ Register Src="~/Temporizadores/Controles/ComandoDetenerL3.ascx" TagPrefix="uc1" TagName="ComandoDetenerL3_" %>
-
-
-
-
+<%@ Register Src="~/Temporizadores/Controles/Inciar.ascx" TagPrefix="uc1" TagName="Inciar" %>
 
 
 <!DOCTYPE html>
@@ -209,17 +206,17 @@
 				<div class="left col" style="text-align:left;">					
 				 	
 				  
-				  <div class="progress-factor flexy-item" style="margin-top:-70px;width:500px;cursor:pointer;" >
+				  <div class="progress-factor flexy-item" style="margin-top:-30px;width:500px;cursor:pointer;" >
 						<div class="progress-bar">
 							<div class="bar has-rotation has-colors navy ruler" style="background-color:#cc3105" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-1">
 								<div class="tooltip white"></div>
 								<div class="bar-face face-position roof percentage" style="background-color:#45b817"><h3 style="color:white;font-size:25px;"><strong id="spanEstatusL1"></strong> </h3></div>
 								<div class="bar-face face-position back percentage"></div>
 								<div class="bar-face face-position floor percentage volume-lights"></div>
-								<div class="bar-face face-position right"></div>
+								<div class="bar-face face-position right" style="background-color:#45b817"></div>
 								<div class="bar-face face-position left"></div>
-								<div class="bar-face face-position front percentage volume-lights shine"></div>
-								<h3 style="color:white;font-size:25px;"><strong> Línea de producción 1</strong> </h3>
+								<div class="bar-face face-position front percentage volume-lights shine" id="tooltipL1" style="font-size:50px; color:#ff0000"></div>
+								<h3 style="color:white;font-size:45px;"><strong> LP 1</strong> </h3>
 							</div>
 							
 						</div>
@@ -234,9 +231,9 @@
 								<div class="bar-face face-position back percentage"></div>
 								<div class="bar-face face-position floor percentage volume-lights"></div>
 								<div class="bar-face face-position left"></div>
-								<div class="bar-face face-position right" ></div>
-								<div class="bar-face face-position front percentage volume-lights shine"></div>
-								<h3 style="color:white;font-size:25px;"><strong> Línea de producción 2</strong> </h3>
+								<div class="bar-face face-position right" style="background-color:#45b817"></div>
+								<div class="bar-face face-position front percentage volume-lights shine" id="tooltipL2" style="font-size:50px; color:#ff0000"></div>
+								<h3 style="color:white;font-size:45px;"><strong> LP 2</strong> </h3>
 							</div>
 						</div>
 					</div>
@@ -246,12 +243,12 @@
 							<div class="bar has-rotation has-colors navy ruler" style="background-color:#cc3105" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-3">
 								<div class="tooltip white"></div>
 								<div class="bar-face face-position roof percentage" style="background-color:#45b817"><h3 style="color:white;font-size:25px;"><strong id="spanEstatusL3"></strong> </h3></div>
-								<div class="bar-face face-position back percentage"></div>
-								<div class="bar-face face-position floor percentage volume-lights"></div>
-								<div class="bar-face face-position right"></div>
-								<div class="bar-face face-position left"></div>
-								<div class="bar-face face-position front percentage volume-lights shine"></div>
-								<h3 style="color:white;font-size:25px;"><strong> Línea de producción 3</strong> </h3>
+								<div class="bar-face face-position back percentage" ></div>
+								<div class="bar-face face-position floor percentage volume-lights" ></div>
+								<div class="bar-face face-position right" style="background-color:#45b817"></div>
+								<div class="bar-face face-position left" ></div>
+								<div class="bar-face face-position front percentage volume-lights shine"  id="tooltipL3" style="font-size:50px; color:#ff0000"></div>
+								<h3 style="color:white;font-size:45px;"><strong> LP 3</strong> </h3>
 							</div>
 						</div>
 					</div>	
@@ -325,305 +322,11 @@
 	</div>
 
 	<div class="card" id="twitter">
-		<a class="card-toggle"><i><span class="fa fa-calendar-check-o"></span></i></a>
+		<a class="card-toggle" ><i><span class="fa fa-calendar-check-o" id="btnIncioLine"></span></i></a>
 		<div class="card-content">
 			<div class="row">
-				<div class="left col">
-					<h3>Datos de <strong> Incio y finalización de operación</strong></h3>
-				
-					<table>
-						<tr>
-					<td>
-						<div class="control"><label for="message">Término de producción L1: </label></div>
-					</td>
-					<td>
-							<select id="normal-select-1" class="select-css" >
-								  <option value="1" class="select-dropdown__list-item">01 Hora</option>
-								  <option value="2" class="select-dropdown__list-item">02 Horas</option>
-								  <option value="3" class="select-dropdown__list-item">03 Horas</option>
-								  <option value="4" class="select-dropdown__list-item">04 Horas</option>
-								  <option value="5" class="select-dropdown__list-item">05 Horas</option>
-								  <option value="6" class="select-dropdown__list-item">06 Horas</option>
-								  <option value="7" class="select-dropdown__list-item">07 Horas</option>
-								  <option value="8" class="select-dropdown__list-item">08 Horas</option>
-								  <option value="9" class="select-dropdown__list-item">09 Horas</option>
-								  <option value="10" class="select-dropdown__list-item">10 Horas</option>
-								  <option value="11" class="select-dropdown__list-item">11 Horas</option>
-								  <option value="12" class="select-dropdown__list-item">12 Horas</option>
-								  <option value="13" class="select-dropdown__list-item">13 Horas</option>
-								  <option value="14" class="select-dropdown__list-item">14 Horas</option>
-								  <option value="15" class="select-dropdown__list-item">15 Horas</option>
-								  <option value="16" class="select-dropdown__list-item">16 Horas</option>
-								  <option value="17" class="select-dropdown__list-item">17 Horas</option>
-								  <option value="18" class="select-dropdown__list-item">18 Horas</option>
-								  <option value="19" class="select-dropdown__list-item">19 Horas</option>
-								  <option value="20" class="select-dropdown__list-item">20 Horas</option>
-								  <option value="21" class="select-dropdown__list-item">21 Horas</option>
-								  <option value="22" class="select-dropdown__list-item">22 Horas</option>
-								  <option value="23" class="select-dropdown__list-item">23 Horas</option>
-								  <option value="24" class="select-dropdown__list-item">24 Horas</option>
-							 </select>
-						</td>
-						<td>
-							 <select id="normal-select-2" class="select-css" >
-								  <option value="0" class="select-dropdown__list-item">00 Minutos</option>
-								  <option value="1" class="select-dropdown__list-item">01 Minuto</option>
-								  <option value="2" class="select-dropdown__list-item">02 Minutos</option>
-								  <option value="3" class="select-dropdown__list-item">03 Minutos</option>
-								  <option value="4" class="select-dropdown__list-item">04 Minutos</option>
-								  <option value="5" class="select-dropdown__list-item">05 Minutos</option>
-								  <option value="6" class="select-dropdown__list-item">06 Minutos</option>
-								  <option value="7" class="select-dropdown__list-item">07 Minutos</option>
-								  <option value="8" class="select-dropdown__list-item">08 Minutos</option>
-								  <option value="9" class="select-dropdown__list-item">09 Minutos</option>
-								  <option value="10" class="select-dropdown__list-item">10 Minutos</option>
-								  <option value="11" class="select-dropdown__list-item">11 Minutos</option>
-								  <option value="12" class="select-dropdown__list-item">12 Minutos</option>
-								  <option value="13" class="select-dropdown__list-item">13 Minutos</option>
-								  <option value="14" class="select-dropdown__list-item">14 Minutos</option>
-								  <option value="15" class="select-dropdown__list-item">15 Minutos</option>
-								  <option value="16" class="select-dropdown__list-item">16 Minutos</option>
-								  <option value="17" class="select-dropdown__list-item">17 Minutos</option>
-								  <option value="18" class="select-dropdown__list-item">18 Minutos</option>
-								  <option value="19" class="select-dropdown__list-item">19 Minutos</option>
-								  <option value="20" class="select-dropdown__list-item">20 Minutos</option>
-								  <option value="21" class="select-dropdown__list-item">21 Minutos</option>
-								  <option value="22" class="select-dropdown__list-item">22 Minutos</option>
-								  <option value="23" class="select-dropdown__list-item">23 Minutos</option>
-								  <option value="24" class="select-dropdown__list-item">24 Minutos</option>
-			  
-								  <option value="25" class="select-dropdown__list-item">25 Minutos</option>
-								  <option value="26" class="select-dropdown__list-item">26 Minutos</option>
-								  <option value="27" class="select-dropdown__list-item">27 Minutos</option>
-								  <option value="28" class="select-dropdown__list-item">28 Minutos</option>
-								  <option value="29" class="select-dropdown__list-item">29 Minutos</option>
-								  <option value="30" class="select-dropdown__list-item">30 Minutos</option>
-								  <option value="31" class="select-dropdown__list-item">31 Minutos</option>
-								  <option value="32" class="select-dropdown__list-item">32 Minutos</option>
-								  <option value="33" class="select-dropdown__list-item">33 Minutos</option>
-								  <option value="34" class="select-dropdown__list-item">34 Minutos</option>
-								  <option value="35" class="select-dropdown__list-item">35 Minutos</option>
-								  <option value="36" class="select-dropdown__list-item">36 Minutos</option>
-								  <option value="37" class="select-dropdown__list-item">38 Minutos</option>
-								  <option value="39" class="select-dropdown__list-item">39 Minutos</option>
-								  <option value="40" class="select-dropdown__list-item">40 Minutos</option>
-								  <option value="41" class="select-dropdown__list-item">41 Minutos</option>
-								  <option value="42" class="select-dropdown__list-item">42 Minutos</option>
-								  <option value="43" class="select-dropdown__list-item">43 Minutos</option>
-								  <option value="44" class="select-dropdown__list-item">44 Minutos</option>
-								  <option value="45" class="select-dropdown__list-item">45 Minutos</option>
-								  <option value="46" class="select-dropdown__list-item">46 Minutos</option>
-								  <option value="47" class="select-dropdown__list-item">47 Minutos</option>
-								  <option value="48" class="select-dropdown__list-item">49 Minutos</option>
-								  <option value="49" class="select-dropdown__list-item">49 Minutos</option>
-								  <option value="50" class="select-dropdown__list-item">50 Minutos</option>
-								  <option value="51" class="select-dropdown__list-item">51 Minutos</option>
-								  <option value="52" class="select-dropdown__list-item">52 Minutos</option>
-								  <option value="53" class="select-dropdown__list-item">53 Minutos</option>
-								  <option value="54" class="select-dropdown__list-item">54 Minutos</option>
-								  <option value="55" class="select-dropdown__list-item">55 Minutos</option>
-								  <option value="56" class="select-dropdown__list-item">56 Minutos</option>
-								  <option value="57" class="select-dropdown__list-item">57 Minutos</option>
-								  <option value="58" class="select-dropdown__list-item">58 Minutos</option>
-								  <option value="59" class="select-dropdown__list-item">59 Minutos</option>	 
-							 </select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="control"><label for="message">Término de producción L2: </label></div>
-						</td>
-						<td>
-							<select id="normal-select-3" class="select-css" >
-							  <option value="1" class="select-dropdown__list-item">01 Hora</option>
-							  <option value="2" class="select-dropdown__list-item">02 Horas</option>
-							  <option value="3" class="select-dropdown__list-item">03 Horas</option>
-							  <option value="4" class="select-dropdown__list-item">04 Horas</option>
-							  <option value="5" class="select-dropdown__list-item">05 Horas</option>
-							  <option value="6" class="select-dropdown__list-item">06 Horas</option>
-							  <option value="7" class="select-dropdown__list-item">07 Horas</option>
-							  <option value="8" class="select-dropdown__list-item">08 Horas</option>
-							  <option value="9" class="select-dropdown__list-item">09 Horas</option>
-							  <option value="10" class="select-dropdown__list-item">10 Horas</option>
-							  <option value="11" class="select-dropdown__list-item">11 Horas</option>
-							  <option value="12" class="select-dropdown__list-item">12 Horas</option>
-							  <option value="13" class="select-dropdown__list-item">13 Horas</option>
-							  <option value="14" class="select-dropdown__list-item">14 Horas</option>
-							  <option value="15" class="select-dropdown__list-item">15 Horas</option>
-							  <option value="16" class="select-dropdown__list-item">16 Horas</option>
-							  <option value="17" class="select-dropdown__list-item">17 Horas</option>
-							  <option value="18" class="select-dropdown__list-item">18 Horas</option>
-							  <option value="19" class="select-dropdown__list-item">19 Horas</option>
-							  <option value="20" class="select-dropdown__list-item">20 Horas</option>
-							  <option value="21" class="select-dropdown__list-item">21 Horas</option>
-							  <option value="22" class="select-dropdown__list-item">22 Horas</option>
-							  <option value="23" class="select-dropdown__list-item">23 Horas</option>
-							  <option value="24" class="select-dropdown__list-item">24 Horas</option>
-							 </select>
-						</td>
-						<td>
-							 <select id="normal-select-4" class="select-css" >
-							 <option value="0" class="select-dropdown__list-item">00 Minutos</option>
-							  <option value="1" class="select-dropdown__list-item">01 Minuto</option>
-							  <option value="2" class="select-dropdown__list-item">02 Minutos</option>
-							  <option value="3" class="select-dropdown__list-item">03 Minutos</option>
-							  <option value="4" class="select-dropdown__list-item">04 Minutos</option>
-							  <option value="5" class="select-dropdown__list-item">05 Minutos</option>
-							  <option value="6" class="select-dropdown__list-item">06 Minutos</option>
-							  <option value="7" class="select-dropdown__list-item">07 Minutos</option>
-							  <option value="8" class="select-dropdown__list-item">08 Minutos</option>
-							  <option value="9" class="select-dropdown__list-item">09 Minutos</option>
-							  <option value="10" class="select-dropdown__list-item">10 Minutos</option>
-							  <option value="11" class="select-dropdown__list-item">11 Minutos</option>
-							  <option value="12" class="select-dropdown__list-item">12 Minutos</option>
-							  <option value="13" class="select-dropdown__list-item">13 Minutos</option>
-							  <option value="14" class="select-dropdown__list-item">14 Minutos</option>
-							  <option value="15" class="select-dropdown__list-item">15 Minutos</option>
-							  <option value="16" class="select-dropdown__list-item">16 Minutos</option>
-							  <option value="17" class="select-dropdown__list-item">17 Minutos</option>
-							  <option value="18" class="select-dropdown__list-item">18 Minutos</option>
-							  <option value="19" class="select-dropdown__list-item">19 Minutos</option>
-							  <option value="20" class="select-dropdown__list-item">20 Minutos</option>
-							  <option value="21" class="select-dropdown__list-item">21 Minutos</option>
-							  <option value="22" class="select-dropdown__list-item">22 Minutos</option>
-							  <option value="23" class="select-dropdown__list-item">23 Minutos</option>
-							  <option value="24" class="select-dropdown__list-item">24 Minutos</option>
-			  
-							  <option value="25" class="select-dropdown__list-item">25 Minutos</option>
-							  <option value="26" class="select-dropdown__list-item">26 Minutos</option>
-							  <option value="27" class="select-dropdown__list-item">27 Minutos</option>
-							  <option value="28" class="select-dropdown__list-item">28 Minutos</option>
-							  <option value="29" class="select-dropdown__list-item">29 Minutos</option>
-							  <option value="30" class="select-dropdown__list-item">30 Minutos</option>
-							  <option value="31" class="select-dropdown__list-item">31 Minutos</option>
-							  <option value="32" class="select-dropdown__list-item">32 Minutos</option>
-							  <option value="33" class="select-dropdown__list-item">33 Minutos</option>
-							  <option value="34" class="select-dropdown__list-item">34 Minutos</option>
-							  <option value="35" class="select-dropdown__list-item">35 Minutos</option>
-							  <option value="36" class="select-dropdown__list-item">36 Minutos</option>
-							  <option value="37" class="select-dropdown__list-item">38 Minutos</option>
-							  <option value="39" class="select-dropdown__list-item">39 Minutos</option>
-							  <option value="40" class="select-dropdown__list-item">40 Minutos</option>
-							  <option value="41" class="select-dropdown__list-item">41 Minutos</option>
-							  <option value="42" class="select-dropdown__list-item">42 Minutos</option>
-							  <option value="43" class="select-dropdown__list-item">43 Minutos</option>
-							  <option value="44" class="select-dropdown__list-item">44 Minutos</option>
-							  <option value="45" class="select-dropdown__list-item">45 Minutos</option>
-							  <option value="46" class="select-dropdown__list-item">46 Minutos</option>
-							  <option value="47" class="select-dropdown__list-item">47 Minutos</option>
-							  <option value="48" class="select-dropdown__list-item">49 Minutos</option>
-							  <option value="49" class="select-dropdown__list-item">49 Minutos</option>
-							  <option value="50" class="select-dropdown__list-item">50 Minutos</option>
-							  <option value="51" class="select-dropdown__list-item">51 Minutos</option>
-							  <option value="52" class="select-dropdown__list-item">52 Minutos</option>
-							  <option value="53" class="select-dropdown__list-item">53 Minutos</option>
-							  <option value="54" class="select-dropdown__list-item">54 Minutos</option>
-							  <option value="55" class="select-dropdown__list-item">55 Minutos</option>
-							  <option value="56" class="select-dropdown__list-item">56 Minutos</option>
-							  <option value="57" class="select-dropdown__list-item">57 Minutos</option>
-							  <option value="58" class="select-dropdown__list-item">58 Minutos</option>
-							  <option value="59" class="select-dropdown__list-item">59 Minutos</option>	 
-							 </select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="control"><label for="message">Término de producción L3: </label></div>
-						</td>
-						<td>
-							<select id="normal-select-5" class="select-css" >
-							  <option value="1" class="select-dropdown__list-item">01 Hora</option>
-							  <option value="2" class="select-dropdown__list-item">02 Horas</option>
-							  <option value="3" class="select-dropdown__list-item">03 Horas</option>
-							  <option value="4" class="select-dropdown__list-item">04 Horas</option>
-							  <option value="5" class="select-dropdown__list-item">05 Horas</option>
-							  <option value="6" class="select-dropdown__list-item">06 Horas</option>
-							  <option value="7" class="select-dropdown__list-item">07 Horas</option>
-							  <option value="8" class="select-dropdown__list-item">08 Horas</option>
-							  <option value="9" class="select-dropdown__list-item">09 Horas</option>
-							  <option value="10" class="select-dropdown__list-item">10 Horas</option>
-							  <option value="11" class="select-dropdown__list-item">11 Horas</option>
-							  <option value="12" class="select-dropdown__list-item">12 Horas</option>
-							  <option value="13" class="select-dropdown__list-item">13 Horas</option>
-							  <option value="14" class="select-dropdown__list-item">14 Horas</option>
-							  <option value="15" class="select-dropdown__list-item">15 Horas</option>
-							  <option value="16" class="select-dropdown__list-item">16 Horas</option>
-							  <option value="17" class="select-dropdown__list-item">17 Horas</option>
-							  <option value="18" class="select-dropdown__list-item">18 Horas</option>
-							  <option value="19" class="select-dropdown__list-item">19 Horas</option>
-							  <option value="20" class="select-dropdown__list-item">20 Horas</option>
-							  <option value="21" class="select-dropdown__list-item">21 Horas</option>
-							  <option value="22" class="select-dropdown__list-item">22 Horas</option>
-							  <option value="23" class="select-dropdown__list-item">23 Horas</option>
-							  <option value="24" class="select-dropdown__list-item">24 Horas</option>
-							 </select>
-						</td>
-						<td>
-							 <select id="normal-select-6" class="select-css" >
-							  <option value="0" class="select-dropdown__list-item">00 Minutos</option>
-							  <option value="1" class="select-dropdown__list-item">01 Minuto</option>
-							  <option value="2" class="select-dropdown__list-item">02 Minutos</option>
-							  <option value="3" class="select-dropdown__list-item">03 Minutos</option>
-							  <option value="4" class="select-dropdown__list-item">04 Minutos</option>
-							  <option value="5" class="select-dropdown__list-item">05 Minutos</option>
-							  <option value="6" class="select-dropdown__list-item">06 Minutos</option>
-							  <option value="7" class="select-dropdown__list-item">07 Minutos</option>
-							  <option value="8" class="select-dropdown__list-item">08 Minutos</option>
-							  <option value="9" class="select-dropdown__list-item">09 Minutos</option>
-							  <option value="10" class="select-dropdown__list-item">10 Minutos</option>
-							  <option value="11" class="select-dropdown__list-item">11 Minutos</option>
-							  <option value="12" class="select-dropdown__list-item">12 Minutos</option>
-							  <option value="13" class="select-dropdown__list-item">13 Minutos</option>
-							  <option value="14" class="select-dropdown__list-item">14 Minutos</option>
-							  <option value="15" class="select-dropdown__list-item">15 Minutos</option>
-							  <option value="16" class="select-dropdown__list-item">16 Minutos</option>
-							  <option value="17" class="select-dropdown__list-item">17 Minutos</option>
-							  <option value="18" class="select-dropdown__list-item">18 Minutos</option>
-							  <option value="19" class="select-dropdown__list-item">19 Minutos</option>
-							  <option value="20" class="select-dropdown__list-item">20 Minutos</option>
-							  <option value="21" class="select-dropdown__list-item">21 Minutos</option>
-							  <option value="22" class="select-dropdown__list-item">22 Minutos</option>
-							  <option value="23" class="select-dropdown__list-item">23 Minutos</option>
-							  <option value="24" class="select-dropdown__list-item">24 Minutos</option>
-			  
-							  <option value="25" class="select-dropdown__list-item">25 Minutos</option>
-							  <option value="26" class="select-dropdown__list-item">26 Minutos</option>
-							  <option value="27" class="select-dropdown__list-item">27 Minutos</option>
-							  <option value="28" class="select-dropdown__list-item">28 Minutos</option>
-							  <option value="29" class="select-dropdown__list-item">29 Minutos</option>
-							  <option value="30" class="select-dropdown__list-item">30 Minutos</option>
-							  <option value="31" class="select-dropdown__list-item">31 Minutos</option>
-							  <option value="32" class="select-dropdown__list-item">32 Minutos</option>
-							  <option value="33" class="select-dropdown__list-item">33 Minutos</option>
-							  <option value="34" class="select-dropdown__list-item">34 Minutos</option>
-							  <option value="35" class="select-dropdown__list-item">35 Minutos</option>
-							  <option value="36" class="select-dropdown__list-item">36 Minutos</option>
-							  <option value="37" class="select-dropdown__list-item">38 Minutos</option>
-							  <option value="39" class="select-dropdown__list-item">39 Minutos</option>
-							  <option value="40" class="select-dropdown__list-item">40 Minutos</option>
-							  <option value="41" class="select-dropdown__list-item">41 Minutos</option>
-							  <option value="42" class="select-dropdown__list-item">42 Minutos</option>
-							  <option value="43" class="select-dropdown__list-item">43 Minutos</option>
-							  <option value="44" class="select-dropdown__list-item">44 Minutos</option>
-							  <option value="45" class="select-dropdown__list-item">45 Minutos</option>
-							  <option value="46" class="select-dropdown__list-item">46 Minutos</option>
-							  <option value="47" class="select-dropdown__list-item">47 Minutos</option>
-							  <option value="48" class="select-dropdown__list-item">49 Minutos</option>
-							  <option value="49" class="select-dropdown__list-item">49 Minutos</option>
-							  <option value="50" class="select-dropdown__list-item">50 Minutos</option>
-							  <option value="51" class="select-dropdown__list-item">51 Minutos</option>
-							  <option value="52" class="select-dropdown__list-item">52 Minutos</option>
-							  <option value="53" class="select-dropdown__list-item">53 Minutos</option>
-							  <option value="54" class="select-dropdown__list-item">54 Minutos</option>
-							  <option value="55" class="select-dropdown__list-item">55 Minutos</option>
-							  <option value="56" class="select-dropdown__list-item">56 Minutos</option>
-							  <option value="57" class="select-dropdown__list-item">57 Minutos</option>
-							  <option value="58" class="select-dropdown__list-item">58 Minutos</option>
-							  <option value="59" class="select-dropdown__list-item">59 Minutos</option>	 
-							 </select>
-						</td>
-					</tr>
-					</table>
+				<div class="left col">					
+				    <uc1:Inciar runat="server" ID="Inciar" />
 				</div>
 				<div class="right col">
 					  <uc1:DataOP1 runat="server" id="DataOP5" />			
@@ -655,15 +358,37 @@
 	<a class="close-modal" href="javascript:void(0)">
 	<i class="fa fa-times"></i>
 	</a>
-	<div>
-		<span>Seleccione el tipo de parada:</span>
-		<select id="SelectParadas" class="select-css" style="width:100%;">
+	<br />
+	<div style="text-align:left;">
+		
+	<%--	<select id="SelectParadas" class="select-css" style="width:100%;">
                     <option value="30">Parada Minima</option>
                     <option value="45">Parada Media</option>
                     <option value="60">Parada por mantenimiento</option>
-         </select>
+         </select>--%>
+		<table style="text-align:left;">
+			<tr>
+				<td>
+					<input class="btn" type="button" value="Parada Mínima" onclick="ParadaLineasdeProduccion(30);" style="background-color:#ff0000; color:#ffffff;  font-size:15px;border-radius:5px; width:100%;">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input class="btn" type="button" value="Pararada Media" onclick="ParadaLineasdeProduccion(45);" style="background-color:#ff0000; color:#ffffff;  font-size:15px;border-radius:5px; width:100%;">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input class="btn" type="button" value="Pararada por Mantenimiento" onclick="ParadaLineasdeProduccion(60);" style="background-color:#ff0000; color:#ffffff;  font-size:15px;border-radius:5px; width:100%;">
+				</td>
+			</tr>
+		</table>
 		<br />
-		<input class="btn" type="button" value="Parar" onclick="EjecutarParada();" style="background-color:#ff0000; color:#ffffff;  font-size:30px;border-radius:5px; width:100%;">
+		
+		<br />
+		
+		<br />
+		
 	</div>
 </div>
 
@@ -737,6 +462,37 @@
         openModalBox2();
         
         function OpenModalNew(Lp) {
+            //verifico si ya está denida
+            if (document.getElementById('txtL').value == 1 && document.getElementById('txtL1').value == 3) {
+                swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 1  ya está denida', 'warning');
+                return false;
+            }
+
+            if (document.getElementById('txtL').value == 2 && document.getElementById('txtL2').value == 3) {
+                swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 2  ya está denida', 'warning');
+                return false;
+            }
+
+            if (document.getElementById('txtL').value == 3 && document.getElementById('txtL3').value == 3) {
+                swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 3  ya está denida', 'warning');
+                return false;
+            }
+
+            // si la línea seleccionada es la 1 y el estatus es Envasando, podemos  continuar, de lo contrario , no
+            if (document.getElementById('txtL').value == 1 && document.getElementById('txtL1').value != 2) {
+                swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 1 debe estar Envasando para poder detenerla', 'warning');
+                return false;
+            }
+
+            if (document.getElementById('txtL').value == 2 && document.getElementById('txtL2').value != 2) {
+                swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 2 debe estar Envasando para poder detenerla', 'warning');
+                return false;
+            }
+
+            if (document.getElementById('txtL').value == 3 && document.getElementById('txtL3').value != 2) {
+                swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 3 debe estar Envasando para poder detenerla', 'warning');
+                return false;
+            }
             var modal = $(".modal, #mask");
             modal.fadeIn(300);
         }
@@ -764,7 +520,7 @@
 
        
        
-        //var Bar = document.getElementById('bar-1');
+        var Bar = document.getElementById('bar-1');
         //var ProgressBarValue_ = 0;
         //var ProgressExe = setInterval(ProgressBar, 200);
        
@@ -783,7 +539,7 @@
            
         }
 
-        //var Bar2 = document.getElementById('bar-2');
+        var Bar2 = document.getElementById('bar-2');
         //var ProgressBarValue2_ = 0;
         //var ProgressExe2 = setInterval(ProgressBar2, 300);
 
@@ -802,7 +558,7 @@
 
         }
 
-        //var Bar3 = document.getElementById('bar-3');
+         var Bar3 = document.getElementById('bar-3');
         //var ProgressBarValue3_ = 0;
         //var ProgressExe3 = setInterval(ProgressBar3, 400);
 

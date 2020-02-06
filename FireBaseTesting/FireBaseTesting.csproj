@@ -441,6 +441,7 @@
     <Content Include="Temporizadores\Controles\Comandos.ascx" />
     <Content Include="Temporizadores\Controles\DataOP.ascx" />
     <Content Include="Temporizadores\Controles\DataOPL1.ascx" />
+    <Content Include="Temporizadores\Controles\Inciar.ascx" />
     <Content Include="Temporizadores\css\component.css" />
     <Content Include="Temporizadores\css\cssbtn1.css" />
     <Content Include="Temporizadores\css\custom-bars.css" />
@@ -691,6 +692,13 @@
     </Compile>
     <Compile Include="Temporizadores\Controles\DataOPL1.ascx.designer.cs">
       <DependentUpon>DataOPL1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\Inciar.ascx.cs">
+      <DependentUpon>Inciar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\Inciar.ascx.designer.cs">
+      <DependentUpon>Inciar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Temporizadores\Data.aspx.cs">
       <DependentUpon>Data.aspx</DependentUpon>

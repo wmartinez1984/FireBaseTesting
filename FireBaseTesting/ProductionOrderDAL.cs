@@ -63,6 +63,28 @@ namespace FireBaseTesting
                         productionOrderEntity_.FechaParadaL3 = productionOrder.FechaParadaL3;
                         productionOrderEntity_.FechaInicioLavado = productionOrder.FechaInicioLavado;
 
+                        //datos nuevos 
+                        productionOrderEntity_.InicioHoraL1 = productionOrder.InicioHoraL1;
+                        productionOrderEntity_.InicioMinutosL1 = productionOrder.InicioMinutosL1;
+                        productionOrderEntity_.InicioFechaL1 = productionOrder.InicioFechaL1;
+                        productionOrderEntity_.FinHoraL1 = productionOrder.FinHoraL1;
+                        productionOrderEntity_.FinMinutosL1 = productionOrder.FinMinutosL1;
+                        productionOrderEntity_.FinFechaL1 = productionOrder.FinFechaL1;
+
+                        productionOrderEntity_.InicioHoraL2 = productionOrder.InicioHoraL2;
+                        productionOrderEntity_.InicioMinutosL2 = productionOrder.InicioMinutosL2;
+                        productionOrderEntity_.InicioFechaL2 = productionOrder.InicioFechaL2;
+                        productionOrderEntity_.FinHoraL2 = productionOrder.FinHoraL2;
+                        productionOrderEntity_.FinMinutosL2 = productionOrder.FinMinutosL2;
+                        productionOrderEntity_.FinFechaL2 = productionOrder.FinFechaL2;
+
+                        productionOrderEntity_.InicioHoraL3 = productionOrder.InicioHoraL3;
+                        productionOrderEntity_.InicioMinutosL3 = productionOrder.InicioMinutosL3;
+                        productionOrderEntity_.InicioFechaL3 = productionOrder.InicioFechaL3;
+                        productionOrderEntity_.FinHoraL3 = productionOrder.FinHoraL3;
+                        productionOrderEntity_.FinMinutosL3 = productionOrder.FinMinutosL3;
+                        productionOrderEntity_.FinFechaL3 = productionOrder.FinFechaL3;
+
                         data.Add(productionOrderEntity_);
                     }
                 }

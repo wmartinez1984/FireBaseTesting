@@ -107,6 +107,126 @@ namespace FireBaseTesting.Temporizadores
 
         }
 
+
+        public static string IniciarLineadeProduccionFechas(HttpContext context)
+        {
+            OrdenesRegistradasSelect(context);// primero valido como estaban los datos antes de hacer el cambio;
+            ProductionOrderDAL productionOrderDAL = new ProductionOrderDAL();
+            ProductionOrderEntity data = new ProductionOrderEntity();
+            Settings settings = new Settings();
+            data.id = Guid.NewGuid();
+            data.OP = context.Request.QueryString["OP"];
+            data.ProductoOP = context.Request.QueryString["ProductoOP"];
+            data.Descripcion = context.Request.QueryString["Descripcion"];
+            data.Cantidad = context.Request.QueryString["Cantidad"];
+            data.Ubicacion = context.Request.QueryString["Ubicacion"];
+            data.CodCliente = context.Request.QueryString["CodCliente"];
+            data.NombreCliente = context.Request.QueryString["NombreCliente"];
+            data.EestadoL1 = int.Parse(context.Request.QueryString["L1"]);
+            data.EestadoL2 = int.Parse(context.Request.QueryString["L2"]);
+            data.EestadoL3 = int.Parse(context.Request.QueryString["L3"]);
+            data.EestadoOP = settings.Envasando;
+            data.MinParadaL1 = Settings.MinParadaL1;
+            data.MinParadaL2 = Settings.MinParadaL2;
+            data.MinParadaL3 = Settings.MinParadaL3;
+            data.TiempoLavado = int.Parse(context.Request.QueryString["TiempoLavado"]);
+            data.DescripLavado = context.Request.QueryString["DescripLavado"];
+            data.HoraInicio = Settings.HoraInicio;
+            data.HoraFinalizacion = Settings.HoraFinalizacion;
+            data.CantFabricados = context.Request.QueryString["Cantidad"];
+            data.FechaCreacion = Settings.FechaCreacion;
+            data.FechaModificacion = DateTime.Now;
+
+            data.FechaParadaL1 = Settings.FechaParadaL1;
+            data.FechaParadaL2 = Settings.FechaParadaL2;
+            data.FechaParadaL3 = Settings.FechaParadaL3;
+            data.FechaInicioLavado = Settings.FechaInicioLavado;
+
+            data.FechaParadaL1 = Settings.FechaParadaL1;
+            data.FechaParadaL2 = Settings.FechaParadaL2;
+            data.FechaParadaL3 = Settings.FechaParadaL3;
+            data.FechaInicioLavado = Settings.FechaInicioLavado;
+
+            // datos nuevos 
+            if(context.Request.QueryString["InicioHoraL1"] != null)
+                data.InicioHoraL1 = context.Request.QueryString["InicioHoraL1"];
+            else
+                data.InicioHoraL1 = Settings.InicioHoraL1;
+
+            if (context.Request.QueryString["InicioMinutosL1"] != null)
+                data.InicioMinutosL1 = context.Request.QueryString["InicioMinutosL1"];
+            else
+                data.InicioMinutosL1 = Settings.InicioMinutosL1;
+
+            data.InicioFechaL1 = DateTime.Now;
+
+            if (context.Request.QueryString["FinHoraL1"] != null)
+                data.FinHoraL1 = context.Request.QueryString["FinHoraL1"];
+            else
+                data.FinHoraL1 = Settings.FinHoraL1;
+
+            if (context.Request.QueryString["FinMinutosL1"] != null)
+                data.FinMinutosL1 = context.Request.QueryString["FinMinutosL1"];
+            else
+                data.FinMinutosL1 = Settings.FinMinutosL1;
+                      
+            data.FinFechaL1 = DateTime.Now;
+
+            if (context.Request.QueryString["InicioHoraL2"] != null)
+                data.InicioHoraL2 = context.Request.QueryString["InicioHoraL2"];
+            else
+                data.InicioHoraL2 = Settings.InicioHoraL2;
+
+
+            if (context.Request.QueryString["InicioMinutosL2"] != null)
+                data.InicioMinutosL2 = context.Request.QueryString["InicioMinutosL2"];
+            else
+                data.InicioMinutosL2 = Settings.InicioMinutosL2;
+
+            data.InicioFechaL2 = DateTime.Now;
+
+            if (context.Request.QueryString["FinHoraL2"] != null)
+                data.FinHoraL2 = context.Request.QueryString["FinHoraL2"];
+            else
+                data.FinHoraL2 = Settings.FinHoraL2;
+
+            if (context.Request.QueryString["FinMinutosL2"] != null)
+                data.FinMinutosL2 = context.Request.QueryString["FinMinutosL2"];
+            else
+                data.FinMinutosL2 = Settings.FinMinutosL2;
+
+            data.FinFechaL2 = DateTime.Now;
+
+            if (context.Request.QueryString["InicioHoraL3"] != null)
+                data.InicioHoraL3 = context.Request.QueryString["InicioHoraL3"];
+            else
+                data.InicioHoraL3 = Settings.InicioHoraL3;
+
+            if (context.Request.QueryString["InicioMinutosL3"] != null)
+                data.InicioMinutosL3 = context.Request.QueryString["InicioMinutosL3"];
+            else
+                data.InicioMinutosL3 = Settings.InicioMinutosL3;
+
+            data.InicioFechaL3 = DateTime.Now;
+
+            if (context.Request.QueryString["FinHoraL3"] != null)
+                data.FinHoraL3 = context.Request.QueryString["FinHoraL3"];
+            else
+                data.FinHoraL3 = Settings.FinHoraL3;
+
+            if (context.Request.QueryString["FinMinutosL3"] != null)
+                data.FinMinutosL3 = context.Request.QueryString["FinMinutosL3"];
+            else
+                data.FinMinutosL3 = Settings.FinMinutosL3;
+
+            data.FinFechaL3 = DateTime.Now;
+
+            productionOrderDAL.OP_Insert(data);
+
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return (serializer.Serialize("ok,ok"));
+        }
+
         public static string DetenerLineadeProduccion(HttpContext context)
         {
             int LP = int.Parse(context.Request.QueryString["LP"]);
@@ -174,6 +294,33 @@ namespace FireBaseTesting.Temporizadores
             data.FechaModificacion = DateTime.Now;
             data.FechaInicioLavado = Settings.FechaInicioLavado;
 
+            data.FechaParadaL1 = Settings.FechaParadaL1;
+            data.FechaParadaL2 = Settings.FechaParadaL2;
+            data.FechaParadaL3 = Settings.FechaParadaL3;
+            data.FechaInicioLavado = Settings.FechaInicioLavado;
+
+            // datos nuevos 
+            data.InicioHoraL1 = Settings.InicioHoraL1;
+            data.InicioMinutosL1 = Settings.InicioMinutosL1;
+            data.InicioFechaL1 = Settings.InicioFechaL1;
+            data.FinHoraL1 = Settings.FinHoraL1;
+            data.FinMinutosL1 = Settings.FinMinutosL1;
+            data.FinFechaL1 = Settings.FinFechaL1;
+
+            data.InicioHoraL2 = Settings.InicioHoraL2;
+            data.InicioMinutosL2 = Settings.InicioMinutosL2;
+            data.InicioFechaL2 = Settings.InicioFechaL2;
+            data.FinHoraL2 = Settings.FinHoraL2;
+            data.FinMinutosL2 = Settings.FinMinutosL2;
+            data.FinFechaL2 = Settings.FinFechaL2;
+
+            data.InicioHoraL3 = Settings.InicioHoraL3;
+            data.InicioMinutosL3 = Settings.InicioMinutosL3;
+            data.InicioFechaL3 = Settings.InicioFechaL3;
+            data.FinHoraL3 = Settings.FinHoraL3;
+            data.FinMinutosL3 = Settings.FinMinutosL3;
+            data.FinFechaL3 = Settings.FinFechaL3;
+
             productionOrderDAL.OP_Insert(data);
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             return (serializer.Serialize("ok,ok"));
@@ -231,6 +378,28 @@ namespace FireBaseTesting.Temporizadores
             data.FechaParadaL3 = Settings.FechaParadaL3;
             data.FechaInicioLavado = Settings.FechaInicioLavado;
 
+            // datos nuevos 
+            data.InicioHoraL1 =  Settings.InicioHoraL1;
+            data.InicioMinutosL1 = Settings.InicioMinutosL1 ;
+            data.InicioFechaL1 =  Settings.InicioFechaL1 ;
+            data.FinHoraL1 =  Settings.FinHoraL1 ;
+            data.FinMinutosL1 =  Settings.FinMinutosL1 ;
+            data.FinFechaL1 = Settings.FinFechaL1 ;
+
+            data.InicioHoraL2 = Settings.InicioHoraL2 ;
+            data.InicioMinutosL2 =  Settings.InicioMinutosL2;
+            data.InicioFechaL2 = Settings.InicioFechaL2 ;
+            data.FinHoraL2 = Settings.FinHoraL2 ;
+            data.FinMinutosL2 = Settings.FinMinutosL2 ;
+            data.FinFechaL2 = Settings.FinFechaL2 ;
+
+            data.InicioHoraL3 = Settings.InicioHoraL3 ;
+            data.InicioMinutosL3 = Settings.InicioMinutosL3 ;
+            data.InicioFechaL3 = Settings.InicioFechaL3 ;
+            data.FinHoraL3 = Settings.FinHoraL3;
+            data.FinMinutosL3 = Settings.FinMinutosL3;
+            data.FinFechaL3 = Settings.FinFechaL3;
+
             productionOrderDAL.OP_Insert(data);
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             return (serializer.Serialize("ok,ok"));
@@ -268,6 +437,29 @@ namespace FireBaseTesting.Temporizadores
                     Settings.FechaParadaL2 = dataColum.FechaParadaL2;
                     Settings.FechaParadaL3 = dataColum.FechaParadaL3;
                     Settings.FechaInicioLavado = dataColum.FechaInicioLavado;
+
+                    //datos nuevos 
+                    Settings.InicioHoraL1 = dataColum.InicioHoraL1;
+                    Settings.InicioMinutosL1 = dataColum.InicioMinutosL1;
+                    Settings.InicioFechaL1 = dataColum.InicioFechaL1;
+                    Settings.FinHoraL1 = dataColum.FinHoraL1;
+                    Settings.FinMinutosL1 = dataColum.FinMinutosL1;
+                    Settings.FinFechaL1 = dataColum.FinFechaL1;
+
+                    Settings.InicioHoraL2 = dataColum.InicioHoraL2;
+                    Settings.InicioMinutosL2 = dataColum.InicioMinutosL2;
+                    Settings.InicioFechaL2 = dataColum.InicioFechaL2;
+                    Settings.FinHoraL2 = dataColum.FinHoraL2;
+                    Settings.FinMinutosL2 = dataColum.FinMinutosL2;
+                    Settings.FinFechaL2 = dataColum.FinFechaL2;
+
+                    Settings.InicioHoraL3 = dataColum.InicioHoraL3;
+                    Settings.InicioMinutosL3 = dataColum.InicioMinutosL3;
+                    Settings.InicioFechaL3 = dataColum.InicioFechaL3;
+                    Settings.FinHoraL3 = dataColum.FinHoraL3;
+                    Settings.FinMinutosL3 = dataColum.FinMinutosL3;
+                    Settings.FinFechaL3 = dataColum.FinFechaL3;
+
 
                 }
                 

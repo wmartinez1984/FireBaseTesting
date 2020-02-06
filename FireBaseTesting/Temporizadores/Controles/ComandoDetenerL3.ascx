@@ -50,16 +50,63 @@ p {
 <div class="container"> 
     <table style="width:100%;text-align:left;">        
         
-         <tr>
+        <tr>
             <td colspan="2">
-                <input class="btn" type="button" value="Iniciar" onclick="IniciarLinea();" style="background-color:#058616;color:#ffffff; font-size:40px;border-radius:10px;width:350px; height:110px;">
-                <br />
+               <input class="btn" type="button" id="Parada1L3" value="Parada Mínima" onclick="ParadaLineasdeProduccion(30);" style="background-color:#ed4109; color:#ffffff;  font-size:20px;border-radius:10px;width:290px; height:60px;">
+                <input class="btn" type="button" id="ReinicioParada1L3" value="Reiniciar con Parada Mínima" onclick="EjecutarReinicioDeParada(30);" style="background-color: #226062;
+                        color: #ffffff;
+                        font-size: 20px;
+                        border-radius: 10px;
+                        width: 300px;
+                        height: 60px;
+                        display: none;">
+            </td>
+            <td>
+                 <input class="btn" type="button" value="Iniciar" onclick="IniciarLinea();" style="background-color: #058616;
+                            color: #ffffff;
+                            font-size: 20px;
+                            border-radius: 10px;
+                            width: 210px;
+                            height: 60px;">
             </td>
         </tr>
         <tr>
             <td>
-                <input class="btn" type="button" value="Parada" onclick="OpenModalNew(1);" style="background-color:#ff0000; color:#ffffff;  font-size:40px;border-radius:10px; width:350px; height:110px;">
-                <br />
+              <input class="btn" type="button" id="Parada2L3" value="Pararada Media" onclick="ParadaLineasdeProduccion(45);" style="background-color: #ed4109;
+					        color: #ffffff;
+					        font-size: 20px;
+					        border-radius: 10px;
+					        width: 290px;
+					        height: 60px;">
+
+                <input class="btn" type="button" id="ReinicioParada2L3" value="Reinicio con Pararada Media" onclick="EjecutarReinicioDeParada(45);" style="background-color: #226062;
+					        color: #ffffff;
+					        font-size: 20px;
+					        border-radius: 10px;
+					        width: 300px;
+					        height: 60px;
+                            display:none;">
+            </td>
+            <td>
+               
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input class="btn" type="button" id="Parada3L3" value="Pararada por Mantenimiento" onclick="ParadaLineasdeProduccion(60);" style="background-color: #ed4109;
+                        color: #ffffff;
+                        font-size: 20px;
+                        border-radius: 10px;
+                        width: 290px;
+                        height: 60px;">
+                    <input class="btn" type="button" id="ReinicioParada3L3" value="Reinicio con Mantenimiento" onclick="EjecutarReinicioDeParada(60);" style="                            background-color: #226062;
+                            color: #ffffff;
+                            font-size: 20px;
+                            border-radius: 10px;
+                            width: 300px;
+                            height: 60px;
+                            display: none;">
+                
             </td>
             <td>
                
@@ -68,8 +115,7 @@ p {
         <tr>
 
             <td>
-                 <input class="btn" type="button" value="Reiniciar Parada" onclick="OpenModalNew2();" style="background-color:#ffd800; font-size:40px;border-radius:10px; width:350px; height:110px;">
-           
+                 
             </td>
             <td>                     
 	            
@@ -78,41 +124,89 @@ p {
         </tr>
         <tr>
             <td colspan="2">
-                 <div id="countdownL3" style="font-size:30px;"></div>
+                 
             </td>
         </tr>
     </table>
+
+            <table style="width:100%;text-align:left;">        
+        
+        <tr>
+            <td colspan="2">
+                
+                <br />
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                <br />
+                <br />
+                 <div id="countdownL3" style="font-size: 20px;"></div>
+            </td>
+        </tr>
+    </table>
+
 </div>
 
 <script>
-        var endL3 = new Date('01/29/2019 5:31 PM');
-        var _secondL3 = 1000;
-        var _minuteL3 = _secondL3 * 60;
-        var _hourL3 = _minuteL3 * 60;
-        var _dayL3 = _hourL3 * 24;
-        var timerL3;
-
-        function showRemainingL3() {
-            var nowL3 = new Date();
-            var distanceL3 = endL3 - nowL3;
-            if (distanceL3 < 0) {
-
-                clearInterval(timer3);
-                document.getElementById('countdownL3').innerHTML = 'No hay una parada actualmente!';
-
-                return;
-            }
-            var daysL3 = Math.floor(distanceL3 / _dayL3);
-            var hoursL3 = Math.floor((distanceL3 % _dayL3) / _hourL3);
-            var minutesL3 = Math.floor((distanceL3 % _hourL3) / _minuteL3);
-            var secondsL3 = Math.floor((distanceL3 % _minuteL3) / _secondL3);
-
-            document.getElementById('countdownL3').innerHTML = daysL3 + ' dias, ';
-            document.getElementById('countdownL3').innerHTML += hoursL3 + ' horas, ';
-            document.getElementById('countdownL3').innerHTML += minutesL3 + ' minutos y ';
-            document.getElementById('countdownL3').innerHTML += secondsL3 + ' segundos';
-        }
-
+    var timerL3;
+    var endL3;
+    var _secondL3;
+    var _minuteL3;
+    var _hourL3;
+    var _dayL3;
+    var distanceInicialL3;
+    var MinParadaL3;
+    function ShowTimerL3(date_) {
+        
+         endL3 = new Date(date_);            
+        _secondL3 = 1000;
+        _minuteL3 = _secondL3 * 60;
+        _hourL3 = _minuteL3 * 60;
+        _dayL3 = _hourL3 * 24;
+             
         timerL3 = setInterval(showRemainingL3, 1000);
+    }
+       
+    function showRemainingL3() {
+
+        var nowL3 = new Date();
+        var distanceL3 = endL3 - nowL3;        
+        
+        
+        
+        if (distanceL3 < 0) {
+            
+            IniciarLineaDespuesdeTimer(3);
+            window.clearInterval(timerL3);
+            //var myVar = setTimeout(location.reload(), 45000);
+            //clearInterval(timer3);
+            //document.getElementById('countdownL3').innerHTML = '';
+
+            return;
+        }
+        var daysL3 = Math.floor(distanceL3 / _dayL3);
+        var hoursL3 = Math.floor((distanceL3 % _dayL3) / _hourL3);
+        var minutesL3 = Math.floor((distanceL3 % _hourL3) / _minuteL3);
+        var secondsL3 = Math.floor((distanceL3 % _minuteL3) / _secondL3);
+
+        document.getElementById('countdownL3').innerHTML = ' La parada termina en: <br/>';
+        document.getElementById('countdownL3').innerHTML += daysL3 + ' dia(s), ';
+        document.getElementById('countdownL3').innerHTML += hoursL3 + ' hora(s), ';
+        document.getElementById('countdownL3').innerHTML += minutesL3 + ' minuto(s) y ';
+        document.getElementById('countdownL3').innerHTML += secondsL3 + ' segundo(s) ';
+
+        var PorcenBar = (minutesL3  * 100) / MinParadaL3;
+       // var PorcenBarRegreso = 100 - PorcenBar;
+        Bar3.setAttribute("aria-valuenow", parseInt(PorcenBar));
+        document.getElementById('tooltipL3').innerHTML = daysL3 + ":" + hoursL3 + ":" + minutesL3 +":"+ secondsL3;
+       // alert(PorcenBarRegreso);
+
+        
+        
+    }
+
+        
 
     </script>

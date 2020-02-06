@@ -1,6 +1,134 @@
 ﻿
-function EjecutarReinicioDeParada() {
-    ReinicioParadaLineasdeProduccion(document.getElementById('SelectParadasR').value);
+function IniciarLineaDespuesdeTimerIncio(Lid) {
+    if (Lid == 1 && document.getElementById('txtL1').value == 2) {
+        swal('Oops!', 'La línea No 1 ya está iniciada', 'warning');
+        return false;
+    }
+
+    if (Lid == 2 && document.getElementById('txtL2').value == 2) {
+        swal('Oops!', 'La línea No 2 ya está iniciada', 'warning');
+        return false;
+    }
+
+    if (Lid == 3 && document.getElementById('txtL3').value == 2) {
+        swal('Oops!', 'La línea No 3 ya está iniciada', 'warning');
+        return false;
+    }
+
+    if (Lid == 1)
+        document.getElementById('txtL1').value = 2; // si la línea seleccionada es la 1, entonces ponemos el valor de la línea en 2 = Envasando
+
+    if (Lid == 2)
+        document.getElementById('txtL2').value = 2; // si la línea seleccionada es la 2, entonces ponemos el valor de la línea en 2 = Envasando
+
+    if (Lid == 3)
+        document.getElementById('txtL3').value = 2; // si la línea seleccionada es la 3, entonces ponemos el valor de la línea en 2 = Envasando
+
+
+
+    var message = "";
+
+    try {
+
+
+        swal('Iniciando Línea...', 'Estamos iniciando la Línea No ' + Lid + ', por favor espere, no cierre esta ventana hasta que la información termine de registrarse…', 'warning');
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=InciarLinea&OP=" + document.getElementsByName('DataspanOP')[0].value + "&ProductoOP=" + document.getElementsByName('NAVI')[0].value + "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value + "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value + "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value + "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value + "&DescripLavado=" + document.getElementById('normal-select-7').innerText + "&L1=" + document.getElementById('txtL1').value + "&L2=" + document.getElementById('txtL2').value + "&L3=" + document.getElementById('txtL3').value + "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                //OPResgistradasSelect();
+                swal('Línea Iniciada', 'La Línea de producción No. ' + document.getElementById('txtL').value + ' fue iniciada correctamente ', 'success');
+
+                var myVar = setTimeout(location.reload(), 15000);
+                return false;
+            },
+            failure: function (r) {
+                swal('Error:', 'Error al iniciar la Línea de producción No ' + document.getElementById('txtL').value + ', por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            },
+            error: function (r) {
+                swal('Error:', 'Error al inicias la Línea, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            }
+
+        });
+        return false;
+
+
+        return false;
+    }
+    catch (err) {
+        swal('Error:', 'Error al registrar la OP, por favor verifique los datos y vuelva a intentarlo', 'error');
+        return false;
+    }
+
+    return false;
+
+}
+
+
+function IniciarLineaDespuesdeTimer(Lid) {
+
+    if (Lid == 1)
+        document.getElementById('txtL1').value = 2; // si la línea seleccionada es la 1, entonces ponemos el valor de la línea en 2 = Envasando
+
+    if (Lid == 2)
+        document.getElementById('txtL2').value = 2; // si la línea seleccionada es la 2, entonces ponemos el valor de la línea en 2 = Envasando
+
+    if (Lid == 3)
+        document.getElementById('txtL3').value = 2; // si la línea seleccionada es la 3, entonces ponemos el valor de la línea en 2 = Envasando
+
+
+
+    var message = "";
+
+    try {
+
+
+        swal('Iniciando Línea...', 'Estamos iniciando la Línea No ' + Lid + ', por favor espere, no cierre esta ventana hasta que la información termine de registrarse…', 'warning');
+            $.ajax({
+                type: "POST",
+                url: "DataOP.ashx?Action=InciarLinea&OP=" + document.getElementsByName('DataspanOP')[0].value + "&ProductoOP=" + document.getElementsByName('NAVI')[0].value + "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value + "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value + "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value + "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value + "&DescripLavado=" + document.getElementById('normal-select-7').innerText + "&L1=" + document.getElementById('txtL1').value + "&L2=" + document.getElementById('txtL2').value + "&L3=" + document.getElementById('txtL3').value + "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    //OPResgistradasSelect();
+                    swal('Línea Iniciada', 'La Línea de producción No. ' + document.getElementById('txtL').value + ' fue iniciada correctamente ', 'success');
+
+                    var myVar = setTimeout(location.reload(), 15000);
+                    return false;
+                },
+                failure: function (r) {
+                    swal('Error:', 'Error al iniciar la Línea de producción No ' + document.getElementById('txtL').value + ', por favor verifique los datos y vuelva a intentarlo', 'error');
+                    return false;
+                },
+                error: function (r) {
+                    swal('Error:', 'Error al inicias la Línea, por favor verifique los datos y vuelva a intentarlo', 'error');
+                    return false;
+                }
+
+            });
+            return false;
+        
+
+        return false;
+    }
+    catch (err) {
+        swal('Error:', 'Error al registrar la OP, por favor verifique los datos y vuelva a intentarlo', 'error');
+        return false;
+    }
+
+    return false;
+
+}
+
+
+function EjecutarReinicioDeParada(tiempo) {
+    ReinicioParadaLineasdeProduccion(tiempo);
 }
 
 function ReinicioParadaLineasdeProduccion(tiempo) {
@@ -45,9 +173,10 @@ function ReinicioParadaLineasdeProduccion(tiempo) {
                 dataType: "json",
                 success: function (data) {
 
-                    OPResgistradasSelect();
+                    //OPResgistradasSelect();
                     swal('Línea DETENIDA', 'La Línea de producción No. ' + document.getElementById('txtL').value + ' fue DETENIDA correctamente ', 'success');
-                    document.getElementById('Modal2Close').click();
+                    var myVar = setTimeout(location.reload(), 15000);   
+                    //document.getElementById('Modal2Close').click();
                     return false;
 
                 },
@@ -135,8 +264,9 @@ function ParadaLineasdeProduccion(tiempo) {
                 dataType: "json",
                 success: function (data) {
 
-                    OPResgistradasSelect();
+                    //OPResgistradasSelect();
                     swal('Línea DETENIDA', 'La Línea de producción No. ' + document.getElementById('txtL').value + ' fue DETENIDA correctamente ', 'success');
+                    var myVar = setTimeout(location.reload(), 15000);   
                     return false;
 
                 },
@@ -366,9 +496,11 @@ function IniciarLinea() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                   
-                    OPResgistradasSelect();
+                    
+                    //OPResgistradasSelect();
                     swal('Línea Iniciada', 'La Línea de producción No. ' + document.getElementById('txtL').value + ' fue iniciada correctamente ', 'success');
+                    
+                    var myVar = setTimeout(location.reload() , 15000);                    
                     return false;
                 },
                 failure: function (r) {
@@ -534,6 +666,7 @@ function OPResgistradasSelect() {
                             }
                             if (estatusOPL == 3) {
                                 estatusOPL_ = "Detenida"
+                                
                             }
 
                             if (estatusOPL == 4) {
@@ -545,6 +678,90 @@ function OPResgistradasSelect() {
                             }
                             document.getElementById('spanEstatusL3').innerHTML = "ESTADO:" + estatusOPL_;
 
+                            //TimerL3
+                            if (item.EestadoL3 == 3) {
+                                var String_ValueDateL3 = item.FechaParadaL3;
+                                var value = new Date(parseInt(String_ValueDateL3.replace(/(^.*\()|([+-].*$)/g, '')));
+                                var dat = value.toLocaleString();
+                                MinParadaL3 = item.MinParadaL3;
+                                ShowTimerL3(dat);
+                                //Mostrar reinicios y ocultar paradas, solo si está detenida 
+                                document.getElementById('ReinicioParada1L3').style.display = "inline";
+                                document.getElementById('ReinicioParada2L3').style.display = "inline";
+                                document.getElementById('ReinicioParada3L3').style.display = "inline";
+                                //paradas
+                                document.getElementById('Parada1L3').style.display = "none";
+                                document.getElementById('Parada2L3').style.display = "none";
+                                document.getElementById('Parada3L3').style.display = "none";
+                            }
+                            else {
+                                //Ocultar reinicios y mostrar paradas, solo si no está detenida 
+                                document.getElementById('ReinicioParada1L3').style.display = "none";
+                                document.getElementById('ReinicioParada2L3').style.display = "none";
+                                document.getElementById('ReinicioParada3L3').style.display = "none";
+                                //paradas
+                                document.getElementById('Parada1L3').style.display = "inline";
+                                document.getElementById('Parada2L3').style.display = "inline";
+                                document.getElementById('Parada3L3').style.display = "inline";
+                            }
+
+                            //TimerL2
+                            if (item.EestadoL2 == 3) {
+                                var String_ValueDateL2 = item.FechaParadaL2;
+                                var valueL2 = new Date(parseInt(String_ValueDateL2.replace(/(^.*\()|([+-].*$)/g, '')));
+                                var datL2 = valueL2.toLocaleString();
+                                MinParadaL2 = item.MinParadaL2;
+                                ShowTimerL2(datL2);
+                                //Mostrar reinicios y ocultar paradas, solo si está detenida 
+                                document.getElementById('ReinicioParada1L2').style.display = "inline";
+                                document.getElementById('ReinicioParada2L2').style.display = "inline";
+                                document.getElementById('ReinicioParada3L2').style.display = "inline";
+                                //paradas
+                                document.getElementById('Parada1L2').style.display = "none";
+                                document.getElementById('Parada2L2').style.display = "none";
+                                document.getElementById('Parada3L2').style.display = "none";
+                            }
+                            else {
+                                //Ocultar reinicios y mostrar paradas, solo si no está detenida 
+                                document.getElementById('ReinicioParada1L2').style.display = "none";
+                                document.getElementById('ReinicioParada2L2').style.display = "none";
+                                document.getElementById('ReinicioParada3L2').style.display = "none";
+                                //paradas
+                                document.getElementById('Parada1L2').style.display = "inline";
+                                document.getElementById('Parada2L2').style.display = "inline";
+                                document.getElementById('Parada3L2').style.display = "inline";
+                            }
+
+                            //TimerL1
+                            if (item.EestadoL1 == 3) {
+                                var String_ValueDateL1 = item.FechaParadaL1;
+                                var valueL1 = new Date(parseInt(String_ValueDateL1.replace(/(^.*\()|([+-].*$)/g, '')));
+                                var datL1 = valueL1.toLocaleString();
+                                MinParadaL1 = item.MinParadaL1;
+                                ShowTimerL1(datL1);
+
+                                //Mostrar reinicios y ocultar paradas, solo si está detenida 
+                                document.getElementById('ReinicioParada1L1').style.display = "inline";
+                                document.getElementById('ReinicioParada2L1').style.display = "inline";
+                                document.getElementById('ReinicioParada3L1').style.display = "inline";
+                                //paradas
+                                document.getElementById('Parada1L1').style.display = "none";
+                                document.getElementById('Parada2L1').style.display = "none";
+                                document.getElementById('Parada3L1').style.display = "none";
+                            }
+                            else {
+                                //Ocultar reinicios y mostrar paradas, solo si no está detenida 
+                                document.getElementById('ReinicioParada1L1').style.display = "none";
+                                document.getElementById('ReinicioParada2L1').style.display = "none";
+                                document.getElementById('ReinicioParada3L1').style.display = "none";
+                                //paradas
+                                document.getElementById('Parada1L1').style.display = "inline";
+                                document.getElementById('Parada2L1').style.display = "inline";
+                                document.getElementById('Parada3L1').style.display = "inline";
+                            }
+                           
+                           
+                           
                         }
 
                         $('#TableOP').append("<tr><td>" + item.OP + "</td><td>" + item.ProductoOP + "</td><td>" + item.Descripcion + "</td><td>" + item.Cantidad + "</td><td>" + item.NombreCliente + "</td><td>" + item.TiempoLavado + " Minutos" + "</td><td>" + estatusOP_ + "</td></tr>");
@@ -615,7 +832,9 @@ function SaveOp() {
                     document.getElementById('spnCliente').innerHTML = "";
                     OPResgistradasSelect();
                     document.getElementById('closeA').click();
-                    swal('OP registrada', 'Información registrada correctamente, en este momento se da inicio a los temporizadores', 'success');
+                    document.getElementById('btnIncioLine').click();
+                    
+                    swal('OP registrada', 'Información registrada correctamente, en este momento puede iniciar cada una de las líneas de producción!', 'success');
 
                 },
                 failure: function (r) {

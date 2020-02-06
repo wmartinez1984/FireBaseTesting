@@ -48,17 +48,79 @@ p {
 
 </style>
 <div class="container"> 
+    <table style="width:100%;">
+			<tr>
+				<td>
+					<input class="btn" type="button" id="Parada1L1" value="Parada Mínima" onclick="ParadaLineasdeProduccion(30);" style="background-color:#ed4109; color:#ffffff;  font-size:20px;border-radius:10px;width:290px; height:60px;">
+                    <input class="btn" type="button" id="ReinicioParada1L1" value="Reiniciar con Parada Mínima" onclick="EjecutarReinicioDeParada(30);" style="                            background-color: rgb(34, 96, 98);
+                            color: #ffffff;
+                            font-size: 20px;
+                            border-radius: 10px;
+                            width: 300px;
+                            height: 60px;
+                            display: none;">
+				</td>
+                <td style="text-align:right;">
+                    <input class="btn" type="button" value="Iniciar" onclick="IniciarLinea();" style="background-color: #058616;
+                            color: #ffffff;
+                            font-size: 20px;
+                            border-radius: 10px;
+                            width: 210px;
+                            height: 60px;">
+                </td>
+			</tr>
+			<tr>
+				<td>
+					<input class="btn" type="button" id="Parada2L1" value="Pararada Media" onclick="ParadaLineasdeProduccion(45);" style="background-color: #ed4109;
+					        color: #ffffff;
+					        font-size: 20px;
+					        border-radius: 10px;
+					        width: 290px;
+					        height: 60px;">
+                    <input class="btn" type="button" id="ReinicioParada2L1" value="Reinicio con Pararada Media" onclick="EjecutarReinicioDeParada(45);" style="background-color: rgb(34, 96, 98);
+                            color: #ffffff;
+                            font-size: 20px;
+                            border-radius: 10px;
+                            width: 300px;
+                            height: 60px;
+                            display: none;">
+				</td>
+                <td style="text-align: right;">
+                                
+                </td>
+			</tr>
+			<tr>
+				<td>
+					<input class="btn" type="button" id="Parada3L1" value="Pararada por Mantenimiento" onclick="ParadaLineasdeProduccion(60);" style="background-color: #ed4109;
+					        color: #ffffff;
+					        font-size: 20px;
+					        border-radius: 10px;
+					        width: 290px;
+					        height: 60px;">
+                    <input class="btn" type="button" id="ReinicioParada3L1" value="Reinicio con Mantenimiento" onclick="EjecutarReinicioDeParada(60);" style="background-color:rgb(34, 96, 98); color:#ffffff;   font-size:20px;border-radius:10px;width:300px; height:60px;display:none;">
+				</td>
+                <td>
+
+                </td>
+			</tr>
+		</table>
     <table style="width:100%;text-align:left;">        
         
         <tr>
             <td colspan="2">
-                <input class="btn" type="button" value="Iniciar" onclick="IniciarLinea();" style="background-color:#058616;color:#ffffff; font-size:40px;border-radius:10px;width:350px; height:110px;">
+                
                 <br />
             </td>
         </tr>
         <tr>
             <td>
-                <input class="btn" type="button" value="Parada" onclick="OpenModalNew(1);" style="background-color:#ff0000; color:#ffffff;  font-size:40px;border-radius:10px; width:350px; height:110px;">
+                <input class="btn" type="button" value="Parada" onclick="OpenModalNew(1);" style="background-color: #ff0000;
+                        color: #ffffff;
+                        font-size: 20px;
+                        border-radius: 10px;
+                        width: 210px;
+                        height: 60px;
+                        display: none;">
                 <br />
             </td>
             <td>
@@ -68,7 +130,7 @@ p {
         <tr>
 
             <td>
-                 <input class="btn" type="button" value="Reiniciar Parada" onclick="OpenModalNew2();" style="background-color:#ffd800; font-size:40px;border-radius:10px; width:350px; height:110px;">                
+                
             </td>
             <td>                     
 	            
@@ -77,7 +139,7 @@ p {
         </tr>
         <tr>
             <td colspan="2">
-                 <div id="countdownL1" style="font-size:30px;"></div>
+                 <div id="countdownL1" style="font-size: 20px;"></div>
             </td>
         </tr>
     </table>
@@ -85,34 +147,52 @@ p {
 
 
 <script>
-        var endL1 = new Date('01/29/2019 5:31 PM');
-        var _secondL1 = 1000;
-        var _minuteL1 = _secondL1 * 60;
-        var _hourL1 = _minuteL1 * 60;
-        var _dayL1 = _hourL1 * 24;
-        var timerL1;
 
-        function showRemainingL1() {
-            var nowL1 = new Date();
-            var distanceL1 = endL1 - nowL1;
-            if (distanceL1 < 0) {
+    var endL1;
+    var _secondL1 = 1000;
+    var _minuteL1 = _secondL1 * 60;
+    var _hourL1 = _minuteL1 * 60;
+    var _dayL1 = _hourL1 * 24;
+    var timerL1;
+    var MinParadaL1;
+    function ShowTimerL1(date_) {
 
-                clearInterval(timerL1);
-                document.getElementById('countdownL1').innerHTML = '';
-
-                return;
-            }
-            var daysL1 = Math.floor(distanceL1 / _dayL1);
-            var hoursL1 = Math.floor((distanceL1 % _dayL1) / _hourL1);
-            var minutesL1 = Math.floor((distanceL1 % _hourL1) / _minuteL1);
-            var secondsL1 = Math.floor((distanceL1 % _minuteL1) / _secondL1);
-
-            document.getElementById('countdownL1').innerHTML = daysL1 + ' dias, ';
-            document.getElementById('countdownL1').innerHTML += hoursL1 + ' horas, ';
-            document.getElementById('countdownL1').innerHTML += minutesL1 + ' minutos y ';
-            document.getElementById('countdownL1').innerHTML += secondsL1 + ' segundos';
-        }
-
+         endL1 = new Date(date_);
+        _secondL1 = 1000;
+        _minuteL1 = _secondL1 * 60;
+        _hourL1 = _minuteL1 * 60;
+        _dayL1 = _hourL1 * 24;
+        
         timerL1 = setInterval(showRemainingL1, 1000);
+        
+    }
+
+    function showRemainingL1() {
+        var nowL1 = new Date();
+        var distanceL1 = endL1 - nowL1;
+        if (distanceL1 < 0) {
+
+            IniciarLineaDespuesdeTimer(1);
+            window.clearInterval(timerL1);
+
+            return;
+        }
+        var daysL1 = Math.floor(distanceL1 / _dayL1);
+        var hoursL1 = Math.floor((distanceL1 % _dayL1) / _hourL1);
+        var minutesL1 = Math.floor((distanceL1 % _hourL1) / _minuteL1);
+        var secondsL1 = Math.floor((distanceL1 % _minuteL1) / _secondL1);
+        document.getElementById('countdownL1').innerHTML = 'La parada termina en: ';
+        document.getElementById('countdownL1').innerHTML += daysL1 + ' días, ';
+        document.getElementById('countdownL1').innerHTML += hoursL1 + ' horas, ';
+        document.getElementById('countdownL1').innerHTML += minutesL1 + ' minutos y ';
+        document.getElementById('countdownL1').innerHTML += secondsL1 + ' segundos';
+
+        var PorcenBar = (minutesL1 * 100) / MinParadaL1;
+        // var PorcenBarRegreso = 100 - PorcenBar;
+        Bar.setAttribute("aria-valuenow", parseInt(PorcenBar));
+        document.getElementById('tooltipL1').innerHTML = daysL1 + ":" + hoursL1 + ":" + minutesL1 + ":" + secondsL1;
+    }
+
+       
 
     </script>
