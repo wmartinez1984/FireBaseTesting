@@ -19,6 +19,7 @@ namespace FireBaseTesting
         public int Terminada = 5;        
         public int SinParada = 0;
         public int Reiniciando = 6;
+        public int EsperandoLavado = 7;
         public bool ExistSession = true;
 
 

@@ -103,7 +103,7 @@
 			</select>
 	</td>
 	<td>
-		<input class="btn" type="button" value="Iniciar" onclick="IniciarLineaDespuesdeTimerIncio(1);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
+		<input class="btn" type="button" value="Iniciar" onclick="IniciandoLineaPrimeraVez(1);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
 	</td>
 </tr>
 <tr>
@@ -205,7 +205,7 @@
 			</select>
 	</td>
 	<td>
-		<input class="btn" type="button" value="Iniciar" onclick="IniciarLineaDespuesdeTimerIncio(2);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
+		<input class="btn" type="button" value="Iniciar" onclick="IniciandoLineaPrimeraVez(2);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
 	</td>
 </tr>
 <tr>
@@ -307,7 +307,7 @@
 			</select>
 	</td>
 	<td>
-		<input class="btn" type="button" value="Iniciar" onclick="IniciarLineaDespuesdeTimerIncio(3);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
+		<input class="btn" type="button" value="Iniciar" onclick="IniciandoLineaPrimeraVez(3);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
 	</td>
  </tr>
 </table>
@@ -320,7 +320,7 @@
 	<div class="control"><label for="message">Finalizar L1: </label></div>
 </td>
 <td>
-		<select id="normal-select-7" class="select-css" >
+		<select id="normal-select-7" name="normal-select-7Fin" class="select-css" >
 				<option value="" class="select-dropdown__list-item">Seleccione</option>
 				<option value="1" class="select-dropdown__list-item">01 Hora</option>
 				<option value="2" class="select-dropdown__list-item">02 Horas</option>
@@ -414,7 +414,7 @@
 			</select>
 	</td>
 	<td>
-		<input class="btn" type="button" value="Finalizar" onclick="FinalizarLinea(1);" style="background-color:#ff6a00; color:#ffffff; font-size:19px;border-radius:10px;width:130px; height:50px;">                
+		<input class="btn" type="button" value="Finalizar" onclick="FinalizaryEsperandoLavadoLinea(1);" style="background-color:#ff6a00; color:#ffffff; font-size:19px;border-radius:10px;width:130px; height:50px;">                
 	</td>
 </tr>
 <tr>
@@ -516,7 +516,7 @@
 			</select>
 	</td>
 	<td>
-		<input class="btn" type="button" value="Finalizar" onclick="FinalizarLinea(2);" style="background-color:#ff6a00; color:#ffffff; font-size:19px;border-radius:10px;width:130px; height:50px;">                
+		<input class="btn" type="button" value="Finalizar" onclick="FinalizaryEsperandoLavadoLinea(2);" style="background-color:#ff6a00; color:#ffffff; font-size:19px;border-radius:10px;width:130px; height:50px;">                
 	</td>
 </tr>
 <tr>
@@ -618,7 +618,7 @@
 			</select>
 	</td>
 	<td>
-		<input class="btn" type="button" value="Finalizar" onclick="FinalizarLinea(3);" style="background-color:#ff6a00; color:#ffffff; font-size:19px;border-radius:10px;width:130px; height:50px;">                
+		<input class="btn" type="button" value="Finalizar" onclick="FinalizaryEsperandoLavadoLinea(3);" style="background-color:#ff6a00; color:#ffffff; font-size:19px;border-radius:10px;width:130px; height:50px;">                
 	</td>
  </tr>
 </table>

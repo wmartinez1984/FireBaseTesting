@@ -195,7 +195,7 @@
 
 	 <div class="card active" id="overview">
 		<a class="card-toggle" >Inicio <i class="fa fa-arrow-circle-left"></i></a>
-		<div class="card-content">			
+		<div class="card-content" style="background-color:#2F98D1;">			
 			<div class="row" style="width:100%;">
 				 <%--<h3 style="color:#186635;font-size:15px;width:200px;"><strong>En proceso L1:</strong> </h3>	
 				 <br />

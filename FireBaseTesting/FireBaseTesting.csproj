@@ -463,6 +463,7 @@
     <Content Include="Temporizadores\HtmlPage2.html" />
     <Content Include="Temporizadores\Images\Fruselva.jpeg" />
     <Content Include="Temporizadores\Images\Fruselva.png" />
+    <Content Include="Temporizadores\Images\gif.gif" />
     <Content Include="Temporizadores\img\about-img.png" />
     <Content Include="Temporizadores\img\apple-touch-icon.png" />
     <Content Include="Temporizadores\img\blog\blog-image-1.jpg" />

@@ -19,13 +19,13 @@
     <link href="styleMonitor.css" rel="stylesheet" />
     <link href="css/sweetalert.css" rel="stylesheet" />
 </head>
-<body>
+<body style="">
 
 
 
  <div class="cards">    
     
-    <table style="width:100%;margin-top:-24px;" class="table" >        
+    <table style="width:100%;margin-top:-24px; background-image:url('Images/gif.gif')" class="table" >        
         <tr>
 
             <td style="width:65%;height:200px;text-align:center;">
@@ -49,7 +49,10 @@
 
         </tr>
         <tr>
-            <td style="width: 65%;height: 200px; text-align:center; ">
+            <td style="                    width: 65%;
+                    height: 200px;
+                    text-align: center;
+            ">
                 <span style="font-size:30px;color:#0b220e"> <strong>Mesa de producción 2</strong> </span>
                 <h3 style="color:white;font-size:25px;color:#207529"><strong id="spanEstatusL2"></strong> </h3>
             </td>
@@ -58,6 +61,8 @@
             <td style="width: 65%;height: 200px; text-align:center; ">
                 <span style="font-size:30px;color:#0b220e"> <strong>Mesa de producción 3</strong> </span>
                 <h3 style="color:white;font-size:25px;color:#207529; "><strong id="spanEstatusL3"></strong> </h3>
+                <br />
+                <br />
             </td>
         </tr>
 

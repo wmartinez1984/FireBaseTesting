@@ -61,7 +61,7 @@ p {
                             display: none;">
 				</td>
                 <td style="text-align:right;">
-                    <input class="btn" type="button" value="Iniciar" onclick="IniciarLinea();" style="background-color: #058616;
+                    <input class="btn" type="button" value="ReIniciar" onclick="IniciarLinea();" style="background-color: #058616;
                             color: #ffffff;
                             font-size: 20px;
                             border-radius: 10px;

@@ -1,4 +1,209 @@
-﻿
+﻿function IniciandoLineaPrimeraVez(Lid) {
+
+
+    if (Lid == 1 && document.getElementById('txtL1').value != 1) {
+        swal('Oops!', 'Sólo se puede iniciar una sola vez la línea 1', 'warning');
+        return false;
+    }
+
+    if (Lid == 2 && document.getElementById('txtL2').value != 1) {
+        swal('Oops!', 'Sólo se puede iniciar una sola vez la línea 2', 'warning');
+        return false;
+    }
+
+    if (Lid == 3 && document.getElementById('txtL3').value != 1) {
+        swal('Oops!', 'Sólo se puede iniciar una sola vez la línea 3', 'warning');
+        return false;
+    }
+
+    if (Lid == 1 && (document.getElementById('normal-select-1').value == "" || document.getElementById('normal-select-2').value == "")) {
+        swal('Oops!', 'Debe seleccionar la hora en que inició la línea 1', 'warning');
+        return false;
+    }
+
+    if (Lid == 2 && (document.getElementById('normal-select-3').value == "" || document.getElementById('normal-select-4').value == "")) {
+        swal('Oops!', 'Debe seleccionar la hora en que inició la línea 2', 'warning');
+        return false;
+    }
+
+    if (Lid == 3 && (document.getElementById('normal-select-5').value == "" || document.getElementById('normal-select-6').value == "")) {
+        swal('Oops!', 'Debe seleccionar la hora en que inició la línea 3', 'warning');
+        return false;
+    }
+
+    if (Lid == 1)
+        document.getElementById('txtL1').value = 2; // si la línea seleccionada es la 1, entonces ponemos el valor de la línea en 2 = Envansando
+
+    if (Lid == 2)
+        document.getElementById('txtL2').value = 2; // si la línea seleccionada es la 2, entonces ponemos el valor de la línea en 2 = Envansando
+
+    if (Lid == 3)
+        document.getElementById('txtL3').value = 2; // si la línea seleccionada es la 3, entonces ponemos el valor de la línea en 2 = Envansando
+
+
+
+    var message = "";
+
+    try {
+
+        swal('Finalizando Línea...', 'Estamos iniciando la Línea No ' + Lid + ', por favor espere, no cierre esta ventana hasta que el proceso termine…', 'warning');
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=IniciandoHoraInicio&OP=" + document.getElementsByName('DataspanOP')[0].value +
+                "&ProductoOP=" + document.getElementsByName('NAVI')[0].value +
+                "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value +
+                "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value +
+                "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value +
+                "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value +
+                "&DescripLavado=" + document.getElementById('normal-select-7').innerText +
+                "&L1=" + document.getElementById('txtL1').value +
+                "&L2=" + document.getElementById('txtL2').value +
+                "&L3=" + document.getElementById('txtL3').value +
+                "&LP=" + Lid +
+                "&InicioHoraL1=" + document.getElementById('normal-select-1').value +
+                "&InicioMinutosL1=" + document.getElementById('normal-select-2').value +
+                "&InicioHoraL2=" + document.getElementById('normal-select-3').value +
+                "&InicioMinutosL2=" + document.getElementById('normal-select-4').value +
+                "&InicioHoraL3=" + document.getElementById('normal-select-5').value +
+                "&InicioMinutosL3=" + document.getElementById('normal-select-6').value + "",
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                //OPResgistradasSelect();
+                swal('Línea Iniciada', 'La Línea de producción No. ' + document.getElementById('txtL').value + ' fue iniciada correctamente ', 'success');
+
+                var myVar = setTimeout(location.reload(), 15000);
+                return false;
+            },
+            failure: function (r) {
+                swal('Error:', 'Error al iniciar la Línea de producción No ' + document.getElementById('txtL').value + ', por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            },
+            error: function (r) {
+                swal('Error:', 'Error al iniciar la Línea, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            }
+
+        });
+        return false;
+
+
+        return false;
+    }
+    catch (err) {
+        swal('Error:', 'Error al iniciar la línea, por favor verifique los datos y vuelva a intentarlo', 'error');
+        return false;
+    }
+
+    return false;
+
+}
+
+function FinalizaryEsperandoLavadoLinea(Lid) {
+
+
+    if (Lid == 1 && document.getElementById('txtL1').value != 2) {
+        swal('Oops!', 'La línea No 1 debe estar Envasando para poder ser finalizada', 'warning');
+        return false;
+    }
+
+    if (Lid == 2 && document.getElementById('txtL2').value != 2) {
+        swal('Oops!', 'La línea No 2 debe estar Envasando para poder ser finalizada', 'warning');
+        return false;
+    }
+
+    if (Lid == 3 && document.getElementById('txtL3').value != 2) {
+        swal('Oops!', 'La línea No 3 debe estar Envasando para poder ser finalizada', 'warning');
+        return false;
+    }
+
+    if (Lid == 1 && (document.getElementsByName('normal-select-7Fin')[0].value == "" || document.getElementById('normal-select-8').value == "")) {
+        swal('Oops!', 'Debe seleccionar la hora en que finalizó la línea', 'warning');
+        return false;
+    }
+
+    if (Lid == 2 && (document.getElementById('normal-select-9').value == "" || document.getElementById('normal-select-10').value == "")) {
+        swal('Oops!', 'Debe seleccionar la hora en que finalizó la línea', 'warning');
+        return false;
+    }
+
+    if (Lid == 3 && (document.getElementById('normal-select-11').value == "" || document.getElementById('normal-select-12').value == "")) {
+        swal('Oops!', 'Debe seleccionar la hora en que finalizó la línea', 'warning');
+        return false;
+    }
+
+    if (Lid == 1)
+        document.getElementById('txtL1').value = 5; // si la línea seleccionada es la 1, entonces ponemos el valor de la línea en 7 = EsperandoLavado
+
+    if (Lid == 2)
+        document.getElementById('txtL2').value = 5; // si la línea seleccionada es la 2, entonces ponemos el valor de la línea en 7 = EsperandoLavado
+
+    if (Lid == 3)
+        document.getElementById('txtL3').value = 5; // si la línea seleccionada es la 3, entonces ponemos el valor de la línea en 7 = EsperandoLavado
+
+
+
+    var message = "";
+
+    try {
+
+        swal('Finalizando Línea...', 'Estamos finalizando la Línea No ' + Lid + ', por favor espere, no cierre esta ventana hasta que el proceso termine…', 'warning');
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=EsperandoLavado&OP=" + document.getElementsByName('DataspanOP')[0].value +
+                "&ProductoOP=" + document.getElementsByName('NAVI')[0].value +
+                "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value +
+                "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value +
+                "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value +
+                "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value +
+                "&DescripLavado=" + document.getElementById('normal-select-7').innerText +
+                "&L1=" + document.getElementById('txtL1').value +
+                "&L2=" + document.getElementById('txtL2').value +
+                "&L3=" + document.getElementById('txtL3').value +
+                "&LP=" + Lid +
+                "&FinHoraL1=" + document.getElementsByName('normal-select-7Fin')[0].value +
+                "&FinMinutosL1=" + document.getElementById('normal-select-8').value +
+                "&FinHoraL2=" + document.getElementById('normal-select-9').value +
+                "&FinMinutosL2=" + document.getElementById('normal-select-10').value +
+                "&FinHoraL3=" + document.getElementById('normal-select-11').value +
+                "&FinMinutosL3=" + document.getElementById('normal-select-12').value + "",
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                //OPResgistradasSelect();
+                swal('Línea Finalizada', 'La Línea de producción No. ' + document.getElementById('txtL').value + ' fue finalizada correctamente ', 'success');
+
+                var myVar = setTimeout(location.reload(), 15000);
+                return false;
+            },
+            failure: function (r) {
+                swal('Error:', 'Error al finalizar la Línea de producción No ' + document.getElementById('txtL').value + ', por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            },
+            error: function (r) {
+                swal('Error:', 'Error al finalizar la Línea, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            }
+
+        });
+        return false;
+
+
+        return false;
+    }
+    catch (err) {
+        swal('Error:', 'Error al finalizar la línea, por favor verifique los datos y vuelva a intentarlo', 'error');
+        return false;
+    }
+
+    return false;
+
+}
+
 function IniciarLineaDespuesdeTimerIncio(Lid) {
     if (Lid == 1 && document.getElementById('txtL1').value == 2) {
         swal('Oops!', 'La línea No 1 ya está iniciada', 'warning');
@@ -29,7 +234,6 @@ function IniciarLineaDespuesdeTimerIncio(Lid) {
     var message = "";
 
     try {
-
 
         swal('Iniciando Línea...', 'Estamos iniciando la Línea No ' + Lid + ', por favor espere, no cierre esta ventana hasta que la información termine de registrarse…', 'warning');
         $.ajax({
@@ -363,7 +567,9 @@ function OPMonitoreada() {
                         if (estatusOPL == 3) {
                             estatusOPL_ = "Detenida"
                         }
-
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
                         if (estatusOPL == 6) {
                             estatusOPL_ = "Reiniciando"
                         }
@@ -386,6 +592,10 @@ function OPMonitoreada() {
                             estatusOPL_ = "Reiniciando"
                         }
 
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
+
                         document.getElementById('spanEstatusL2').innerHTML = "ESTADO:" + estatusOPL_;
 
 
@@ -399,6 +609,9 @@ function OPMonitoreada() {
                         }
                         if (estatusOPL == 3) {
                             estatusOPL_ = "Detenida"
+                        }
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
                         }
 
                         if (estatusOPL == 6) {
@@ -447,6 +660,21 @@ function OPMonitoreada() {
 }
 
 function IniciarLinea() {
+
+    if (document.getElementById('txtL').value == 1 && document.getElementById('txtL1').value != 3) {
+        swal('Oops!', 'La línea 1 no está detenida, por lo que no es necesario Reiniciarla', 'warning');
+        return false;
+    }
+
+    if (document.getElementById('txtL').value == 2 && document.getElementById('txtL2').value != 3) {
+        swal('Oops!', 'La línea 2 no está detenida, por lo que no es necesario Reiniciarla', 'warning');
+        return false;
+    }
+
+    if (document.getElementById('txtL').value == 3 && document.getElementById('txtL3').value != 3) {
+        swal('Oops!', 'La línea 3 no está detenida, por lo que no es necesario Reiniciarla', 'warning');
+        return false;
+    }
 
     if (document.getElementById('txtL').value == 1 && document.getElementById('txtL1').value == 2) {
         swal('Oops!', 'La línea No 1 ya está iniciada', 'warning');
@@ -567,7 +795,7 @@ function OPResgistradasSelect() {
 
                         if (estatusOP == 4) {
                             estatusOP_ = "Lavando";
-                            document.getElementById('HiddenEstadoOP').value = 3;
+                            document.getElementById('HiddenEstadoOP').value = 4;
                         }
 
                         if (estatusOP == 5) {
@@ -631,6 +859,12 @@ function OPResgistradasSelect() {
                             if (estatusOPL == 6) {
                                 estatusOPL_ = "Reiniciando"
                             }
+                            if (estatusOPL == 5) {
+                                estatusOPL_ = "Terminada"
+                            }
+                            if (estatusOPL == 7) {
+                                estatusOPL_ = "Esperando Lavado"
+                            }
 
                             document.getElementById('spanEstatusL1').innerHTML = "ESTADO:" + estatusOPL_;
                            
@@ -649,8 +883,14 @@ function OPResgistradasSelect() {
                             if (estatusOPL == 4) {
                                 estatusOPL_ = "Lavando"
                             }
+                            if (estatusOPL == 5) {
+                                estatusOPL_ = "Terminada"
+                            }
                             if (estatusOPL == 6) {
                                 estatusOPL_ = "Reiniciando"
+                            }
+                            if (estatusOPL == 7) {
+                                estatusOPL_ = "Esperando Lavado"
                             }
                             
                             document.getElementById('spanEstatusL2').innerHTML = "ESTADO:" + estatusOPL_;
@@ -673,8 +913,16 @@ function OPResgistradasSelect() {
                                 estatusOPL_ = "Lavando"
                             }
 
+                            if (estatusOPL == 5) {
+                                estatusOPL_ = "Terminada"
+                            }
+
                             if (estatusOPL == 6) {
                                 estatusOPL_ = "Reiniciando"
+                            }
+
+                            if (estatusOPL == 7) {
+                                estatusOPL_ = "Esperando Lavado"
                             }
                             document.getElementById('spanEstatusL3').innerHTML = "ESTADO:" + estatusOPL_;
 
@@ -759,8 +1007,24 @@ function OPResgistradasSelect() {
                                 document.getElementById('Parada2L1').style.display = "inline";
                                 document.getElementById('Parada3L1').style.display = "inline";
                             }
-                           
-                           
+
+
+                            //Inicio 
+                            document.getElementById('normal-select-1').value = item.InicioHoraL1;
+                            document.getElementById('normal-select-2').value = item.InicioMinutosL1;
+                            document.getElementById('normal-select-3').value = item.InicioHoraL2;
+                            document.getElementById('normal-select-4').value = item.InicioMinutosL2;
+                            document.getElementById('normal-select-5').value = item.InicioHoraL3;
+                            document.getElementById('normal-select-6').value = item.InicioMinutosL3;
+
+                            //Hora de finalización
+                            document.getElementsByName('normal-select-7Fin')[0].value = item.FinHoraL1;
+                            document.getElementById('normal-select-8').value = item.FinMinutosL1;
+                            document.getElementById('normal-select-9').value = item.FinHoraL2;
+                            document.getElementById('normal-select-10').value = item.FinMinutosL2;
+                            document.getElementById('normal-select-11').value = item.FinHoraL3;
+                            document.getElementById('normal-select-12').value = item.FinMinutosL3;
+
                            
                         }
 

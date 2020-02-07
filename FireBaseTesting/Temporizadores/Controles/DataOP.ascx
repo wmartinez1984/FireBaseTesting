@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DataOP.ascx.cs" Inherits="FireBaseTesting.Temporizadores.Controles.DataOP" %>
-<div>
-    <table style="color:#000000;font-size:20px;width:88%;">
+<div style="border-radius:30px;border-color:#ff0000;border:double; border-width:20px;background-color:#ffffff; width:97%;">
+    <table style="color:#ff6a00;font-size:18px;width:88%;">
         <tr>
             <td style="text-align:right;font-size:30px;color:#ff6a00" colspan="2" >
                <img src="Images/Fruselva.png" style="width:200px" />
@@ -8,7 +8,7 @@
           
         </tr>
         <tr>
-            <td style="text-align:left;font-size:30px;color:#000000" colspan="2" >
+            <td style="text-align:left;font-size:30px;" colspan="2" >
                 <strong>
                    Datos de la OP 
                 </strong>  
