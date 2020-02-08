@@ -135,8 +135,204 @@ namespace FireBaseTesting.Temporizadores
 
             }
 
+            if (context.Request.QueryString["Action"].ToString().Equals("IniciarLavado"))
+            {
+
+                string callback = context.Request.QueryString["callback"];
+                string json = IniciarLavado(context);
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = string.Format("{0}({1});", callback, json);
+                }
+                context.Response.ContentType = "text/json";
+                context.Response.Write(json);
+
+
+            }
+
+            if (context.Request.QueryString["Action"].ToString().Equals("FinalizarOP"))
+            {
+
+                string callback = context.Request.QueryString["callback"];
+                string json = FinalizarLineasyOP(context);
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = string.Format("{0}({1});", callback, json);
+                }
+                context.Response.ContentType = "text/json";
+                context.Response.Write(json);
+
+
+            }
+
+            if (context.Request.QueryString["Action"].ToString().Equals("OPRegistradasTable"))
+            {
+
+                string callback = context.Request.QueryString["callback"];
+                string json = OrdenesRegistradasSelectTable(context);
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = string.Format("{0}({1});", callback, json);
+                }
+                context.Response.ContentType = "text/json";
+                context.Response.Write(json);
+
+
+            }
+
         }
 
+
+        public static string OrdenesRegistradasSelectTable(HttpContext context)
+        {
+            Settings settings = new Settings();
+            ProductionOrderDAL productionOrderDAL = new ProductionOrderDAL();
+            List<ProductionOrderEntity> list = new List<ProductionOrderEntity>();
+            list = productionOrderDAL.OrdenesRegistradas_Select();
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();          
+            return (serializer.Serialize(list));
+        }
+
+        public static string FinalizarLineasyOP(HttpContext context)
+        {
+            OrdenesRegistradasSelect(context);// primero valido como estaban los datos antes de hacer el cambio;
+
+            ProductionOrderDAL productionOrderDAL = new ProductionOrderDAL();
+            ProductionOrderEntity data = new ProductionOrderEntity();
+            Settings settings = new Settings();
+            data.id = Settings.id;
+            data.OP = context.Request.QueryString["OP"];
+            data.ProductoOP = context.Request.QueryString["ProductoOP"];
+            data.Descripcion = context.Request.QueryString["Descripcion"];
+            data.Cantidad = context.Request.QueryString["Cantidad"];
+            data.Ubicacion = context.Request.QueryString["Ubicacion"];
+            data.CodCliente = context.Request.QueryString["CodCliente"];
+            data.NombreCliente = context.Request.QueryString["NombreCliente"];
+            data.EestadoL1 = int.Parse(context.Request.QueryString["L1"]);
+            data.EestadoL2 = int.Parse(context.Request.QueryString["L2"]);
+            data.EestadoL3 = int.Parse(context.Request.QueryString["L3"]);
+            data.EestadoOP = settings.Terminada;
+            data.MinParadaL1 = Settings.MinParadaL1;
+            data.MinParadaL2 = Settings.MinParadaL2;
+            data.MinParadaL3 = Settings.MinParadaL3;
+            data.TiempoLavado = int.Parse(context.Request.QueryString["TiempoLavado"]);
+            data.DescripLavado = context.Request.QueryString["DescripLavado"];
+            data.HoraInicio = Settings.HoraInicio;
+            data.HoraFinalizacion = Settings.HoraFinalizacion;
+            data.CantFabricados = context.Request.QueryString["Cantidad"];
+            data.FechaCreacion = Settings.FechaCreacion;
+            data.FechaModificacion = DateTime.Now;
+
+            data.FechaParadaL1 = Settings.FechaParadaL1;
+            data.FechaParadaL2 = Settings.FechaParadaL2;
+            data.FechaParadaL3 = Settings.FechaParadaL3;
+
+            data.FechaParadaL1 = Settings.FechaParadaL1;
+            data.FechaParadaL2 = Settings.FechaParadaL2;
+            data.FechaParadaL3 = Settings.FechaParadaL3;
+            data.FechaInicioLavado = DateTime.Now.AddMinutes(int.Parse(context.Request.QueryString["TiempoLavado"]));
+
+
+            //Todas las líneas en lavando 
+            data.EestadoL1 = settings.Terminada;
+            data.EestadoL2 = settings.Terminada;
+            data.EestadoL3 = settings.Terminada;
+
+            data.InicioHoraL1 = Settings.InicioHoraL1;
+            data.InicioMinutosL1 = Settings.InicioMinutosL1;
+            data.InicioFechaL1 = Settings.InicioFechaL1;
+            data.FinHoraL1 = Settings.FinHoraL1;
+            data.FinMinutosL1 = Settings.FinMinutosL1;
+            data.FinFechaL1 = Settings.FinFechaL1;
+            data.InicioHoraL2 = Settings.InicioHoraL2;
+            data.InicioMinutosL2 = Settings.InicioMinutosL2;
+            data.InicioFechaL2 = Settings.InicioFechaL2;
+            data.FinHoraL2 = Settings.FinHoraL2;
+            data.FinMinutosL2 = Settings.FinMinutosL2;
+            data.FinFechaL2 = Settings.FinFechaL2;
+            data.InicioHoraL3 = Settings.InicioHoraL3;
+            data.InicioMinutosL3 = Settings.InicioMinutosL3;
+            data.InicioFechaL3 = Settings.InicioFechaL3;
+            data.FinHoraL3 = Settings.FinHoraL3;
+            data.FinMinutosL3 = Settings.FinMinutosL3;
+            data.FinFechaL3 = Settings.FinFechaL3;
+
+            productionOrderDAL.OP_Insert(data);
+
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return (serializer.Serialize("ok,ok"));
+        }
+
+
+        public static string IniciarLavado(HttpContext context)
+        {
+            OrdenesRegistradasSelect(context);// primero valido como estaban los datos antes de hacer el cambio;
+            
+            ProductionOrderDAL productionOrderDAL = new ProductionOrderDAL();
+            ProductionOrderEntity data = new ProductionOrderEntity();
+            Settings settings = new Settings();
+            data.id = Settings.id;
+            data.OP = context.Request.QueryString["OP"];
+            data.ProductoOP = context.Request.QueryString["ProductoOP"];
+            data.Descripcion = context.Request.QueryString["Descripcion"];
+            data.Cantidad = context.Request.QueryString["Cantidad"];
+            data.Ubicacion = context.Request.QueryString["Ubicacion"];
+            data.CodCliente = context.Request.QueryString["CodCliente"];
+            data.NombreCliente = context.Request.QueryString["NombreCliente"];
+            data.EestadoL1 = int.Parse(context.Request.QueryString["L1"]);
+            data.EestadoL2 = int.Parse(context.Request.QueryString["L2"]);
+            data.EestadoL3 = int.Parse(context.Request.QueryString["L3"]);
+            data.EestadoOP = settings.Lavando;
+            data.MinParadaL1 = Settings.MinParadaL1;
+            data.MinParadaL2 = Settings.MinParadaL2;
+            data.MinParadaL3 = Settings.MinParadaL3;
+            data.TiempoLavado = int.Parse(context.Request.QueryString["TiempoLavado"]);
+            data.DescripLavado = context.Request.QueryString["DescripLavado"];
+            data.HoraInicio = Settings.HoraInicio;
+            data.HoraFinalizacion = Settings.HoraFinalizacion;
+            data.CantFabricados = context.Request.QueryString["Cantidad"];
+            data.FechaCreacion = Settings.FechaCreacion;
+            data.FechaModificacion = DateTime.Now;
+
+            data.FechaParadaL1 = Settings.FechaParadaL1;
+            data.FechaParadaL2 = Settings.FechaParadaL2;
+            data.FechaParadaL3 = Settings.FechaParadaL3;
+            
+            data.FechaParadaL1 = Settings.FechaParadaL1;
+            data.FechaParadaL2 = Settings.FechaParadaL2;
+            data.FechaParadaL3 = Settings.FechaParadaL3;
+            data.FechaInicioLavado = DateTime.Now.AddMinutes(int.Parse(context.Request.QueryString["TiempoLavado"]));
+
+            
+           //Todas las líneas en lavando 
+            data.EestadoL1 = settings.Lavando;            
+            data.EestadoL2 = settings.Lavando;
+            data.EestadoL3 = settings.Lavando;          
+
+            data.InicioHoraL1 = Settings.InicioHoraL1;            
+            data.InicioMinutosL1 = Settings.InicioMinutosL1;
+            data.InicioFechaL1 = Settings.InicioFechaL1;           
+            data.FinHoraL1 = Settings.FinHoraL1;            
+            data.FinMinutosL1 = Settings.FinMinutosL1;
+            data.FinFechaL1 = Settings.FinFechaL1;       
+            data.InicioHoraL2 = Settings.InicioHoraL2;          
+            data.InicioMinutosL2 = Settings.InicioMinutosL2;
+            data.InicioFechaL2 = Settings.InicioFechaL2;           
+            data.FinHoraL2 = Settings.FinHoraL2;           
+            data.FinMinutosL2 = Settings.FinMinutosL2;
+            data.FinFechaL2 = Settings.FinFechaL2;
+            data.InicioHoraL3 = Settings.InicioHoraL3;
+            data.InicioMinutosL3 = Settings.InicioMinutosL3;
+            data.InicioFechaL3 = Settings.InicioFechaL3;
+            data.FinHoraL3 = Settings.FinHoraL3;            
+            data.FinMinutosL3 = Settings.FinMinutosL3;
+            data.FinFechaL3 = Settings.FinFechaL3;
+
+            productionOrderDAL.OP_Insert(data);
+
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return (serializer.Serialize("ok,ok"));
+        }
 
         public static string IniciarLineadeProduccionHoraInicio(HttpContext context)
         {

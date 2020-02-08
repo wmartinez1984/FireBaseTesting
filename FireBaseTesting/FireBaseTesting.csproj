@@ -384,6 +384,7 @@
     <Content Include="Images\img.jpg" />
     <Content Include="Images\img_avatar2.png" />
     <Content Include="Images\inbox.png" />
+    <Content Include="Images\lavando.gif" />
     <Content Include="Images\LogoBanner.png" />
     <Content Include="Images\managment.svg" />
     <Content Include="Images\mastercard.png" />

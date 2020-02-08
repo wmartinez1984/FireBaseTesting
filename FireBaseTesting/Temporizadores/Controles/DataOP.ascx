@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DataOP.ascx.cs" Inherits="FireBaseTesting.Temporizadores.Controles.DataOP" %>
-<div style="border-radius:30px;border-color:#ff0000;border:double; border-width:20px;background-color:#ffffff; width:97%;">
+<div style="border-radius:30px;border-color:#ff0000; border-width:20px;background-color:#ffffff; width:97%;">
     <table style="color:#ff6a00;font-size:18px;width:88%;">
         <tr>
             <td style="text-align:right;font-size:30px;color:#ff6a00" colspan="2" >

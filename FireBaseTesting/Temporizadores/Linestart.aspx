@@ -35,7 +35,7 @@
 	<link rel="stylesheet" type="text/css" href="css/custom-bars.css" />
 
 </head>
-<body>
+<body  onload="document.getElementById('bntInicio').click();">
 
 <div class="cards">
 
@@ -194,7 +194,7 @@
 	</div>
 
 	 <div class="card active" id="overview">
-		<a class="card-toggle" >Inicio <i class="fa fa-arrow-circle-left"></i></a>
+		<a class="card-toggle"  id="bntInicio">Inicio <i class="fa fa-arrow-circle-left"></i></a>
 		<div class="card-content" style="background-color:#2F98D1;">			
 			<div class="row" style="width:100%;">
 				 <%--<h3 style="color:#186635;font-size:15px;width:200px;"><strong>En proceso L1:</strong> </h3>	
@@ -209,14 +209,14 @@
 				  <div class="progress-factor flexy-item" style="margin-top:-30px;width:500px;cursor:pointer;" >
 						<div class="progress-bar">
 							<div class="bar has-rotation has-colors navy ruler" style="background-color:#cc3105" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-1">
-								<div class="tooltip white"></div>
+								<div class="tooltip white" style="display:none;"></div>
 								<div class="bar-face face-position roof percentage" style="background-color:#45b817"><h3 style="color:white;font-size:25px;"><strong id="spanEstatusL1"></strong> </h3></div>
 								<div class="bar-face face-position back percentage"></div>
 								<div class="bar-face face-position floor percentage volume-lights"></div>
 								<div class="bar-face face-position right" style="background-color:#45b817"></div>
 								<div class="bar-face face-position left"></div>
 								<div class="bar-face face-position front percentage volume-lights shine" id="tooltipL1" style="font-size:50px; color:#ff0000"></div>
-								<h3 style="color:white;font-size:45px;"><strong> LP 1</strong> </h3>
+								<h3 style="color:white;font-size:60px;"><strong> LP 1</strong> </h3>
 							</div>
 							
 						</div>
@@ -226,14 +226,14 @@
 					<div class="progress-factor flexy-item" style="width:500px;">
 						<div class="progress-bar">
 							<div class="bar has-rotation has-colors orange ruler-3" style="background-color:#4e10b1" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-2">
-								<div class="tooltip white" ></div>
+								<div class="tooltip white" style="display:none;"></div>
 								<div class="bar-face face-position roof percentage" style="background-color:#ff6a00"><h3 style="color:white;font-size:25px;"><strong id="spanEstatusL2"></strong> </h3></div>
 								<div class="bar-face face-position back percentage"></div>
 								<div class="bar-face face-position floor percentage volume-lights"></div>
 								<div class="bar-face face-position left"></div>
 								<div class="bar-face face-position right" style="background-color:#45b817"></div>
 								<div class="bar-face face-position front percentage volume-lights shine" id="tooltipL2" style="font-size:50px; color:#ff0000"></div>
-								<h3 style="color:white;font-size:45px;"><strong> LP 2</strong> </h3>
+								<h3 style="color:white;font-size:60px;"><strong> LP 2</strong> </h3>
 							</div>
 						</div>
 					</div>
@@ -241,14 +241,14 @@
 					<div class="progress-factor flexy-item" style="width:500px;">
 						<div class="progress-bar">
 							<div class="bar has-rotation has-colors navy ruler" style="background-color:#cc3105" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-3">
-								<div class="tooltip white"></div>
+								<div class="tooltip white" style="display:none;"></div>
 								<div class="bar-face face-position roof percentage" style="background-color:#45b817"><h3 style="color:white;font-size:25px;"><strong id="spanEstatusL3"></strong> </h3></div>
 								<div class="bar-face face-position back percentage" ></div>
 								<div class="bar-face face-position floor percentage volume-lights" ></div>
 								<div class="bar-face face-position right" style="background-color:#45b817"></div>
 								<div class="bar-face face-position left" ></div>
 								<div class="bar-face face-position front percentage volume-lights shine"  id="tooltipL3" style="font-size:50px; color:#ff0000"></div>
-								<h3 style="color:white;font-size:45px;"><strong> LP 3</strong> </h3>
+								<h3 style="color:white;font-size:60px;"><strong> LP 3</strong> </h3>
 							</div>
 						</div>
 					</div>	
@@ -264,13 +264,33 @@
 
 				<div class="right col" style="text-align:right;border-color:#1d4189; border-width:10px;">			
 						<uc1:DataOP1 runat="server" id="DataOP1" />	
+					<br />
+						<table style="width:97%;text-align:center;border-radius:30px;border-color:#45b817; background-color:white">
+							<tr>
+								<td>
+									<div id="divIniciarLavado" style="display:none;">
+										<input class="btn" type="button" id="btnLavar" value="Iniciar Lavado" 
+											style="background-color: #cc3105;
+											color: white;
+											font-size: 30px;
+											border-radius: 10px;
+											width: 300px;
+											height: 60px;cursor:pointer;" onclick="InciarLavado();">
+									</div>
+									<div id="divLavando" style="display:none;">
+										<img  src="../Images/lavando.gif" style="height:157px;"/>
+									</div>
+									
+								</td>
+							</tr>
+						</table>
 				</div>
 			</div>
 		</div>
 	</div> 
 	
 	<div class="card" id="dribbble" onclick="document.getElementById('txtL').value = 1; ">
-		<a class="card-toggle"><i><span class="fa fa-list"></span></i></a>
+		<a class="card-toggle" id="btnL1"><i><span class="fa fa-list"></span></i></a>
 		<div class="card-content">
 			<div class="row">
 				<div class="left col" style="text-align: left;">
@@ -348,7 +368,8 @@
 			</div>
 		</div>
 	</div>
-	<a class="card-toggle" href="login.aspx"  style="width:90%;text-align:right;"><i><span class="fa fa-sign-out" style="width:200px;color:black;font-size:21px;">Log out</span></i></a>
+	
+	<a class="card-toggle" href="login.aspx"  style="width:90%;text-align:right;color:white"><i><span class="fa fa-sign-out" style="width:200px;color:black;font-size:21px; color:white">Log out</span></i></a>
 </div>
 
 <%--MODAL OP--%>
@@ -576,7 +597,7 @@
             Bar3.setAttribute("aria-valuenow", ProgressBarValue3_);
 
         }
-
+        OPResgistradasSelectTable();
         OPResgistradasSelect();					
 	</script>
 

@@ -1,4 +1,191 @@
-﻿function IniciandoLineaPrimeraVez(Lid) {
+﻿function OPResgistradasSelectTable() {
+
+    
+    $("#TableOP tbody tr").each(function () {
+            this.parentNode.removeChild(this);
+    });
+    try {
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=OPRegistradasTable",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var exists = false;
+                var count = 0;
+                $.each(data, function (index, item) {
+                    exists = true;
+
+                    var estatusOP = item.EestadoOP;
+
+                    var estatusOP_ = "";
+                    if (estatusOP == 1) {
+                        estatusOP_ = "Iniciada";
+
+                    }
+                    if (item.EestadoL1 == 2 || item.EestadoL2 == 2 || item.EestadoL3 == 2) {
+                        estatusOP_ = "Envasando";
+
+                    }
+                    else {
+                        estatusOP_ = "Iniciada";
+
+                    }
+                    if (estatusOP == 3) {
+                        estatusOP_ = "Detenida";
+
+                    }
+
+                    if (estatusOP == 4) {
+                        estatusOP_ = "Lavando";
+
+                    }
+
+                    if (estatusOP == 5) {
+                        estatusOP_ = "Terminada";
+
+                    }
+                   
+                    $('#TableOP').append("<tr><td>" + item.OP + "</td><td>" + item.ProductoOP + "</td><td>" + item.Descripcion + "</td><td>" + item.Cantidad + "</td><td>" + item.NombreCliente + "</td><td>" + item.TiempoLavado + " Minutos" + "</td><td>" + estatusOP_ + "</td></tr>");
+                    count += 1;
+                    return true;
+                });
+               
+            },
+            failure: function (r) {
+                //alert('Error al recuperar los permisos...');
+                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            },
+            error: function (r) {
+                // alert(r.error + " Permisos");
+                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            }
+
+        });
+
+    }
+    catch (err) {
+        swal('Error:', 'No podemos cargar tus datos en este momento, comuníquese al whatsapp 55-6874-9040 para obtener  ayuda', 'error');
+        return false;
+    }
+    return false;
+
+}
+
+function FinalizarOP() {
+
+    var message = "";
+
+    try {
+
+        swal('Finalizando OP...', 'Estamos finalizando la OP, por favor espere, no cierre esta ventana hasta que el proceso termine…', 'warning');
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=FinalizarOP&OP=" + document.getElementsByName('DataspanOP')[0].value +
+                "&ProductoOP=" + document.getElementsByName('NAVI')[0].value +
+                "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value +
+                "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value +
+                "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value +
+                "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value +
+                "&DescripLavado=" + document.getElementById('normal-select-7').innerText +
+                "&L1=" + document.getElementById('txtL1').value +
+                "&L2=" + document.getElementById('txtL2').value +
+                "&L3=" + document.getElementById('txtL3').value + "",
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                OPResgistradasSelectTable();
+                OPResgistradasSelect();
+                swal('OP Finalizada', 'La OP finalizó correctamente, puede iniciar el proceso con una nueva OP', 'success');
+                document.getElementById('divIniciarLavado').style.display = 'none';
+                document.getElementById('divLavando').style.display = 'none';
+
+                // var myVar = setTimeout(location.reload(), 15000);
+                return false;
+            },
+            failure: function (r) {
+                swal('Error:', 'Error al finalizar la OP, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            },
+            error: function (r) {
+                swal('Error:', 'Error al finalizar la OP, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            }
+
+        });
+        return false;
+
+
+        return false;
+    }
+    catch (err) {
+        swal('Error:', 'Error al finalizar la OP, por favor verifique los datos y vuelva a intentarlo', 'error');
+        return false;
+    }
+
+    return false;
+}
+function InciarLavado() {
+
+    var message = "";
+
+    try {
+
+        swal('Iniciando  Lavado...', 'Estamos iniciando el lavado de la OP, por favor espere, no cierre esta ventana hasta que el proceso termine…', 'warning');
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=IniciarLavado&OP=" + document.getElementsByName('DataspanOP')[0].value +
+                "&ProductoOP=" + document.getElementsByName('NAVI')[0].value +
+                "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value +
+                "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value +
+                "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value +
+                "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value +
+                "&DescripLavado=" + document.getElementById('normal-select-7').innerText +
+                "&L1=" + document.getElementById('txtL1').value +
+                "&L2=" + document.getElementById('txtL2').value +
+                "&L3=" + document.getElementById('txtL3').value +"",
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                OPResgistradasSelect();
+                swal('Lavando OP', 'La OP inició el lavado correctamente', 'success');
+                document.getElementById('divIniciarLavado').style.display = 'none';
+                document.getElementById('divLavando').style.display = 'inline';
+
+               // var myVar = setTimeout(location.reload(), 15000);
+                return false;
+            },
+            failure: function (r) {
+                swal('Error:', 'Error al iniciar el lavado, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            },
+            error: function (r) {
+                swal('Error:', 'Error al iniciar el lavado, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            }
+
+        });
+        return false;
+
+
+        return false;
+    }
+    catch (err) {
+        swal('Error:', 'Error al iniciar el lavado, por favor verifique los datos y vuelva a intentarlo', 'error');
+        return false;
+    }
+
+    return false;
+}
+
+function IniciandoLineaPrimeraVez(Lid) {
 
 
     if (Lid == 1 && document.getElementById('txtL1').value != 1) {
@@ -513,8 +700,10 @@ function OPMonitoreada() {
                 var count = 0;
                 $.each(data, function (index, item) {
                     document.getElementById('messageUpdateData').innerHTML = "";
+                    
                     exists = true;
                     var estatusOP = item.EestadoOP;
+
                     var estatusOP_ = "";
                     if (estatusOP == 1) {
                         estatusOP_ = "Iniciada";
@@ -542,7 +731,7 @@ function OPMonitoreada() {
                         estatusOP_ = "Terminada";
                        
                     }
-
+                    
                     if (count == 0) {
                         //document.getElementById('txtL1').value = item.EestadoL1;
                         //document.getElementById('txtL2').value = item.EestadoL2;
@@ -567,6 +756,11 @@ function OPMonitoreada() {
                         if (estatusOPL == 3) {
                             estatusOPL_ = "Detenida"
                         }
+
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+                        }
+
                         if (estatusOPL == 5) {
                             estatusOPL_ = "Terminada"
                         }
@@ -587,6 +781,9 @@ function OPMonitoreada() {
                         }
                         if (estatusOPL == 3) {
                             estatusOPL_ = "Detenida"
+                        }
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
                         }
                         if (estatusOPL == 6) {
                             estatusOPL_ = "Reiniciando"
@@ -610,6 +807,10 @@ function OPMonitoreada() {
                         if (estatusOPL == 3) {
                             estatusOPL_ = "Detenida"
                         }
+
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+                        }
                         if (estatusOPL == 5) {
                             estatusOPL_ = "Terminada"
                         }
@@ -632,7 +833,7 @@ function OPMonitoreada() {
                     document.getElementById('spanEstatusL1').innerHTML = "";
                     document.getElementById('spanEstatusL2').innerHTML = "";
                     document.getElementById('spanEstatusL3').innerHTML = "";
-                    swal('Oops', 'No existe una OP en proceso', 'warning');
+                    //swal('Oops', 'No existe una OP en proceso', 'warning');
                     document.getElementById('messageUpdateData').innerHTML = "No existe una OP en proceso";
                 }
                     
@@ -758,9 +959,9 @@ function IniciarLinea() {
 function OPResgistradasSelect() {
    
     document.getElementById('HiddenEstadoOP').value = 5;
-    $("#TableOP tbody tr").each(function () {
-            this.parentNode.removeChild(this);
-    });
+    //$("#TableOP tbody tr").each(function () {
+    //        this.parentNode.removeChild(this);
+    //});
         try {
             $.ajax({
                 type: "POST",
@@ -768,7 +969,8 @@ function OPResgistradasSelect() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    
+
+                    var existeopPendiente = false;
                     var exists = false;
                     var count = 0;
                     $.each(data, function (index, item) {
@@ -802,8 +1004,9 @@ function OPResgistradasSelect() {
                             estatusOP_ = "Terminada";
                             document.getElementById('HiddenEstadoOP').value = 5;
                         }
-
-                        if (count == 0) {
+                        
+                        if (estatusOP_ != "Terminada") {
+                            existeopPendiente = true;
                             document.getElementById('txtL1').value = item.EestadoL1;
                             document.getElementById('txtL2').value = item.EestadoL2;
                             document.getElementById('txtL3').value = item.EestadoL3;
@@ -854,6 +1057,10 @@ function OPResgistradasSelect() {
                             }
                             if (estatusOPL == 3) {
                                 estatusOPL_ = "Detenida"
+                            }
+
+                            if (estatusOPL == 4) {
+                                estatusOPL_ = "Lavando"
                             }
 
                             if (estatusOPL == 6) {
@@ -913,6 +1120,7 @@ function OPResgistradasSelect() {
                                 estatusOPL_ = "Lavando"
                             }
 
+                            
                             if (estatusOPL == 5) {
                                 estatusOPL_ = "Terminada"
                             }
@@ -1025,15 +1233,56 @@ function OPResgistradasSelect() {
                             document.getElementById('normal-select-11').value = item.FinHoraL3;
                             document.getElementById('normal-select-12').value = item.FinMinutosL3;
 
-                           
+
+                            //las posibilidades para que se habilite el lavado
+                            if (item.EestadoOP != 5) {
+
+
+                                if (item.EestadoL1 == 5 && item.EestadoL2 == 5 && item.EestadoL3 == 5 && item.estatusOP != 5) {
+
+                                    document.getElementById('divIniciarLavado').style.display = 'inline';
+                                }
+                                else if (item.EestadoL1 == 5 && item.EestadoL2 == 5 && item.EestadoL3 == 1
+                                    || (item.EestadoL1 == 5 && item.EestadoL2 == 1 && item.EestadoL3 == 1)
+                                    || (item.EestadoL1 == 1 && item.EestadoL2 == 1 && item.EestadoL3 == 5)
+                                    || (item.EestadoL1 == 1 && item.EestadoL2 == 5 && item.EestadoL3 == 1)
+
+                                ) {
+                                    document.getElementById('divIniciarLavado').style.display = 'inline';
+                                }
+
+                                if (item.EestadoL1 == 4 || item.EestadoL2 == 4 || item.EestadoL3 == 4) {
+
+                                    document.getElementById('divLavando').style.display = 'inline';
+                                    var String_ValueDate = item.FechaInicioLavado;
+                                    var value = new Date(parseInt(String_ValueDate.replace(/(^.*\()|([+-].*$)/g, '')));
+                                    // var dat = value.toLocaleString();
+                                    MinParadaL1 = item.TiempoLavado;
+                                    ShowTimerLavandoL1(value);
+
+                                    MinParadaL2 = item.TiempoLavado;
+                                    ShowTimerLavandoL2(value);
+
+                                    MinParadaL3 = item.TiempoLavado;
+                                    ShowTimerLavandoL3(value);
+
+                                }
+                                else {
+                                    document.getElementById('divLavando').style.display = 'none';
+                                }
+
+                            }
+                            
+                            return; //si existe una en proceso ya no valida ninuga otra
+
                         }
 
-                        $('#TableOP').append("<tr><td>" + item.OP + "</td><td>" + item.ProductoOP + "</td><td>" + item.Descripcion + "</td><td>" + item.Cantidad + "</td><td>" + item.NombreCliente + "</td><td>" + item.TiempoLavado + " Minutos" + "</td><td>" + estatusOP_ + "</td></tr>");
+                       // $('#TableOP').append("<tr><td>" + item.OP + "</td><td>" + item.ProductoOP + "</td><td>" + item.Descripcion + "</td><td>" + item.Cantidad + "</td><td>" + item.NombreCliente + "</td><td>" + item.TiempoLavado + " Minutos" + "</td><td>" + estatusOP_ + "</td></tr>");
                         count += 1;
                         // swal('OP válida \n' + item.OP + '', 'Producto: ' + item.Descripcion + '\n\n Hemos terminado de consultar la información de la OP, presione “Ok” para continuar', 'success');
                         return true;
                     });
-                    if (document.getElementById('HiddenEstadoOP').value == 5 || !exists) {
+                    if ((!existeopPendiente && document.getElementById('HiddenEstadoOP').value == 5) || !exists) {
                         document.getElementById('ConfiguracionA').click();
                     }
                 },

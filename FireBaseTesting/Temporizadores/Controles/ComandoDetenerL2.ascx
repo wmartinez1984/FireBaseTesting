@@ -203,3 +203,55 @@ p {
         }
 
     </script>
+
+<script>
+
+    var end;
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+    var MinParadaL2;
+    function ShowTimerLavandoL2(date_) {
+
+        end = new Date(date_);
+        _second = 1000;
+        _minute = _second * 60;
+        _hour = _minute * 60;
+        _day = _hour * 24;
+
+        timer = setInterval(showRemainingL2, 1000);
+
+    }
+
+    function showRemainingL2() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+            // Finalizar aquí cuando termine el tiempo de lavado
+            FinalizarOP();
+            clearInterval(timer);
+            document.getElementById('countdownL2').innerHTML = '';
+
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+
+        document.getElementById('countdownL2').innerHTML = 'La parada termina en:';
+        document.getElementById('countdownL2').innerHTML += days + ' dias, ';
+        document.getElementById('countdownL2').innerHTML += hours + ' horas, ';
+        document.getElementById('countdownL2').innerHTML += minutes + ' minutos y ';
+        document.getElementById('countdownL2').innerHTML += seconds + ' segundos';
+
+        var PorcenBarL2 = (minutes * 100) / MinParadaL2;
+        // var PorcenBarRegreso = 100 - PorcenBar;
+        Bar2.setAttribute("aria-valuenow", parseInt(PorcenBarL2));
+
+        document.getElementById('tooltipL2').innerHTML = days + ":" + hours + ":" + minutes + ":" + seconds;
+    }
+
+    </script>
