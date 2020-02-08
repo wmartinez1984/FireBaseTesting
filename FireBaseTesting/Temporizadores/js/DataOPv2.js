@@ -930,9 +930,9 @@ function OPResgistradasSelect() {
                             if (item.EestadoL3 == 3) {
                                 var String_ValueDateL3 = item.FechaParadaL3;
                                 var value = new Date(parseInt(String_ValueDateL3.replace(/(^.*\()|([+-].*$)/g, '')));
-                                var dat = value.toLocaleString();
+                               // var dat = value.toLocaleString();
                                 MinParadaL3 = item.MinParadaL3;
-                                ShowTimerL3(dat);
+                                ShowTimerL3(value);
                                 //Mostrar reinicios y ocultar paradas, solo si está detenida 
                                 document.getElementById('ReinicioParada1L3').style.display = "inline";
                                 document.getElementById('ReinicioParada2L3').style.display = "inline";
@@ -957,9 +957,9 @@ function OPResgistradasSelect() {
                             if (item.EestadoL2 == 3) {
                                 var String_ValueDateL2 = item.FechaParadaL2;
                                 var valueL2 = new Date(parseInt(String_ValueDateL2.replace(/(^.*\()|([+-].*$)/g, '')));
-                                var datL2 = valueL2.toLocaleString();
+                                //var datL2 = valueL2.toLocaleString();
                                 MinParadaL2 = item.MinParadaL2;
-                                ShowTimerL2(datL2);
+                                ShowTimerL2(valueL2);
                                 //Mostrar reinicios y ocultar paradas, solo si está detenida 
                                 document.getElementById('ReinicioParada1L2').style.display = "inline";
                                 document.getElementById('ReinicioParada2L2').style.display = "inline";
@@ -984,10 +984,9 @@ function OPResgistradasSelect() {
                             if (item.EestadoL1 == 3) {
                                 var String_ValueDateL1 = item.FechaParadaL1;
                                 var valueL1 = new Date(parseInt(String_ValueDateL1.replace(/(^.*\()|([+-].*$)/g, '')));
-                               // alert(valueL1);
-                                var datL1 = valueL1.toLocaleString();
+                                //var datL1 = valueL1.toLocaleString();
                                 MinParadaL1 = item.MinParadaL1;
-                                ShowTimerL1(datL1);
+                                ShowTimerL1(valueL1);
 
                                 //Mostrar reinicios y ocultar paradas, solo si está detenida 
                                 document.getElementById('ReinicioParada1L1').style.display = "inline";

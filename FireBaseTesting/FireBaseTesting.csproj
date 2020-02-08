@@ -498,6 +498,7 @@
     <Content Include="Temporizadores\img\team\4.jpg" />
     <Content Include="Temporizadores\img\video-bg.jpg" />
     <Content Include="Temporizadores\index.html" />
+    <Content Include="Temporizadores\js\DataOPv2.js" />
     <Content Include="Temporizadores\js\DataOP.js" />
     <Content Include="Temporizadores\js\jquery-2.1.1.min.js" />
     <Content Include="Temporizadores\js\jsbtn1.js" />

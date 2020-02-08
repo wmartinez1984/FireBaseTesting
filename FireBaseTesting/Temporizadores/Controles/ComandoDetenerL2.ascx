@@ -198,6 +198,7 @@ p {
             var PorcenBarL2 = (minutes * 100) / MinParadaL2;
             // var PorcenBarRegreso = 100 - PorcenBar;
             Bar2.setAttribute("aria-valuenow", parseInt(PorcenBarL2));
+            
             document.getElementById('tooltipL2').innerHTML = days + ":" + hours + ":" + minutes + ":" + seconds;
         }
 

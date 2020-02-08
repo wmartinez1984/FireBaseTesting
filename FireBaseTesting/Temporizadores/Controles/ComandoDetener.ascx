@@ -169,6 +169,7 @@ p {
 
     function showRemainingL1() {
         var nowL1 = new Date();
+        //alert(endL1 + ":" + nowL1);
         var distanceL1 = endL1 - nowL1;
         if (distanceL1 < 0) {
 
