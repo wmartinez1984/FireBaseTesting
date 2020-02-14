@@ -18,11 +18,12 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script src="js/DataOPv2.js"></script>
+	<script src="js/DataOPv3.js"></script>
 
 	<%--NECESARIOS PARA DISEÑO--%>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
+	<link rel="stylesheet" href="./styleV2.css">
     <script src="js/sweetalert-dev.js"></script>
 
 	<%--NECESARIOS PARA DISEÑO Y MENSAJES DEL SISTEMA--%>
@@ -49,7 +50,7 @@
 		<table>
 			<tr>
 				
-				<td colspan="3" style="text-align:left;">
+				<td colspan="3" style="text-align:center;">
 					<div class="searchBox" style="">
 					  <input class="searchInput" type="text" name="" id="txtsearchInput" placeholder="Consultar" />
 					  <button class="searchButton" onclick="DataClient(); return false;">
@@ -58,27 +59,24 @@
 						</i>
 					  </button>
 					</div>
-					<br />
-					<br />
+					
 				</td>
 				
 			</tr>
 			<tr>
 				<td>
-						<br />
-						OP consultada: 
+					<br />
+					OP consultada: 
 					
 				</td>
 				<td colspan="2">
+					<br />
 					<span id="spnOP" style="font-size:14px;"></span>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					
-						NAVI: 
-					
-					
+						NAVI: 					
 				</td>
 				<td colspan="2">
 					<span id="spnNAVI" style="font-size:14px;"></span>
@@ -96,7 +94,7 @@
 				</td>
 			</tr>
 
-			<tr>
+			<tr style="display:none;">
 				<td>
 					
 						Unidades a Fabricar: 
@@ -195,7 +193,7 @@
 
 	 <div class="card active" id="overview">
 		<a class="card-toggle"  id="bntInicio">Inicio <i class="fa fa-arrow-circle-left"></i></a>
-		<div class="card-content" style="background-color:#2F98D1;">			
+		<div class="card-content" style="background-color:#81cfef">			
 			<div class="row" style="width:100%;">
 				 <%--<h3 style="color:#186635;font-size:15px;width:200px;"><strong>En proceso L1:</strong> </h3>	
 				 <br />
@@ -206,9 +204,9 @@
 				<div class="left col" style="text-align:left;">					
 				 	
 				  
-				  <div class="progress-factor flexy-item" style="margin-top:-30px;width:500px;cursor:pointer;" >
-						<div class="progress-bar">
-							<div class="bar has-rotation has-colors navy ruler" style="background-color:#cc3105" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-1">
+				  <div class="progress-factor flexy-item" style="margin-top:-30px;width:500px;cursor:pointer;border-radius:40px;" >
+						<div class="progress-bar" >
+							<div class="bar has-rotation has-colors navy ruler" style="background-color:white" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-1">
 								<div class="tooltip white" style="display:none;"></div>
 								<div class="bar-face face-position roof percentage" style="background-color:#45b817"><h3 style="color:white;font-size:25px;"><strong id="spanEstatusL1"></strong> </h3></div>
 								<div class="bar-face face-position back percentage"></div>
@@ -216,14 +214,14 @@
 								<div class="bar-face face-position right" style="background-color:#45b817"></div>
 								<div class="bar-face face-position left"></div>
 								<div class="bar-face face-position front percentage volume-lights shine" id="tooltipL1" style="font-size:50px; color:#ff0000"></div>
-								<h3 style="color:white;font-size:60px;"><strong> LP 1</strong> </h3>
+								<h3 style="color:black;font-size:60px;"><strong> Línea 1</strong> </h3>
 							</div>
 							
 						</div>
 					</div>
 					
 					<br />
-					<div class="progress-factor flexy-item" style="width:500px;">
+					<div class="progress-factor flexy-item" style="width:500px;border-radius:20px;">
 						<div class="progress-bar">
 							<div class="bar has-rotation has-colors orange ruler-3" style="background-color:#4e10b1" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-2">
 								<div class="tooltip white" style="display:none;"></div>
@@ -231,14 +229,14 @@
 								<div class="bar-face face-position back percentage"></div>
 								<div class="bar-face face-position floor percentage volume-lights"></div>
 								<div class="bar-face face-position left"></div>
-								<div class="bar-face face-position right" style="background-color:#45b817"></div>
+								<div class="bar-face face-position right" style="background-color:white"></div>
 								<div class="bar-face face-position front percentage volume-lights shine" id="tooltipL2" style="font-size:50px; color:#ff0000"></div>
-								<h3 style="color:white;font-size:60px;"><strong> LP 2</strong> </h3>
+								<h3 style="color:black;font-size:60px;"><strong> Línea 2</strong> </h3>
 							</div>
 						</div>
 					</div>
 					<br />
-					<div class="progress-factor flexy-item" style="width:500px;">
+					<div class="progress-factor flexy-item" style="width:500px;border-radius:20px;">
 						<div class="progress-bar">
 							<div class="bar has-rotation has-colors navy ruler" style="background-color:#cc3105" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="bar-3">
 								<div class="tooltip white" style="display:none;"></div>
@@ -248,7 +246,7 @@
 								<div class="bar-face face-position right" style="background-color:#45b817"></div>
 								<div class="bar-face face-position left" ></div>
 								<div class="bar-face face-position front percentage volume-lights shine"  id="tooltipL3" style="font-size:50px; color:#ff0000"></div>
-								<h3 style="color:white;font-size:60px;"><strong> LP 3</strong> </h3>
+								<h3 style="color:black;font-size:60px;"><strong> Línea 3</strong> </h3>
 							</div>
 						</div>
 					</div>	
@@ -278,7 +276,9 @@
 											height: 60px;cursor:pointer;" onclick="InciarLavado();">
 									</div>
 									<div id="divLavando" style="display:none;">
-										<img  src="../Images/lavando.gif" style="height:157px;"/>
+										<p style="color:#81cfef;font-size:40px;">
+											Estamos Lavando...
+										</p>
 									</div>
 									
 								</td>
@@ -289,8 +289,8 @@
 		</div>
 	</div> 
 	
-	<div class="card" id="dribbble" onclick="document.getElementById('txtL').value = 1; ">
-		<a class="card-toggle" id="btnL1"><i><span class="fa fa-list"></span></i></a>
+	<div class="card" id="dribbble" onclick="document.getElementById('txtL').value = 1;" style="background-color:#382B7B" >
+		<a style="background-color:white"   class="card-toggle" id="btnL1"><i><span  class="fa fa-list"></span></i></a>
 		<div class="card-content">
 			<div class="row">
 				<div class="left col" style="text-align: left;">
@@ -310,7 +310,7 @@
 	</div> 
 	
 	<div class="card" id="behance" onclick="document.getElementById('txtL').value = 2; ">
-		<a class="card-toggle"><i><span class="fa fa-list"></span></i></a>
+		<a style="background-color:white"  class="card-toggle"><i><span class="fa fa-list"></span></i></a>
 		<div class="card-content">
 			<div class="row">
 				<div class="left col">
@@ -326,7 +326,7 @@
 	</div>
 
 	<div class="card" id="linkedin" onclick="document.getElementById('txtL').value = 3; ">
-		<a class="card-toggle"><i><span class="fa fa-list"></span></i></a>
+		<a style="background-color:white"  class="card-toggle"><i><span class="fa fa-list"></span></i></a>
 		<div class="card-content" >
 			<div class="row" style="text-align:left;">
 				<div class="left col">
@@ -342,7 +342,7 @@
 	</div>
 
 	<div class="card" id="twitter">
-		<a class="card-toggle" ><i><span class="fa fa-calendar-check-o" id="btnIncioLine"></span></i></a>
+		<a style="background-color:white" class="card-toggle" ><i ><span class="fa fa-calendar-check-o" id="btnIncioLine"></span></i></a>
 		<div class="card-content">
 			<div class="row">
 				<div class="left col">					
@@ -430,7 +430,11 @@
 		<table>
 			<tr>
 				<td colspan="2">
-					<input class="btn" type="button" value="Reiniciar" onclick="EjecutarReinicioDeParada();" style="background-color:#ff0000; color:#ffffff;  font-size:15px;border-radius:5px; width:100%;">
+					<input class="btn" type="button" value="Reiniciar" onclick="EjecutarReinicioDeParada();" style="					        background-color: #ff0000;
+					        color: #ffffff;
+					        font-size: 15px;
+					        border-radius: 5px;
+					        width: 100%;">
 				</td>
 				
 			</tr>
@@ -597,6 +601,8 @@
             Bar3.setAttribute("aria-valuenow", ProgressBarValue3_);
 
         }
+
+        document.getElementById('divDatosAdicionales').style.display = "none";
         OPResgistradasSelectTable();
         OPResgistradasSelect();					
 	</script>

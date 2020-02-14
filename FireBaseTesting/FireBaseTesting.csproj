@@ -142,6 +142,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="ActivosFinancieros\ACTFData.js" />
+    <Content Include="ActivosFinancieros\Activos.aspx" />
     <Content Include="ActivosFinancieros\ApiKey.aspx" />
     <Content Include="ActivosFinancieros\contactform\contactform.js" />
     <Content Include="ActivosFinancieros\contactform\Readme.txt" />
@@ -224,6 +225,7 @@
     <Content Include="ActivosFinancieros\lib\wow\wow.min.js" />
     <Content Include="ActivosFinancieros\login.aspx" />
     <Content Include="ActivosFinancieros\Simulador.aspx" />
+    <Content Include="ActivosFinancieros\Simulador.aspx.js" />
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\font-awesome.min.css" />
@@ -317,6 +319,7 @@
     <Content Include="dafault_enable.html" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="Default.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -362,6 +365,10 @@
     <Content Include="ActivosFinancieros\lib\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="ActivosFinancieros\lib\owlcarousel\LICENSE" />
     <Content Include="ActivosFinancieros\ApiKey.aspx.ashx" />
+    <Content Include="ActivosFinancieros\Activos.ashx" />
+    <Content Include="ActivosFinancieros\Simulador.aspx.ashx" />
+    <Content Include="index.js" />
+    <Content Include="pdfs\example2.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP1.pubxml" />
@@ -434,6 +441,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="sitemap.xml" />
+    <Content Include="styles.css" />
     <Content Include="Temporizadores\contactform\contactform.js" />
     <Content Include="Temporizadores\contactform\Readme.txt" />
     <Content Include="Temporizadores\Controles\ComandoDetener.ascx" />
@@ -443,13 +451,16 @@
     <Content Include="Temporizadores\Controles\DataOP.ascx" />
     <Content Include="Temporizadores\Controles\DataOPL1.ascx" />
     <Content Include="Temporizadores\Controles\Inciar.ascx" />
+    <Content Include="Temporizadores\CopiaEndLine.aspx" />
     <Content Include="Temporizadores\css\component.css" />
     <Content Include="Temporizadores\css\cssbtn1.css" />
     <Content Include="Temporizadores\css\custom-bars.css" />
     <Content Include="Temporizadores\css\demo.css" />
+    <Content Include="Temporizadores\css\demowather.css" />
     <Content Include="Temporizadores\css\normalize.css" />
     <Content Include="Temporizadores\css\scss-files.txt" />
     <Content Include="Temporizadores\css\style.css" />
+    <Content Include="Temporizadores\css\style1.css" />
     <Content Include="Temporizadores\css\stylebtn1.css" />
     <Content Include="Temporizadores\css\sweetalert.css" />
     <Content Include="Temporizadores\Data.aspx" />
@@ -470,9 +481,16 @@
     <Content Include="Temporizadores\img\blog\blog-image-1.jpg" />
     <Content Include="Temporizadores\img\blog\blog-image-2.jpg" />
     <Content Include="Temporizadores\img\blog\blog-image-3.jpg" />
+    <Content Include="Temporizadores\img\city.jpg" />
+    <Content Include="Temporizadores\img\drop-alpha.png" />
+    <Content Include="Temporizadores\img\drop-color.png" />
+    <Content Include="Temporizadores\img\drop-shine.png" />
+    <Content Include="Temporizadores\img\drop-shine2.png" />
     <Content Include="Temporizadores\img\favicon.png" />
     <Content Include="Temporizadores\img\hero-bg.png" />
     <Content Include="Temporizadores\img\hero-img.png" />
+    <Content Include="Temporizadores\img\iphone.svg" />
+    <Content Include="Temporizadores\img\logo.svg" />
     <Content Include="Temporizadores\img\newsletter-bg.jpg" />
     <Content Include="Temporizadores\img\screen\1.jpg" />
     <Content Include="Temporizadores\img\screen\2.jpg" />
@@ -498,9 +516,23 @@
     <Content Include="Temporizadores\img\team\3.jpg" />
     <Content Include="Temporizadores\img\team\4.jpg" />
     <Content Include="Temporizadores\img\video-bg.jpg" />
+    <Content Include="Temporizadores\img\water\texture-bg.png" />
+    <Content Include="Temporizadores\img\water\texture-fg.png" />
+    <Content Include="Temporizadores\img\weather\texture-drizzle-bg.png" />
+    <Content Include="Temporizadores\img\weather\texture-drizzle-fg.png" />
+    <Content Include="Temporizadores\img\weather\texture-fallout-bg.png" />
+    <Content Include="Temporizadores\img\weather\texture-fallout-fg.png" />
+    <Content Include="Temporizadores\img\weather\texture-rain-bg.png" />
+    <Content Include="Temporizadores\img\weather\texture-rain-fg.png" />
+    <Content Include="Temporizadores\img\weather\texture-storm-lightning-bg.png" />
+    <Content Include="Temporizadores\img\weather\texture-storm-lightning-fg.png" />
+    <Content Include="Temporizadores\img\weather\texture-sun-bg.png" />
+    <Content Include="Temporizadores\img\weather\texture-sun-fg.png" />
     <Content Include="Temporizadores\index.html" />
+    <Content Include="Temporizadores\js\DataOPv3.js" />
     <Content Include="Temporizadores\js\DataOPv2.js" />
     <Content Include="Temporizadores\js\DataOP.js" />
+    <Content Include="Temporizadores\js\index.min.js" />
     <Content Include="Temporizadores\js\jquery-2.1.1.min.js" />
     <Content Include="Temporizadores\js\jsbtn1.js" />
     <Content Include="Temporizadores\js\main.js" />
@@ -547,18 +579,35 @@
     <Content Include="Temporizadores\css\temporizador.css" />
     <Content Include="Temporizadores\script.js" />
     <Content Include="Temporizadores\scriptLogin.js" />
+    <Content Include="Temporizadores\styleV2.css" />
     <Content Include="Temporizadores\styleMonitor.css" />
     <Content Include="Temporizadores\style.css" />
     <Content Include="Temporizadores\styleLogin.css" />
     <Content Include="Temporizadores\Temporizador.aspx" />
+    <Content Include="Temporizadores\tes\HtmlPage1.html" />
+    <Content Include="Temporizadores\tes\HtmlPage2.html" />
+    <Content Include="testpdf.html" />
+    <Content Include="testViewPDF.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ACTFActivosDAL.cs" />
     <Compile Include="ACTFDALKeys.cs" />
     <Compile Include="ACTFKeyss.cs" />
+    <Compile Include="Activos.cs" />
+    <Compile Include="ActivosFinancieros\Activos.ashx.cs">
+      <DependentUpon>Activos.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFinancieros\Activos.aspx.cs">
+      <DependentUpon>Activos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFinancieros\Activos.aspx.designer.cs">
+      <DependentUpon>Activos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ActivosFinancieros\ApiKey.aspx.ashx.cs">
       <DependentUpon>ApiKey.aspx.ashx</DependentUpon>
     </Compile>
@@ -582,6 +631,9 @@
     </Compile>
     <Compile Include="ActivosFinancieros\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFinancieros\Simulador.aspx.ashx.cs">
+      <DependentUpon>Simulador.aspx.ashx</DependentUpon>
     </Compile>
     <Compile Include="ActivosFinancieros\Simulador.aspx.cs">
       <DependentUpon>Simulador.aspx</DependentUpon>
@@ -703,6 +755,13 @@
     <Compile Include="Temporizadores\Controles\Inciar.ascx.designer.cs">
       <DependentUpon>Inciar.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Temporizadores\CopiaEndLine.aspx.cs">
+      <DependentUpon>CopiaEndLine.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\CopiaEndLine.aspx.designer.cs">
+      <DependentUpon>CopiaEndLine.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Temporizadores\Data.aspx.cs">
       <DependentUpon>Data.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -747,6 +806,13 @@
     </Compile>
     <Compile Include="Temporizadores\Temporizador.aspx.designer.cs">
       <DependentUpon>Temporizador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="testViewPDF.aspx.cs">
+      <DependentUpon>testViewPDF.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testViewPDF.aspx.designer.cs">
+      <DependentUpon>testViewPDF.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

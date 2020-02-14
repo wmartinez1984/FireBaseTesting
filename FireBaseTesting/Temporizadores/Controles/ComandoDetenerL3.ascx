@@ -212,7 +212,7 @@ p {
     </script>
 
 <script>
-    var timerL3;
+    var timerL3Lavando;
     var endL3;
     var _secondL3;
     var _minuteL3;
@@ -228,21 +228,19 @@ p {
         _hourL3 = _minuteL3 * 60;
         _dayL3 = _hourL3 * 24;
 
-        timerL3 = setInterval(showRemainingL3, 1000);
+        timerL3Lavando = setInterval(showRemainingL3timerL3Lavando, 1000);
     }
 
-    function showRemainingL3() {
+    function showRemainingL3timerL3Lavando() {
 
         var nowL3 = new Date();
         var distanceL3 = endL3 - nowL3;
-
-
 
         if (distanceL3 < 0) {
 
              // Finalizar aquí cuando termine el tiempo de lavado
             FinalizarOP();
-            window.clearInterval(timerL3);
+            window.clearInterval(timerL3Lavando);
             document.getElementById('countdownL3').innerHTML = '';
 
             return;
@@ -252,7 +250,7 @@ p {
         var minutesL3 = Math.floor((distanceL3 % _hourL3) / _minuteL3);
         var secondsL3 = Math.floor((distanceL3 % _minuteL3) / _secondL3);
 
-        document.getElementById('countdownL3').innerHTML = ' La parada termina en: <br/>';
+        document.getElementById('countdownL3').innerHTML = ' El lavado termina en: <br/>';
         document.getElementById('countdownL3').innerHTML += daysL3 + ' dia(s), ';
         document.getElementById('countdownL3').innerHTML += hoursL3 + ' hora(s), ';
         document.getElementById('countdownL3').innerHTML += minutesL3 + ' minuto(s) y ';

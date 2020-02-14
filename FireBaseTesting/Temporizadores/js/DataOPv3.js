@@ -1,4 +1,724 @@
-﻿function OPResgistradasSelectTable() {
+﻿function OPResgistradasSelectEndLineP2() {
+
+    document.getElementById('HiddenEstadoOP').value = 5;
+    //$("#TableOP tbody tr").each(function () {
+    //        this.parentNode.removeChild(this);
+    //});
+    try {
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=OPRegistradas",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var existeopPendiente = false;
+                var exists = false;
+                var count = 0;
+                $.each(data, function (index, item) {
+                    exists = true;
+
+                    var estatusOP = item.EestadoOP;
+                    var estatusOP_ = "";
+                    if (estatusOP == 1) {
+                        estatusOP_ = "Iniciada";
+                        document.getElementById('HiddenEstadoOP').value = 1;
+                    }
+                    if (item.EestadoL1 == 2 || item.EestadoL2 == 2 || item.EestadoL3 == 2) {
+                        estatusOP_ = "Envasando";
+                        document.getElementById('HiddenEstadoOP').value = 2;
+                    }
+                    else {
+                        estatusOP_ = "Iniciada";
+                        document.getElementById('HiddenEstadoOP').value = 1;
+                    }
+                    if (estatusOP == 3) {
+                        estatusOP_ = "Detenida";
+                        document.getElementById('HiddenEstadoOP').value = 3;
+                    }
+
+                    if (estatusOP == 4) {
+                        estatusOP_ = "Lavando";
+                        document.getElementById('HiddenEstadoOP').value = 4;
+                    }
+
+                    if (estatusOP == 5) {
+                        estatusOP_ = "Terminada";
+                        document.getElementById('HiddenEstadoOP').value = 5;
+                    }
+
+                    if (estatusOP_ != "Terminada") {
+                        existeopPendiente = true;
+                        document.getElementById('txtL1').value = item.EestadoL1;
+                        document.getElementById('txtL2').value = item.EestadoL2;
+                        document.getElementById('txtL3').value = item.EestadoL3;
+                        document.getElementsByName('EstadoOP')[0].value = estatusOP_;
+                        document.getElementsByName('EstadoOP')[1].value = estatusOP_;
+                        document.getElementsByName('EstadoOP')[2].value = estatusOP_;
+                        document.getElementsByName('EstadoOP')[3].value = estatusOP_;
+                        document.getElementsByName('EstadoOP')[4].value = estatusOP_;
+                        document.getElementsByName('DataspanOP')[0].value = item.OP;
+                        document.getElementsByName('DataspanOP')[1].value = item.OP;
+                        document.getElementsByName('DataspanOP')[2].value = item.OP;
+                        document.getElementsByName('DataspanOP')[3].value = item.OP;
+                        document.getElementsByName('DataspanOP')[4].value = item.OP;
+                        document.getElementsByName('NAVI')[0].value = item.ProductoOP;
+                        document.getElementsByName('NAVI')[1].value = item.ProductoOP;
+                        document.getElementsByName('NAVI')[2].value = item.ProductoOP;
+                        document.getElementsByName('NAVI')[3].value = item.ProductoOP;
+                        document.getElementsByName('NAVI')[4].value = item.ProductoOP;
+                        document.getElementsByName('NombreProducto')[0].value = item.Descripcion;
+                        document.getElementsByName('NombreProducto')[1].value = item.Descripcion;
+                        document.getElementsByName('NombreProducto')[2].value = item.Descripcion;
+                        document.getElementsByName('NombreProducto')[3].value = item.Descripcion;
+                        document.getElementsByName('NombreProducto')[4].value = item.Descripcion;
+                        document.getElementsByName('UnidadesFabricar')[0].value = item.Cantidad;
+                        document.getElementsByName('UnidadesFabricar')[1].value = item.Cantidad;
+                        document.getElementsByName('UnidadesFabricar')[2].value = item.Cantidad;
+                        document.getElementsByName('UnidadesFabricar')[3].value = item.Cantidad;
+                        document.getElementsByName('UnidadesFabricar')[4].value = item.Cantidad;
+                        document.getElementsByName('Cliente')[0].value = item.NombreCliente;
+                        document.getElementsByName('Cliente')[1].value = item.NombreCliente;
+                        document.getElementsByName('Cliente')[2].value = item.NombreCliente;
+                        document.getElementsByName('Cliente')[3].value = item.NombreCliente;
+                        document.getElementsByName('Cliente')[4].value = item.NombreCliente;
+                        document.getElementsByName('Lavado')[0].value = item.TiempoLavado;
+                        document.getElementsByName('Lavado')[1].value = item.TiempoLavado;
+                        document.getElementsByName('Lavado')[2].value = item.TiempoLavado;
+                        document.getElementsByName('Lavado')[3].value = item.TiempoLavado;
+                        document.getElementsByName('Lavado')[4].value = item.TiempoLavado;
+
+                        //L1
+                        var estatusOPL = item.EestadoL1;
+                        var estatusOPL_ = "";
+                        if (estatusOPL == 1) {
+                            estatusOPL_ = "Esperando"
+                        }
+                        if (estatusOPL == 2) {
+                            estatusOPL_ = "Envasando"
+                        }
+                        if (estatusOPL == 3) {
+                            estatusOPL_ = "Detenida"
+                        }
+
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+                        }
+
+                        if (estatusOPL == 6) {
+                            estatusOPL_ = "Reiniciando"
+                        }
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
+                        if (estatusOPL == 7) {
+                            estatusOPL_ = "Esperando Lavado"
+                        }
+
+                        var nuevoestatusL1 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL1').innerHTML != nuevoestatusL1)
+                            location.reload()
+                        else
+                            document.getElementById('spanEstatusL1').innerHTML = "ESTADO:" + estatusOPL_;
+
+                        //L2
+                        estatusOPL = item.EestadoL2;
+
+                        if (estatusOPL == 1) {
+                            estatusOPL_ = "Esperando"
+                        }
+                        if (estatusOPL == 2) {
+                            estatusOPL_ = "Envasando"
+                        }
+                        if (estatusOPL == 3) {
+                            estatusOPL_ = "Detenida"
+                        }
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+                        }
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
+                        if (estatusOPL == 6) {
+                            estatusOPL_ = "Reiniciando"
+                        }
+                        if (estatusOPL == 7) {
+                            estatusOPL_ = "Esperando Lavado"
+                        }
+
+                        var nuevoestatusL2 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL2').innerHTML != nuevoestatusL2)
+                            location.reload()
+                        else
+                            document.getElementById('spanEstatusL2').innerHTML = "ESTADO:" + estatusOPL_;
+
+
+                        //L3
+                        estatusOPL = item.EestadoL3;
+                        if (estatusOPL == 1) {
+                            estatusOPL_ = "Esperando"
+                        }
+                        if (estatusOPL == 2) {
+                            estatusOPL_ = "Envasando"
+                        }
+                        if (estatusOPL == 3) {
+                            estatusOPL_ = "Detenida"
+
+                        }
+
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+                        }
+
+
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
+
+                        if (estatusOPL == 6) {
+                            estatusOPL_ = "Reiniciando"
+                        }
+
+                        if (estatusOPL == 7) {
+                            estatusOPL_ = "Esperando Lavado"
+                        }
+
+                        var nuevoestatusL3 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL3').innerHTML != nuevoestatusL3)
+                            location.reload()
+                        else
+                            document.getElementById('spanEstatusL3').innerHTML = "ESTADO:" + estatusOPL_;
+
+                        //TimerL3
+                        if (item.EestadoL3 == 3) {
+                            var String_ValueDateL3 = item.FechaParadaL3;
+                            var value = new Date(parseInt(String_ValueDateL3.replace(/(^.*\()|([+-].*$)/g, '')));
+                            // var dat = value.toLocaleString();
+                            MinParadaL3 = item.MinParadaL3;
+                            ShowTimerL3(value);
+                            //Mostrar reinicios y ocultar paradas, solo si está detenida 
+                            document.getElementById('ReinicioParada1L3').style.display = "inline";
+                            document.getElementById('ReinicioParada2L3').style.display = "inline";
+                            document.getElementById('ReinicioParada3L3').style.display = "inline";
+                            //paradas
+                            document.getElementById('Parada1L3').style.display = "none";
+                            document.getElementById('Parada2L3').style.display = "none";
+                            document.getElementById('Parada3L3').style.display = "none";
+                        }
+                        else {
+                            //Ocultar reinicios y mostrar paradas, solo si no está detenida 
+                            document.getElementById('ReinicioParada1L3').style.display = "none";
+                            document.getElementById('ReinicioParada2L3').style.display = "none";
+                            document.getElementById('ReinicioParada3L3').style.display = "none";
+                            //paradas
+                            document.getElementById('Parada1L3').style.display = "inline";
+                            document.getElementById('Parada2L3').style.display = "inline";
+                            document.getElementById('Parada3L3').style.display = "inline";
+                        }
+
+                        //TimerL2
+                        if (item.EestadoL2 == 3) {
+                            var String_ValueDateL2 = item.FechaParadaL2;
+                            var valueL2 = new Date(parseInt(String_ValueDateL2.replace(/(^.*\()|([+-].*$)/g, '')));
+                            //var datL2 = valueL2.toLocaleString();
+                            MinParadaL2 = item.MinParadaL2;
+                            ShowTimerL2(valueL2);
+                            //Mostrar reinicios y ocultar paradas, solo si está detenida 
+                            document.getElementById('ReinicioParada1L2').style.display = "inline";
+                            document.getElementById('ReinicioParada2L2').style.display = "inline";
+                            document.getElementById('ReinicioParada3L2').style.display = "inline";
+                            //paradas
+                            document.getElementById('Parada1L2').style.display = "none";
+                            document.getElementById('Parada2L2').style.display = "none";
+                            document.getElementById('Parada3L2').style.display = "none";
+                        }
+                        else {
+                            //Ocultar reinicios y mostrar paradas, solo si no está detenida 
+                            document.getElementById('ReinicioParada1L2').style.display = "none";
+                            document.getElementById('ReinicioParada2L2').style.display = "none";
+                            document.getElementById('ReinicioParada3L2').style.display = "none";
+                            //paradas
+                            document.getElementById('Parada1L2').style.display = "inline";
+                            document.getElementById('Parada2L2').style.display = "inline";
+                            document.getElementById('Parada3L2').style.display = "inline";
+                        }
+
+                        //TimerL1
+                        if (item.EestadoL1 == 3) {
+                            var String_ValueDateL1 = item.FechaParadaL1;
+                            var valueL1 = new Date(parseInt(String_ValueDateL1.replace(/(^.*\()|([+-].*$)/g, '')));
+                            //var datL1 = valueL1.toLocaleString();
+                            MinParadaL1 = item.MinParadaL1;
+                            ShowTimerL1(valueL1);
+
+                            //Mostrar reinicios y ocultar paradas, solo si está detenida 
+                            document.getElementById('ReinicioParada1L1').style.display = "inline";
+                            document.getElementById('ReinicioParada2L1').style.display = "inline";
+                            document.getElementById('ReinicioParada3L1').style.display = "inline";
+                            //paradas
+                            document.getElementById('Parada1L1').style.display = "none";
+                            document.getElementById('Parada2L1').style.display = "none";
+                            document.getElementById('Parada3L1').style.display = "none";
+                        }
+                        else {
+                            //Ocultar reinicios y mostrar paradas, solo si no está detenida 
+                            document.getElementById('ReinicioParada1L1').style.display = "none";
+                            document.getElementById('ReinicioParada2L1').style.display = "none";
+                            document.getElementById('ReinicioParada3L1').style.display = "none";
+                            //paradas
+                            document.getElementById('Parada1L1').style.display = "inline";
+                            document.getElementById('Parada2L1').style.display = "inline";
+                            document.getElementById('Parada3L1').style.display = "inline";
+                        }
+
+
+                        //Inicio 
+                        document.getElementById('normal-select-1').value = item.InicioHoraL1;
+                        document.getElementById('normal-select-2').value = item.InicioMinutosL1;
+                        document.getElementById('normal-select-3').value = item.InicioHoraL2;
+                        document.getElementById('normal-select-4').value = item.InicioMinutosL2;
+                        document.getElementById('normal-select-5').value = item.InicioHoraL3;
+                        document.getElementById('normal-select-6').value = item.InicioMinutosL3;
+
+                        //Hora de finalización
+                        document.getElementsByName('normal-select-7Fin')[0].value = item.FinHoraL1;
+                        document.getElementById('normal-select-8').value = item.FinMinutosL1;
+                        document.getElementById('normal-select-9').value = item.FinHoraL2;
+                        document.getElementById('normal-select-10').value = item.FinMinutosL2;
+                        document.getElementById('normal-select-11').value = item.FinHoraL3;
+                        document.getElementById('normal-select-12').value = item.FinMinutosL3;
+
+
+                        //las posibilidades para que se habilite el lavado
+                        if (item.EestadoOP != 5) {
+
+
+                            if (item.EestadoL1 == 5 && item.EestadoL2 == 5 && item.EestadoL3 == 5 && item.estatusOP != 5) {
+
+                                document.getElementById('divIniciarLavado').style.display = 'inline';
+                            }
+                            else if (item.EestadoL1 == 5 && item.EestadoL2 == 5 && item.EestadoL3 == 1
+                                || (item.EestadoL1 == 5 && item.EestadoL2 == 1 && item.EestadoL3 == 1)
+                                || (item.EestadoL1 == 1 && item.EestadoL2 == 1 && item.EestadoL3 == 5)
+                                || (item.EestadoL1 == 1 && item.EestadoL2 == 5 && item.EestadoL3 == 1)
+                                || (item.EestadoL1 == 5 && item.EestadoL2 == 1 && item.EestadoL3 == 5)
+                                || (item.EestadoL1 == 1 && item.EestadoL2 == 5 && item.EestadoL3 == 5)
+
+                            ) {
+                                document.getElementById('divIniciarLavado').style.display = 'inline';
+                            }
+
+                            if (item.EestadoL1 == 4 || item.EestadoL2 == 4 || item.EestadoL3 == 4) {
+
+                                document.getElementById('divLavando').style.display = 'inline';
+                                var String_ValueDate = item.FechaInicioLavado;
+                                var value = new Date(parseInt(String_ValueDate.replace(/(^.*\()|([+-].*$)/g, '')));
+                                // var dat = value.toLocaleString();
+                                MinParadaL1 = item.TiempoLavado;
+                                ShowTimerLavandoL1(value);
+
+                                MinParadaL2 = item.TiempoLavado;
+                                ShowTimerLavandoL2(value);
+
+                                MinParadaL3 = item.TiempoLavado;
+                                ShowTimerLavandoL3(value);
+
+                            }
+                            else {
+                                document.getElementById('divLavando').style.display = 'none';
+                            }
+
+                        }
+
+                        return; //si existe una en proceso ya no valida ninuga otra
+
+                    }
+
+                    // $('#TableOP').append("<tr><td>" + item.OP + "</td><td>" + item.ProductoOP + "</td><td>" + item.Descripcion + "</td><td>" + item.Cantidad + "</td><td>" + item.NombreCliente + "</td><td>" + item.TiempoLavado + " Minutos" + "</td><td>" + estatusOP_ + "</td></tr>");
+                    count += 1;
+                    // swal('OP válida \n' + item.OP + '', 'Producto: ' + item.Descripcion + '\n\n Hemos terminado de consultar la información de la OP, presione “Ok” para continuar', 'success');
+                    return true;
+                });
+                if ((!existeopPendiente && document.getElementById('HiddenEstadoOP').value == 5) || !exists) {
+                    document.getElementById('ConfiguracionA').click();
+                }
+            },
+            failure: function (r) {
+                //alert('Error al recuperar los permisos...');
+                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            },
+            error: function (r) {
+                // alert(r.error + " Permisos");
+                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            }
+
+        });
+
+    }
+    catch (err) {
+        swal('Error:', 'No podemos cargar tus datos en este momento, comuníquese al whatsapp 55-6874-9040 para obtener  ayuda', 'error');
+        return false;
+    }
+    return false;
+
+}
+function OPResgistradasSelectEndLine() {
+
+    document.getElementById('HiddenEstadoOP').value = 5;
+    //$("#TableOP tbody tr").each(function () {
+    //        this.parentNode.removeChild(this);
+    //});
+    try {
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=OPRegistradas",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var existeopPendiente = false;
+                var exists = false;
+                var count = 0;
+                $.each(data, function (index, item) {
+                    exists = true;
+
+                    var estatusOP = item.EestadoOP;
+                    var estatusOP_ = "";
+                    if (estatusOP == 1) {
+                        estatusOP_ = "Iniciada";
+                        document.getElementById('HiddenEstadoOP').value = 1;
+                    }
+                    if (item.EestadoL1 == 2 || item.EestadoL2 == 2 || item.EestadoL3 == 2) {
+                        estatusOP_ = "Envasando";
+                        document.getElementById('HiddenEstadoOP').value = 2;
+                    }
+                    else {
+                        estatusOP_ = "Iniciada";
+                        document.getElementById('HiddenEstadoOP').value = 1;
+                    }
+                    if (estatusOP == 3) {
+                        estatusOP_ = "Detenida";
+                        document.getElementById('HiddenEstadoOP').value = 3;
+                    }
+
+                    if (estatusOP == 4) {
+                        estatusOP_ = "Lavando";
+                        document.getElementById('HiddenEstadoOP').value = 4;
+                    }
+
+                    if (estatusOP == 5) {
+                        estatusOP_ = "Terminada";
+                        document.getElementById('HiddenEstadoOP').value = 5;
+                    }
+
+                    if (estatusOP_ != "Terminada") {
+                        existeopPendiente = true;
+                        document.getElementById('txtL1').value = item.EestadoL1;
+                        document.getElementById('txtL2').value = item.EestadoL2;
+                        document.getElementById('txtL3').value = item.EestadoL3;
+                        document.getElementsByName('EstadoOP')[0].value = estatusOP_;
+                        document.getElementsByName('EstadoOP')[1].value = estatusOP_;
+                        document.getElementsByName('EstadoOP')[2].value = estatusOP_;
+                        document.getElementsByName('EstadoOP')[3].value = estatusOP_;
+                        document.getElementsByName('EstadoOP')[4].value = estatusOP_;
+                        document.getElementsByName('DataspanOP')[0].value = item.OP;
+                        document.getElementsByName('DataspanOP')[1].value = item.OP;
+                        document.getElementsByName('DataspanOP')[2].value = item.OP;
+                        document.getElementsByName('DataspanOP')[3].value = item.OP;
+                        document.getElementsByName('DataspanOP')[4].value = item.OP;
+                        document.getElementsByName('NAVI')[0].value = item.ProductoOP;
+                        document.getElementsByName('NAVI')[1].value = item.ProductoOP;
+                        document.getElementsByName('NAVI')[2].value = item.ProductoOP;
+                        document.getElementsByName('NAVI')[3].value = item.ProductoOP;
+                        document.getElementsByName('NAVI')[4].value = item.ProductoOP;
+                        document.getElementsByName('NombreProducto')[0].value = item.Descripcion;
+                        document.getElementsByName('NombreProducto')[1].value = item.Descripcion;
+                        document.getElementsByName('NombreProducto')[2].value = item.Descripcion;
+                        document.getElementsByName('NombreProducto')[3].value = item.Descripcion;
+                        document.getElementsByName('NombreProducto')[4].value = item.Descripcion;
+                        document.getElementsByName('UnidadesFabricar')[0].value = item.Cantidad;
+                        document.getElementsByName('UnidadesFabricar')[1].value = item.Cantidad;
+                        document.getElementsByName('UnidadesFabricar')[2].value = item.Cantidad;
+                        document.getElementsByName('UnidadesFabricar')[3].value = item.Cantidad;
+                        document.getElementsByName('UnidadesFabricar')[4].value = item.Cantidad;
+                        document.getElementsByName('Cliente')[0].value = item.NombreCliente;
+                        document.getElementsByName('Cliente')[1].value = item.NombreCliente;
+                        document.getElementsByName('Cliente')[2].value = item.NombreCliente;
+                        document.getElementsByName('Cliente')[3].value = item.NombreCliente;
+                        document.getElementsByName('Cliente')[4].value = item.NombreCliente;
+                        document.getElementsByName('Lavado')[0].value = item.TiempoLavado;
+                        document.getElementsByName('Lavado')[1].value = item.TiempoLavado;
+                        document.getElementsByName('Lavado')[2].value = item.TiempoLavado;
+                        document.getElementsByName('Lavado')[3].value = item.TiempoLavado;
+                        document.getElementsByName('Lavado')[4].value = item.TiempoLavado;
+
+                        //L1
+                        var estatusOPL = item.EestadoL1;
+                        var estatusOPL_ = "";
+                        if (estatusOPL == 1) {
+                            estatusOPL_ = "Esperando"
+                        }
+                        if (estatusOPL == 2) {
+                            estatusOPL_ = "Envasando"
+                        }
+                        if (estatusOPL == 3) {
+                            estatusOPL_ = "Detenida"
+                        }
+
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+                        }
+
+                        if (estatusOPL == 6) {
+                            estatusOPL_ = "Reiniciando"
+                        }
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
+                        if (estatusOPL == 7) {
+                            estatusOPL_ = "Esperando Lavado"
+                        }
+
+                        document.getElementById('spanEstatusL1').innerHTML = "ESTADO:" + estatusOPL_;
+
+                        //L2
+                        estatusOPL = item.EestadoL2;
+
+                        if (estatusOPL == 1) {
+                            estatusOPL_ = "Esperando"
+                        }
+                        if (estatusOPL == 2) {
+                            estatusOPL_ = "Envasando"
+                        }
+                        if (estatusOPL == 3) {
+                            estatusOPL_ = "Detenida"
+                        }
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+                        }
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
+                        if (estatusOPL == 6) {
+                            estatusOPL_ = "Reiniciando"
+                        }
+                        if (estatusOPL == 7) {
+                            estatusOPL_ = "Esperando Lavado"
+                        }
+
+                        document.getElementById('spanEstatusL2').innerHTML = "ESTADO:" + estatusOPL_;
+
+
+                        //L3
+                        estatusOPL = item.EestadoL3;
+                        if (estatusOPL == 1) {
+                            estatusOPL_ = "Esperando"
+                        }
+                        if (estatusOPL == 2) {
+                            estatusOPL_ = "Envasando"
+                        }
+                        if (estatusOPL == 3) {
+                            estatusOPL_ = "Detenida"
+
+                        }
+
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+                        }
+
+
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
+
+                        if (estatusOPL == 6) {
+                            estatusOPL_ = "Reiniciando"
+                        }
+
+                        if (estatusOPL == 7) {
+                            estatusOPL_ = "Esperando Lavado"
+                        }
+                        document.getElementById('spanEstatusL3').innerHTML = "ESTADO:" + estatusOPL_;
+
+                        //TimerL3
+                        if (item.EestadoL3 == 3) {
+                            var String_ValueDateL3 = item.FechaParadaL3;
+                            var value = new Date(parseInt(String_ValueDateL3.replace(/(^.*\()|([+-].*$)/g, '')));
+                            // var dat = value.toLocaleString();
+                            MinParadaL3 = item.MinParadaL3;
+                            ShowTimerL3(value);
+                            //Mostrar reinicios y ocultar paradas, solo si está detenida 
+                            document.getElementById('ReinicioParada1L3').style.display = "inline";
+                            document.getElementById('ReinicioParada2L3').style.display = "inline";
+                            document.getElementById('ReinicioParada3L3').style.display = "inline";
+                            //paradas
+                            document.getElementById('Parada1L3').style.display = "none";
+                            document.getElementById('Parada2L3').style.display = "none";
+                            document.getElementById('Parada3L3').style.display = "none";
+                        }
+                        else {
+                            //Ocultar reinicios y mostrar paradas, solo si no está detenida 
+                            document.getElementById('ReinicioParada1L3').style.display = "none";
+                            document.getElementById('ReinicioParada2L3').style.display = "none";
+                            document.getElementById('ReinicioParada3L3').style.display = "none";
+                            //paradas
+                            document.getElementById('Parada1L3').style.display = "inline";
+                            document.getElementById('Parada2L3').style.display = "inline";
+                            document.getElementById('Parada3L3').style.display = "inline";
+                        }
+
+                        //TimerL2
+                        if (item.EestadoL2 == 3) {
+                            var String_ValueDateL2 = item.FechaParadaL2;
+                            var valueL2 = new Date(parseInt(String_ValueDateL2.replace(/(^.*\()|([+-].*$)/g, '')));
+                            //var datL2 = valueL2.toLocaleString();
+                            MinParadaL2 = item.MinParadaL2;
+                            ShowTimerL2(valueL2);
+                            //Mostrar reinicios y ocultar paradas, solo si está detenida 
+                            document.getElementById('ReinicioParada1L2').style.display = "inline";
+                            document.getElementById('ReinicioParada2L2').style.display = "inline";
+                            document.getElementById('ReinicioParada3L2').style.display = "inline";
+                            //paradas
+                            document.getElementById('Parada1L2').style.display = "none";
+                            document.getElementById('Parada2L2').style.display = "none";
+                            document.getElementById('Parada3L2').style.display = "none";
+                        }
+                        else {
+                            //Ocultar reinicios y mostrar paradas, solo si no está detenida 
+                            document.getElementById('ReinicioParada1L2').style.display = "none";
+                            document.getElementById('ReinicioParada2L2').style.display = "none";
+                            document.getElementById('ReinicioParada3L2').style.display = "none";
+                            //paradas
+                            document.getElementById('Parada1L2').style.display = "inline";
+                            document.getElementById('Parada2L2').style.display = "inline";
+                            document.getElementById('Parada3L2').style.display = "inline";
+                        }
+
+                        //TimerL1
+                        if (item.EestadoL1 == 3) {
+                            var String_ValueDateL1 = item.FechaParadaL1;
+                            var valueL1 = new Date(parseInt(String_ValueDateL1.replace(/(^.*\()|([+-].*$)/g, '')));
+                            //var datL1 = valueL1.toLocaleString();
+                            MinParadaL1 = item.MinParadaL1;
+                            ShowTimerL1(valueL1);
+
+                            //Mostrar reinicios y ocultar paradas, solo si está detenida 
+                            document.getElementById('ReinicioParada1L1').style.display = "inline";
+                            document.getElementById('ReinicioParada2L1').style.display = "inline";
+                            document.getElementById('ReinicioParada3L1').style.display = "inline";
+                            //paradas
+                            document.getElementById('Parada1L1').style.display = "none";
+                            document.getElementById('Parada2L1').style.display = "none";
+                            document.getElementById('Parada3L1').style.display = "none";
+                        }
+                        else {
+                            //Ocultar reinicios y mostrar paradas, solo si no está detenida 
+                            document.getElementById('ReinicioParada1L1').style.display = "none";
+                            document.getElementById('ReinicioParada2L1').style.display = "none";
+                            document.getElementById('ReinicioParada3L1').style.display = "none";
+                            //paradas
+                            document.getElementById('Parada1L1').style.display = "inline";
+                            document.getElementById('Parada2L1').style.display = "inline";
+                            document.getElementById('Parada3L1').style.display = "inline";
+                        }
+
+
+                        //Inicio 
+                        document.getElementById('normal-select-1').value = item.InicioHoraL1;
+                        document.getElementById('normal-select-2').value = item.InicioMinutosL1;
+                        document.getElementById('normal-select-3').value = item.InicioHoraL2;
+                        document.getElementById('normal-select-4').value = item.InicioMinutosL2;
+                        document.getElementById('normal-select-5').value = item.InicioHoraL3;
+                        document.getElementById('normal-select-6').value = item.InicioMinutosL3;
+
+                        //Hora de finalización
+                        document.getElementsByName('normal-select-7Fin')[0].value = item.FinHoraL1;
+                        document.getElementById('normal-select-8').value = item.FinMinutosL1;
+                        document.getElementById('normal-select-9').value = item.FinHoraL2;
+                        document.getElementById('normal-select-10').value = item.FinMinutosL2;
+                        document.getElementById('normal-select-11').value = item.FinHoraL3;
+                        document.getElementById('normal-select-12').value = item.FinMinutosL3;
+
+
+                        //las posibilidades para que se habilite el lavado
+                        if (item.EestadoOP != 5) {
+
+
+                            if (item.EestadoL1 == 5 && item.EestadoL2 == 5 && item.EestadoL3 == 5 && item.estatusOP != 5) {
+
+                                document.getElementById('divIniciarLavado').style.display = 'inline';
+                            }
+                            else if (item.EestadoL1 == 5 && item.EestadoL2 == 5 && item.EestadoL3 == 1
+                                || (item.EestadoL1 == 5 && item.EestadoL2 == 1 && item.EestadoL3 == 1)
+                                || (item.EestadoL1 == 1 && item.EestadoL2 == 1 && item.EestadoL3 == 5)
+                                || (item.EestadoL1 == 1 && item.EestadoL2 == 5 && item.EestadoL3 == 1)
+                                || (item.EestadoL1 == 5 && item.EestadoL2 == 1 && item.EestadoL3 == 5)
+                                || (item.EestadoL1 == 1 && item.EestadoL2 == 5 && item.EestadoL3 == 5)
+
+                            ) {
+                                document.getElementById('divIniciarLavado').style.display = 'inline';
+                            }
+
+                            if (item.EestadoL1 == 4 || item.EestadoL2 == 4 || item.EestadoL3 == 4) {
+
+                                document.getElementById('divLavando').style.display = 'inline';
+                                var String_ValueDate = item.FechaInicioLavado;
+                                var value = new Date(parseInt(String_ValueDate.replace(/(^.*\()|([+-].*$)/g, '')));
+                                // var dat = value.toLocaleString();
+                                MinParadaL1 = item.TiempoLavado;
+                                ShowTimerLavandoL1(value);
+
+                                MinParadaL2 = item.TiempoLavado;
+                                ShowTimerLavandoL2(value);
+
+                                MinParadaL3 = item.TiempoLavado;
+                                ShowTimerLavandoL3(value);
+
+                            }
+                            else {
+                                document.getElementById('divLavando').style.display = 'none';
+                            }
+
+                        }
+
+                        return; //si existe una en proceso ya no valida ninuga otra
+
+                    }
+
+                    // $('#TableOP').append("<tr><td>" + item.OP + "</td><td>" + item.ProductoOP + "</td><td>" + item.Descripcion + "</td><td>" + item.Cantidad + "</td><td>" + item.NombreCliente + "</td><td>" + item.TiempoLavado + " Minutos" + "</td><td>" + estatusOP_ + "</td></tr>");
+                    count += 1;
+                    // swal('OP válida \n' + item.OP + '', 'Producto: ' + item.Descripcion + '\n\n Hemos terminado de consultar la información de la OP, presione “Ok” para continuar', 'success');
+                    return true;
+                });
+                if ((!existeopPendiente && document.getElementById('HiddenEstadoOP').value == 5) || !exists) {
+                    document.getElementById('ConfiguracionA').click();
+                }
+            },
+            failure: function (r) {
+                //alert('Error al recuperar los permisos...');
+                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            },
+            error: function (r) {
+                // alert(r.error + " Permisos");
+                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            }
+
+        });
+
+    }
+    catch (err) {
+        swal('Error:', 'No podemos cargar tus datos en este momento, comuníquese al whatsapp 55-6874-9040 para obtener  ayuda', 'error');
+        return false;
+    }
+    return false;
+
+}
+
+function OPResgistradasSelectTable() {
 
     
     $("#TableOP tbody tr").each(function () {
@@ -820,6 +1540,65 @@ function OPMonitoreada() {
                         }
 
                         document.getElementById('spanEstatusL3').innerHTML = "ESTADO:" + estatusOPL_;
+
+                        //TimerL1
+                        if (item.EestadoL1 == 3) {
+
+                            var String_ValueDateL1 = item.FechaParadaL1;
+                            var valueL1 = new Date(parseInt(String_ValueDateL1.replace(/(^.*\()|([+-].*$)/g, '')));
+                            //var datL1 = valueL1.toLocaleString();
+                            MinParadaL1 = item.MinParadaL1;
+                            ShowTimerL1(valueL1);
+                        }
+
+                        else {
+                            MinParadaL1 = 0;
+                        }
+
+                        //TimerL2
+                        if (item.EestadoL2 == 3) {
+
+                            var String_ValueDateL2 = item.FechaParadaL2;
+                            var valueL2 = new Date(parseInt(String_ValueDateL2.replace(/(^.*\()|([+-].*$)/g, '')));
+                            //var datL1 = valueL1.toLocaleString();
+                            MinParadaL2 = item.MinParadaL2;
+                            ShowTimerL2(valueL2);
+                        }
+                        else
+                        {
+                            MinParadaL2 = 0;
+                        }
+
+                        //TimerL3
+                        if (item.EestadoL3 == 3) {
+
+                            var String_ValueDateL3 = item.FechaParadaL3;
+                            var valueL3 = new Date(parseInt(String_ValueDateL3.replace(/(^.*\()|([+-].*$)/g, '')));
+                            //var datL1 = valueL1.toLocaleString();
+                            MinParadaL3 = item.MinParadaL3;
+                            ShowTimerL3(valueL3);
+                        }
+                        else {
+                           
+                            MinParadaL3 = 0;
+                            document.getElementById('tooltipL3').innerHTML = "";
+                           
+                        }
+
+                        if (item.EestadoL1 == 4 || item.EestadoL2 == 4 || item.EestadoL3 == 4) {
+
+                            var String_ValueDate = item.FechaInicioLavado;
+                            var value = new Date(parseInt(String_ValueDate.replace(/(^.*\()|([+-].*$)/g, '')));
+                            // var dat = value.toLocaleString();
+                            MinParadaL1 = item.TiempoLavado;
+                            MinParadaL2 = item.TiempoLavado;
+                            MinParadaL3 = item.TiempoLavado;
+
+                            ShowTimerL1(value);
+                            ShowTimerL2(value);
+                            ShowTimerL3(value);
+                            
+                        }
 
                     }
                    

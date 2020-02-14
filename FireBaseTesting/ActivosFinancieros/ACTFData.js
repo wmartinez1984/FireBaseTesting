@@ -1,4 +1,209 @@
-﻿function KeyListData() {
+﻿function ActivosRegistradosEliminar(btn) {
+
+    try {
+
+
+        
+        swal('Eliminando…', 'Estamos eliminando el Activo, por favor espere, no cierre esta ventana hasta que el proceso termine…', 'warning');
+        $.ajax({
+            type: "POST",
+            url: "Activos.ashx?Action=DeleteAct&id=" + btn.title + "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                ActivosRegistradosList();
+                swal('Eliminado!', 'El Activo fue eliminado correctamente', 'success');
+
+            },
+            failure: function (r) {
+                swal('Error:', 'Error al eliminar el Activo, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            },
+            error: function (r) {
+                swal('Error:', 'Error al eliminar el Activo, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            }
+
+        });
+
+
+
+    }
+    catch (err) {
+        swal('Error:', 'Error al eliminar el Activo, por favor verifique los datos y vuelva a intentarlo', 'error');
+        return false;
+    }
+
+    return false;
+
+}
+
+function ActivosRegistradosList() {
+
+   
+    $("#TableActivosRegistrados tbody tr").each(function () {
+        this.parentNode.removeChild(this);
+    });
+
+    try {
+        $.ajax({
+            type: "POST",
+            url: "Activos.ashx?Action=ActivoRegistradosList",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var exists = false;
+                var count = 0;
+                $.each(data, function (index, item) {
+                    exists = true;
+                    $('#TableActivosRegistrados').append("<tr>  <td style='text-align:center;'>" + item.symbol + "</td><td style='text-align:center;'>" + item.name + "</td><td style='text-align:center;'>" + item.type + "</td> <td style='text-align:center;'>" + item.region + "</td> <td style='text-align:center;'>" + item.marketOpen + "</td> <td style='text-align:center;'>" + item.marketClose + "</td> <td style='text-align:center;'>" + item.timezone + "</td> <td style='text-align:center;'>" + item.currency + "</td> <td style='text-align:center;'>" + item.matchScore + "</td><td style='text-align:center;'><button style='width: 100px; background - color: #ff0000; border - radius: 12px;' title='" + item.id + "' onclick='ActivosRegistradosEliminar(this); return false;'>- Eliminar </button></td> </tr>");
+                    
+                });
+
+
+            },
+            failure: function (r) {
+               
+                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            },
+            error: function (r) {               
+                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            }
+
+        });
+
+    }
+    catch (err) {
+        swal('Error:', 'No podemos cargar tus datos en este momento', 'error');
+        return false;
+    }
+    return false;
+
+}
+function ActivoSave(obj) {
+    var str = obj.title;
+    var res = str.split("|");
+
+    //VALIDAR SI EXISTE
+    var ExistsKey = false;
+    var table = document.getElementById("TableActivosRegistrados");
+    var r = 0;
+    while (row = table.rows[r++]) {
+        var c = 0;
+        while (cell = row.cells[c++]) {
+            if (c == 2) {
+                var span = cell.innerHTML; //Obtengo el span que está dentro de la celda
+                //pregunto si es igual a lo que se está capturando
+                if (res[1] == span) {
+                    ExistsKey = true;
+                    break;
+                }
+
+            }
+        }
+    }
+    // 
+    if (ExistsKey) {
+        swal('Error:', 'Ya está registrado el Activo ' + res[1] +' ', 'error');
+        return false;
+
+    }
+
+    swal('Registrando...', 'Estamos registrando los datos, por favor espere....', 'warning');
+    try {
+        $.ajax({
+            type: "POST",
+            url: "Activos.ashx?Action=ActivoInsert&symbol=" + res[0] +
+                "&name=" + res[1] +
+                "&type=" + res[2] +
+                "&region=" + res[3] +
+                "&marketOpen=" + res[4] +
+                "&marketClose=" + res[5] +
+                "&timezone=" + res[6] +
+                "&currency=" + res[7] +
+                "&matchScore=" + res[8] +"",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                    ActivosRegistradosList();
+                    swal('Datos guardados', 'El activo se registró correctamente en el sistema', 'success');
+               
+            },
+            failure: function (r) {               
+                swal('Error:', 'No podemos guardar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            },
+            error: function (r) {
+               
+                swal('Error:', 'No podemos guardar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            }
+
+        });
+
+    }
+    catch (err) {
+        swal('Error:', 'No podemos guardar los datos en este momento', 'error');
+        return false;
+    }
+    return false;
+
+}
+
+function ActivoList(keywords) {
+
+    document.getElementById('message').innerHTML = "Consultando información...";
+    $("#TableActivos tbody tr").each(function () {
+        this.parentNode.removeChild(this);
+    });
+   
+    try {
+        $.ajax({
+            type: "POST",
+            url: "Activos.ashx?Action=ActivoList&keywords=" + keywords +"",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var exists = false;
+                var count = 0;
+                $.each(data, function (index, item) {
+                    exists = true;
+
+                    $('#TableActivos').append("<tr>  <td style='text-align:center;'>" + item.symbol + "</td><td style='text-align:center;'>" + item.name + "</td><td style='text-align:center;'>" + item.type + "</td> <td style='text-align:center;'>" + item.region + "</td> <td style='text-align:center;'>" + item.marketOpen + "</td> <td style='text-align:center;'>" + item.marketClose + "</td> <td style='text-align:center;'>" + item.timezone + "</td> <td style='text-align:center;'>" + item.currency + "</td> <td style='text-align:center;'>" + item.matchScore + "</td><td style='text-align:center;'><button style='width: 100px; background - color: #ff0000; border - radius: 12px;' title='" + item.symbol + "|" + item.name + "|" + item.type + "|" + item.region + "|" + item.marketOpen + "|" + item.marketClose + "|" + item.timezone + "|" + item.currency + "|" + item.matchScore  + "' onclick='ActivoSave(this); return false;'>+ Guardar </button></td> </tr>");
+                    document.getElementById('message').innerHTML = "";
+                });
+
+                
+            },
+            failure: function (r) {
+                document.getElementById('message').innerHTML = "";
+                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            },
+            error: function (r) {
+                // alert(r.error + " Permisos");
+                document.getElementById('message').innerHTML = "";
+                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                return false;
+            }
+
+        });
+
+    }
+    catch (err) {
+        document.getElementById('message').innerHTML = "";
+        swal('Error:', 'No podemos cargar tus datos en este momento', 'error');
+        return false;
+    }
+    return false;
+
+}
+
+function KeyListData() {
 
     //document.getElementById('HiddenEstadoOP').value = 5;
     $("#KeytableList tbody tr").each(function () {
@@ -49,7 +254,7 @@
 
     }
     catch (err) {
-        swal('Error:', 'No podemos cargar tus datos en este momento, comuníquese al whatsapp 55-6874-9040 para obtener  ayuda', 'error');
+        swal('Error:', 'No podemos cargar tus datos en este momento', 'error');
         return false;
     }
     return false;

@@ -55,14 +55,7 @@
 			<tr>
 				
 				<td colspan="3" style="text-align:left;">
-					<div class="searchBox" style="">
-					  <input class="searchInput" type="text" name="" id="txtsearchInput" placeholder="Consultar" />
-					  <button class="searchButton" onclick="DataClient(); return false;">
-						<i class="material-icons">
-						  OP
-						</i>
-					  </button>
-					</div>
+					
 					<br />
 					<br />
 				</td>
@@ -76,6 +69,7 @@
 				</td>
 				<td colspan="2">
 					<span id="spnOP" style="font-size:14px;"></span>
+
 				</td>
 			</tr>
 			<tr>

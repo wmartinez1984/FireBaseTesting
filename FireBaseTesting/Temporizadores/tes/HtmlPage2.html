@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div style="height:350px; width:100%; background-color:#343f4f; border-radius:20px; position:relative; ">
+        
+        <div style="height:310px; width:100%; background-color:#ffffff; position:absolute; top: 10px;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+          width: 20px; border-radius:20px; " id="divCrono1">
+            <table style="margin:auto;color:red; position:absolute; width:100%; ">
+                <tr>
+                    <td style="text-align:center;">
+                        <span style="font-size:40px;">000000</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+       
+          
+
+            var count = 100;
+            var counter = setInterval(timer, 1000);
+
+            function timer() {
+                count -= 1;
+                if (count === -1) {
+                    alert("Tiempo terminado");
+                    clearInterval(counter);
+                    return;
+                   
+                }
+
+                document.getElementById("divCrono1").style.width = count+"%";
+            }
+        
+
+    </script>
+</body>
+    
+</html>

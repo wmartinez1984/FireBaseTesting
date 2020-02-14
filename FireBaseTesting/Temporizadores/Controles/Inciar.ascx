@@ -8,10 +8,9 @@
  <td>
 	<div class="control"><label for="message">Incio L1: </label></div>
  </td>
- <td>
-		<select id="normal-select-1" class="select-css" >
-				<option value="" class="select-dropdown__list-item">Seleccione</option>
-				<option value="1" class="select-dropdown__list-item">01 Hora</option>
+ <td style="display:none;">
+		<select id="normal-select-1" class="select-css" >				
+				<option value="1" selected="selected" class="select-dropdown__list-item">01 Hora</option>
 				<option value="2" class="select-dropdown__list-item">02 Horas</option>
 				<option value="3" class="select-dropdown__list-item">03 Horas</option>
 				<option value="4" class="select-dropdown__list-item">04 Horas</option>
@@ -37,11 +36,10 @@
 				<option value="24" class="select-dropdown__list-item">24 Horas</option>
 			</select>
 	</td>
-	<td>
-			<select id="normal-select-2" class="select-css" >
-				<option value="" class="select-dropdown__list-item">Seleccione</option>
+	<td style="display:none;">
+			<select id="normal-select-2" class="select-css" >				
 				<option value="0" class="select-dropdown__list-item">00 Minutos</option>
-				<option value="1" class="select-dropdown__list-item">01 Minuto</option>
+				<option value="1" selected="selected" class="select-dropdown__list-item">01 Minuto</option>
 				<option value="2" class="select-dropdown__list-item">02 Minutos</option>
 				<option value="3" class="select-dropdown__list-item">03 Minutos</option>
 				<option value="4" class="select-dropdown__list-item">04 Minutos</option>
@@ -103,18 +101,17 @@
 			</select>
 	</td>
 	<td>
-		<input class="btn" type="button" value="Iniciar" onclick="IniciandoLineaPrimeraVez(1);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
+		<input class="btn" type="button" value="Iniciar" onclick="IniciandoLineaPrimeraVezv2(1);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
 	</td>
 </tr>
 <tr>
 	<td>
 		<div class="control"><label for="message">Iniciar L2: </label></div>
 	</td>
-	<td>
+	<td style="display:none;">
 		<select id="normal-select-3" class="select-css" >
-			<option value="" class="select-dropdown__list-item">Seleccione</option>
-			<option value="1" class="select-dropdown__list-item">01 Hora</option>
-			<option value="2" class="select-dropdown__list-item">02 Horas</option>
+			<option value="1" selected="selected" class="select-dropdown__list-item">01 Hora</option>
+			<option value="2"  class="select-dropdown__list-item">02 Horas</option>
 			<option value="3" class="select-dropdown__list-item">03 Horas</option>
 			<option value="4" class="select-dropdown__list-item">04 Horas</option>
 			<option value="5" class="select-dropdown__list-item">05 Horas</option>
@@ -139,11 +136,10 @@
 			<option value="24" class="select-dropdown__list-item">24 Horas</option>
 			</select>
 	</td>
-	<td>
+	<td style="display:none;">
 			<select id="normal-select-4" class="select-css" >
-			<option value="" class="select-dropdown__list-item">Seleccione</option>
 			<option value="0" class="select-dropdown__list-item">00 Minutos</option>
-			<option value="1" class="select-dropdown__list-item">01 Minuto</option>
+			<option value="1" selected="selected" class="select-dropdown__list-item">01 Minuto</option>
 			<option value="2" class="select-dropdown__list-item">02 Minutos</option>
 			<option value="3" class="select-dropdown__list-item">03 Minutos</option>
 			<option value="4" class="select-dropdown__list-item">04 Minutos</option>
@@ -205,17 +201,16 @@
 			</select>
 	</td>
 	<td>
-		<input class="btn" type="button" value="Iniciar" onclick="IniciandoLineaPrimeraVez(2);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
+		<input class="btn" type="button" value="Iniciar" onclick="IniciandoLineaPrimeraVezv2(2);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
 	</td>
 </tr>
 <tr>
 	<td>
 		<div class="control"><label for="message">Inciar L3: </label></div>
 	</td>
-	<td>
+	<td style="display:none;">
 		<select id="normal-select-5" class="select-css" >
-		<option value="" class="select-dropdown__list-item">Seleccione</option>
-			<option value="1" class="select-dropdown__list-item">01 Hora</option>
+			<option value="1" selected="selected" class="select-dropdown__list-item">01 Hora</option>
 			<option value="2" class="select-dropdown__list-item">02 Horas</option>
 			<option value="3" class="select-dropdown__list-item">03 Horas</option>
 			<option value="4" class="select-dropdown__list-item">04 Horas</option>
@@ -241,10 +236,9 @@
 			<option value="24" class="select-dropdown__list-item">24 Horas</option>
 			</select>
 	</td>
-	<td>
+	<td style="display:none;">
 			<select id="normal-select-6" class="select-css" >
-			<option value="" class="select-dropdown__list-item">Seleccione</option>
-			<option value="0" class="select-dropdown__list-item">00 Minutos</option>
+			<option value="0" selected="selected" class="select-dropdown__list-item">00 Minutos</option>
 			<option value="1" class="select-dropdown__list-item">01 Minuto</option>
 			<option value="2" class="select-dropdown__list-item">02 Minutos</option>
 			<option value="3" class="select-dropdown__list-item">03 Minutos</option>
@@ -307,7 +301,7 @@
 			</select>
 	</td>
 	<td>
-		<input class="btn" type="button" value="Iniciar" onclick="IniciandoLineaPrimeraVez(3);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
+		<input class="btn" type="button" value="Iniciar" onclick="IniciandoLineaPrimeraVezv2(3);" style="background-color:#058616; color:#ffffff; font-size:19px;border-radius:10px;width:110px; height:50px;">                
 	</td>
  </tr>
 </table>
@@ -319,10 +313,9 @@
 <td>
 	<div class="control"><label for="message">Finalizar L1: </label></div>
 </td>
-<td>
+<td style="display:none;">
 		<select id="normal-select-7" name="normal-select-7Fin" class="select-css" >
-				<option value="" class="select-dropdown__list-item">Seleccione</option>
-				<option value="1" class="select-dropdown__list-item">01 Hora</option>
+				<option value="1" selected="selected" class="select-dropdown__list-item">01 Hora</option>
 				<option value="2" class="select-dropdown__list-item">02 Horas</option>
 				<option value="3" class="select-dropdown__list-item">03 Horas</option>
 				<option value="4" class="select-dropdown__list-item">04 Horas</option>
@@ -348,10 +341,9 @@
 				<option value="24" class="select-dropdown__list-item">24 Horas</option>
 			</select>
 	</td>
-	<td>
+	<td style="display:none;">
 			<select id="normal-select-8" class="select-css" >
-				<option value="" class="select-dropdown__list-item">Seleccione</option>
-				<option value="0" class="select-dropdown__list-item">00 Minutos</option>
+				<option value="0" selected="selected" class="select-dropdown__list-item">00 Minutos</option>
 				<option value="1" class="select-dropdown__list-item">01 Minuto</option>
 				<option value="2" class="select-dropdown__list-item">02 Minutos</option>
 				<option value="3" class="select-dropdown__list-item">03 Minutos</option>
@@ -421,10 +413,9 @@
 	<td>
 		<div class="control"><label for="message">Finalizar L2: </label></div>
 	</td>
-	<td>
+	<td style="display:none;">
 		<select id="normal-select-9" class="select-css" >
-			<option value="" class="select-dropdown__list-item">Seleccione</option>
-			<option value="1" class="select-dropdown__list-item">01 Hora</option>
+			<option value="1" selected="selected" class="select-dropdown__list-item">01 Hora</option>
 			<option value="2" class="select-dropdown__list-item">02 Horas</option>
 			<option value="3" class="select-dropdown__list-item">03 Horas</option>
 			<option value="4" class="select-dropdown__list-item">04 Horas</option>
@@ -450,11 +441,10 @@
 			<option value="24" class="select-dropdown__list-item">24 Horas</option>
 			</select>
 	</td>
-	<td>
+	<td style="display:none;">
 			<select id="normal-select-10" class="select-css" >
-			<option value="" class="select-dropdown__list-item">Seleccione</option>
 			<option value="0" class="select-dropdown__list-item">00 Minutos</option>
-			<option value="1" class="select-dropdown__list-item">01 Minuto</option>
+			<option value="1" selected="selected" class="select-dropdown__list-item">01 Minuto</option>
 			<option value="2" class="select-dropdown__list-item">02 Minutos</option>
 			<option value="3" class="select-dropdown__list-item">03 Minutos</option>
 			<option value="4" class="select-dropdown__list-item">04 Minutos</option>
@@ -523,11 +513,10 @@
 	<td>
 		<div class="control"><label for="message">Finalizar L3: </label></div>
 	</td>
-	<td>
+	<td style="display:none;">
 		<select id="normal-select-11" class="select-css" >
-		<option value="" class="select-dropdown__list-item">Seleccione</option>
-			<option value="1" class="select-dropdown__list-item">01 Hora</option>
-			<option value="2" class="select-dropdown__list-item">02 Horas</option>
+			<option value="1" selected="selected" class="select-dropdown__list-item">01 Hora</option>
+			<option value="2" selected="selected" class="select-dropdown__list-item">02 Horas</option>
 			<option value="3" class="select-dropdown__list-item">03 Horas</option>
 			<option value="4" class="select-dropdown__list-item">04 Horas</option>
 			<option value="5" class="select-dropdown__list-item">05 Horas</option>
@@ -552,11 +541,10 @@
 			<option value="24" class="select-dropdown__list-item">24 Horas</option>
 			</select>
 	</td>
-	<td>
+	<td style="display:none;">
 			<select id="normal-select-12" class="select-css" >
-			<option value="" class="select-dropdown__list-item">Seleccione</option>
 			<option value="0" class="select-dropdown__list-item">00 Minutos</option>
-			<option value="1" class="select-dropdown__list-item">01 Minuto</option>
+			<option value="1" selected="selected" class="select-dropdown__list-item">01 Minuto</option>
 			<option value="2" class="select-dropdown__list-item">02 Minutos</option>
 			<option value="3" class="select-dropdown__list-item">03 Minutos</option>
 			<option value="4" class="select-dropdown__list-item">04 Minutos</option>
