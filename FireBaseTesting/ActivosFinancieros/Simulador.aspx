@@ -297,6 +297,11 @@
                     Technical Analysis:
                 </strong> 
              </p>
+             <p>
+                 <strong style="font-size:15px;">
+                    Total consultas ejecutadas: <span id="spanTotal">0</span>
+                </strong> 
+             </p>
             <table class="table table-striped table-bordered table-hover" id="TableResult" style="width:100%;">
             <thead>
                 <tr style="background-color:#009688;">

@@ -43,6 +43,7 @@ namespace FireBaseTesting.ActivosFinancieros
             string indicador = parametro.Request.QueryString["indicador"];
             string Sesiones = parametro.Request.QueryString["Sesiones"];
 
+            int TotalPeriodo = int.Parse(time_period);
             var dataTechnicaList = new List<DataTechnical>();
             DataTechnical dataTechnical = new DataTechnical();
             
@@ -52,10 +53,7 @@ namespace FireBaseTesting.ActivosFinancieros
                 webClient.Encoding = Encoding.UTF8;
                 webClient.Encoding = UTF8Encoding.UTF8;
                 webClient.Headers.Add("Content-Type", "application/json");
-                //WebProxy wp = new WebProxy("221.141.86.43", 1080);
-                //webClient.Proxy = wp;
-                var json = webClient.DownloadString("https://www.alphavantage.co/query?function="+ indicador + "&symbol="+ symbol  + "&interval="+ interval + "&time_period="+ time_period  + "&series_type="+ series_type + "&apikey="+ apikey +"");
-                JObject Search = JObject.Parse(json);
+                
                 //IList<JToken> results = FireBaseSearch["documents"].Children()["fields"].ToList();
                 //Search["Technical Analysis: "+ indicador +""].ToList();
                 //Lo siguiente es para validar si no hay un error en la respuesta del api, si lo hay me espero un minuto y vuelvo a intentarlo
@@ -66,6 +64,12 @@ namespace FireBaseTesting.ActivosFinancieros
                     retry = false;
                     try
                     {
+                        //WebProxy wp = new WebProxy("221.141.86.43", 1080);
+                        //webClient.Proxy = wp;
+                     
+                        var json = webClient.DownloadString("https://www.alphavantage.co/query?function=" + indicador + "&symbol=" + symbol + "&interval=" + interval + "&time_period=" + time_period + "&series_type=" + series_type + "&apikey=" + apikey + "");
+                        JObject Search = JObject.Parse(json);
+
                         IList<JToken> results = Search["Technical Analysis: " + indicador + ""].ToList();
                         
                         int count = 1;
@@ -95,10 +99,10 @@ namespace FireBaseTesting.ActivosFinancieros
                     }
                     catch (Exception ex)
                     {
-                        if (countTime < 5)
+                        if (countTime < 25)
                         {
                             retry = true;
-                            Thread.Sleep(60000);
+                            Thread.Sleep(15000);
                             countTime++;
                         }
                         else

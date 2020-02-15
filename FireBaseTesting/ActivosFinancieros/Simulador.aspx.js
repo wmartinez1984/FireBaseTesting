@@ -3,7 +3,7 @@
     var ApiKeyList = document.getElementById('spanApiKeys').innerHTML;
     var Keys = ApiKeyList.split('|');
     var countCall = 0;
-    var TotalCall = 59;
+    var TotalCall = 60;
     var periodo = 2;
     for (var i = 0; i < Keys.length; i++) {
         //Keys[i]
@@ -19,7 +19,6 @@
                     i = 0;
             }
             else {
-                alert(countCall);
                 return false;
             }
 
@@ -30,7 +29,7 @@
             i = 0;
 
     }
-    alert(countCall);
+  
     return false;
 }
 
@@ -96,8 +95,9 @@ function KeyListData() {
 
 function ApiTechnicalAnalysis(apikey, series_type, time_period, interval, symbol, indicador, columna) {
 
+    swal('Incia el proceso', 'Por favor espere, este proceso puede tardar varios minutos...', 'warning');
     var Sesiones = document.getElementById('txtSesiones').value;
-
+    var  ConsultaInicial = document.getElementById('spanTotal').innerHTML;
     var ValCell = document.getElementById("TableResult").rows[99].cells;
     ValCell[columna].innerHTML = apikey;
 
@@ -139,8 +139,16 @@ function ApiTechnicalAnalysis(apikey, series_type, time_period, interval, symbol
                 });
 
                 
-                if (!exists)
-                    swal('Sin Data:', 'No hemos podido extraer los datos', 'error');
+                if (!exists) {
+                    swal('Sin Data:', 'No hemos podido consultar información con  el Api Key ' + apikey + '', 'error');
+                }
+                else {
+
+                    var TotalConsultasEjecutadas = parseInt(document.getElementById('spanTotal').innerHTML);
+                    TotalConsultasEjecutadas += 1;
+                    document.getElementById('spanTotal').innerHTML = TotalConsultasEjecutadas;
+                }
+                   
 
             },
             failure: function (r) {
