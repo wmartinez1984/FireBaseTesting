@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace FireBaseTesting.Temporizadores
+namespace FireBaseTesting.Temporizadores.Controles
 {
 
 
-    public partial class EndLine
+    public partial class DataOP2
     {
     }
 }

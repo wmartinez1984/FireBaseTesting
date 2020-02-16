@@ -1,4 +1,7 @@
 ﻿function confirmar() {
+    document.getElementById('divConfirm').style.display = "none";
+    document.getElementById('divResultados').style.display = "inline";
+    window.scrollTo(0, 0);
 
     var ApiKeyList = document.getElementById('spanApiKeys').innerHTML;
     var Keys = ApiKeyList.split('|');
@@ -67,7 +70,7 @@ function KeyListData() {
                 }
 
                 if (exists)
-                    swal('Datos necesarios', 'Actualmente el sistema cuenta con ' + count + ' Api Key dadas de alta con su perfil de usuario, por lo cual está cumpliendo con lo necesario para ejecutar el proceso de simulación, le pedimos parametrizar correctamente los datos necesarios antes de iniciar, presione Ok para continuar :)  ', 'success');
+                    swal('Datos necesarios', 'No olvide parametrizar los datos necesarios para iniciar con la simulación, presione Ok para continuar :)  ', 'success');
                 
 
             },
@@ -95,7 +98,7 @@ function KeyListData() {
 
 function ApiTechnicalAnalysis(apikey, series_type, time_period, interval, symbol, indicador, columna) {
 
-    swal('Incia el proceso', 'Por favor espere, este proceso puede tardar varios minutos...', 'warning');
+    //swal('Incia el proceso', 'Por favor espere, este proceso puede tardar varios minutos...', 'warning');
     var Sesiones = document.getElementById('txtSesiones').value;
     var  ConsultaInicial = document.getElementById('spanTotal').innerHTML;
     var ValCell = document.getElementById("TableResult").rows[99].cells;
@@ -120,12 +123,14 @@ function ApiTechnicalAnalysis(apikey, series_type, time_period, interval, symbol
                             var fechaCell = document.getElementById("TableResult").rows[count].cells;
                             fechaCell[0].innerHTML = item.Name;
                             var ValCell = document.getElementById("TableResult").rows[count].cells;
-                            ValCell[1].innerHTML = item.Value + ":\n" + apikey + ":\n" + time_period;
+                            ValCell[1].innerHTML = item.Value;
+                           // ValCell[1].innerHTML = item.Value + ":\n" + apikey + ":\n" + time_period;
                         }
                         else {
 
                             var ValCell = document.getElementById("TableResult").rows[count].cells;
-                            ValCell[columna].innerHTML = item.Value + ":\n" + apikey + ":\n" + time_period;
+                            ValCell[columna].innerHTML = item.Value;
+                            //ValCell[columna].innerHTML = item.Value + ":\n" + apikey + ":\n" + time_period;
                             
                         }
                        
@@ -147,17 +152,23 @@ function ApiTechnicalAnalysis(apikey, series_type, time_period, interval, symbol
                     var TotalConsultasEjecutadas = parseInt(document.getElementById('spanTotal').innerHTML);
                     TotalConsultasEjecutadas += 1;
                     document.getElementById('spanTotal').innerHTML = TotalConsultasEjecutadas;
+
+                    if (TotalConsultasEjecutadas >=59)
+                        document.getElementById('spanEsperando').innerHTML = "El proceso ha terminado, puede continuar"; 
                 }
                    
 
             },
             failure: function (r) {
-
-                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                var TotalConsultasEjecutadas = parseInt(document.getElementById('spanTotal').innerHTML);
+                TotalConsultasEjecutadas += 1;
+                document.getElementById('spanTotal').innerHTML = TotalConsultasEjecutadas;
                 return false;
             },
             error: function (r) {
-                swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                var TotalConsultasEjecutadas = parseInt(document.getElementById('spanTotal').innerHTML);
+                TotalConsultasEjecutadas += 1;
+                document.getElementById('spanTotal').innerHTML = TotalConsultasEjecutadas;
                 return false;
             }
 
@@ -174,7 +185,15 @@ function ApiTechnicalAnalysis(apikey, series_type, time_period, interval, symbol
 
 
 function CrearTablaDinamicamente() {
-    
+    if (document.getElementById('SelectActivo').value == "") {
+        swal('Error:', 'Debe seleccionar un Activo', 'error');
+        return false;
+    }
+
+    if (document.getElementById('SelectIndicador').value == "") {
+        swal('Error:', 'Debe seleccionar un Indicador', 'error');
+        return false;
+    }
     //Limpio la tabla antes de agregar dinamicamente las filas 
     $("#TableResult tbody tr").each(function () {
         this.parentNode.removeChild(this);
@@ -261,8 +280,11 @@ function CrearTablaDinamicamente() {
     document.getElementById('SeriesType').innerHTML = document.getElementById('SelectTipoPrecio').value;
     document.getElementById('Sesiones').innerHTML = Sesiones;
 
-  
-
+    document.getElementById('divConfirm').style.display = "inline";
+    window.scrollTo(0, 0);
+    document.getElementById('divConfirm').className = "bs-example container";
+    document.getElementById('DivStep1').style.display = "none";
+    
    
 }
 
@@ -279,7 +301,7 @@ function ActivosRegistradosListComboBox() {
 
                 var exists = false;
                 var count = 0;
-                var s = '<option value="-1">Seleccione un Activo</option>';
+                var s = '<option value="">Seleccione un Activo</option>';
                 $.each(data, function (index, item) {
                     exists = true;
                     s += '<option value="' + item.symbol + '">' + item.name + '</option>';

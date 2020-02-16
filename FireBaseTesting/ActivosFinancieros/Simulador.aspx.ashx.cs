@@ -99,10 +99,10 @@ namespace FireBaseTesting.ActivosFinancieros
                     }
                     catch (Exception ex)
                     {
-                        if (countTime < 25)
+                        if (countTime < 100)
                         {
                             retry = true;
-                            Thread.Sleep(15000);
+                            Thread.Sleep(50000);
                             countTime++;
                         }
                         else

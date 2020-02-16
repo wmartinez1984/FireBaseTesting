@@ -1,5 +1,5 @@
 ﻿function OPResgistradasSelectEndLineP2() {
-
+   
     document.getElementById('HiddenEstadoOP').value = 5;
     //$("#TableOP tbody tr").each(function () {
     //        this.parentNode.removeChild(this);
@@ -117,7 +117,7 @@
 
                         var nuevoestatusL1 = "ESTADO:" + estatusOPL_;
                         if (document.getElementById('spanEstatusL1').innerHTML != nuevoestatusL1)
-                            location.reload()
+                            location.reload();
                         else
                             document.getElementById('spanEstatusL1').innerHTML = "ESTADO:" + estatusOPL_;
 
@@ -148,7 +148,7 @@
 
                         var nuevoestatusL2 = "ESTADO:" + estatusOPL_;
                         if (document.getElementById('spanEstatusL2').innerHTML != nuevoestatusL2)
-                            location.reload()
+                            location.reload();
                         else
                             document.getElementById('spanEstatusL2').innerHTML = "ESTADO:" + estatusOPL_;
 
@@ -185,7 +185,7 @@
 
                         var nuevoestatusL3 = "ESTADO:" + estatusOPL_;
                         if (document.getElementById('spanEstatusL3').innerHTML != nuevoestatusL3)
-                            location.reload()
+                            location.reload();
                         else
                             document.getElementById('spanEstatusL3').innerHTML = "ESTADO:" + estatusOPL_;
 
@@ -1525,12 +1525,17 @@ function OPMonitoreada() {
                             estatusOPL_ = "Envasando"
                         }
                         if (estatusOPL == 3) {
-                            estatusOPL_ = "Detenida"
+                            estatusOPL_ = "Detenida"                           
+                                                       
                         }
+                       
 
                         if (estatusOPL == 4) {
                             estatusOPL_ = "Lavando"
+                           
                         }
+                       
+
                         if (estatusOPL == 5) {
                             estatusOPL_ = "Terminada"
                         }
@@ -1599,7 +1604,9 @@ function OPMonitoreada() {
                             ShowTimerL3(value);
                             
                         }
-
+                      //  document.getElementById('divL3').style.transform = "rotateX(-90deg) translateY(75px)";
+                      
+                        
                     }
                    
                     //$('#TableOP').append("<tr><td>" + item.OP + "</td><td>" + item.ProductoOP + "</td><td>" + item.Descripcion + "</td><td>" + item.Cantidad + "</td><td>" + item.NombreCliente + "</td><td>" + item.TiempoLavado + " Minutos" + "</td><td>" + estatusOP_ + "</td></tr>");
@@ -1615,6 +1622,7 @@ function OPMonitoreada() {
                     //swal('Oops', 'No existe una OP en proceso', 'warning');
                     document.getElementById('messageUpdateData').innerHTML = "No existe una OP en proceso";
                 }
+
                     
             },
             failure: function (r) {
@@ -1632,7 +1640,7 @@ function OPMonitoreada() {
 
     }
     catch (err) {
-        swal('Error:', 'No podemos cargar tus datos en este momento, comuníquese al whatsapp 55-6874-9040 para obtener  ayuda', 'error');
+       // swal('Error:', 'No podemos cargar tus datos en este momento, comuníquese al whatsapp 55-6874-9040 para obtener  ayuda', 'error');
         return false;
     }
     return false;

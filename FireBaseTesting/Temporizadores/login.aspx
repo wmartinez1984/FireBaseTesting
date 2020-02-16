@@ -21,7 +21,7 @@
 
             else if (document.getElementById('username').value == "Nivel2") {
                                 
-                window.location.href = 'EndLine';
+                window.location.href = 'FinaldeLinea';
                 document.getElementById('spanMessage').innerHTML = "";
             }
             else {

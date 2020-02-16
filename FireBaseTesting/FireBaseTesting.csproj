@@ -449,6 +449,7 @@
     <Content Include="Temporizadores\Controles\ComandoDetenerL3.ascx" />
     <Content Include="Temporizadores\Controles\Comandos.ascx" />
     <Content Include="Temporizadores\Controles\DataOP.ascx" />
+    <Content Include="Temporizadores\Controles\DataOP2.ascx" />
     <Content Include="Temporizadores\Controles\DataOPL1.ascx" />
     <Content Include="Temporizadores\Controles\Inciar.ascx" />
     <Content Include="Temporizadores\CopiaEndLine.aspx" />
@@ -465,7 +466,10 @@
     <Content Include="Temporizadores\css\sweetalert.css" />
     <Content Include="Temporizadores\Data.aspx" />
     <Content Include="Temporizadores\EndLine.aspx" />
+    <Content Include="Temporizadores\EndLine\index.html" />
     <Content Include="Temporizadores\favicon.ico" />
+    <Content Include="Temporizadores\FinadeLinea.aspx" />
+    <Content Include="Temporizadores\FinaldeLinea.aspx" />
     <Content Include="Temporizadores\fonts\codropsicons\codropsicons.svg" />
     <Content Include="Temporizadores\fonts\codropsicons\license.txt" />
     <Content Include="Temporizadores\fonts\font-awesome-4.3.0\css\font-awesome.css" />
@@ -741,6 +745,13 @@
     <Compile Include="Temporizadores\Controles\DataOP.ascx.designer.cs">
       <DependentUpon>DataOP.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Temporizadores\Controles\DataOP2.ascx.cs">
+      <DependentUpon>DataOP2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\Controles\DataOP2.ascx.designer.cs">
+      <DependentUpon>DataOP2.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Temporizadores\Controles\DataOPL1.ascx.cs">
       <DependentUpon>DataOPL1.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -778,6 +789,20 @@
     </Compile>
     <Compile Include="Temporizadores\EndLine.aspx.designer.cs">
       <DependentUpon>EndLine.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\FinadeLinea.aspx.cs">
+      <DependentUpon>FinadeLinea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\FinadeLinea.aspx.designer.cs">
+      <DependentUpon>FinadeLinea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Temporizadores\FinaldeLinea.aspx.cs">
+      <DependentUpon>FinaldeLinea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\FinaldeLinea.aspx.designer.cs">
+      <DependentUpon>FinaldeLinea.aspx</DependentUpon>
     </Compile>
     <Compile Include="Temporizadores\L1.aspx.cs">
       <DependentUpon>L1.aspx</DependentUpon>

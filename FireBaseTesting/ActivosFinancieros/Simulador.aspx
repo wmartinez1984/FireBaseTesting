@@ -79,8 +79,8 @@
      href="https://fonts.googleapis.com/css?family=Montserrat"
    rel="stylesheet"/>
         <div class="wrapper">
-          <div class="container">
-            <span id="spanApiKeys"></span>
+          <div class="container" id="DivStep1">
+            <span id="spanApiKeys" style="display:none;"></span>
             <h1>Parametrizar    Simulación</h1>
             <br />
             <form>
@@ -89,9 +89,8 @@
                 <div class="form-group col-md-6">
                    <label for="inputEmail4">Activo</label>
                    <select id="SelectActivo" class="form-control">
-                    <option selected>Choose...</option>
-                    <option> Option 1</option>
-                    <option> Option 2</option>
+                    <option selected>Seleccione</option>
+                  
                   </select>
                   
                   <div class="line"></div>
@@ -125,7 +124,7 @@
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Indicador</label>
                    <select id="SelectIndicador" class="form-control">
-                    <option selected>Seleccione</option>
+                    <option value="">Seleccione</option>
                     <option>EMA</option>
                     <option>SMA</option>
                     <option>WMA</option>
@@ -224,13 +223,14 @@
                 </div>
               </div>
 
-
                 <p><button class="w3-button w3-block w3-teal" onclick="CrearTablaDinamicamente();return false;">Iniciar</button></p>
             </form>
-          </div>
-          <div id="divConfirm"  class="bs-example container">
-              <p>Parámetros a ejecutar en el API </p>
-             <table>
+        </div>
+        <div style="display:none;" id="divConfirm">
+         <p class="w3-button w3-block w3-teal">Parámetros a ejecutar en el API </p>
+         <div class="bs-example container"  >
+             
+             <table style="margin:auto;">
                  <tr>
                      <td>
                          Function
@@ -281,12 +281,24 @@
                  </tr>
              </table>
              <br />
+            <table style="margin:auto;">
+             <tr>
+                 <td>
+                     <input id="btnCancelarConfirm" type="button" class="w3-button w3-block w3-teal" style="background-color:#792525 !important" onclick="location.reload();" value="Cancelar" />
+                 </td>
+                 <td>
+                      <button class="w3-button w3-block w3-teal" onclick="confirmar();">Inciar Consultas</button>
+                 </td>
+             </tr>
+           </table>
             
-               <p><button class="w3-button w3-block w3-teal" onclick="confirmar();return false;">Confirmar e Inciar Simulador</button></p>
           </div>
-        </div>
 
-         <div class="bs-example container" id="divResultados"  data-example-id="striped-table" style="width:100%;overflow-x:auto;">
+        </div>
+        </div>
+        <div style="display:none;" id="divResultados">    
+        <p class="w3-button w3-block w3-teal">Technical Analysis DATA</p>
+        <div class="bs-example container"  >
              <p>
                  <strong>
                     Price:
@@ -299,9 +311,23 @@
              </p>
              <p>
                  <strong style="font-size:15px;">
-                    Total consultas ejecutadas: <span id="spanTotal">0</span>
+                    Total consultas ejecutadas: <span id="spanTotal">0</span><br />
+                     <span id="spanEsperando" style="color:red;font-size:20px;">Consultando información, por favor espere que se ejecuten las 59 consultas...</span>
                 </strong> 
              </p>
+         <table style="margin:auto;">
+             <tr>
+                 <td>
+                     <input id="btnCancelar" type="button" class="w3-button w3-block w3-teal" style="background-color:#792525 !important" onclick="location.reload();" value="Cancelar" />
+                 </td>
+                 <td>
+                      <input id="btnCalcular" class="w3-button w3-block w3-teal" type="button" value="Ejecutar Cálculos " />
+                 </td>
+             </tr>
+         </table>
+        <br />
+         <div data-example-id="striped-table" style="width:100%;overflow-x:auto; overflow-y:auto; height:300px;">
+            
             <table class="table table-striped table-bordered table-hover" id="TableResult" style="width:100%;">
             <thead>
                 <tr style="background-color:#009688;">
@@ -375,7 +401,8 @@
             </tfoot>
             </table>
        </div>
-
+     </div>
+    </div>
   <!--==========================
     Hero Section
   ============================-->
