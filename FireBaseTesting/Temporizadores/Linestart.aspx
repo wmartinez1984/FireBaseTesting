@@ -369,7 +369,7 @@
 		</div>
 	</div>
 	
-	<a class="card-toggle" href="login.aspx"  style="width:90%;text-align:right;color:white"><i><span class="fa fa-sign-out" style="width:200px;color:black;font-size:21px; color:white">Log out</span></i></a>
+	
 </div>
 
 <%--MODAL OP--%>

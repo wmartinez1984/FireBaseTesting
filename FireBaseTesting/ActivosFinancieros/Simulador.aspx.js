@@ -100,8 +100,9 @@ function ApiTechnicalAnalysis(apikey, series_type, time_period, interval, symbol
 
     //swal('Incia el proceso', 'Por favor espere, este proceso puede tardar varios minutos...', 'warning');
     var Sesiones = document.getElementById('txtSesiones').value;
+    var Filas = parseInt(Sesiones);
     var  ConsultaInicial = document.getElementById('spanTotal').innerHTML;
-    var ValCell = document.getElementById("TableResult").rows[99].cells;
+    var ValCell = document.getElementById("TableResult").rows[Filas -1 ].cells;
     ValCell[columna].innerHTML = apikey;
 
     try {

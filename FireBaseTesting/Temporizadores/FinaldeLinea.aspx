@@ -107,9 +107,10 @@
     </style>
 </head>
 
-<body>
-    
+<body  onload="document.getElementById('btnStart').click();">
+   <%-- Audios/Inicio.mp3--%>
     <div class="wrapper">
+       
         <table style="width:100%;">
             <tr>
 
@@ -170,12 +171,71 @@
             <input id="Submit2" type="submit" value="submit"  onclick="MovimientosMesas2();"/>
     </div>
 
-<script>
+       <button id="btnStart" onclick="document.getElementById('id01').style.display='block'" style="display:none;">Open Modal</button>
 
-    OPMonitoreada();
-    setInterval(function () { OPMonitoreada(); }, 7000);
-    setInterval(function () { document.getElementById('Submit1').click(); }, 1500);
-    setInterval(function () { document.getElementById('Submit2').click(); }, 3000);
+    <div id="id01" class="modal">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+      <form class="modal-content">
+        <div class="container">
+          <h1 style="color:#207529; font-size:90px; "><strong>¡Bienvenido!</strong> </h1>
+          <p style="font-size:30px;">Damos inicio a la consola de <strong>Final de Línea</strong> , en este momento usted podrá visualizar en tiempo real el comportamiento de la Orden de Producción que  esté ejecutándose, presione el botón  “OK” para  dar inicio al proceso correctamente</p>
+    
+          <div class="clearfix">
+            <button id="bt1AudioInicio" onclick="playAudio(); EjecutarAll(); document.getElementById('id01').style.display='none';" type="button" style="width:200px; ">OK</button>
+            <button onclick="pauseAudio()" type="button" style="display:none;">Pause Audio</button> 
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div style="display:none;">
+         <audio id="myAudio">
+          <source src="Audios/Inicio.mp3" type="audio/ogg">
+          <source src="Audios/Inicio.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <audio id="myAudio2">
+          <source src="Audios/Parada.mp3" type="audio/ogg">
+          <source src="Audios/Parada.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>      
+        <audio id="myAudio3">
+          <source src="Audios/Envasando.mp3" type="audio/ogg">
+          <source src="Audios/Envasando.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>    
+         <audio id="myAudio4">
+          <source src="Audios/Lavando.mp3" type="audio/ogg">
+          <source src="Audios/Lavando.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>   
+         <audio id="myAudio5">
+          <source src="Audios/Terminada.mp3" type="audio/ogg">
+          <source src="Audios/Terminada.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>   
+    </div>
+    
+<script>
+    var x = document.getElementById("myAudio");
+    x.play();
+    document.getElementById('bt1AudioInicio').click();
+    function playAudio() {
+        x.play();
+    }
+
+    function pauseAudio() {
+        x.pause();
+    } 
+</script>
+<script>
+    function EjecutarAll() {
+        OPMonitoreada();
+        setInterval(function () { OPMonitoreadaSiguientesUpdates(); }, 7000);
+        setInterval(function () { document.getElementById('Submit1').click(); }, 1500);
+        setInterval(function () { document.getElementById('Submit2').click(); }, 3000);
+    }
+  
 
     function MovimientosMesas() {
         
@@ -352,7 +412,119 @@
 
 
     </script>
-   
+   <style>
+       body {font-family: Arial, Helvetica, sans-serif;}
+            * {box-sizing: border-box;}
+
+            /* Set a style for all buttons */
+            button {
+              background-color: #4CAF50;
+              color: white;
+              padding: 14px 20px;
+              margin: 8px 0;
+              border: none;
+              cursor: pointer;
+              width: 100%;
+              opacity: 0.9;
+            }
+
+            button:hover {
+              opacity:1;
+            }
+
+            /* Float cancel and delete buttons and add an equal width */
+            .cancelbtn, .deletebtn {
+              float: left;
+              width: 50%;
+            }
+
+            /* Add a color to the cancel button */
+            .cancelbtn {
+              background-color: #ccc;
+              color: black;
+            }
+
+            /* Add a color to the delete button */
+            .deletebtn {
+              background-color: #f44336;
+            }
+
+            /* Add padding and center-align text to the container */
+            .container {
+              padding: 16px;
+              text-align: center;
+            }
+
+            /* The Modal (background) */
+            .modal {
+              display: none; /* Hidden by default */
+              position: fixed; /* Stay in place */
+              z-index: 1; /* Sit on top */
+              left: 0;
+              top: 0;
+              width: 100%; /* Full width */
+              height: 100%; /* Full height */
+              overflow: auto; /* Enable scroll if needed */
+              background-color: rgba(238, 42, 28, 0.69);
+              padding-top: 50px;
+            }
+
+            /* Modal Content/Box */
+            .modal-content {
+              background-color: #fefefe;
+              margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+              border: 1px solid #888;
+              width: 50%; /* Could be more or less, depending on screen size */
+            }
+
+            /* Style the horizontal ruler */
+            hr {
+              border: 1px solid #f1f1f1;
+              margin-bottom: 25px;
+            }
+ 
+            /* The Modal Close Button (x) */
+            .close {
+              position: absolute;
+              right: 35px;
+              top: 15px;
+              font-size: 40px;
+              font-weight: bold;
+              color: #f1f1f1;
+            }
+
+            .close:hover,
+            .close:focus {
+              color: #f44336;
+              cursor: pointer;
+            }
+
+            /* Clear floats */
+            .clearfix::after {
+              content: "";
+              clear: both;
+              display: table;
+            }
+
+            /* Change styles for cancel button and delete button on extra small screens */
+            @media screen and (max-width: 300px) {
+              .cancelbtn, .deletebtn {
+                 width: 100%;
+              }
+            }
+</style>
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 
 </html>

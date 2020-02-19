@@ -368,7 +368,14 @@
     <Content Include="ActivosFinancieros\Activos.ashx" />
     <Content Include="ActivosFinancieros\Simulador.aspx.ashx" />
     <Content Include="index.js" />
+    <Content Include="pdf.min.js" />
+    <Content Include="PdfAdmin.aspx" />
+    <Content Include="PdfLinks\Login.aspx" />
+    <Content Include="PdfLinks\styles.css" />
+    <Content Include="PdfLinks\testpdf.html" />
+    <Content Include="PdfLinks\viewpdf.aspx" />
     <Content Include="pdfs\example2.pdf" />
+    <Content Include="PdfLinks\pdfs\example2.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP1.pubxml" />
@@ -442,6 +449,11 @@
     <Content Include="Site.Master" />
     <Content Include="sitemap.xml" />
     <Content Include="styles.css" />
+    <Content Include="Temporizadores\Audios\Terminada.mp3" />
+    <Content Include="Temporizadores\Audios\Envasando.mp3" />
+    <Content Include="Temporizadores\Audios\Inicio.mp3" />
+    <Content Include="Temporizadores\Audios\Lavando.mp3" />
+    <Content Include="Temporizadores\Audios\Parada.mp3" />
     <Content Include="Temporizadores\contactform\contactform.js" />
     <Content Include="Temporizadores\contactform\Readme.txt" />
     <Content Include="Temporizadores\Controles\ComandoDetener.ascx" />
@@ -588,10 +600,12 @@
     <Content Include="Temporizadores\style.css" />
     <Content Include="Temporizadores\styleLogin.css" />
     <Content Include="Temporizadores\Temporizador.aspx" />
+    <Content Include="Temporizadores\test.aspx" />
     <Content Include="Temporizadores\tes\HtmlPage1.html" />
     <Content Include="Temporizadores\tes\HtmlPage2.html" />
     <Content Include="testpdf.html" />
     <Content Include="testViewPDF.aspx" />
+    <Content Include="ViewPdf.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -689,6 +703,27 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PdfAdmin.aspx.cs">
+      <DependentUpon>PdfAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PdfAdmin.aspx.designer.cs">
+      <DependentUpon>PdfAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PdfLinks\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PdfLinks\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PdfLinks\viewpdf.aspx.cs">
+      <DependentUpon>viewpdf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PdfLinks\viewpdf.aspx.designer.cs">
+      <DependentUpon>viewpdf.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductionOrderDAL.cs" />
     <Compile Include="ProductionOrderEntity.cs" />
@@ -832,12 +867,26 @@
     <Compile Include="Temporizadores\Temporizador.aspx.designer.cs">
       <DependentUpon>Temporizador.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Temporizadores\test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temporizadores\test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
     <Compile Include="testViewPDF.aspx.cs">
       <DependentUpon>testViewPDF.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="testViewPDF.aspx.designer.cs">
       <DependentUpon>testViewPDF.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewPdf.aspx.cs">
+      <DependentUpon>ViewPdf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewPdf.aspx.designer.cs">
+      <DependentUpon>ViewPdf.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

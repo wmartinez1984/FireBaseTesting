@@ -43,20 +43,12 @@ namespace FireBaseTesting.ActivosFinancieros
             string indicador = parametro.Request.QueryString["indicador"];
             string Sesiones = parametro.Request.QueryString["Sesiones"];
 
-            int TotalPeriodo = int.Parse(time_period);
+            int NumPeriodo = int.Parse(time_period);
             var dataTechnicaList = new List<DataTechnical>();
             DataTechnical dataTechnical = new DataTechnical();
             
             using (WebClient webClient = new System.Net.WebClient())
             {
-
-                webClient.Encoding = Encoding.UTF8;
-                webClient.Encoding = UTF8Encoding.UTF8;
-                webClient.Headers.Add("Content-Type", "application/json");
-                
-                //IList<JToken> results = FireBaseSearch["documents"].Children()["fields"].ToList();
-                //Search["Technical Analysis: "+ indicador +""].ToList();
-                //Lo siguiente es para validar si no hay un error en la respuesta del api, si lo hay me espero un minuto y vuelvo a intentarlo
                 int countTime = 0;
                 bool retry = false;
                 do
@@ -64,9 +56,55 @@ namespace FireBaseTesting.ActivosFinancieros
                     retry = false;
                     try
                     {
-                        //WebProxy wp = new WebProxy("221.141.86.43", 1080);
-                        //webClient.Proxy = wp;
-                     
+                        webClient.Encoding = Encoding.UTF8;
+                        webClient.Encoding = UTF8Encoding.UTF8;
+                        webClient.Headers.Add("Content-Type", "application/json");
+                        //si es menor a 8 se ejecuta normal, sin proxy 
+                        if (NumPeriodo > 8 && NumPeriodo <= 16)
+                        {
+                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static", "hmgkn0ztpad0");
+
+                        }
+
+                        if (NumPeriodo > 16 && NumPeriodo <= 24)
+                        {
+                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf", "8jcnmagkxr9x");
+                        }
+
+                        if (NumPeriodo > 24 && NumPeriodo <= 32)
+                        {
+                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf2", "hm0pssiuy51s");
+                        }
+
+                        if (NumPeriodo > 32 && NumPeriodo <= 40)
+                        {
+                           
+                        }
+
+                        if (NumPeriodo > 40 && NumPeriodo <= 48)
+                        {
+                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static", "hmgkn0ztpad0");
+
+                        }
+
+
+                        if (NumPeriodo > 48 && NumPeriodo <= 56)
+                        {
+                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf", "8jcnmagkxr9x");
+                        }
+
+                        if (NumPeriodo > 56 )
+                        {
+                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf2", "hm0pssiuy51s");
+                        }
+
+
                         var json = webClient.DownloadString("https://www.alphavantage.co/query?function=" + indicador + "&symbol=" + symbol + "&interval=" + interval + "&time_period=" + time_period + "&series_type=" + series_type + "&apikey=" + apikey + "");
                         JObject Search = JObject.Parse(json);
 
@@ -102,7 +140,7 @@ namespace FireBaseTesting.ActivosFinancieros
                         if (countTime < 100)
                         {
                             retry = true;
-                            Thread.Sleep(50000);
+                            Thread.Sleep(60000);
                             countTime++;
                         }
                         else

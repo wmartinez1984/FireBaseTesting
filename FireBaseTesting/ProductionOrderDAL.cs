@@ -105,7 +105,7 @@ namespace FireBaseTesting
 
             };
 
-            SqlDataReader reader = select.Select("SELECT [OP],[Producto OP],[Descripcion],[Pedido],[Cantidad],[Ubicacion],[Cod Cliente],[Nombre Cliente] FROM [dbo].[SQL_TIRADAS_MEZCLAS_OP_PROD_TER]  WHERE OP = @OP", parametros);
+            SqlDataReader reader = select.Select("SELECT TOP 1 [OP],[Producto OP],[Descripcion],[Pedido],[Cantidad],[Ubicacion],[Cod Cliente],[Nombre Cliente]  FROM [SISINT].[dbo].[Sql_Tiradas_Mezclas_OP_Prod_Term]  WHERE [OP] = @OP", parametros);
             while (reader.Read())
             {
                 ProductionOrderEntity productionOrderEntity_ = new ProductionOrderEntity();

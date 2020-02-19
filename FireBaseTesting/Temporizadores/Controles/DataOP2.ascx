@@ -7,7 +7,7 @@
                 <td style="text-align:right;font-size:30px;color:#ff6a00" >
                      <a href="login.aspx">
                       <img src="Images/Fruselva.png" style="width:200px" />
-                  </a> 
+                    </a> 
                 </td>
             </tr>
             <tr>
@@ -81,7 +81,7 @@
     <table style="color:#ff6a00;font-size:18px;width:80%;margin:auto;display:none;">
         <tr>
             <td style="text-align:right;font-size:30px;color:#ff6a00" colspan="2" >
-              <a href="../login.aspx">
+              <a href="login.aspx">
                   <img src="Images/Fruselva.png" style="width:200px" />
               </a> 
             </td>

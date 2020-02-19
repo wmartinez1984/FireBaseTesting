@@ -1405,6 +1405,323 @@ function ParadaLineasdeProduccion(tiempo) {
 
 }
 
+function OPMonitoreadaSiguientesUpdates() {
+
+
+    document.getElementById('messageUpdateData').innerHTML = "Consultando estado de la información...";
+
+    try {
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=OPRegistradasFinalLinea",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                var exists = false;
+                var count = 0;
+                $.each(data, function (index, item) {
+                    document.getElementById('messageUpdateData').innerHTML = "";
+
+                    exists = true;
+                    var estatusOP = item.EestadoOP;
+
+                    var estatusOP_ = "";
+                    if (estatusOP == 1) {
+                        estatusOP_ = "Iniciada";
+
+                    }
+                    if (item.EestadoL1 == 2 || item.EestadoL2 == 2 || item.EestadoL3 == 2) {
+                        estatusOP_ = "Envasando";
+
+                    }
+                    else {
+                        estatusOP_ = "Iniciada";
+
+                    }
+                    if (estatusOP == 3) {
+                        estatusOP_ = "Detenida";
+
+                    }
+
+                    if (estatusOP == 4) {
+                        estatusOP_ = "Lavando";
+
+                    }
+
+                    if (estatusOP == 5) {
+                        estatusOP_ = "Terminada";
+
+                    }
+
+                    if (count == 0) {
+                        //document.getElementById('txtL1').value = item.EestadoL1;
+                        //document.getElementById('txtL2').value = item.EestadoL2;
+                        //document.getElementById('txtL3').value = item.EestadoL3;
+                        document.getElementsByName('EstadoOP')[0].value = estatusOP_;
+                        document.getElementsByName('DataspanOP')[0].value = item.OP;
+                        document.getElementsByName('NAVI')[0].value = item.ProductoOP;
+                        document.getElementsByName('NombreProducto')[0].value = item.Descripcion;
+                        document.getElementsByName('UnidadesFabricar')[0].value = item.Cantidad;
+                        document.getElementsByName('Cliente')[0].value = item.NombreCliente;
+                        document.getElementsByName('Lavado')[0].value = item.TiempoLavado;
+
+                        //L1
+                        var estatusOPL = item.EestadoL1;
+                        var estatusOPL_ = "";
+                        if (estatusOPL == 1) {
+                            estatusOPL_ = "Esperando"
+                        }
+                        if (estatusOPL == 2) {
+                            estatusOPL_ = "Envasando"
+                        }
+                        if (estatusOPL == 3) {
+                            estatusOPL_ = "Detenida"
+
+                        }
+
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+                        }
+
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
+                        if (estatusOPL == 6) {
+                            estatusOPL_ = "Reiniciando"
+                        }
+
+                        var nuevoestatusL1 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL1').innerHTML != nuevoestatusL1 && estatusOPL_ == "Detenida") {
+                              var myAudio2 = document.getElementById("myAudio2");
+                              myAudio2.play();
+                        }
+
+                        var nuevoestatusL1 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL1').innerHTML != nuevoestatusL1 && estatusOPL_ == "Envasando") {
+                            var myAudio3 = document.getElementById("myAudio3");
+                            myAudio3.play();
+                        }
+
+                        var nuevoestatusL1 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL1').innerHTML != nuevoestatusL1 && estatusOPL_ == "Lavando") {
+                            var myAudio4 = document.getElementById("myAudio4");
+                            myAudio4.play();
+                        }
+
+                        var nuevoestatusL2 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL2').innerHTML != nuevoestatusL2 && estatusOPL_ == "Terminada") {
+                            var myAudio5 = document.getElementById("myAudio5");
+                            myAudio5.play();
+                        }
+                       
+                         document.getElementById('spanEstatusL1').innerHTML = "ESTADO:" + estatusOPL_;
+
+                     
+                       
+
+                        //L2
+                        estatusOPL = item.EestadoL2;
+
+                        if (estatusOPL == 1) {
+                            estatusOPL_ = "Esperando"
+                        }
+                        if (estatusOPL == 2) {
+                            estatusOPL_ = "Envasando"
+                        }
+                        if (estatusOPL == 3) {
+                            estatusOPL_ = "Detenida"
+                        }
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+                        }
+                        if (estatusOPL == 6) {
+                            estatusOPL_ = "Reiniciando"
+                        }
+
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
+
+                        var nuevoestatusL2 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL2').innerHTML != nuevoestatusL2 && estatusOPL_ == "Detenida") {
+                            var myAudio2 = document.getElementById("myAudio2");
+                            myAudio2.play();
+                        }
+                        var nuevoestatusL2 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL2').innerHTML != nuevoestatusL2 && estatusOPL_ == "Envasando") {
+                            var myAudio3 = document.getElementById("myAudio3");
+                            myAudio3.play();
+                        }
+
+                        var nuevoestatusL2 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL2').innerHTML != nuevoestatusL2 && estatusOPL_ == "Lavando") {
+                            var myAudio4 = document.getElementById("myAudio4");
+                            myAudio4.play();
+                        }
+
+                        var nuevoestatusL2 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL2').innerHTML != nuevoestatusL2 && estatusOPL_ == "Terminada") {
+                            var myAudio5 = document.getElementById("myAudio5");
+                            myAudio5.play();
+                        }
+
+                        document.getElementById('spanEstatusL2').innerHTML = "ESTADO:" + estatusOPL_;
+
+
+                        //L3
+                        estatusOPL = item.EestadoL3;
+                        if (estatusOPL == 1) {
+                            estatusOPL_ = "Esperando"
+                        }
+                        if (estatusOPL == 2) {
+                            estatusOPL_ = "Envasando"
+                        }
+                        if (estatusOPL == 3) {
+                            estatusOPL_ = "Detenida"
+
+                        }
+
+
+                        if (estatusOPL == 4) {
+                            estatusOPL_ = "Lavando"
+
+                        }
+
+
+                        if (estatusOPL == 5) {
+                            estatusOPL_ = "Terminada"
+                        }
+
+                        if (estatusOPL == 6) {
+                            estatusOPL_ = "Reiniciando"
+                        }
+
+                        var nuevoestatusL3 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL3').innerHTML != nuevoestatusL3 && estatusOPL_ == "Detenida") {
+                            var myAudio2 = document.getElementById("myAudio2");
+                            myAudio2.play();
+                        }
+
+                        var nuevoestatusL3 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL3').innerHTML != nuevoestatusL3 && estatusOPL_ == "Envasando") {
+                            var myAudio3 = document.getElementById("myAudio3");
+                            myAudio3.play();
+                        }
+
+                        var nuevoestatusL3 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL3').innerHTML != nuevoestatusL3 && estatusOPL_ == "Lavando") {
+                            var myAudio4 = document.getElementById("myAudio4");
+                            myAudio4.play();
+                        }
+
+                        var nuevoestatusL3 = "ESTADO:" + estatusOPL_;
+                        if (document.getElementById('spanEstatusL3').innerHTML != nuevoestatusL3 && estatusOPL_ == "Terminada") {
+                            var myAudio5 = document.getElementById("myAudio5");
+                            myAudio5.play();
+                        }
+
+                        document.getElementById('spanEstatusL3').innerHTML = "ESTADO:" + estatusOPL_;
+
+                        //TimerL1
+                        if (item.EestadoL1 == 3) {
+
+                            var String_ValueDateL1 = item.FechaParadaL1;
+                            var valueL1 = new Date(parseInt(String_ValueDateL1.replace(/(^.*\()|([+-].*$)/g, '')));
+                            //var datL1 = valueL1.toLocaleString();
+                            MinParadaL1 = item.MinParadaL1;
+                            ShowTimerL1(valueL1);
+                        }
+
+                        else {
+                            MinParadaL1 = 0;
+                        }
+
+                        //TimerL2
+                        if (item.EestadoL2 == 3) {
+
+                            var String_ValueDateL2 = item.FechaParadaL2;
+                            var valueL2 = new Date(parseInt(String_ValueDateL2.replace(/(^.*\()|([+-].*$)/g, '')));
+                            //var datL1 = valueL1.toLocaleString();
+                            MinParadaL2 = item.MinParadaL2;
+                            ShowTimerL2(valueL2);
+                        }
+                        else {
+                            MinParadaL2 = 0;
+                        }
+
+                        //TimerL3
+                        if (item.EestadoL3 == 3) {
+
+                            var String_ValueDateL3 = item.FechaParadaL3;
+                            var valueL3 = new Date(parseInt(String_ValueDateL3.replace(/(^.*\()|([+-].*$)/g, '')));
+                            //var datL1 = valueL1.toLocaleString();
+                            MinParadaL3 = item.MinParadaL3;
+                            ShowTimerL3(valueL3);
+                        }
+                        else {
+
+                            MinParadaL3 = 0;
+                            document.getElementById('tooltipL3').innerHTML = "";
+
+                        }
+
+                        if (item.EestadoL1 == 4 || item.EestadoL2 == 4 || item.EestadoL3 == 4) {
+
+                            var String_ValueDate = item.FechaInicioLavado;
+                            var value = new Date(parseInt(String_ValueDate.replace(/(^.*\()|([+-].*$)/g, '')));
+                            // var dat = value.toLocaleString();
+                            MinParadaL1 = item.TiempoLavado;
+                            MinParadaL2 = item.TiempoLavado;
+                            MinParadaL3 = item.TiempoLavado;
+
+                            ShowTimerL1(value);
+                            ShowTimerL2(value);
+                            ShowTimerL3(value);
+
+                        }
+                        //  document.getElementById('divL3').style.transform = "rotateX(-90deg) translateY(75px)";
+
+
+                    }
+
+                    //$('#TableOP').append("<tr><td>" + item.OP + "</td><td>" + item.ProductoOP + "</td><td>" + item.Descripcion + "</td><td>" + item.Cantidad + "</td><td>" + item.NombreCliente + "</td><td>" + item.TiempoLavado + " Minutos" + "</td><td>" + estatusOP_ + "</td></tr>");
+                    count += 1;
+                    // swal('OP válida \n' + item.OP + '', 'Producto: ' + item.Descripcion + '\n\n Hemos terminado de consultar la información de la OP, presione “Ok” para continuar', 'success');
+                    return true;
+                });
+                if (!exists) {
+
+                    document.getElementById('spanEstatusL1').innerHTML = "";
+                    document.getElementById('spanEstatusL2').innerHTML = "";
+                    document.getElementById('spanEstatusL3').innerHTML = "";
+                    //swal('Oops', 'No existe una OP en proceso', 'warning');
+                    document.getElementById('messageUpdateData').innerHTML = "No existe una OP en proceso";
+                }
+
+
+            },
+            failure: function (r) {
+                ////alert('Error al recuperar los permisos...');
+                //swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                //return false;
+            },
+            error: function (r) {
+                //// alert(r.error + " Permisos");
+                //swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
+                //return false;
+            }
+
+        });
+
+    }
+    catch (err) {
+        // swal('Error:', 'No podemos cargar tus datos en este momento, comuníquese al whatsapp 55-6874-9040 para obtener  ayuda', 'error');
+        return false;
+    }
+    return false;
+
+}
+
 function OPMonitoreada() {
 
     document.getElementById('messageUpdateData').innerHTML = "Consultando estado de la información...";
