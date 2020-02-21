@@ -376,6 +376,7 @@
     <Content Include="PdfLinks\viewpdf.aspx" />
     <Content Include="pdfs\example2.pdf" />
     <Content Include="PdfLinks\pdfs\example2.pdf" />
+    <Content Include="pdfs\A1_1032X_EN.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP1.pubxml" />
@@ -545,6 +546,7 @@
     <Content Include="Temporizadores\img\weather\texture-sun-bg.png" />
     <Content Include="Temporizadores\img\weather\texture-sun-fg.png" />
     <Content Include="Temporizadores\index.html" />
+    <Content Include="Temporizadores\js\DataOPv4.js" />
     <Content Include="Temporizadores\js\DataOPv3.js" />
     <Content Include="Temporizadores\js\DataOPv2.js" />
     <Content Include="Temporizadores\js\DataOP.js" />
@@ -697,6 +699,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LINKDataDAL.cs" />
+    <Compile Include="LINKDataEntity.cs" />
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -48,11 +48,11 @@ p {
 
 </style>
 <div class="container"> 
-    <table style="width:100%;text-align:left;">        
+    <table style="width:100%;text-align:left;border-collapse: separate;border-spacing: 10px 5px;">        
         
         <tr>
             <td colspan="2">
-               <input class="btn" type="button" id="Parada1L3" value="Parada Mínima" onclick="ParadaLineasdeProduccion(30);" style="background-color:#ed4109; color:#ffffff;  font-size:20px;border-radius:10px;width:290px; height:60px;">
+               <input class="btn" type="button" id="Parada1L3" value="Parada Mínima" onclick="ParadaLineasdeProduccion(30);" style="background-color: #ed4109; color: #ffffff; font-size: 20px; border-radius: 10px; width: 290px; height: 60px;">
                 <input class="btn" type="button" id="ReinicioParada1L3" value="Reiniciar con Parada Mínima" onclick="EjecutarReinicioDeParada(30);" style="background-color: #226062;
                         color: #ffffff;
                         font-size: 20px;
@@ -191,17 +191,29 @@ p {
         var minutesL3 = Math.floor((distanceL3 % _hourL3) / _minuteL3);
         var secondsL3 = Math.floor((distanceL3 % _minuteL3) / _secondL3);
 
-        document.getElementById('countdownL3').innerHTML = ' La parada termina en: <br/>';
-        document.getElementById('countdownL3').innerHTML += daysL3 + ' dia(s), ';
-        document.getElementById('countdownL3').innerHTML += hoursL3 + ' hora(s), ';
-        document.getElementById('countdownL3').innerHTML += minutesL3 + ' minuto(s) y ';
-        document.getElementById('countdownL3').innerHTML += secondsL3 + ' segundo(s) ';
+        
+        var PorcenBar = (minutesL3 * 100) / MinParadaL3;
 
-        var PorcenBar = (minutesL3  * 100) / MinParadaL3;
-       // var PorcenBarRegreso = 100 - PorcenBar;
-        Bar3.setAttribute("aria-valuenow", parseInt(PorcenBar));
-        document.getElementById('tooltipL3').innerHTML = daysL3 + ":" + hoursL3 + ":" + minutesL3 +":"+ secondsL3;
-       // alert(PorcenBarRegreso);
+        if (MinParadaL3 <= 0) {
+            document.getElementById('tooltipL3').innerHTML = "";
+            Bar3.setAttribute("aria-valuenow", 100);
+            document.getElementById('countdownL3').innerHTML = "";
+        }
+        else {
+
+            document.getElementById('countdownL3').innerHTML = ' La parada termina en: <br/>';
+            document.getElementById('countdownL3').innerHTML += daysL3 + ' dia(s), ';
+            document.getElementById('countdownL3').innerHTML += hoursL3 + ' hora(s), ';
+            document.getElementById('countdownL3').innerHTML += minutesL3 + ' minuto(s) y ';
+            document.getElementById('countdownL3').innerHTML += secondsL3 + ' segundo(s) ';
+
+
+            Bar3.setAttribute("aria-valuenow", parseInt(PorcenBar));
+            document.getElementById('tooltipL3').innerHTML = daysL3 + ":" + hoursL3 + ":" + minutesL3 + ":" + secondsL3;
+       
+        }
+           
+     
 
         
         

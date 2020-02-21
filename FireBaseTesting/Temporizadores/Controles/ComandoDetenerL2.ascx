@@ -48,11 +48,11 @@ p {
 
 </style>
 <div class="container"> 
-    <table style="width:100%;text-align:left;">        
+    <table style="width:100%;text-align:left;border-collapse: separate;border-spacing: 10px 5px;">        
         
         <tr>
             <td colspan="2">
-                <input class="btn" type="button" id="Parada1L2" value="Parada Mínima" onclick="ParadaLineasdeProduccion(30);" style="background-color:#ed4109; color:#ffffff;  font-size:20px;border-radius:10px;width:290px; height:60px;">
+                <input class="btn" type="button" id="Parada1L2" value="Parada Mínima" onclick="ParadaLineasdeProduccion(30);" style="background-color: #ed4109; color: #ffffff; font-size: 20px; border-radius: 10px; width: 290px; height: 60px; ">
                 <input class="btn" type="button" id="ReinicioParada1L2" value="Reiniciar con Parada Mínima" onclick="EjecutarReinicioDeParada(30);" style="                        background-color: #226062;
                         color: #ffffff;
                         font-size: 20px;
@@ -241,17 +241,32 @@ p {
         var minutes = Math.floor((distance % _hour) / _minute);
         var seconds = Math.floor((distance % _minute) / _second);
 
-        document.getElementById('countdownL2').innerHTML = 'El lavado termina en:';
-        document.getElementById('countdownL2').innerHTML += days + ' dias, ';
-        document.getElementById('countdownL2').innerHTML += hours + ' horas, ';
-        document.getElementById('countdownL2').innerHTML += minutes + ' minutos y ';
-        document.getElementById('countdownL2').innerHTML += seconds + ' segundos';
+       
 
         var PorcenBarL2 = (minutes * 100) / MinParadaL2;
-        // var PorcenBarRegreso = 100 - PorcenBar;
-        Bar2.setAttribute("aria-valuenow", parseInt(PorcenBarL2));
 
-        document.getElementById('tooltipL2').innerHTML = days + ":" + hours + ":" + minutes + ":" + seconds;
+
+        if (MinParadaL2 <= 0) {
+            document.getElementById('tooltipL2').innerHTML = "";
+            Bar2.setAttribute("aria-valuenow", 100);
+            document.getElementById('countdownL2').innerHTML = "";
+        }
+        else {
+
+            document.getElementById('countdownL2').innerHTML = 'El lavado termina en:';
+            document.getElementById('countdownL2').innerHTML += days + ' dias, ';
+            document.getElementById('countdownL2').innerHTML += hours + ' horas, ';
+            document.getElementById('countdownL2').innerHTML += minutes + ' minutos y ';
+            document.getElementById('countdownL2').innerHTML += seconds + ' segundos';
+
+            Bar2.setAttribute("aria-valuenow", parseInt(PorcenBarL2));
+            document.getElementById('tooltipL2').innerHTML = days + ":" + hours + ":" + minutes + ":" + seconds;
+            
+
+
+        }
+
+       
     }
 
     </script>

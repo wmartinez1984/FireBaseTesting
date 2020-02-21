@@ -188,7 +188,7 @@ namespace FireBaseTesting.Temporizadores
             Settings settings = new Settings();
             ProductionOrderDAL productionOrderDAL = new ProductionOrderDAL();
             List<ProductionOrderEntity> list = new List<ProductionOrderEntity>();
-            list = productionOrderDAL.OrdenesRegistradas_Select();
+            list = productionOrderDAL.OrdenesRegistradas_Select(context.Request.QueryString["GrupoLinea"].ToString());
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();          
             return (serializer.Serialize(list));
         }
@@ -219,7 +219,7 @@ namespace FireBaseTesting.Temporizadores
             data.DescripLavado = context.Request.QueryString["DescripLavado"];
             data.HoraInicio = Settings.HoraInicio;
             data.HoraFinalizacion = Settings.HoraFinalizacion;
-            data.CantFabricados = context.Request.QueryString["Cantidad"];
+            data.CantFabricados = int.Parse(context.Request.QueryString["Cantidad"]);
             data.FechaCreacion = Settings.FechaCreacion;
             data.FechaModificacion = DateTime.Now;
 
@@ -257,7 +257,7 @@ namespace FireBaseTesting.Temporizadores
             data.FinMinutosL3 = Settings.FinMinutosL3;
             data.FinFechaL3 = Settings.FinFechaL3;
 
-            productionOrderDAL.OP_Insert(data);
+            productionOrderDAL.OP_Insert(data, context.Request.QueryString["GrupoLinea"].ToString());
 
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             return (serializer.Serialize("ok,ok"));
@@ -290,7 +290,7 @@ namespace FireBaseTesting.Temporizadores
             data.DescripLavado = context.Request.QueryString["DescripLavado"];
             data.HoraInicio = Settings.HoraInicio;
             data.HoraFinalizacion = Settings.HoraFinalizacion;
-            data.CantFabricados = context.Request.QueryString["Cantidad"];
+            data.CantFabricados = int.Parse(context.Request.QueryString["Cantidad"]);
             data.FechaCreacion = Settings.FechaCreacion;
             data.FechaModificacion = DateTime.Now;
 
@@ -328,7 +328,7 @@ namespace FireBaseTesting.Temporizadores
             data.FinMinutosL3 = Settings.FinMinutosL3;
             data.FinFechaL3 = Settings.FinFechaL3;
 
-            productionOrderDAL.OP_Insert(data);
+            productionOrderDAL.OP_Insert(data, context.Request.QueryString["GrupoLinea"].ToString());
 
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             return (serializer.Serialize("ok,ok"));
@@ -360,7 +360,7 @@ namespace FireBaseTesting.Temporizadores
             data.DescripLavado = context.Request.QueryString["DescripLavado"];
             data.HoraInicio = Settings.HoraInicio;
             data.HoraFinalizacion = Settings.HoraFinalizacion;
-            data.CantFabricados = context.Request.QueryString["Cantidad"];
+            data.CantFabricados = int.Parse(context.Request.QueryString["Cantidad"]);
             data.FechaCreacion = Settings.FechaCreacion;
             data.FechaModificacion = DateTime.Now;
 
@@ -463,7 +463,7 @@ namespace FireBaseTesting.Temporizadores
 
             data.FinFechaL3 = DateTime.Now;
 
-            productionOrderDAL.OP_Insert(data);
+            productionOrderDAL.OP_Insert(data, context.Request.QueryString["GrupoLinea"].ToString());
 
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             return (serializer.Serialize("ok,ok"));
@@ -496,7 +496,7 @@ namespace FireBaseTesting.Temporizadores
             data.DescripLavado = context.Request.QueryString["DescripLavado"];
             data.HoraInicio = Settings.HoraInicio;
             data.HoraFinalizacion = Settings.HoraFinalizacion;
-            data.CantFabricados = context.Request.QueryString["Cantidad"];
+            data.CantFabricados = int.Parse(context.Request.QueryString["Cantidad"]);
             data.FechaCreacion = Settings.FechaCreacion;
             data.FechaModificacion = DateTime.Now;
 
@@ -599,7 +599,7 @@ namespace FireBaseTesting.Temporizadores
 
             data.FinFechaL3 = DateTime.Now;
 
-            productionOrderDAL.OP_Insert(data);
+            productionOrderDAL.OP_Insert(data, context.Request.QueryString["GrupoLinea"].ToString());
 
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             return (serializer.Serialize("ok,ok"));
@@ -667,7 +667,7 @@ namespace FireBaseTesting.Temporizadores
             data.DescripLavado = context.Request.QueryString["DescripLavado"];
             data.HoraInicio = Settings.HoraInicio;
             data.HoraFinalizacion = Settings.HoraFinalizacion;
-            data.CantFabricados = "0";
+            data.CantFabricados = 0;
             data.FechaCreacion = Settings.FechaCreacion;
             data.FechaModificacion = DateTime.Now;
             data.FechaInicioLavado = Settings.FechaInicioLavado;
@@ -695,7 +695,7 @@ namespace FireBaseTesting.Temporizadores
             data.FinMinutosL3 = Settings.FinMinutosL3;
             data.FinFechaL3 = Settings.FinFechaL3;
 
-            productionOrderDAL.OP_Insert(data);
+            productionOrderDAL.OP_Insert(data, context.Request.QueryString["GrupoLinea"].ToString());
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             return (serializer.Serialize("ok,ok"));
         }
@@ -706,7 +706,7 @@ namespace FireBaseTesting.Temporizadores
 
             ProductionOrderDAL productionOrderDAL = new ProductionOrderDAL();
             List<ProductionOrderEntity> list = new List<ProductionOrderEntity>();
-            list = productionOrderDAL.OrdenesRegistradas_Select();
+            list = productionOrderDAL.OrdenesRegistradas_Select(context.Request.QueryString["GrupoLinea"].ToString());
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             var filteredList = from dta in list
                                where dta.EestadoOP != 5  //solo la OP que está pendiente, si es que existe
@@ -743,7 +743,7 @@ namespace FireBaseTesting.Temporizadores
             data.DescripLavado = context.Request.QueryString["DescripLavado"];
             data.HoraInicio = Settings.HoraInicio;
             data.HoraFinalizacion = Settings.HoraFinalizacion;
-            data.CantFabricados = context.Request.QueryString["Cantidad"];
+            data.CantFabricados = int.Parse(context.Request.QueryString["Cantidad"]);
             data.FechaCreacion =   Settings.FechaCreacion;
             data.FechaModificacion = DateTime.Now;
 
@@ -774,7 +774,7 @@ namespace FireBaseTesting.Temporizadores
             data.FinMinutosL3 = Settings.FinMinutosL3;
             data.FinFechaL3 = Settings.FinFechaL3;
 
-            productionOrderDAL.OP_Insert(data);
+            productionOrderDAL.OP_Insert(data, context.Request.QueryString["GrupoLinea"].ToString());
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             return (serializer.Serialize("ok,ok"));
         }
@@ -785,7 +785,7 @@ namespace FireBaseTesting.Temporizadores
             Settings settings = new Settings();
             ProductionOrderDAL productionOrderDAL = new ProductionOrderDAL(); 
             List<ProductionOrderEntity> list = new List<ProductionOrderEntity>();
-            list = productionOrderDAL.OrdenesRegistradas_Select();
+            list = productionOrderDAL.OrdenesRegistradas_Select(context.Request.QueryString["GrupoLinea"].ToString());
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             var filteredList = from dta in list
                                where dta.EestadoOP != 5  //solo la OP que está pendiente, si es que existe
@@ -867,11 +867,11 @@ namespace FireBaseTesting.Temporizadores
                 data.DescripLavado = context.Request.QueryString["DescripLavado"];
                 data.HoraInicio = "NA";
                 data.HoraFinalizacion = "NA";
-                data.CantFabricados = "NA";
+                data.CantFabricados = 0;
                 data.FechaCreacion = DateTime.Now;
                 data.FechaModificacion = DateTime.Now;
 
-                productionOrderDAL.OP_Insert(data);
+                productionOrderDAL.OP_Insert(data, context.Request.QueryString["GrupoLinea"].ToString());
                 
             
 

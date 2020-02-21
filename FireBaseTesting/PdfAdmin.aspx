@@ -48,7 +48,7 @@
         </tr>
         <tr>
             <td>
-                <input id="datepicker" style="width:200px;" readonly="readonly"  />
+                <input id="datepicker" style="width:200px;" readonly="readonly"  runat="server" />
             </td>
             <td style="text-align:right;">
                 <asp:FileUpload ID="FileUpload1" runat="server" />
@@ -66,7 +66,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <asp:Button ID="btnSave" runat="server" Text="Guardar" OnClick="btnSave_Click" />
+                <asp:Button ID="btnSave" runat="server" Text="Guardar" OnClick="btnSave_Click"  OnClientClick="swal('Generando link...', 'Por favor espere, no cierre esta ventana hasta que hayamos terminado...', 'success');"/>
             </td>
         </tr>
     </table>

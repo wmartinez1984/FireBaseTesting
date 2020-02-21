@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script src="js/DataOPv3.js"></script>
+	<script src="js/DataOPv4.js"></script>
 
 	<%--NECESARIOS PARA DISEÑO--%>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -39,8 +39,28 @@
 <body  onload="document.getElementById('bntInicio').click();">
 
 <div class="cards">
+	<div class="contact" style="margin-top:-25px;width:30%;"> <i><span class="fa fa-gear" style="color:#808080; width:300px; font-size:17px; color:white; " id="ConfiguracionA">Configuración de Operación</span></i> </div>
+	<br />
+	<div class="contact" style="width:100%;text-align:right;background-color:transparent;margin-top:-25px;"> 
+		<a href="login.aspx" style="color:red;">
+			<i>
+			  <span class="fa fa-backward" style="color:#808080; width:300px; font-size:17px; color:white; " id="ConfiguracionExit">
+				Log Out
+			   </span>
+			</i>
+		</a> 
+	</div>
+	<div class="contact2" style="width:65%;text-align:right;background-color:transparent;margin-top:25px;" > 
+		 <div class="box">
+		  <select id="SelectGrupo" onchange="OPResgistradasSelect();OPResgistradasSelectTable();">
+			<option value="L1L2L3">Grupo L1L2L3</option>
+			<option value="L2L5L6">Grupo L2L5L6</option>
+			<option value="L7L8L9">Grupo L7L8L9</option>
+			
+		  </select>
+		</div>
+	</div>
 
-	<div class="contact"> <i><span class="fa fa-gear" style="color:#808080; width:300px; font-size:17px; color:white; " id="ConfiguracionA">Configuración de Operación</span></i> </div>
 	<div class="contact-form">
 		<a href="#" class="close" id="closeA"><i class="fa fa-times"></i></a>
 		<form>
@@ -52,7 +72,7 @@
 				
 				<td colspan="3" style="text-align:center;">
 					<div class="searchBox" style="">
-					  <input class="searchInput" type="text" name="" id="txtsearchInput" placeholder="Consultar" />
+					  <input class="searchInput" type="text" name="" id="txtsearchInput" placeholder="Consultar" value="OP" />
 					  <button class="searchButton" onclick="DataClient(); return false;">
 						<i class="material-icons">
 						  OP
@@ -120,14 +140,15 @@
 						Tipo de Lavado:
 					</td>
 					<td >
-						 <select id="normal-select-7" class="select-css" onchange=" CambiarLavado();" >
-					      <option value="45" class="select-dropdown__list-item">Enjugaue</option>
-						  <option value="135" class="select-dropdown__list-item">CIP</option>
-						  <option value="180" class="select-dropdown__list-item">CIP acido</option>						 	 
+						 <select id="normal-select-7" class="select-css" onchange=" CambiarLavado();" style="width:280px; " >
+					      <option value="45" class="select-dropdown__list-item">Enjugaue 45 minutos</option>
+						  <option value="75" class="select-dropdown__list-item">Enjugaue intermedio 1hr:15min</option>
+						  <option value="135" class="select-dropdown__list-item">CIP 2hrs:15min</option>
+						  <option value="180" class="select-dropdown__list-item">CIP acido 3 hrs</option>						 	 
 						 </select>
 					</td>
 					<td style="text-align:center;">
-						<span style="color:#4FC3A1" id="spLavado"><strong>45 minutos</strong> </span>
+						<span style="color:#4FC3A1;display:none; " id="spLavado" ><strong>45 minutos</strong> </span>
 					</td>
 	       </tr>
 
@@ -191,8 +212,8 @@
 		</form>
 	</div>
 
-	 <div class="card active" id="overview">
-		<a class="card-toggle"  id="bntInicio">Inicio <i class="fa fa-arrow-circle-left"></i></a>
+	 <div class="card active" id="overview">		
+		<a class="card-toggle"  style="display:none" id="bntInicio">Inicio <i class="fa fa-arrow-circle-left"></i></a>
 		<div class="card-content" style="background-color:#81cfef">			
 			<div class="row" style="width:100%;">
 				 <%--<h3 style="color:#186635;font-size:15px;width:200px;"><strong>En proceso L1:</strong> </h3>	
@@ -201,7 +222,8 @@
 				<br />
 				<br />
 				<h3 style="color:#5f0909;font-size:15px;"><strong>En proceso L3:</strong> </h3>	--%>
-				<div class="left col" style="text-align:left;">					
+				<div class="left col" style="				        text-align: left;
+				">					
 				 	
 				  
 				  <div class="progress-factor flexy-item" style="margin-top:-30px;width:500px;cursor:pointer;border-radius:40px;" >
@@ -353,6 +375,10 @@
 			   </div>
 			</div>
 		</div>
+	</div>
+
+	<div class="card" id="IncioTab">
+		<a style="background-color:white" class="card-toggle"  onclick="document.getElementById('bntInicio').click();"><i ><span class="fa fa-home" id="btnIncioTab"></span></i></a>		
 	</div>
 
 	<div class="card" id="twitter2" >

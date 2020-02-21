@@ -89,16 +89,13 @@
                 <div class="form-group col-md-6">
                    <label for="inputEmail4">Activo</label>
                    <select id="SelectActivo" class="form-control">
-                    <option selected>Seleccione</option>
-                  
-                  </select>
-                  
+                    <option selected>Seleccione</option>                  
+                   </select>                  
                   <div class="line"></div>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Capital Inicial</label>
-                  <input type="text" class="form-control" id="txtCapitalIncial"  value="10000"/>
-                  
+                  <input type="text" class="form-control" id="txtCapitalIncial"  value="10000"/>                  
                   <div class="line"></div>
                 </div>
               </div>

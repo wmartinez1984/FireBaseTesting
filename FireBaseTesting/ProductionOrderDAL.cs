@@ -20,14 +20,14 @@ namespace FireBaseTesting
         };
         IFirebaseClient client;
 
-        public List<ProductionOrderEntity> OrdenesRegistradas_Select()
+        public List<ProductionOrderEntity> OrdenesRegistradas_Select(string  GrupoLinea)
         {
             Settings settings = new Settings();
             var data = new List<ProductionOrderEntity>();
             client = new FireSharp.FirebaseClient(config);
             if (client != null)
             {
-                FirebaseResponse response = client.Get("OperationOrder");
+                FirebaseResponse response = client.Get("OperationOrder"+ GrupoLinea);
                 var json = response.Body;
                 if (json != null && json != "null")
                 {
@@ -54,7 +54,8 @@ namespace FireBaseTesting
                         productionOrderEntity_.DescripLavado = productionOrder.DescripLavado;
                         productionOrderEntity_.HoraInicio = productionOrder.HoraInicio;
                         productionOrderEntity_.HoraFinalizacion = productionOrder.HoraFinalizacion;
-                        productionOrderEntity_.CantFabricados = productionOrder.CantFabricados;
+                        productionOrderEntity_.CantFabricados = productionOrder.CantFabricados;                       
+
                         productionOrderEntity_.FechaCreacion = productionOrder.FechaCreacion;
                         productionOrderEntity_.FechaModificacion = productionOrder.FechaModificacion;
 
@@ -105,7 +106,8 @@ namespace FireBaseTesting
 
             };
 
-            SqlDataReader reader = select.Select("SELECT TOP 1 [OP],[Producto OP],[Descripcion],[Pedido],[Cantidad],[Ubicacion],[Cod Cliente],[Nombre Cliente]  FROM [SISINT].[dbo].[Sql_Tiradas_Mezclas_OP_Prod_Term]  WHERE [OP] = @OP", parametros);
+            SqlDataReader reader = select.Select("SELECT TOP 1 [OP],[Producto OP],[Descripcion],[Pedido],[Cantidad],[Ubicacion],[Cod Cliente],[Nombre Cliente]  FROM Sql_Tiradas_Mezclas_OP_Prod_Term  WHERE [OP] = @OP", parametros);
+            //SqlDataReader reader = select.Select("SELECT TOP 1 [OP],[Producto OP],[Descripcion],[Pedido],[Cantidad],[Ubicacion],[Cod Cliente],[Nombre Cliente]  FROM [SISINT].[dbo].[Sql_Tiradas_Mezclas_OP_Prod_Term]  WHERE [OP] = @OP", parametros);
             while (reader.Read())
             {
                 ProductionOrderEntity productionOrderEntity_ = new ProductionOrderEntity();
@@ -121,12 +123,12 @@ namespace FireBaseTesting
             return data;
         }
 
-        public void OP_Insert(ProductionOrderEntity productionOrderEntity)
+        public void OP_Insert(ProductionOrderEntity productionOrderEntity, string GrupoLinea)
         {
             client = new FireSharp.FirebaseClient(config);
             if (client != null)
             {              
-                SetResponse resp = client.Set("OperationOrder/" + productionOrderEntity.OP, productionOrderEntity);     
+                SetResponse resp = client.Set("OperationOrder"+ GrupoLinea + "/" + productionOrderEntity.OP, productionOrderEntity);     
                 
             }
         }

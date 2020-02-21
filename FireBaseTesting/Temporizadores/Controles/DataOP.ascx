@@ -2,20 +2,19 @@
 <div style="border-radius:30px;border-color:#ff0000; border-width:20px;background-color:rgba(255, 255, 255, 0.64); width:97%;">
     <table style="color:#ff6a00;font-size:18px;width:80%;margin:auto;">
         <tr>
-            <td style="text-align:right;font-size:30px;color:#ff6a00" colspan="2" >
+            <td style="text-align:right;font-size:30px;color:#ff6a00;" colspan="2" >
+            
               <a href="login.aspx">
-                  <img src="Images/Fruselva.png" style="width:200px" />
+                  <img src="Images/Fruselva.png" style="width:200px;margin-top:15px;" />
               </a> 
-            </td>
-          
+            </td>          
         </tr>
         <tr>
-            <td style="text-align:left;font-size:30px;" colspan="2" >
+            <td style="text-align: left;font-size: 30px;" colspan="2" >
                 <strong>
                    Datos de la OP 
                 </strong>  
-            </td>
-          
+            </td>          
         </tr>
          <tr>
             <td style="text-align:left;">
@@ -86,10 +85,9 @@
                       <input type="text" id="Lavado" name="Lavado" style="background-color:transparent;border:none;" readonly="readonly"/>
                 </strong>               
             </td>
-        </tr>
-        
+        </tr>        
     </table>
-    <div id="divDatosAdicionales">
+    <div id="divDatosAdicionales" style="display:none;">
         <table style="width:88%">
 			<tr>
 				<td style="text-align:center;">

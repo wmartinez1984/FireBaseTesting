@@ -26,7 +26,7 @@ namespace FireBaseTesting
         public string DescripLavado { get; set; }
         public string HoraInicio { get; set; }
         public string HoraFinalizacion { get; set; }
-        public string CantFabricados { get; set; }
+        public int CantFabricados { get; set; }
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
         public DateTime FechaParadaL1 { get; set; }
