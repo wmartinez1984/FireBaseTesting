@@ -177,8 +177,10 @@ p {
         
         
         if (distanceL3 < 0) {
-            
-            IniciarLineaDespuesdeTimer(3);
+            if (MinParadaL3 != 0) {
+                IniciarLineaDespuesdeTimer(3);
+                MinParadaL3 = 0;
+            }
             window.clearInterval(timerL3);
             //var myVar = setTimeout(location.reload(), 45000);
             //clearInterval(timer3);
@@ -251,7 +253,10 @@ p {
         if (distanceL3 < 0) {
 
              // Finalizar aquí cuando termine el tiempo de lavado
-            FinalizarOP();
+            if (MinParadaL3 != 0) {
+                FinalizarOP();
+                MinParadaL3 = 0;
+            }
             window.clearInterval(timerL3Lavando);
             document.getElementById('countdownL3').innerHTML = '';
 

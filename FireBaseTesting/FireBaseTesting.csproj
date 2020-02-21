@@ -481,7 +481,6 @@
     <Content Include="Temporizadores\EndLine.aspx" />
     <Content Include="Temporizadores\EndLine\index.html" />
     <Content Include="Temporizadores\favicon.ico" />
-    <Content Include="Temporizadores\FinadeLinea.aspx" />
     <Content Include="Temporizadores\FinaldeLinea.aspx" />
     <Content Include="Temporizadores\fonts\codropsicons\codropsicons.svg" />
     <Content Include="Temporizadores\fonts\codropsicons\license.txt" />
@@ -828,13 +827,6 @@
     </Compile>
     <Compile Include="Temporizadores\EndLine.aspx.designer.cs">
       <DependentUpon>EndLine.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Temporizadores\FinadeLinea.aspx.cs">
-      <DependentUpon>FinadeLinea.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Temporizadores\FinadeLinea.aspx.designer.cs">
-      <DependentUpon>FinadeLinea.aspx</DependentUpon>
     </Compile>
     <Compile Include="Temporizadores\FinaldeLinea.aspx.cs">
       <DependentUpon>FinaldeLinea.aspx</DependentUpon>

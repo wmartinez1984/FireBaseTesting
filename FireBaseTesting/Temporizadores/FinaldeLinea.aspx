@@ -12,7 +12,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="js/sweetalert-dev.js"></script>
-	<script src="js/DataOPv3.js"></script>
+	<script src="js/DataOPv4.js"></script>
 
      <%--NECESARIOS PARA DISEÑO---%>
    
@@ -105,23 +105,38 @@
         }
 
     </style>
+    <link href="css/demo.css" rel="stylesheet" />
 </head>
 
 <body  onload="document.getElementById('btnStart').click();">
    <%-- Audios/Inicio.mp3--%>
+     <div style="display:none;">
+		<input type="text"  id="txtL"/>
+		<input type="text"  id="txtL1"/>
+		<input type="text"  id="txtL2"/>
+		<input type="text"  id="txtL3"/>
+	 </div>
+					
     <div class="wrapper">
        
         <table style="width:100%;">
             <tr>
 
                 <td style="width:65%;height:200px;text-align:center;">
+                   <div class="box2">
+		                <select id="SelectGrupo" onchange="OPMonitoreadaSiguientesUpdates();">
+		                    <option value="L1L2L3">Grupo L1L2L3</option>
+		                    <option value="L2L5L6">Grupo L2L5L6</option>
+		                    <option value="L7L8L9">Grupo L7L8L9</option>			
+		                    </select>
+	                 </div>
                     <div class="btn" id="divL1">
                         <div class="side default-side" style="font-size:90px;width:100%;color:black; ">
                              <h3><strong id="spanEstatusL1"></strong> </h3>
                              
                         </div>
                         <div class="side hover-side" style="font-size:120px;width:100%;color:black; ">
-                             <div id="tooltipL1" ></div>
+                             <div id="tooltipL1" style="color:white;" ></div>
                         </div>
 
                     </div>
@@ -143,7 +158,7 @@
                             
                         </div>
                         <div class="side hover-side" style="font-size:120px;width:100%;color:black; ">
-                           <div id="tooltipL2"></div>
+                           <div id="tooltipL2" style="color:white;"></div>
                         </div>
 
                     </div>
@@ -157,7 +172,7 @@
                             <h3><strong id="spanEstatusL3"></strong> </h3>                            
                         </div>
                         <div class="side hover-side" style="font-size:120px;width:100%;color:black; ">
-                            <div id="tooltipL3"></div>
+                            <div id="tooltipL3" style="color:white;"></div>
                         </div>
                     </div>
                 </td>
@@ -232,7 +247,7 @@
     function EjecutarAll() {
         OPMonitoreada();
         setInterval(function () { OPMonitoreadaSiguientesUpdates(); }, 7000);
-        setInterval(function () { document.getElementById('Submit1').click(); }, 1500);
+        setInterval(function () { document.getElementById('Submit1').click(); }, 2000);
         setInterval(function () { document.getElementById('Submit2').click(); }, 3000);
     }
   
@@ -283,6 +298,13 @@
         //alert(endL1 + ":" + nowL1);
         var distanceL1 = endL1 - nowL1;
         if (distanceL1 < 0) {
+
+            if (MinParadaL1 != 0) {
+                IniciarLineaDespuesdeTimerFinaldeLinea(1);
+                MinParadaL1 = 0;
+            }
+               
+
             document.getElementById('tooltipL1').innerHTML = "";
             window.clearInterval(timerL1);
 
@@ -330,7 +352,13 @@
         var now = new Date();
         var distance = end - now;
         if (distance < 0) {
-           
+
+            if (MinParadaL2 != 0) {
+                IniciarLineaDespuesdeTimerFinaldeLinea(2);
+                MinParadaL2 = 0;
+            }
+               
+
             clearInterval(timer);
             document.getElementById('tooltipL2').innerHTML = "";
 
@@ -383,12 +411,14 @@
 
             if (distanceL3 < 0) {
 
+                if (MinParadaL3 != 0) {
+                    IniciarLineaDespuesdeTimerFinaldeLinea(3);
+                    MinParadaL3 = 0;
+                }
+                    
+
                 document.getElementById('tooltipL3').innerHTML = "";
                 window.clearInterval(timerL3);
-                //var myVar = setTimeout(location.reload(), 45000);
-                //clearInterval(timer3);
-                //document.getElementById('countdownL3').innerHTML = '';
-
                 return;
             }
             var daysL3 = Math.floor(distanceL3 / _dayL3);

@@ -178,7 +178,10 @@ p {
             var now = new Date();
             var distance = end - now;
             if (distance < 0) {
-                IniciarLineaDespuesdeTimer(2);
+                if (MinParadaL2 != 0) {
+                    IniciarLineaDespuesdeTimer(2);
+                    MinParadaL2 = 0;
+                }
                 clearInterval(timer);
                 document.getElementById('countdownL2').innerHTML = '';
 
@@ -196,10 +199,27 @@ p {
             document.getElementById('countdownL2').innerHTML += seconds + ' segundos';
 
             var PorcenBarL2 = (minutes * 100) / MinParadaL2;
-            // var PorcenBarRegreso = 100 - PorcenBar;
-            Bar2.setAttribute("aria-valuenow", parseInt(PorcenBarL2));
-            
-            document.getElementById('tooltipL2').innerHTML = days + ":" + hours + ":" + minutes + ":" + seconds;
+
+            if (MinParadaL2 <= 0) {
+                document.getElementById('tooltipL2').innerHTML = "";
+                Bar2.setAttribute("aria-valuenow", 100);
+                document.getElementById('countdownL2').innerHTML = "";
+            }
+            else {
+
+                document.getElementById('countdownL2').innerHTML = 'El lavado termina en:';
+                document.getElementById('countdownL2').innerHTML += days + ' dias, ';
+                document.getElementById('countdownL2').innerHTML += hours + ' horas, ';
+                document.getElementById('countdownL2').innerHTML += minutes + ' minutos y ';
+                document.getElementById('countdownL2').innerHTML += seconds + ' segundos';
+
+                Bar2.setAttribute("aria-valuenow", parseInt(PorcenBarL2));
+                document.getElementById('tooltipL2').innerHTML = days + ":" + hours + ":" + minutes + ":" + seconds;
+
+
+
+            }
+
         }
 
     </script>
@@ -230,7 +250,10 @@ p {
         var distance = end - now;
         if (distance < 0) {
             // Finalizar aquí cuando termine el tiempo de lavado
-            FinalizarOP();
+            if (MinParadaL2 != 0) {
+                FinalizarOP();
+                MinParadaL2 = 0;
+            }
             clearInterval(timerLavado);
             document.getElementById('countdownL2').innerHTML = '';
 

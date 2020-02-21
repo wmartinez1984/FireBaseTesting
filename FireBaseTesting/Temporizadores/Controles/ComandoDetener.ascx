@@ -172,8 +172,10 @@ p {
         //alert(endL1 + ":" + nowL1);
         var distanceL1 = endL1 - nowL1;
         if (distanceL1 < 0) {
-
-            IniciarLineaDespuesdeTimer(1);
+            if (MinParadaL1 != 0) {
+                IniciarLineaDespuesdeTimer(1);
+                MinParadaL1 = 0;
+            }
             window.clearInterval(timerL1);
 
             return;
@@ -189,9 +191,27 @@ p {
         document.getElementById('countdownL1').innerHTML += secondsL1 + ' segundos';
 
         var PorcenBar = (minutesL1 * 100) / MinParadaL1;
-        // var PorcenBarRegreso = 100 - PorcenBar;
-        Bar.setAttribute("aria-valuenow", parseInt(PorcenBar));
-        document.getElementById('tooltipL1').innerHTML = daysL1 + ":" + hoursL1 + ":" + minutesL1 + ":" + secondsL1;
+
+        if (MinParadaL1 <= 0) {
+            document.getElementById('tooltipL1').innerHTML = "";
+            Bar.setAttribute("aria-valuenow", 100);
+            document.getElementById('countdownL1').innerHTML = "";
+        }
+        else {
+            document.getElementById('countdownL1').innerHTML = 'El lavado termina en: ';
+            document.getElementById('countdownL1').innerHTML += daysL1 + ' días, ';
+            document.getElementById('countdownL1').innerHTML += hoursL1 + ' horas, ';
+            document.getElementById('countdownL1').innerHTML += minutesL1 + ' minutos y ';
+            document.getElementById('countdownL1').innerHTML += secondsL1 + ' segundos';
+
+
+            Bar.setAttribute("aria-valuenow", parseInt(PorcenBar));
+            document.getElementById('tooltipL1').innerHTML = daysL1 + ":" + hoursL1 + ":" + minutesL1 + ":" + secondsL1;
+
+
+
+        }
+
     }
 
 </script>
@@ -225,7 +245,10 @@ p {
         if (distanceL1 < 0) {
 
            // Finalizar aquí cuando termine el tiempo de lavado
-            FinalizarOP();
+            if (MinParadaL1 != 0) {
+                FinalizarOP();
+                MinParadaL1 = 0;
+            }
             window.clearInterval(timerL1Lavado);
 
             return;

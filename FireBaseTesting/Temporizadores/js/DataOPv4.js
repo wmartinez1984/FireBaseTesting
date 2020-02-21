@@ -1,4 +1,117 @@
-﻿function OPResgistradasSelectEndLineP2() {
+﻿function IniciarLineaDespuesdeTimerFinaldeLinea(Lid) {
+   
+    if (Lid == 1)
+        document.getElementById('txtL1').value = 2; // si la línea seleccionada es la 1, entonces ponemos el valor de la línea en 2 = Envasando
+
+    if (Lid == 2)
+        document.getElementById('txtL2').value = 2; // si la línea seleccionada es la 2, entonces ponemos el valor de la línea en 2 = Envasando
+
+    if (Lid == 3)
+        document.getElementById('txtL3').value = 2; // si la línea seleccionada es la 3, entonces ponemos el valor de la línea en 2 = Envasando
+
+
+
+    var message = "";
+
+    try {
+
+
+        //swal('Iniciando Línea...', 'Estamos iniciando la Línea No ' + Lid + ', por favor espere, no cierre esta ventana hasta que la información termine de registrarse…', 'warning');
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=InciarLinea&OP=" + document.getElementsByName('DataspanOP')[0].value + "&ProductoOP=" + document.getElementsByName('NAVI')[0].value + "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value + "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value + "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value + "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value + "&DescripLavado=NA&L1=" + document.getElementById('txtL1').value + "&L2=" + document.getElementById('txtL2').value + "&L3=" + document.getElementById('txtL3').value + "&GrupoLinea=" + document.getElementById('SelectGrupo').value + "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                //OPResgistradasSelect();
+                //swal('Línea Iniciada', 'La Línea de producción  fue iniciada correctamente ', 'success');
+                var myVar = setTimeout(OPResgistradasSelect(), 15000);
+                //var myVar = setTimeout(location.reload(), 15000);
+                return false;
+            },
+            failure: function (r) {
+                swal('Error:', 'Error al iniciar la Línea de producción, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            },
+            error: function (r) {
+                swal('Error:', 'Error al iniciar la Línea, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            }
+
+        });
+        return false;
+
+
+        
+    }
+    catch (err) {
+       
+        return false;
+    }
+
+    return false;
+
+}
+
+function FinalizarOPFinaldeLinea() {
+
+    var message = "";
+
+    try {
+
+       
+        $.ajax({
+            type: "POST",
+            url: "DataOP.ashx?Action=FinalizarOP&OP=" + document.getElementsByName('DataspanOP')[0].value +
+                "&ProductoOP=" + document.getElementsByName('NAVI')[0].value +
+                "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value +
+                "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value +
+                "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value +
+                "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value +
+                "&DescripLavado=" + document.getElementById('normal-select-7').innerText +
+                "&L1=" + document.getElementById('txtL1').value +
+                "&L2=" + document.getElementById('txtL2').value +
+                "&L3=" + document.getElementById('txtL3').value +
+                "&GrupoLinea=" + document.getElementById('SelectGrupo').value + "",
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                //OPResgistradasSelectTable();
+                //OPResgistradasSelect();
+                //swal('OP Finalizada', 'La OP finalizó correctamente, puede iniciar el proceso con una nueva OP', 'success');
+                document.getElementById('divIniciarLavado').style.display = 'none';
+                document.getElementById('divLavando').style.display = 'none';
+                var myVar = setTimeout(OPResgistradasSelect(), 5000);
+                //var myVar = setTimeout(location.reload(), 40000);
+
+            },
+            failure: function (r) {
+               // swal('Error:', 'Error al finalizar la OP, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            },
+            error: function (r) {
+                //swal('Error:', 'Error al finalizar la OP, por favor verifique los datos y vuelva a intentarlo', 'error');
+                return false;
+            }
+
+        });
+        return false;
+
+
+        return false;
+    }
+    catch (err) {
+        swal('Error:', 'Error al finalizar la OP, por favor verifique los datos y vuelva a intentarlo', 'error');
+        return false;
+    }
+
+    return false;
+}
+
+function OPResgistradasSelectEndLineP2() {
 
    
     document.getElementById('HiddenEstadoOP').value = 5;
@@ -1214,7 +1327,7 @@ function IniciarLineaDespuesdeTimer(Lid) {
         swal('Iniciando Línea...', 'Estamos iniciando la Línea No ' + Lid + ', por favor espere, no cierre esta ventana hasta que la información termine de registrarse…', 'warning');
             $.ajax({
                 type: "POST",
-                url: "DataOP.ashx?Action=InciarLinea&OP=" + document.getElementsByName('DataspanOP')[0].value + "&ProductoOP=" + document.getElementsByName('NAVI')[0].value + "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value + "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value + "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value + "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value + "&DescripLavado=" + document.getElementById('normal-select-7').innerText + "&L1=" + document.getElementById('txtL1').value + "&L2=" + document.getElementById('txtL2').value + "&L3=" + document.getElementById('txtL3').value + "",
+                url: "DataOP.ashx?Action=InciarLinea&OP=" + document.getElementsByName('DataspanOP')[0].value + "&ProductoOP=" + document.getElementsByName('NAVI')[0].value + "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value + "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value + "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value + "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value + "&DescripLavado=" + document.getElementById('normal-select-7').innerText + "&L1=" + document.getElementById('txtL1').value + "&L2=" + document.getElementById('txtL2').value + "&L3=" + document.getElementById('txtL3').value + "&GrupoLinea=" + document.getElementById('SelectGrupo').value + "",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -1255,7 +1368,7 @@ function EjecutarReinicioDeParada(tiempo) {
 }
 
 function ReinicioParadaLineasdeProduccion(tiempo) {
-    alert(document.getElementById('SelectGrupo').value);
+   
     //verifico si ya está denida, sólo así podrá reiniciar línea
     if (document.getElementById('txtL').value == 1 && document.getElementById('txtL1').value != 3) {
         swal('Por favor verifique lo siguiente: ', 'La Línea de producción No 1  actualmente no está denida, esta opción sólo se usa cuándo se desea reiniciar el tiempo de parada', 'warning');
@@ -1423,7 +1536,7 @@ function ParadaLineasdeProduccion(tiempo) {
 function OPMonitoreadaSiguientesUpdates() {
 
 
-    document.getElementById('messageUpdateData').innerHTML = "Consultando estado de la información...";
+    document.getElementById('messageUpdateData').innerHTML = "";
 
     try {
         $.ajax({
@@ -1469,6 +1582,11 @@ function OPMonitoreadaSiguientesUpdates() {
                     }
 
                     if (count == 0) {
+
+                        document.getElementById('txtL1').value = item.EestadoL1;
+                        document.getElementById('txtL2').value = item.EestadoL2;
+                        document.getElementById('txtL3').value = item.EestadoL3;
+
                         //document.getElementById('txtL1').value = item.EestadoL1;
                         //document.getElementById('txtL2').value = item.EestadoL2;
                         //document.getElementById('txtL3').value = item.EestadoL3;
@@ -1710,7 +1828,7 @@ function OPMonitoreadaSiguientesUpdates() {
                     document.getElementById('spanEstatusL2').innerHTML = "";
                     document.getElementById('spanEstatusL3').innerHTML = "";
                     //swal('Oops', 'No existe una OP en proceso', 'warning');
-                    document.getElementById('messageUpdateData').innerHTML = "No existe una OP en proceso";
+                   // document.getElementById('messageUpdateData').innerHTML = "No existe una OP en proceso";
                 }
 
 
@@ -1721,6 +1839,7 @@ function OPMonitoreadaSiguientesUpdates() {
                 //return false;
             },
             error: function (r) {
+               // document.getElementById('messageUpdateData').innerHTML = "No podemos cargar los datos en este momento";
                 //// alert(r.error + " Permisos");
                 //swal('Error:', 'No podemos cargar los datos en este momento, por favor verifique si está conectado correctamente al centro de datos', 'error');
                 //return false;
@@ -1952,7 +2071,7 @@ function OPMonitoreada() {
                     document.getElementById('spanEstatusL2').innerHTML = "";
                     document.getElementById('spanEstatusL3').innerHTML = "";
                     //swal('Oops', 'No existe una OP en proceso', 'warning');
-                    document.getElementById('messageUpdateData').innerHTML = "No existe una OP en proceso";
+                    document.getElementById('messageUpdateData').innerHTML = "No existe una OP en proceso para el grupo seleccionado";
                 }
 
                     
@@ -2040,7 +2159,7 @@ function IniciarLinea() {
             swal('Iniciando Línea...', 'Estamos iniciando la Línea No ' + document.getElementById('txtL').value + ', por favor espere, no cierre esta ventana hasta que la información termine de registrarse…', 'warning');
             $.ajax({
                 type: "POST",
-                url: "DataOP.ashx?Action=InciarLinea&OP=" + document.getElementsByName('DataspanOP')[0].value + "&ProductoOP=" + document.getElementsByName('NAVI')[0].value + "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value + "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value + "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value + "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value + "&DescripLavado=" + document.getElementById('normal-select-7').innerText + "&L1=" + document.getElementById('txtL1').value + "&L2=" + document.getElementById('txtL2').value + "&L3=" + document.getElementById('txtL3').value + "",
+                url: "DataOP.ashx?Action=InciarLinea&OP=" + document.getElementsByName('DataspanOP')[0].value + "&ProductoOP=" + document.getElementsByName('NAVI')[0].value + "&Descripcion=" + document.getElementsByName('NombreProducto')[0].value + "&Cantidad=" + document.getElementsByName('UnidadesFabricar')[0].value + "&Ubicacion=-&CodCliente=-&NombreCliente=" + document.getElementsByName('Cliente')[0].value + "&TiempoLavado=" + document.getElementsByName('Lavado')[0].value + "&DescripLavado=" + document.getElementById('normal-select-7').innerText + "&L1=" + document.getElementById('txtL1').value + "&L2=" + document.getElementById('txtL2').value + "&L3=" + document.getElementById('txtL3').value + "&GrupoLinea=" + document.getElementById('SelectGrupo').value + "",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
