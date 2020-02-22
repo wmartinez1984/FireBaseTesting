@@ -445,15 +445,15 @@ h2 {
 	/*position: absolute;*/
 	/*top: 1%;
 	left: 1%;*/
-	transform: translate(-10%, 50%);
+	transform: translate(0%, 70%);
 	background: #4FC3A1;
-	height: 40px;
+	height: 53px;
 	border-radius: 40px;
 	/*padding: 10px;*/
 }
 
 	.searchBox:hover > .searchInput {
-		width: 340px;
+		width: 440px;
 		padding: 0 16px;
 	}
 
@@ -467,12 +467,12 @@ h2 {
 	color: white;
 	float: right;
 	width: 40px;
-	height: 40px;
+	height: 55px;
 	border-radius: 50%;
 	background: #324960;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	justify-content: left;
+	align-items: left;
 	transition: 0.4s;
 }
 
@@ -483,7 +483,7 @@ h2 {
 	/*float: left;*/
 	padding: 0;
 	color: white;
-	font-size: 16px;
+	font-size: 24px;
 	transition: 0.4s;
 	line-height: 40px;
 	width: 240px;

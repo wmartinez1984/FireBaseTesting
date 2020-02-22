@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DataOP2.ascx.cs" Inherits="FireBaseTesting.Temporizadores.Controles.DataOP2" %>
 
-<div id="divDatosAdicionales" style="margin-top:-13px;">
+<div id="divDatosAdicionales" style="margin-top:-5px;">
     <table style="width:90%;margin:auto;">
           <tr>
                 <td style="text-align:right;font-size:30px;color:#ff6a00" >

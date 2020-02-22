@@ -35,6 +35,31 @@
 	<link rel="stylesheet" type="text/css" href="css/component.css" />
 	<link rel="stylesheet" type="text/css" href="css/custom-bars.css" />
 
+	<script>
+        function CambiarNumeroDeLineas(valor) {
+
+            if (valor == 0) {
+
+                document.getElementById('NL1').innerHTML = "1";
+                document.getElementById('NL2').innerHTML = "2";
+                document.getElementById('NL3').innerHTML = "3";
+            }
+
+            if (valor == 1) {
+                document.getElementById('NL1').innerHTML = "4";
+                document.getElementById('NL2').innerHTML = "5";
+                document.getElementById('NL3').innerHTML = "6";
+            }
+
+            if (valor == 2) {
+                document.getElementById('NL1').innerHTML = "7";
+                document.getElementById('NL2').innerHTML = "8";
+                document.getElementById('NL3').innerHTML = "9";
+            }
+               
+        }
+	</script>
+
 </head>
 <body  onload="document.getElementById('bntInicio').click();">
 
@@ -52,10 +77,10 @@
 	</div>
 	<div class="contact2" style="width:65%;text-align:right;background-color:transparent;margin-top:25px;" > 
 		 <div class="box">
-		  <select id="SelectGrupo" onchange="OPResgistradasSelect();OPResgistradasSelectTable();">
-			<option value="L1L2L3">Grupo L1L2L3</option>
-			<option value="L2L5L6">Grupo L2L5L6</option>
-			<option value="L7L8L9">Grupo L7L8L9</option>
+		  <select id="SelectGrupo" onchange="OPResgistradasSelect();OPResgistradasSelectTable(); CambiarNumeroDeLineas(document.getElementById('SelectGrupo').selectedIndex);">
+			<option value="L1L2L3">Grupo L1 L2 L3</option>
+			<option value="L2L5L6">Grupo L4 L5 L6</option>
+			<option value="L7L8L9">Grupo L7 L8 L9</option>
 			
 		  </select>
 		</div>
@@ -79,7 +104,7 @@
 						</i>
 					  </button>
 					</div>
-					
+					<br />
 				</td>
 				
 			</tr>
@@ -141,8 +166,8 @@
 					</td>
 					<td >
 						 <select id="normal-select-7" class="select-css" onchange=" CambiarLavado();" style="width:280px; " >
-					      <option value="45" class="select-dropdown__list-item">Enjugaue 45 minutos</option>
-						  <option value="75" class="select-dropdown__list-item">Enjugaue intermedio 1hr:15min</option>
+					      <option value="45" class="select-dropdown__list-item">Enjuague 45 minutos</option>
+						  <option value="75" class="select-dropdown__list-item">Enjuague intermedio 1hr:15min</option>
 						  <option value="135" class="select-dropdown__list-item">CIP 2hrs:15min</option>
 						  <option value="180" class="select-dropdown__list-item">CIP acido 3 hrs</option>						 	 
 						 </select>
@@ -236,7 +261,7 @@
 								<div class="bar-face face-position right" style="background-color:#45b817"></div>
 								<div class="bar-face face-position left"></div>
 								<div class="bar-face face-position front percentage volume-lights shine" id="tooltipL1" style="font-size:50px; color:#ff0000"></div>
-								<h3 style="color:black;font-size:60px;"><strong> Línea 1</strong> </h3>
+								<h3 style="color:black;font-size:60px;"><strong> Línea <span id="NL1"> 1</span> </strong> </h3>
 							</div>
 							
 						</div>
@@ -253,7 +278,7 @@
 								<div class="bar-face face-position left"></div>
 								<div class="bar-face face-position right" style="background-color:white"></div>
 								<div class="bar-face face-position front percentage volume-lights shine" id="tooltipL2" style="font-size:50px; color:#ff0000"></div>
-								<h3 style="color:black;font-size:60px;"><strong> Línea 2</strong> </h3>
+								<h3 style="color:black;font-size:60px;"><strong> Línea <span id="NL2"> 2</span></strong> </h3>
 							</div>
 						</div>
 					</div>
@@ -268,7 +293,7 @@
 								<div class="bar-face face-position right" style="background-color:#45b817"></div>
 								<div class="bar-face face-position left" ></div>
 								<div class="bar-face face-position front percentage volume-lights shine"  id="tooltipL3" style="font-size:50px; color:#ff0000"></div>
-								<h3 style="color:black;font-size:60px;"><strong> Línea 3</strong> </h3>
+								<h3 style="color:black;font-size:60px;"><strong> Línea <span id="NL3"> 3</span></strong> </h3>
 							</div>
 						</div>
 					</div>	
@@ -278,8 +303,7 @@
 						<input type="text"  id="txtL1"/>
 						<input type="text"  id="txtL2"/>
 						<input type="text"  id="txtL3"/>
-					</div>
-					
+					</div>					
 				</div>
 
 				<div class="right col" style="text-align:right;border-color:#1d4189; border-width:10px;">			
@@ -312,7 +336,7 @@
 	</div> 
 	
 	<div class="card" id="dribbble" onclick="document.getElementById('txtL').value = 1;" style="background-color:#382B7B" >
-		<a style="background-color:white"   class="card-toggle" id="btnL1"><i><span  class="fa fa-list"></span></i></a>
+		<a style="background-color:white"   class="card-toggle" id="btnL1" onclick="document.getElementById('IncioTab').style.display = 'inline';"><i><span  class="fa fa-list"></span></i></a>
 		<div class="card-content">
 			<div class="row">
 				<div class="left col" style="text-align: left;">
@@ -332,7 +356,7 @@
 	</div> 
 	
 	<div class="card" id="behance" onclick="document.getElementById('txtL').value = 2; ">
-		<a style="background-color:white"  class="card-toggle"><i><span class="fa fa-list"></span></i></a>
+		<a style="background-color:white"  class="card-toggle" onclick="document.getElementById('IncioTab').style.display = 'inline';"><i><span class="fa fa-list"></span></i></a>
 		<div class="card-content">
 			<div class="row">
 				<div class="left col">
@@ -348,7 +372,7 @@
 	</div>
 
 	<div class="card" id="linkedin" onclick="document.getElementById('txtL').value = 3; ">
-		<a style="background-color:white"  class="card-toggle"><i><span class="fa fa-list"></span></i></a>
+		<a style="background-color:white"  class="card-toggle" onclick="document.getElementById('IncioTab').style.display = 'inline';"><i><span class="fa fa-list"></span></i></a>
 		<div class="card-content" >
 			<div class="row" style="text-align:left;">
 				<div class="left col">
@@ -364,7 +388,7 @@
 	</div>
 
 	<div class="card" id="twitter">
-		<a style="background-color:white" class="card-toggle" ><i ><span class="fa fa-calendar-check-o" id="btnIncioLine"></span></i></a>
+		<a style="background-color:white" class="card-toggle"  onclick="document.getElementById('IncioTab').style.display = 'inline';"><i ><span class="fa fa-calendar-check-o" id="btnIncioLine"></span></i></a>
 		<div class="card-content">
 			<div class="row">
 				<div class="left col">					
@@ -377,8 +401,8 @@
 		</div>
 	</div>
 
-	<div class="card" id="IncioTab">
-		<a style="background-color:white" class="card-toggle"  onclick="document.getElementById('bntInicio').click();"><i ><span class="fa fa-home" id="btnIncioTab"></span></i></a>		
+	<div class="card" id="IncioTab" style="display:none;">
+		<a style="background-color:white" class="card-toggle"  onclick="document.getElementById('bntInicio').click(); document.getElementById('IncioTab').style.display = 'none';"><i ><span class="fa fa-home" id="btnIncioTab"></span></i></a>		
 	</div>
 
 	<div class="card" id="twitter2" >

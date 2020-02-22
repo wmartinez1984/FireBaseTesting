@@ -1261,8 +1261,6 @@ function IniciarLineaDespuesdeTimerIncio(Lid) {
     if (Lid == 3)
         document.getElementById('txtL3').value = 2; // si la línea seleccionada es la 3, entonces ponemos el valor de la línea en 2 = Envasando
 
-
-
     var message = "";
 
     try {
