@@ -204,7 +204,7 @@ namespace FireBaseTesting.Temporizadores
             data.OP = context.Request.QueryString["OP"];
             data.ProductoOP = context.Request.QueryString["ProductoOP"];
             data.Descripcion = context.Request.QueryString["Descripcion"];
-            data.Cantidad = context.Request.QueryString["Cantidad"];
+            data.Cantidad = int.Parse(context.Request.QueryString["Cantidad"]);
             data.Ubicacion = context.Request.QueryString["Ubicacion"];
             data.CodCliente = context.Request.QueryString["CodCliente"];
             data.NombreCliente = context.Request.QueryString["NombreCliente"];
@@ -275,7 +275,7 @@ namespace FireBaseTesting.Temporizadores
             data.OP = context.Request.QueryString["OP"];
             data.ProductoOP = context.Request.QueryString["ProductoOP"];
             data.Descripcion = context.Request.QueryString["Descripcion"];
-            data.Cantidad = context.Request.QueryString["Cantidad"];
+            data.Cantidad = int.Parse(context.Request.QueryString["Cantidad"]);
             data.Ubicacion = context.Request.QueryString["Ubicacion"];
             data.CodCliente = context.Request.QueryString["CodCliente"];
             data.NombreCliente = context.Request.QueryString["NombreCliente"];
@@ -345,7 +345,7 @@ namespace FireBaseTesting.Temporizadores
             data.OP = context.Request.QueryString["OP"];
             data.ProductoOP = context.Request.QueryString["ProductoOP"];
             data.Descripcion = context.Request.QueryString["Descripcion"];
-            data.Cantidad = context.Request.QueryString["Cantidad"];
+            data.Cantidad = int.Parse(context.Request.QueryString["Cantidad"]);
             data.Ubicacion = context.Request.QueryString["Ubicacion"];
             data.CodCliente = context.Request.QueryString["CodCliente"];
             data.NombreCliente = context.Request.QueryString["NombreCliente"];
@@ -481,7 +481,7 @@ namespace FireBaseTesting.Temporizadores
             data.OP = context.Request.QueryString["OP"];
             data.ProductoOP = context.Request.QueryString["ProductoOP"];
             data.Descripcion = context.Request.QueryString["Descripcion"];
-            data.Cantidad = context.Request.QueryString["Cantidad"];
+            data.Cantidad = int.Parse(context.Request.QueryString["Cantidad"]);
             data.Ubicacion = context.Request.QueryString["Ubicacion"];
             data.CodCliente = context.Request.QueryString["CodCliente"];
             data.NombreCliente = context.Request.QueryString["NombreCliente"];
@@ -616,7 +616,7 @@ namespace FireBaseTesting.Temporizadores
             data.OP = context.Request.QueryString["OP"];
             data.ProductoOP = context.Request.QueryString["ProductoOP"];
             data.Descripcion = context.Request.QueryString["Descripcion"];
-            data.Cantidad = context.Request.QueryString["Cantidad"];
+            data.Cantidad = int.Parse(context.Request.QueryString["Cantidad"]);
             data.Ubicacion = context.Request.QueryString["Ubicacion"];
             data.CodCliente = context.Request.QueryString["CodCliente"];
             data.NombreCliente = context.Request.QueryString["NombreCliente"];
@@ -728,7 +728,7 @@ namespace FireBaseTesting.Temporizadores
             data.OP = context.Request.QueryString["OP"];
             data.ProductoOP = context.Request.QueryString["ProductoOP"];
             data.Descripcion = context.Request.QueryString["Descripcion"];
-            data.Cantidad = context.Request.QueryString["Cantidad"];
+            data.Cantidad = int.Parse(context.Request.QueryString["Cantidad"]);
             data.Ubicacion = context.Request.QueryString["Ubicacion"];
             data.CodCliente = context.Request.QueryString["CodCliente"];
             data.NombreCliente = context.Request.QueryString["NombreCliente"];
@@ -852,7 +852,7 @@ namespace FireBaseTesting.Temporizadores
                 data.OP = context.Request.QueryString["OP"];
                 data.ProductoOP = context.Request.QueryString["ProductoOP"];
                 data.Descripcion = context.Request.QueryString["Descripcion"];
-                data.Cantidad = context.Request.QueryString["Cantidad"];
+                data.Cantidad = int.Parse(context.Request.QueryString["Cantidad"]);
                 data.Ubicacion = context.Request.QueryString["Ubicacion"];
                 data.CodCliente = context.Request.QueryString["CodCliente"];
                 data.NombreCliente = context.Request.QueryString["NombreCliente"];

@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script src="js/DataOPv4.js"></script>
+	<script src="js/DataOPv5.js"></script>
 
 	<%--NECESARIOS PARA DISEÑO--%>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -79,7 +79,7 @@
 		 <div class="box">
 		  <select id="SelectGrupo" onchange="OPResgistradasSelect();OPResgistradasSelectTable(); CambiarNumeroDeLineas(document.getElementById('SelectGrupo').selectedIndex);">
 			<option value="L1L2L3">Grupo L1 L2 L3</option>
-			<option value="L2L5L6">Grupo L4 L5 L6</option>
+			<option value="L4L5L6">Grupo L4 L5 L6</option>
 			<option value="L7L8L9">Grupo L7 L8 L9</option>
 			
 		  </select>

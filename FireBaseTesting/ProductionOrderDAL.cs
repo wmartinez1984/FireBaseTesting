@@ -15,8 +15,13 @@ namespace FireBaseTesting
     {
         IFirebaseConfig config = new FirebaseConfig
         {
-            AuthSecret = "iBcbS7xIoCfCEj2lc8mAdFBNV4ZqqS599tMOVdCQ",
-            BasePath = "https://fruselvaclient.firebaseio.com/",
+            //Base de datos del cliente chile
+            AuthSecret = "8deo17Qh6Rsku4RtVHZaSlcDuezrp5e7HLA5i4gv",
+            BasePath = "https://frubasedatos.firebaseio.com/",
+
+            //Base de datos propia
+            //AuthSecret = "iBcbS7xIoCfCEj2lc8mAdFBNV4ZqqS599tMOVdCQ",
+            //BasePath = "https://fruselvaclient.firebaseio.com/",
         };
         IFirebaseClient client;
 
@@ -106,15 +111,15 @@ namespace FireBaseTesting
 
             };
 
-            SqlDataReader reader = select.Select("SELECT TOP 1 [OP],[Producto OP],[Descripcion],[Pedido],[Cantidad],[Ubicacion],[Cod Cliente],[Nombre Cliente]  FROM Sql_Tiradas_Mezclas_OP_Prod_Term  WHERE [OP] = @OP", parametros);
-            //SqlDataReader reader = select.Select("SELECT TOP 1 [OP],[Producto OP],[Descripcion],[Pedido],[Cantidad],[Ubicacion],[Cod Cliente],[Nombre Cliente]  FROM [SISINT].[dbo].[Sql_Tiradas_Mezclas_OP_Prod_Term]  WHERE [OP] = @OP", parametros);
+            //SqlDataReader reader = select.Select("SELECT TOP 1 [OP],[Producto OP],[Descripcion],[Pedido],[Cantidad],[Ubicacion],[Cod Cliente],[Nombre Cliente]  FROM Sql_Tiradas_Mezclas_OP_Prod_Term  WHERE [OP] = @OP", parametros);
+            SqlDataReader reader = select.Select("SELECT TOP 1 [OP],[Producto OP],[Descripcion],[Pedido],[Cantidad],[Ubicacion],[Cod Cliente],[Nombre Cliente]  FROM [SISINT].[dbo].[Sql_Tiradas_Mezclas_OP_Prod_Term]  WHERE [OP] = @OP", parametros);
             while (reader.Read())
             {
                 ProductionOrderEntity productionOrderEntity_ = new ProductionOrderEntity();
                 productionOrderEntity_.OP = reader["OP"].ToString().ToUpper();
                 productionOrderEntity_.ProductoOP = reader["Producto OP"].ToString().ToUpper();
                 productionOrderEntity_.Descripcion = reader["Descripcion"].ToString().ToUpper();
-                productionOrderEntity_.Cantidad = reader["Cantidad"].ToString().ToUpper();
+                productionOrderEntity_.Cantidad = 0;
                 productionOrderEntity_.CodCliente = reader["Cod Cliente"].ToString().ToUpper();
                 productionOrderEntity_.NombreCliente = reader["Nombre Cliente"].ToString().ToUpper();
 

@@ -12,7 +12,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="js/sweetalert-dev.js"></script>
-	<script src="js/DataOPv4.js"></script>
+	<script src="js/DataOPv5.js"></script>
 
      <%--NECESARIOS PARA DISEÑO---%>
    
@@ -126,7 +126,7 @@
                    <div class="box2">
 		                <select id="SelectGrupo" onchange="OPMonitoreadaSiguientesUpdates();">
 		                    <option value="L1L2L3">Grupo L1L2L3</option>
-		                    <option value="L2L5L6">Grupo L2L5L6</option>
+		                    <option value="L4L5L6">Grupo L4L5L6</option>
 		                    <option value="L7L8L9">Grupo L7L8L9</option>			
 		                    </select>
 	                 </div>

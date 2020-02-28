@@ -56,7 +56,7 @@
                 </strong>
             </td>
         </tr>
-        <tr>
+        <tr style="display:none;">
             <td style="text-align:left;">
                 Unidades a Fabricar:
             </td>

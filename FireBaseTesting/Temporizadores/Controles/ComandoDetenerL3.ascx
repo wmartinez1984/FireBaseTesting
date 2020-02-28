@@ -267,18 +267,27 @@ p {
         var minutesL3 = Math.floor((distanceL3 % _hourL3) / _minuteL3);
         var secondsL3 = Math.floor((distanceL3 % _minuteL3) / _secondL3);
 
-        document.getElementById('countdownL3').innerHTML = ' El lavado termina en: <br/>';
-        document.getElementById('countdownL3').innerHTML += daysL3 + ' dia(s), ';
-        document.getElementById('countdownL3').innerHTML += hoursL3 + ' hora(s), ';
-        document.getElementById('countdownL3').innerHTML += minutesL3 + ' minuto(s) y ';
-        document.getElementById('countdownL3').innerHTML += secondsL3 + ' segundo(s) ';
 
-        var PorcenBar = (minutesL3 * 100) / MinParadaL3;
-        // var PorcenBarRegreso = 100 - PorcenBar;
-        Bar3.setAttribute("aria-valuenow", parseInt(PorcenBar));
-        document.getElementById('tooltipL3').innerHTML = daysL3 + ":" + hoursL3 + ":" + minutesL3 + ":" + secondsL3;
-        // alert(PorcenBarRegreso);
 
+        if (MinParadaL3 <= 0) {
+            document.getElementById('tooltipL3').innerHTML = "";
+            Bar3.setAttribute("aria-valuenow", 100);
+            document.getElementById('countdownL3').innerHTML = "";
+        }
+        else {
+
+            document.getElementById('countdownL3').innerHTML = ' El lavado termina en: <br/>';
+            document.getElementById('countdownL3').innerHTML += daysL3 + ' dia(s), ';
+            document.getElementById('countdownL3').innerHTML += hoursL3 + ' hora(s), ';
+            document.getElementById('countdownL3').innerHTML += minutesL3 + ' minuto(s) y ';
+            document.getElementById('countdownL3').innerHTML += secondsL3 + ' segundo(s) ';
+
+            var PorcenBar = (minutesL3 * 100) / MinParadaL3;
+            // var PorcenBarRegreso = 100 - PorcenBar;
+            Bar3.setAttribute("aria-valuenow", parseInt(PorcenBar));
+            document.getElementById('tooltipL3').innerHTML = daysL3 + ":" + hoursL3 + ":" + minutesL3 + ":" + secondsL3;
+            // alert(PorcenBarRegreso);
+        }
 
 
     }

@@ -69,8 +69,8 @@ function KeyListData() {
                     return false;
                 }
 
-                if (exists)
-                    swal('Datos necesarios', 'No olvide parametrizar los datos necesarios para iniciar con la simulación, presione Ok para continuar :)  ', 'success');
+               // if (exists)
+                   // swal('Datos necesarios', 'No olvide parametrizar los datos necesarios para iniciar con la simulación, presione Ok para continuar :)  ', 'success');
                 
 
             },

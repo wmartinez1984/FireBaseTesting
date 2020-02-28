@@ -6,6 +6,12 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Web;
+using System.IO;
+
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using OfficeOpenXml.Style;
+using OfficeOpenXml;
 
 namespace FireBaseTesting.ActivosFinancieros
 {
@@ -44,6 +50,7 @@ namespace FireBaseTesting.ActivosFinancieros
             string Sesiones = parametro.Request.QueryString["Sesiones"];
 
             int NumPeriodo = int.Parse(time_period);
+
             var dataTechnicaList = new List<DataTechnical>();
             DataTechnical dataTechnical = new DataTechnical();
             
@@ -59,6 +66,7 @@ namespace FireBaseTesting.ActivosFinancieros
                         webClient.Encoding = Encoding.UTF8;
                         webClient.Encoding = UTF8Encoding.UTF8;
                         webClient.Headers.Add("Content-Type", "application/json");
+
                         //si es menor a 8 se ejecuta normal, sin proxy 
                         if (NumPeriodo > 8 && NumPeriodo <= 16)
                         {
@@ -168,6 +176,75 @@ namespace FireBaseTesting.ActivosFinancieros
             public int count { get; set; }
         }
 
+        public void DataTechnicalExcel(IEnumerable<DataTechnical> dataTechnicals, HttpContext context)
+        {
+           
+
+            ExcelPackage excel = new ExcelPackage();
+            // name of the sheet 
+            var workSheet = excel.Workbook.Worksheets.Add("TechnicalAnalysis");
+
+            // setting the properties 
+            // of the work sheet  
+            workSheet.TabColor = System.Drawing.Color.Black;
+            workSheet.DefaultRowHeight = 12;
+
+            // Setting the properties 
+            // of the first row 
+            workSheet.Row(1).Height = 20;
+            workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(1).Style.Font.Bold = true;
+
+            // Header of the Excel sheet 
+            workSheet.Cells[1, 1].Value = "Fecha";
+            workSheet.Cells[2, 1].Value = "DateTimeValue";
+            for (int i = 2; i <= 60; i++)
+            {
+                
+                workSheet.Cells[1, 2].Value = "2";
+                workSheet.Cells[1, 3].Value = "3";
+                workSheet.Cells[1, 4].Value = "4";
+            }
+            
+
+            // Inserting the article data into excel 
+            // sheet by using the for each loop 
+            // As we have values to the first row  
+            // we will start with second row 
+            int recordIndex = 2;
+
+            foreach (var data in dataTechnicals)
+            {
+                workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
+                workSheet.Cells[recordIndex, 2].Value = data.Name;
+                workSheet.Cells[recordIndex, 3].Value = data.Value;
+                recordIndex++;
+            }
+
+            // By default, the column width is not  
+            // set to auto fit for the content 
+            // of the range, so we are using 
+            // AutoFit() method here.  
+            workSheet.Column(1).AutoFit();
+            workSheet.Column(2).AutoFit();
+            workSheet.Column(3).AutoFit();
+
+           
+            // file name with .xlsx extension  
+            string p_strPath = context.Server.MapPath("DadaExcel/TechnicalAnalysis.xlsx").ToString();
+
+            if (File.Exists(p_strPath))
+                File.Delete(p_strPath);
+
+            // Create excel file on physical disk  
+            FileStream objFileStrm = File.Create(p_strPath);
+            objFileStrm.Close();
+
+            // Write content to excel file  
+            File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
+            //Close Excel package 
+            excel.Dispose();
+        }
 
         public bool IsReusable
         {

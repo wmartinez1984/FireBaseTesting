@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\..\..\Desarrollos\Projects\RegistroRE\Bin\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="FireSharp, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FireSharp.2.0.4\lib\portable-net45+sl5+wp8+win8\FireSharp.dll</HintPath>
     </Reference>
@@ -545,6 +548,7 @@
     <Content Include="Temporizadores\img\weather\texture-sun-bg.png" />
     <Content Include="Temporizadores\img\weather\texture-sun-fg.png" />
     <Content Include="Temporizadores\index.html" />
+    <Content Include="Temporizadores\js\DataOPv5.js" />
     <Content Include="Temporizadores\js\DataOPv4.js" />
     <Content Include="Temporizadores\js\DataOPv3.js" />
     <Content Include="Temporizadores\js\DataOPv2.js" />
@@ -893,8 +897,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ActivosFinancieros\DadaExcel\" />
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Temporizadores\DadaExcel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

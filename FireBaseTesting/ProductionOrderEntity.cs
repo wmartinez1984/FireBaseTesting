@@ -11,7 +11,7 @@ namespace FireBaseTesting
         public string OP { get; set; }
         public string ProductoOP { get; set; }
         public string Descripcion { get; set; }
-        public string Cantidad { get; set; }
+        public int Cantidad { get; set; }
         public string Ubicacion { get; set; }
         public string CodCliente { get; set; }
         public string NombreCliente { get; set; }

@@ -8,7 +8,8 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
-  
+
+
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -21,6 +22,7 @@
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
+
   <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="lib/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet">
   <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -45,9 +47,11 @@
 </head>
 
 <body onload="ActivosRegistradosListComboBox();KeyListData();">
-
+    
   <header id="header" class="header header-hide">
+
     <div class="container">
+
 
       <div id="logo" class="pull-left">
         <h1><a href="#body" class="scrollto"><span>A</span>Ctivos</a> Financieros</h1>
@@ -67,17 +71,20 @@
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
+        <form  runat="server">
+        <asp:Button ID="Button1" runat="server" Text="Button"  OnClick="Button1_Click"/>
+    </form>
   </header><!-- #header -->
 
 <br />
 <br />
+  
+ 
   <!--==========================
     Form Section
   ============================-->
 
-    <link
-     href="https://fonts.googleapis.com/css?family=Montserrat"
-   rel="stylesheet"/>
+    <link      href="https://fonts.googleapis.com/css?family=Montserrat"   rel="stylesheet"/>
         <div class="wrapper">
           <div class="container" id="DivStep1">
             <span id="spanApiKeys" style="display:none;"></span>
@@ -223,7 +230,7 @@
                 <p><button class="w3-button w3-block w3-teal" onclick="CrearTablaDinamicamente();return false;">Iniciar</button></p>
             </form>
         </div>
-        <div style="display:none;" id="divConfirm">
+        <div style="display:inline;" id="divConfirm">
          <p class="w3-button w3-block w3-teal">Parámetros a ejecutar en el API </p>
          <div class="bs-example container"  >
              
@@ -293,7 +300,8 @@
 
         </div>
         </div>
-        <div style="display:none;" id="divResultados">    
+        <div style="display:inline;" id="divResultados">    
+
         <p class="w3-button w3-block w3-teal">Technical Analysis DATA</p>
         <div class="bs-example container"  >
              <p>
@@ -323,81 +331,108 @@
              </tr>
          </table>
         <br />
-         <div data-example-id="striped-table" style="width:100%;overflow-x:auto; overflow-y:auto; height:300px;">
+           <button class="tablink" onclick="openPage('Home', this, '#009688')" id="defaultOpen">Resultados</button>
+            <button class="tablink" onclick="openPage('News', this, 'green')" >Señales</button>
+
+            <div id="Home" class="tabcontent">
+                 <div data-example-id="striped-table" style="width:100%;overflow-x:auto; overflow-y:auto; height:300px;">
             
-            <table class="table table-striped table-bordered table-hover" id="TableResult" style="width:100%;">
-            <thead>
-                <tr style="background-color:#009688;">
-                    <th style="text-align:center;">Fecha</th>
-                    <th style="text-align:center;">2</th>
-                    <th style="text-align:center;">3</th>
-                    <th style="text-align:center;">4</th>
-                    <th style="text-align:center;">5</th>
-                    <th style="text-align:center;">6</th>
-                    <th style="text-align:center;">7</th>
-                    <th style="text-align:center;">8</th>
-                    <th style="text-align:center;">9</th>
-                    <th style="text-align:center;">10</th>
-                    <th style="text-align:center;">11</th>
-                    <th style="text-align:center;">12</th>
-                    <th style="text-align:center;">13</th>
-                    <th style="text-align:center;">14</th>
-                    <th style="text-align:center;">15</th>
-                    <th style="text-align:center;">16</th>
-                    <th style="text-align:center;">17</th>
-                    <th style="text-align:center;">18</th>
-                    <th style="text-align:center;">19</th>
-                    <th style="text-align:center;">20</th>
-                    <th style="text-align:center;">21</th>
-                    <th style="text-align:center;">22</th>
-                    <th style="text-align:center;">23</th>
-                    <th style="text-align:center;">24</th>
-                    <th style="text-align:center;">25</th>
-                    <th style="text-align:center;">26</th>
-                    <th style="text-align:center;">27</th>
-                    <th style="text-align:center;">28</th>
-                    <th style="text-align:center;">29</th>
-                    <th style="text-align:center;">30</th>
-                    <th style="text-align:center;">31</th>
-                    <th style="text-align:center;">32</th>
-                    <th style="text-align:center;">33</th>
-                    <th style="text-align:center;">34</th>
-                    <th style="text-align:center;">35</th>
-                    <th style="text-align:center;">36</th>
-                    <th style="text-align:center;">37</th>
-                    <th style="text-align:center;">38</th>
-                    <th style="text-align:center;">39</th>
-                    <th style="text-align:center;">40</th>
-                    <th style="text-align:center;">41</th>
-                    <th style="text-align:center;">42</th>
-                    <th style="text-align:center;">43</th>
-                    <th style="text-align:center;">44</th>
-                    <th style="text-align:center;">45</th>
-                    <th style="text-align:center;">46</th>
-                    <th style="text-align:center;">47</th>
-                    <th style="text-align:center;">48</th>
-                    <th style="text-align:center;">49</th>
-                    <th style="text-align:center;">50</th>
-                    <th style="text-align:center;">51</th>
-                    <th style="text-align:center;">52</th>
-                    <th style="text-align:center;">53</th>
-                    <th style="text-align:center;">54</th>
-                    <th style="text-align:center;">55</th>
-                    <th style="text-align:center;">56</th>
-                    <th style="text-align:center;">57</th>
-                    <th style="text-align:center;">58</th>
-                    <th style="text-align:center;">59</th>
-                    <th style="text-align:center;">60</th>
-                </tr>
-            </thead>
-            <tbody>
+                    <table class="table table-striped table-bordered table-hover" id="TableResult" style="width:100%;">
+                    <thead>
+                        <tr style="background-color:#009688;">
+                            <th style="text-align:center;">Fecha</th>
+                            <th style="text-align:center;">2</th>
+                            <th style="text-align:center;">3</th>
+                            <th style="text-align:center;">4</th>
+                            <th style="text-align:center;">5</th>
+                            <th style="text-align:center;">6</th>
+                            <th style="text-align:center;">7</th>
+                            <th style="text-align:center;">8</th>
+                            <th style="text-align:center;">9</th>
+                            <th style="text-align:center;">10</th>
+                            <th style="text-align:center;">11</th>
+                            <th style="text-align:center;">12</th>
+                            <th style="text-align:center;">13</th>
+                            <th style="text-align:center;">14</th>
+                            <th style="text-align:center;">15</th>
+                            <th style="text-align:center;">16</th>
+                            <th style="text-align:center;">17</th>
+                            <th style="text-align:center;">18</th>
+                            <th style="text-align:center;">19</th>
+                            <th style="text-align:center;">20</th>
+                            <th style="text-align:center;">21</th>
+                            <th style="text-align:center;">22</th>
+                            <th style="text-align:center;">23</th>
+                            <th style="text-align:center;">24</th>
+                            <th style="text-align:center;">25</th>
+                            <th style="text-align:center;">26</th>
+                            <th style="text-align:center;">27</th>
+                            <th style="text-align:center;">28</th>
+                            <th style="text-align:center;">29</th>
+                            <th style="text-align:center;">30</th>
+                            <th style="text-align:center;">31</th>
+                            <th style="text-align:center;">32</th>
+                            <th style="text-align:center;">33</th>
+                            <th style="text-align:center;">34</th>
+                            <th style="text-align:center;">35</th>
+                            <th style="text-align:center;">36</th>
+                            <th style="text-align:center;">37</th>
+                            <th style="text-align:center;">38</th>
+                            <th style="text-align:center;">39</th>
+                            <th style="text-align:center;">40</th>
+                            <th style="text-align:center;">41</th>
+                            <th style="text-align:center;">42</th>
+                            <th style="text-align:center;">43</th>
+                            <th style="text-align:center;">44</th>
+                            <th style="text-align:center;">45</th>
+                            <th style="text-align:center;">46</th>
+                            <th style="text-align:center;">47</th>
+                            <th style="text-align:center;">48</th>
+                            <th style="text-align:center;">49</th>
+                            <th style="text-align:center;">50</th>
+                            <th style="text-align:center;">51</th>
+                            <th style="text-align:center;">52</th>
+                            <th style="text-align:center;">53</th>
+                            <th style="text-align:center;">54</th>
+                            <th style="text-align:center;">55</th>
+                            <th style="text-align:center;">56</th>
+                            <th style="text-align:center;">57</th>
+                            <th style="text-align:center;">58</th>
+                            <th style="text-align:center;">59</th>
+                            <th style="text-align:center;">60</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     
-            </tbody>
-            <tfoot>
+                    </tbody>
+                    <tfoot>
             
-            </tfoot>
-            </table>
-       </div>
+                    </tfoot>
+                </table>
+               </div>              
+            </div>
+
+            <div id="News" class="tabcontent">
+              <div data-example-id="striped-table" style="width:100%;overflow-x:auto; overflow-y:auto; height:300px;">            
+                <table class="table table-striped table-bordered table-hover" id="TableSenales" style="width:100%;">
+                    <thead>
+                        <tr style="background-color:#009688;">
+                            <th style="text-align:center;">Incial</th>
+                            <th style="text-align:center;">Valor</th>
+                            <th style="text-align:center;">Final</th>
+                            <th style="text-align:center;">Valor</th>
+                            <th style="text-align:center;">Señal</th>                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                    <tfoot>
+            
+                    </tfoot>
+                    </table>
+               </div>  
+             </div>
      </div>
     </div>
   <!--==========================
@@ -462,6 +497,67 @@
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
+
+
+
+<script>
+    function openPage(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+<style>
+* {box-sizing: border-box}
+
+    /* Set height of body and the document to 100% */
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial;
+    }
+
+    /* Style tab links */
+    .tablink {
+      background-color: #555;
+      color: white;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      font-size: 17px;
+      width: 25%;
+    }
+
+    .tablink:hover {
+      background-color: #777;
+    }
+
+    /* Style the tab content (and add height:100% for full page content) */
+    .tabcontent {
+      color: white;
+      display: none;
+      padding: 100px 20px;
+      height: 100%;
+    }
+
+    #Home {background-color: transparent;}
+    #News {background-color: transparent;}
+ 
+</style>
+
   <!-- JavaScript Libraries -->
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/jquery/jquery-migrate.min.js"></script>
@@ -497,6 +593,7 @@
      });
 
  </script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </body>
 </html>
 
