@@ -117,7 +117,7 @@
 		<input type="text"  id="txtL3"/>
 	 </div>
 					
-    <div class="wrapper">
+<%--    <div class="wrapper">--%>
        
         <table style="width:100%;">
             <tr>
@@ -165,6 +165,7 @@
                    
                 </td>
             </tr>
+
             <tr>
                 <td style="width: 65%; height: 200px; text-align: center;">
                     <div class="btn" id="divL3" >
@@ -180,13 +181,13 @@
 
         </table>
 
-    </div>
+    <%--</div>--%>
     <div style="display:none;">
             <input id="Submit1" type="submit" value="submit"  onclick="MovimientosMesas();"/>
             <input id="Submit2" type="submit" value="submit"  onclick="MovimientosMesas2();"/>
     </div>
 
-       <button id="btnStart" onclick="document.getElementById('id01').style.display='block'" style="display:none;">Open Modal</button>
+    <button id="btnStart" onclick="document.getElementById('id01').style.display='block'" style="display:none;">Open Modal</button>
 
     <div id="id01" class="modal">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>

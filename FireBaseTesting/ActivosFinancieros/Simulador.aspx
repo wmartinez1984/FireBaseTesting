@@ -14,8 +14,8 @@
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">
+ <%-- <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">--%>
 
   <!-- Bootstrap css -->
   <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
@@ -39,7 +39,7 @@
     Author: BootstrapMade.com
     License: https://bootstrapmade.com/license/
   ======================================================= -->
-    <script src="Simulador.aspx.js"></script>
+    <script src="Simulador.aspxV5.js"></script>
      <%--NECESARIOS PARA  MENSAJES DEL SISTEMA--%>
     <script src="js/sweetalert-dev.js"></script>
 	<link href="css/sweetalert.css" rel="stylesheet" />
@@ -71,9 +71,12 @@
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
-        <form  runat="server">
-        <asp:Button ID="Button1" runat="server" Text="Button"  OnClick="Button1_Click"/>
-    </form>
+      <div style="display:none;">
+          <form  runat="server">
+            <asp:Button ID="Button1" runat="server" Text="Button"  OnClick="Button1_Click"/>
+        </form>
+      </div>
+        
   </header><!-- #header -->
 
 <br />
@@ -106,7 +109,8 @@
                   <div class="line"></div>
                 </div>
               </div>
-                            <div class="form-row">
+
+              <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Tipo de estrategia</label>
                    <select id="SelectTipoEstrategia" class="form-control">
@@ -149,18 +153,16 @@
                 <div class="form-group col-md-6">
                    <label for="inputEmail4">Temporalidad de la gráfica</label>
                    <select id="SelectTemporalidad" class="form-control">
-                    <option value="daily" selected="selected"  >Diario</option>
-                    <option value="weekly">Semanal</option>       
-                    <option value="monthly">Mensual</option>
-                                 
-                  </select>
+                        <option value="daily" selected="selected"  >Diario</option>
+                        <option value="weekly">Semanal</option>       
+                        <option value="monthly">Mensual</option>                                 
+                   </select>
                   
                   <div class="line"></div>
                 </div>
                 <div class="form-group col-md-6">
                    <label for="inputPassword4">Valor comisión Entrada(%)</label>
-                  <input type="text" class="form-control" id="txtValorComisionEntrada" value="0.5" />
-                  
+                   <input type="text" class="form-control" id="txtValorComisionEntrada" value="0.5" />                  
                   <div class="line"></div>
                 </div>
               </div>
@@ -216,8 +218,6 @@
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">MM Lenta inicial</label>
                   <input type="text" class="form-control" id="txtMMLenta" value="16" />
-                  
-                  
                   <div class="line"></div>
                 </div>
                 <div class="form-group col-md-6">
@@ -227,13 +227,12 @@
                 </div>
               </div>
 
-                <p><button class="w3-button w3-block w3-teal" onclick="CrearTablaDinamicamente();return false;">Iniciar</button></p>
+             <p><button class="w3-button w3-block w3-teal" onclick="CrearTablaDinamicamente();return false;">Iniciar</button></p>
             </form>
         </div>
-        <div style="display:inline;" id="divConfirm">
+        <div style="display:none;" id="divConfirm">
          <p class="w3-button w3-block w3-teal">Parámetros a ejecutar en el API </p>
-         <div class="bs-example container"  >
-             
+         <div class="bs-example container">             
              <table style="margin:auto;">
                  <tr>
                      <td>
@@ -243,7 +242,7 @@
                          <span id="spamActivo"></span>
                      </td>
                  </tr>
-                  <tr>
+                 <tr>
                      <td>
                          Symbol
                      </td>
@@ -294,13 +293,11 @@
                       <button class="w3-button w3-block w3-teal" onclick="confirmar();">Inciar Consultas</button>
                  </td>
              </tr>
-           </table>
-            
+           </table>            
           </div>
-
         </div>
         </div>
-        <div style="display:inline;" id="divResultados">    
+        <div style="display:none;" id="divResultados">    
 
         <p class="w3-button w3-block w3-teal">Technical Analysis DATA</p>
         <div class="bs-example container"  >
@@ -317,122 +314,49 @@
              <p>
                  <strong style="font-size:15px;">
                     Total consultas ejecutadas: <span id="spanTotal">0</span><br />
-                     <span id="spanEsperando" style="color:red;font-size:20px;">Consultando información, por favor espere que se ejecuten las 59 consultas...</span>
+                     <span id="spanEsperando" style="color:red;font-size:23px;">Consultando información, por favor espere que se ejecute el proceso... </span>
                 </strong> 
              </p>
-         <table style="margin:auto;">
+            <table style="margin:auto;">
              <tr>
-                 <td>
-                     <input id="btnCancelar" type="button" class="w3-button w3-block w3-teal" style="background-color:#792525 !important" onclick="location.reload();" value="Cancelar" />
-                 </td>
-                 <td>
-                      <input id="btnCalcular" class="w3-button w3-block w3-teal" type="button" value="Ejecutar Cálculos " />
-                 </td>
-             </tr>
-         </table>
-        <br />
-           <button class="tablink" onclick="openPage('Home', this, '#009688')" id="defaultOpen">Resultados</button>
-            <button class="tablink" onclick="openPage('News', this, 'green')" >Señales</button>
+                 
+                 <td colspan="2">
 
-            <div id="Home" class="tabcontent">
+                     
+                     <a target="_blank" href="DadaExcel/TechnicalAnalysisv2.xlsx" style="display:none;" id="aDescarga">
+                         <input id="btnCalcular" class="w3-button w3-block w3-teal" type="button" value="Descargar resultado"  />
+                     </a>                     
+                     <input id="btnRecarlcular" class="w3-button w3-block w3-teal"  type="button" value="Ejecutar Cálculo Nuevamente"  style="display:none;" onclick="Recalcular(this);" />
+                     <input id="btnCancelar" type="button" class="w3-button w3-block w3-teal" style="background-color:#792525 !important" onclick="location.reload();" value="Salir" />
+
+                 </td>
+                
+             </tr>
+            </table>
+        <br />
+           
                  <div data-example-id="striped-table" style="width:100%;overflow-x:auto; overflow-y:auto; height:300px;">
             
-                    <table class="table table-striped table-bordered table-hover" id="TableResult" style="width:100%;">
+                    <table class="table table-striped table-bordered table-hover" id="TableResult" style="width:100%;" runat="server">
                     <thead>
-                        <tr style="background-color:#009688;">
+                        <%--<tr style="background-color:#009688;">
                             <th style="text-align:center;">Fecha</th>
-                            <th style="text-align:center;">2</th>
-                            <th style="text-align:center;">3</th>
-                            <th style="text-align:center;">4</th>
-                            <th style="text-align:center;">5</th>
-                            <th style="text-align:center;">6</th>
-                            <th style="text-align:center;">7</th>
-                            <th style="text-align:center;">8</th>
-                            <th style="text-align:center;">9</th>
-                            <th style="text-align:center;">10</th>
-                            <th style="text-align:center;">11</th>
-                            <th style="text-align:center;">12</th>
-                            <th style="text-align:center;">13</th>
-                            <th style="text-align:center;">14</th>
-                            <th style="text-align:center;">15</th>
-                            <th style="text-align:center;">16</th>
-                            <th style="text-align:center;">17</th>
-                            <th style="text-align:center;">18</th>
-                            <th style="text-align:center;">19</th>
-                            <th style="text-align:center;">20</th>
-                            <th style="text-align:center;">21</th>
-                            <th style="text-align:center;">22</th>
-                            <th style="text-align:center;">23</th>
-                            <th style="text-align:center;">24</th>
-                            <th style="text-align:center;">25</th>
-                            <th style="text-align:center;">26</th>
-                            <th style="text-align:center;">27</th>
-                            <th style="text-align:center;">28</th>
-                            <th style="text-align:center;">29</th>
-                            <th style="text-align:center;">30</th>
-                            <th style="text-align:center;">31</th>
-                            <th style="text-align:center;">32</th>
-                            <th style="text-align:center;">33</th>
-                            <th style="text-align:center;">34</th>
-                            <th style="text-align:center;">35</th>
-                            <th style="text-align:center;">36</th>
-                            <th style="text-align:center;">37</th>
-                            <th style="text-align:center;">38</th>
-                            <th style="text-align:center;">39</th>
-                            <th style="text-align:center;">40</th>
-                            <th style="text-align:center;">41</th>
-                            <th style="text-align:center;">42</th>
-                            <th style="text-align:center;">43</th>
-                            <th style="text-align:center;">44</th>
-                            <th style="text-align:center;">45</th>
-                            <th style="text-align:center;">46</th>
-                            <th style="text-align:center;">47</th>
-                            <th style="text-align:center;">48</th>
-                            <th style="text-align:center;">49</th>
-                            <th style="text-align:center;">50</th>
-                            <th style="text-align:center;">51</th>
-                            <th style="text-align:center;">52</th>
-                            <th style="text-align:center;">53</th>
-                            <th style="text-align:center;">54</th>
-                            <th style="text-align:center;">55</th>
-                            <th style="text-align:center;">56</th>
-                            <th style="text-align:center;">57</th>
-                            <th style="text-align:center;">58</th>
-                            <th style="text-align:center;">59</th>
-                            <th style="text-align:center;">60</th>
-                        </tr>
+                          
+                        </tr>--%>
                     </thead>
                     <tbody>
-                    
+                        
                     </tbody>
                     <tfoot>
             
                     </tfoot>
                 </table>
-               </div>              
-            </div>
+                <div id="demoDiv" style="width:100%;">
 
-            <div id="News" class="tabcontent">
-              <div data-example-id="striped-table" style="width:100%;overflow-x:auto; overflow-y:auto; height:300px;">            
-                <table class="table table-striped table-bordered table-hover" id="TableSenales" style="width:100%;">
-                    <thead>
-                        <tr style="background-color:#009688;">
-                            <th style="text-align:center;">Incial</th>
-                            <th style="text-align:center;">Valor</th>
-                            <th style="text-align:center;">Final</th>
-                            <th style="text-align:center;">Valor</th>
-                            <th style="text-align:center;">Señal</th>                           
-                        </tr>
-                    </thead>
-                    <tbody>
-                    
-                    </tbody>
-                    <tfoot>
+                </div>
+               </div>              
             
-                    </tfoot>
-                    </table>
-               </div>  
-             </div>
+
      </div>
     </div>
   <!--==========================

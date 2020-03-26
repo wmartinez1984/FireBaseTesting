@@ -1532,7 +1532,8 @@ function ParadaLineasdeProduccion(tiempo) {
 }
 
 function OPMonitoreadaSiguientesUpdates() {
-
+    
+    document.getElementById('NombreProducto').value = ""; document.getElementById('NAVI').value = ""; 
 
     document.getElementById('messageUpdateData').innerHTML = "";
 

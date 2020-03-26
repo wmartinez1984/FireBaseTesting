@@ -161,11 +161,13 @@
     <Content Include="ActivosFinancieros\img\blog\blog-image-1.jpg" />
     <Content Include="ActivosFinancieros\img\blog\blog-image-2.jpg" />
     <Content Include="ActivosFinancieros\img\blog\blog-image-3.jpg" />
+    <Content Include="ActivosFinancieros\img\CompuData.gif" />
     <Content Include="ActivosFinancieros\img\favicon.png" />
     <Content Include="ActivosFinancieros\img\hero-bg.png" />
     <Content Include="ActivosFinancieros\img\hero-img.png" />
     <Content Include="ActivosFinancieros\img\newsletter-bg.jpg" />
     <Content Include="ActivosFinancieros\img\plagc3.png" />
+    <Content Include="ActivosFinancieros\img\Reloj.gif" />
     <Content Include="ActivosFinancieros\img\screen\1.jpg" />
     <Content Include="ActivosFinancieros\img\screen\2.jpg" />
     <Content Include="ActivosFinancieros\img\screen\3.jpg" />
@@ -228,7 +230,12 @@
     <Content Include="ActivosFinancieros\lib\wow\wow.min.js" />
     <Content Include="ActivosFinancieros\login.aspx" />
     <Content Include="ActivosFinancieros\Simulador.aspx" />
+    <Content Include="ActivosFinancieros\Simulador.aspxV5.js" />
+    <Content Include="ActivosFinancieros\Simulador.aspxV4.js" />
+    <Content Include="ActivosFinancieros\Simulador.aspxV3.js" />
+    <Content Include="ActivosFinancieros\Simulador.aspxv2.js" />
     <Content Include="ActivosFinancieros\Simulador.aspx.js" />
+    <Content Include="ActivosFinancieros\test.aspx" />
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\font-awesome.min.css" />
@@ -380,6 +387,8 @@
     <Content Include="pdfs\example2.pdf" />
     <Content Include="PdfLinks\pdfs\example2.pdf" />
     <Content Include="pdfs\A1_1032X_EN.pdf" />
+    <Content Include="ActivosFinancieros\DadaExcel\TechnicalAnalysisv2.xlsx" />
+    <None Include="ActivosFinancieros\Simulador.aspxv2ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP1.pubxml" />
@@ -655,6 +664,9 @@
     <Compile Include="ActivosFinancieros\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ActivosFinancieros\Simulador.aspx - Copia.ashx.cs">
+      <DependentUpon>Simulador.aspxv2ashx</DependentUpon>
+    </Compile>
     <Compile Include="ActivosFinancieros\Simulador.aspx.ashx.cs">
       <DependentUpon>Simulador.aspx.ashx</DependentUpon>
     </Compile>
@@ -664,6 +676,13 @@
     </Compile>
     <Compile Include="ActivosFinancieros\Simulador.aspx.designer.cs">
       <DependentUpon>Simulador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFinancieros\test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFinancieros\test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -897,7 +916,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ActivosFinancieros\DadaExcel\" />
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Temporizadores\DadaExcel\" />

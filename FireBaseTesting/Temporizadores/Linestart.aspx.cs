@@ -11,7 +11,15 @@ namespace FireBaseTesting.Temporizadores
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack)
+            {
+                if (Request.QueryString["LineSelected"] != null)
+                {
+                     txtLinea.Value = Request.QueryString["LineSelected"];
+                    SelectGrupo.Value = txtLinea.Value;
+                }
+                  
+            }
         }
     }
 }

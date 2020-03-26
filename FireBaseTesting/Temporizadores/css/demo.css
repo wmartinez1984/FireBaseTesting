@@ -36,7 +36,7 @@ a:hover, a:focus {
 	overflow: hidden;
 	width: 0;
 	height: 0;
-	pointer-events: none;
+	/*pointer-events: none;*/
 }
 
 /* Header */
@@ -602,7 +602,7 @@ https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css
   line-height: 45px;
   color: rgba(255, 255, 255, 0.5);
   background-color: rgba(255, 255, 255, 0.1);
-  pointer-events: none;
+  /*pointer-events: none;*/
 }
 
 .box:hover::before {
@@ -652,7 +652,7 @@ https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css
 		line-height: 45px;
 		color: rgba(255, 255, 255, 0.5);
 		background-color: rgba(255, 255, 255, 0.1);
-		pointer-events: none;
+		/*pointer-events: none;*/
 	}
 
 	.box2:hover::before {

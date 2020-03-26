@@ -175,7 +175,7 @@ input:focus {
           transform-origin: 100% 50%;
   -webkit-transform: translateY(-50%) rotate(var(--beamDegrees, 0));
           transform: translateY(-50%) rotate(var(--beamDegrees, 0));
-  pointer-events: none;
+  /*pointer-events: none;*/
 }
 .show-password [id="beam"] {
   background: var(--beamColor);

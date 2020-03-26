@@ -1,0 +1,1 @@
+﻿<%@ WebHandler Language="C#" CodeBehind="Simulador.aspxv2.ashx.cs" Class="FireBaseTesting.ActivosFinancieros.Simulador_aspxv2" %>

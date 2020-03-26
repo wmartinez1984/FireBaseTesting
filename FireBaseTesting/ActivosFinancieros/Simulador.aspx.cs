@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Newtonsoft.Json.Linq;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 namespace FireBaseTesting.ActivosFinancieros
@@ -16,87 +21,821 @@ namespace FireBaseTesting.ActivosFinancieros
 
         }
 
+        [WebMethod]
+        public static void GenerarCalculos(string[] DataList)
+        {
+
+            string[] dataList = DataList;
+        }
+
         protected void Button1_Click(object sender, EventArgs e)
         {
-            CargarDataLocal();
-            //var Articles = new[]
-            //{
-            //    new {
-            //        Id = "101", Name = "C++"
-            //    },
-            //    new {
-            //        Id = "102", Name = "Python"
-            //    },
-            //    new {
-            //        Id = "103", Name = "Java Script"
-            //    },
-            //    new {
-            //        Id = "104", Name = "GO"
-            //    },
-            //    new {
-            //        Id = "105", Name = "Java"
-            //    },
-            //    new {
-            //        Id = "106", Name = "C#"
-            //    }
-            //};
 
-            //ExcelPackage excel = new ExcelPackage();
-            //// name of the sheet 
-            //var workSheet = excel.Workbook.Worksheets.Add("TechnicalAnalysis");
+            string apikey = "TP7N016HS7WSW4AQ|R67BCSM6M48U3UXP|4FBIG5TULRH84VFD|Z235P5V28NJAO6GF|SRNXB4IHEWRLEJH7|MJRQQRSU4P91WRCN|32MXJLRO8ZLVNP0O|TLKQAFU3U488YD50|GUK1VEFW5NZE4M0M|2QMKXM3TEOAM9PGF|5S2GD09CXEC2DIV5|M8BIRNAJFHTYQW6Q|";
+            string series_type = "open";
+            string time_period = "2";
+            string interval = "weekly";
+            string symbol = "AMZN";
+            string indicador = "SMA";
+            string Sesiones = "1000";
 
-            //// setting the properties 
-            //// of the work sheet  
-            //workSheet.TabColor = System.Drawing.Color.Black;
-            //workSheet.DefaultRowHeight = 12;
+            int RapidaInicial = 2;
+            int RapidaFinal = 15;
+            int LentaInicial = 16;
+            int LentaFinal = 60;
 
-            //// Setting the properties 
-            //// of the first row 
-            //workSheet.Row(1).Height = 20;
-            //workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-            //workSheet.Row(1).Style.Font.Bold = true;
+            ExcelPackage excel = new ExcelPackage();
+            var workSheet = excel.Workbook.Worksheets.Add("TechnicalAnalysis");
+            var SenalSheet1 = excel.Workbook.Worksheets.Add("Señales"); //Pestaña de señales
 
-            //// Header of the Excel sheet 
-            //workSheet.Cells[1, 1].Value = "S.No";
-            //workSheet.Cells[1, 2].Value = "Id";
-            //workSheet.Cells[1, 3].Value = "Name";
+            // setting the properties 
+            // of the work sheet  
+            workSheet.TabColor = System.Drawing.Color.Black;
+            workSheet.DefaultRowHeight = 12;
 
-            //// Inserting the article data into excel 
-            //// sheet by using the for each loop 
-            //// As we have values to the first row  
-            //// we will start with second row 
-            //int recordIndex = 2;
+            SenalSheet1.TabColor = System.Drawing.Color.Brown;
+            SenalSheet1.DefaultRowHeight = 12;
 
-            //foreach (var article in Articles)
-            //{
-            //    workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
-            //    workSheet.Cells[recordIndex, 2].Value = article.Id;
-            //    workSheet.Cells[recordIndex, 3].Value = article.Name;
-            //    recordIndex++;
-            //}
+            // Setting the properties 
+            // of the first row 
+            workSheet.Row(1).Height = 20;
+            workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(1).Style.Font.Bold = true;
 
-            //// By default, the column width is not  
-            //// set to auto fit for the content 
-            //// of the range, so we are using 
-            //// AutoFit() method here.  
-            //workSheet.Column(1).AutoFit();
-            //workSheet.Column(2).AutoFit();
-            //workSheet.Column(3).AutoFit();
+            SenalSheet1.Row(1).Height = 30;
+            SenalSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            SenalSheet1.Row(1).Style.Font.Bold = true;
 
-            //// file name with .xlsx extension  
-            //string p_strPath = Server.MapPath("DadaExcel/TechnicalAnalysis.xlsx");
+            // Header of the Excel sheet 
+            workSheet.Cells[1, 1].Value = "Fecha";
+            //Creamos 59 columnas más, en total 60
+            for (int i = 2; i <= LentaFinal; i++)
+            {
+                workSheet.Cells[1, i].Value = i.ToString();
+            }
 
-            //if (File.Exists(p_strPath))
-            //    File.Delete(p_strPath);
 
-            //// Create excel file on physical disk  
-            //FileStream objFileStrm = File.Create(p_strPath);
-            //objFileStrm.Close();
+            int NumPeriodo = int.Parse(time_period);
 
-            //// Write content to excel file  
-            //File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
-            ////Close Excel package 
-            //excel.Dispose();
+            var countCall = 0;
+            var TotalCall = LentaFinal;
+            var Keys = apikey.Split('|');
+            int TotalEjecutadas = 0;
+            var dataTechnicaList = new List<DataTechnical>();
+            DataTechnical dataTechnical = new DataTechnical();
+            try
+            {
+                int EjecutarProxy = 1;
+                for (var i = 0; i < Keys.Length; i++)
+                {
+                   
+                    if (Keys[i] != "")
+                    {
+                        countCall += 1;
+                        if (countCall < TotalCall)
+                        {
+
+                            //Aquí van las ejecuciones 
+
+
+
+                            using (WebClient webClient = new System.Net.WebClient())
+                            {
+                                int countTime = 0;
+                                bool retry = false;
+                                do
+                                {
+                                    retry = false;
+                                    try
+                                    {
+                                        webClient.Encoding = Encoding.UTF8;
+                                        webClient.Encoding = UTF8Encoding.UTF8;
+                                        webClient.Headers.Add("Content-Type", "application/json");
+
+                                        //Ejecutan individualmente
+                                        if (EjecutarProxy == 1)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static", "hmgkn0ztpad0");
+
+                                        }
+
+                                        if (EjecutarProxy == 2)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf", "8jcnmagkxr9x");
+                                        }
+
+                                        if (EjecutarProxy == 3)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf2", "hm0pssiuy51s");
+                                        }
+
+                                        if (EjecutarProxy == 4)
+                                        {
+
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-country-fr", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 5)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf-country-de", "8jcnmagkxr9x");
+
+                                        }
+
+
+                                        if (EjecutarProxy == 6)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf-country-co", "8jcnmagkxr9x");
+                                        }
+
+                                        if (EjecutarProxy == 7)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf2-country-it", "hm0pssiuy51s");
+                                        }
+
+                                        if (EjecutarProxy == 8)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3-country-ar", "950qr9c3oy74");
+
+                                        }
+
+                                        if (EjecutarProxy == 9)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3-country-bg", "950qr9c3oy74");
+                                        }
+
+                                        if (EjecutarProxy == 10)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3", "950qr9c3oy74");
+                                        }
+
+                                        if (EjecutarProxy == 11)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3-route_err-block", "950qr9c3oy74");
+                                        }
+
+                                        if (EjecutarProxy == 12)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf-route_err-block", "8jcnmagkxr9x");
+                                        }
+
+                                        if (EjecutarProxy == 13)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf-route_err-block-country-us", "8jcnmagkxr9x");
+
+                                        }
+
+                                        if (EjecutarProxy == 14)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3-route_err-block-country-ie", "950qr9c3oy74");
+                                        }
+
+                                        if (EjecutarProxy == 15)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 16)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3", "950qr9c3oy74");
+                                        }
+
+
+                                        if (EjecutarProxy == 18)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf2-route_err-block", "hm0pssiuy51s");
+                                        }
+
+                                        if (EjecutarProxy == 19)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 20)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block-country-be", "hmgkn0ztpad0");
+
+                                        }
+
+                                        if (EjecutarProxy == 21)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block-country-be", "hmgkn0ztpad0");
+
+                                        }
+
+                                        if (EjecutarProxy == 22)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef4", "dkynyah79ep4");
+                                        }
+
+                                        if (EjecutarProxy == 23)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef4-country-gb", "dkynyah79ep4");
+                                        }
+
+                                        if (EjecutarProxy == 24)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef4-country-us", "dkynyah79ep4");
+                                        }
+
+                                        if (EjecutarProxy == 25)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-country-al", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 26)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-country-au", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 27)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-country-eg", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 28)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef4-country-fi", "dkynyah79ep4");
+                                        }
+
+                                        if (EjecutarProxy == 29)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef5", "ihz4r4y1afpi");
+                                        }
+
+                                        if (EjecutarProxy == 30)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef5-country-cn", "ihz4r4y1afpi");
+                                        }
+
+                                        if (EjecutarProxy == 31)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef5-country-in", "ihz4r4y1afpi");
+                                        }
+
+                                        if (EjecutarProxy == 32)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef6-country-in", "nk9fkr5guhqo");
+                                        }
+
+                                        if (EjecutarProxy == 33)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef6-country-id", "nk9fkr5guhqo");
+                                        }
+
+
+                                        if (EjecutarProxy == 33)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef6-country-au", "nk9fkr5guhqo");
+                                        }
+
+                                        if (EjecutarProxy == 33)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef6-country-ar", "nk9fkr5guhqo");
+                                        }
+
+                                        if (EjecutarProxy == 34)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef6-country-uz", "nk9fkr5guhqo");
+                                        }
+
+                                        if (EjecutarProxy == 35)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-country-uz", "hmgkn0ztpad0");
+                                        }
+
+
+                                        //******************************************************************************************
+                                        if (EjecutarProxy == 36)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static", "hmgkn0ztpad0");
+
+                                        }
+
+                                        if (EjecutarProxy == 37)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf", "8jcnmagkxr9x");
+                                        }
+
+                                        if (EjecutarProxy == 38)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf2", "hm0pssiuy51s");
+                                        }
+
+                                        if (EjecutarProxy == 39)
+                                        {
+
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-country-fr", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 40)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf-country-de", "8jcnmagkxr9x");
+
+                                        }
+
+
+                                        if (EjecutarProxy == 41)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf-country-co", "8jcnmagkxr9x");
+                                        }
+
+                                        if (EjecutarProxy == 42)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf2-country-it", "hm0pssiuy51s");
+                                        }
+
+                                        if (EjecutarProxy == 43)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3-country-ar", "950qr9c3oy74");
+
+                                        }
+
+                                        if (EjecutarProxy == 44)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3-country-bg", "950qr9c3oy74");
+                                        }
+
+                                        if (EjecutarProxy == 45)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3", "950qr9c3oy74");
+                                        }
+
+                                        if (EjecutarProxy == 46)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3-route_err-block", "950qr9c3oy74");
+                                        }
+
+                                        if (EjecutarProxy == 47)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf-route_err-block", "8jcnmagkxr9x");
+                                        }
+
+                                        if (EjecutarProxy == 48)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf-route_err-block-country-us", "8jcnmagkxr9x");
+
+                                        }
+
+                                        if (EjecutarProxy == 49)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3-route_err-block-country-ie", "950qr9c3oy74");
+                                        }
+
+                                        if (EjecutarProxy == 50)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 51)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef3", "950qr9c3oy74");
+                                        }
+
+
+                                        if (EjecutarProxy == 52)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf2-route_err-block", "hm0pssiuy51s");
+                                        }
+
+                                        if (EjecutarProxy == 53)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 54)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block-country-be", "hmgkn0ztpad0");
+
+                                        }
+
+                                        if (EjecutarProxy == 55)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block-country-be", "hmgkn0ztpad0");
+
+                                        }
+
+                                        if (EjecutarProxy == 56)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef4", "dkynyah79ep4");
+                                        }
+
+                                        if (EjecutarProxy == 57)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef4-country-gb", "dkynyah79ep4");
+                                        }
+
+                                        if (EjecutarProxy == 58)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef4-country-us", "dkynyah79ep4");
+                                        }
+
+                                        if (EjecutarProxy == 59)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-country-al", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 60)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-country-au", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 61)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-country-eg", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 62)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef4-country-fi", "dkynyah79ep4");
+                                        }
+
+                                        if (EjecutarProxy == 63)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef5", "ihz4r4y1afpi");
+                                        }
+
+                                        if (EjecutarProxy == 64)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef5-country-cn", "ihz4r4y1afpi");
+                                        }
+
+                                        if (EjecutarProxy == 65)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef5-country-in", "ihz4r4y1afpi");
+                                        }
+
+                                        if (EjecutarProxy == 66)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef6-country-in", "nk9fkr5guhqo");
+                                        }
+
+                                        if (EjecutarProxy == 67)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 68)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef7", "bs8i0wjbemwf");
+                                        }
+
+                                        if (EjecutarProxy == 69)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef7", "bs8i0wjbemwf");
+                                        }
+
+                                        if (EjecutarProxy == 70)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef7", "bs8i0wjbemwf");
+                                        }
+
+                                        if (EjecutarProxy == 71)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef8", "hoa63y623ppr");
+                                        }
+
+                                        if (EjecutarProxy == 72)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef8", "hoa63y623ppr");
+                                        }
+
+                                        if (EjecutarProxy == 74)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef8", "hoa63y623ppr");
+                                        }
+
+                                        if (EjecutarProxy == 75)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zonef8-route_err-block", "hoa63y623ppr");
+                                        }
+
+                                        if (EjecutarProxy == 76)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 77)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 78)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-static-route_err-block", "hmgkn0ztpad0");
+                                        }
+
+                                        if (EjecutarProxy == 79)
+                                        {
+                                            webClient.Proxy = new WebProxy("zproxy.lum-superproxy.io:22225");
+                                            webClient.Proxy.Credentials = new NetworkCredential("lum-customer-hl_7378269a-zone-zoneaf-country-de", "8jcnmagkxr9x");
+
+                                        }
+
+                                        var json = webClient.DownloadString("https://www.alphavantage.co/query?function=" + indicador + "&symbol=" + symbol + "&interval=" + interval + "&time_period=" + NumPeriodo + "&series_type=" + series_type + "&apikey=" + Keys[i] + "");
+                                        JObject Search = JObject.Parse(json);
+
+                                        IList<JToken> results = Search["Technical Analysis: " + indicador + ""].ToList();
+                                        EjecutarProxy++;
+
+                                        int count = 1;
+                                        // Inserting the  data into excel 
+
+                                        int recordIndex = 2;
+                                        int DataCount = 0;
+                                        int sessiones = 15;
+                                        int sessionesCount = 0;
+                                        foreach (JToken result in results)
+                                        {
+                                            if (count <= int.Parse(Sesiones))
+                                            {
+
+                                                dataTechnical.Name = ((Newtonsoft.Json.Linq.JProperty)result).Name.ToString();
+
+                                                JObject RowsTable = JObject.Parse(((Newtonsoft.Json.Linq.JProperty)result).Value.ToString());
+                                                foreach (KeyValuePair<string, JToken> property in RowsTable)
+                                                {
+                                                    dataTechnical.Value = property.Value.ToString();
+                                                }
+
+                                                if (NumPeriodo == 2)//sí es la primera,lleno la columna con las fechas
+                                                    workSheet.Cells[recordIndex, 1].Value = dataTechnical.Name;
+
+                                                workSheet.Cells[recordIndex, NumPeriodo].Value = dataTechnical.Value;
+
+
+                                                recordIndex++;
+
+                                                count += 1;
+
+                                            }
+                                            else
+                                                break;
+
+
+                                        }
+
+                                        //ajusto la columna que llené 
+                                        workSheet.Column(NumPeriodo).AutoFit();
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        if (countTime < 300)
+                                        {
+                                            retry = true;
+                                            EjecutarProxy++;
+                                            if(EjecutarProxy >= 66)
+                                            {
+                                                Thread.Sleep(1000);
+                                                EjecutarProxy = 1;
+                                            }                                              
+
+                                            countTime++;
+                                        }
+                                        else
+                                        {
+                                            throw ex;
+                                        }
+                                    }
+                                } while (retry);
+
+
+                            }
+
+                            NumPeriodo = NumPeriodo + 1;
+                            TotalEjecutadas = i + 1;
+                            if (TotalEjecutadas == Keys.Length && countCall < TotalCall)
+                                i = 0;
+
+                        }
+                        else
+                        {
+                            break;
+                        }
+
+
+                    }
+
+                    TotalEjecutadas = i + 1;
+                    if (TotalEjecutadas == Keys.Length && countCall < TotalCall)
+                        i = 0;
+                }
+
+                //cálculo  de  Señales
+                try
+                {
+
+
+                    int RapidaInicialColum = RapidaInicial;
+                    int ColumInicial = 1;
+                    for (int s = RapidaInicial; s < RapidaFinal; s++)
+                    {
+                        int LentaInicialRows = LentaInicial;
+                        for (int c = ColumInicial; c <= (((LentaFinal - LentaInicial) + ColumInicial)); c++)
+                        {
+                            SenalSheet1.Cells[1, c].Value = "Señal (" + s + ", " + LentaInicialRows + ") ";
+
+                            //Primera fila por default
+                            SenalSheet1.Cells[2, c].Value = "SELL ( " + s + " = " + decimal.Parse(workSheet.Cells[2, s].Value.ToString()) + ",  " + LentaInicialRows + " = " + workSheet.Cells[2, LentaInicialRows].Value + ")";
+                            SenalSheet1.Row(2).Style.Font.Bold = true;
+                            SenalSheet1.Row(2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                            //Señales por columna
+                            for (int f = 3; f <= int.Parse(Sesiones); f++)
+                            {
+                                if (workSheet.Cells[f, s].Value != null && workSheet.Cells[s, LentaInicialRows].Value != null)
+                                {
+                                    decimal C1 = decimal.Parse(workSheet.Cells[f, s].Value.ToString());
+                                    decimal C2 = decimal.Parse(workSheet.Cells[f, LentaInicialRows].Value.ToString());
+                                    decimal C3 = decimal.Parse(workSheet.Cells[f + 1, s].Value.ToString());
+                                    decimal C4 = decimal.Parse(workSheet.Cells[f + 1, LentaInicialRows].Value.ToString());
+
+                                    string strSenal = "";
+
+                                    if (C1 > C2 && C4 > C3)
+                                        strSenal = "BUY";
+                                    else if (C1 < C2 && C3 > C4)
+                                        strSenal = "SELL";
+                                    else
+                                        strSenal = "NEUTRO";
+
+                                    //SenalSheet1.Cells[f, c].Value = "SELL.." + workSheet.Cells[f, s].Value + ":"+ workSheet.Cells[f, LentaInicialRows].Value;
+                                    SenalSheet1.Cells[f, c].Value = "" + strSenal + " ( " + s + " = " + decimal.Parse(workSheet.Cells[f, s].Value.ToString()) + ",  " + LentaInicialRows + " = " + workSheet.Cells[f, LentaInicialRows].Value + ")";
+                                }
+
+
+                            }
+                            //última fila por default
+                            SenalSheet1.Cells[int.Parse(Sesiones) + 1, c].Value = "NEUTRO ( " + s + " = " + decimal.Parse(workSheet.Cells[int.Parse(Sesiones) + 1, s].Value.ToString()) + ",  " + LentaInicialRows + " = " + workSheet.Cells[int.Parse(Sesiones) + 1, LentaInicialRows].Value + ")";
+                            SenalSheet1.Row(int.Parse(Sesiones) + 1).Style.Font.Bold = true;
+                            SenalSheet1.Row(int.Parse(Sesiones) + 1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+
+                            LentaInicialRows += 1;
+                            SenalSheet1.Row(1).Height = 30;
+                            SenalSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                            SenalSheet1.Row(1).Style.Font.Size = 12;
+                            SenalSheet1.Row(1).Style.Font.Bold = true;
+                            SenalSheet1.Column(c).AutoFit();
+
+                        }
+
+                        ColumInicial += (LentaFinal - LentaInicial) + 1;
+
+
+
+                    }
+
+                    string p_strPathLog1 = Server.MapPath("DadaExcel/log.txt").ToString();
+                    if (File.Exists(p_strPathLog1))
+                        File.Delete(p_strPathLog1);
+
+
+                    using (StreamWriter _testData = new StreamWriter(Server.MapPath("DadaExcel/log.txt"), true))
+                    {
+                        _testData.WriteLine("Proceso de señales correcto + " + DateTime.Now.ToString() + "");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string p_strPathLog2 = Server.MapPath("DadaExcel/log.txt").ToString();
+                    if (File.Exists(p_strPathLog2))
+                        File.Delete(p_strPathLog2);
+
+
+                    using (StreamWriter _testData = new StreamWriter(Server.MapPath("DadaExcel/log.txt"), true))
+                    {
+                        _testData.WriteLine("Error señales: " + ex.ToString() + ", " + DateTime.Now.ToString() + "");
+                    }
+                }
+
+
+                // file name with .xlsx extension  
+                //string p_strPath = context.Server.MapPath("DadaExcel/TechnicalAnalysisv2.xlsx").ToString();
+                string p_strPath = Server.MapPath("DadaExcel/TechnicalAnalysisv2.xlsx").ToString();
+
+                if (File.Exists(p_strPath))
+                    File.Delete(p_strPath);
+
+                // Create excel file on physical disk  
+                FileStream objFileStrm = File.Create(p_strPath);
+                objFileStrm.Close();
+
+                // Write content to excel file  
+                File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
+                //Close Excel package 
+                excel.Dispose();
+
+                string p_strPathLog = Server.MapPath("DadaExcel/log.txt").ToString();
+                if (File.Exists(p_strPathLog))
+                    File.Delete(p_strPathLog);
+
+
+                using (StreamWriter _testData = new StreamWriter(Server.MapPath("DadaExcel/log.txt"), true))
+                {
+                    _testData.WriteLine("Ha terminado el proceso correctamente + " + DateTime.Now.ToString() + "");
+                }
+               // lblMensaje.Text = "Final del proceso";
+               
+            }
+            catch (Exception ex)
+            {
+
+               // lblMensaje.Text = ex.ToString();
+
+
+                string p_strPathLog = Server.MapPath("DadaExcel/log.txt").ToString();
+                if (File.Exists(p_strPathLog))
+                    File.Delete(p_strPathLog);
+
+
+                using (StreamWriter _testData = new StreamWriter(Server.MapPath("DadaExcel/log.txt"), true))
+                {
+                    _testData.WriteLine("Error: " + ex.ToString() + ", " + DateTime.Now.ToString() + "");
+                }
+
+                dataTechnical.Name = "Error";
+                dataTechnical.Value = ex.ToString().Substring(0, 20);
+
+            }
+
         }
 
 
@@ -111,6 +850,11 @@ namespace FireBaseTesting.ActivosFinancieros
 
         public  void CargarDataLocal()
         {
+
+            // Iterate through the rows of the table.
+           
+
+
             var ls = new List<ExcelData>();
             List<string> excelData = new List<string>();
 
@@ -130,85 +874,7 @@ namespace FireBaseTesting.ActivosFinancieros
                         //loop all columns in a row
 
 
-                        ls.Add(new ExcelData
-                        {
-                            Col1 = worksheet.Cells[i, 1].Text.ToString(),
-                            Col2 = worksheet.Cells[i, 2].Text.ToString(),
-                            Col3 = worksheet.Cells[i, 3].Text.ToString(),
-                            Col4 = worksheet.Cells[i, 4].Text.ToString(),
-                            Col5 = worksheet.Cells[i, 5].Text.ToString(),
-
-                            Col6 = worksheet.Cells[i, 6].Text.ToString(),
-                            Col7 = worksheet.Cells[i, 7].Text.ToString(),
-                            Col8 = worksheet.Cells[i, 8].Text.ToString(),
-                            Col9 = worksheet.Cells[i, 9].Text.ToString(),
-                            Col10 = worksheet.Cells[i, 10].Text.ToString(),
-
-                            Col11 = worksheet.Cells[i, 11].Text.ToString(),
-                            Col12 = worksheet.Cells[i, 12].Text.ToString(),
-                            Col13 = worksheet.Cells[i, 13].Text.ToString(),
-                            Col14 = worksheet.Cells[i, 14].Text.ToString(),
-                            Col15 = worksheet.Cells[i, 15].Text.ToString(),
-
-                            Col16 = worksheet.Cells[i, 16].Text.ToString(),
-                            Col17 = worksheet.Cells[i, 17].Text.ToString(),
-                            Col18 = worksheet.Cells[i, 18].Text.ToString(),
-                            Col19 = worksheet.Cells[i, 19].Text.ToString(),
-                            Col20 = worksheet.Cells[i, 20].Text.ToString(),
-
-                            Col21 = worksheet.Cells[i, 21].Text.ToString(),
-                            Col22 = worksheet.Cells[i, 22].Text.ToString(),
-                            Col23 = worksheet.Cells[i, 23].Text.ToString(),
-                            Col24 = worksheet.Cells[i, 24].Text.ToString(),
-                            Col25 = worksheet.Cells[i, 25].Text.ToString(),
-
-                            Col26 = worksheet.Cells[i, 26].Text.ToString(),
-                            Col27 = worksheet.Cells[i, 27].Text.ToString(),
-                            Col28 = worksheet.Cells[i, 28].Text.ToString(),
-                            Col29 = worksheet.Cells[i, 29].Text.ToString(),
-                            Col30 = worksheet.Cells[i, 30].Text.ToString(),
-
-                            Col31 = worksheet.Cells[i, 31].Text.ToString(),
-                            Col32 = worksheet.Cells[i, 32].Text.ToString(),
-                            Col33 = worksheet.Cells[i, 33].Text.ToString(),
-                            Col34 = worksheet.Cells[i, 34].Text.ToString(),
-                            Col35 = worksheet.Cells[i, 35].Text.ToString(),
-
-
-                            Col36 = worksheet.Cells[i, 36].Text.ToString(),
-                            Col37 = worksheet.Cells[i, 37].Text.ToString(),
-                            Col38 = worksheet.Cells[i, 38].Text.ToString(),
-                            Col39 = worksheet.Cells[i, 39].Text.ToString(),
-                            Col40 = worksheet.Cells[i, 40].Text.ToString(),
-
-
-                            Col41 = worksheet.Cells[i, 41].Text.ToString(),
-                            Col42 = worksheet.Cells[i, 42].Text.ToString(),
-                            Col43 = worksheet.Cells[i, 43].Text.ToString(),
-                            Col44 = worksheet.Cells[i, 44].Text.ToString(),
-                            Col45 = worksheet.Cells[i, 45].Text.ToString(),
-
-
-                            Col46 = worksheet.Cells[i, 46].Text.ToString(),
-                            Col47 = worksheet.Cells[i, 47].Text.ToString(),
-                            Col48 = worksheet.Cells[i, 48].Text.ToString(),
-                            Col49 = worksheet.Cells[i, 49].Text.ToString(),
-                            Col50 = worksheet.Cells[i, 50].Text.ToString(),
-
-
-                            Col51 = worksheet.Cells[i, 51].Text.ToString(),
-                            Col52 = worksheet.Cells[i, 52].Text.ToString(),
-                            Col53 = worksheet.Cells[i, 53].Text.ToString(),
-                            Col54 = worksheet.Cells[i, 54].Text.ToString(),
-                            Col55 = worksheet.Cells[i, 55].Text.ToString(),
-
-                            Col56 = worksheet.Cells[i, 56].Text.ToString(),
-                            Col57 = worksheet.Cells[i, 57].Text.ToString(),
-                            Col58 = worksheet.Cells[i, 58].Text.ToString(),
-                            Col59 = worksheet.Cells[i, 59].Text.ToString(),
-                            Col60 = worksheet.Cells[i, 60].Text.ToString(),
-
-                        });
+                       
 
                        
                     }
@@ -367,7 +1033,7 @@ namespace FireBaseTesting.ActivosFinancieros
                     SenalSheet1.Cells[1, c].Value = "Señal (" + s + ", " + LentaInicialRows + ") ";
 
                     //Primera fila por default
-                    SenalSheet1.Cells[2, c].Value = "SELL";
+                    SenalSheet1.Cells[2, c].Value = "SELL ( " + s + " = " + decimal.Parse(workSheet.Cells[2, s].Value.ToString()) + ",  " + LentaInicialRows + " = " + workSheet.Cells[2, LentaInicialRows].Value + ")";
                     SenalSheet1.Row(2).Style.Font.Bold = true;
                     SenalSheet1.Row(2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     //Señales por columna
@@ -382,7 +1048,7 @@ namespace FireBaseTesting.ActivosFinancieros
 
                             string strSenal = "";
 
-                            if (C1 > C2 && C3 > C4)
+                            if (C1 > C2 && C4 > C3)
                                 strSenal = "BUY";
                             else if (C1 < C2 && C3 > C4)
                                 strSenal = "SELL";
@@ -396,7 +1062,7 @@ namespace FireBaseTesting.ActivosFinancieros
                        
                     }
                     //última fila por default
-                    SenalSheet1.Cells[sessiones + 1, c].Value = "NEUTRO";
+                    SenalSheet1.Cells[sessiones + 1, c].Value =  "NEUTRO ( " + s + " = " + decimal.Parse(workSheet.Cells[sessiones + 1, s].Value.ToString()) + ",  " + LentaInicialRows + " = " + workSheet.Cells[sessiones + 1, LentaInicialRows].Value + ")";
                     SenalSheet1.Row(sessiones + 1).Style.Font.Bold = true;
                     SenalSheet1.Row(sessiones + 1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
 

@@ -1,4 +1,53 @@
-﻿function confirmar() {
+﻿
+function LlenarExel(objData, Sesiones, RapidaInicial, RapidaFinal, LentaInicial, LentaFinal) {
+    swal('Ejecutando cálculos', 'No cierre hasta que el proceso termine, por favor espere...', 'success');
+    try {
+        $.ajax({
+            type: "POST",
+            url: "Simulador.aspx.ashx?Action=TechnicalAnalysisExcel&Sesiones=" + Sesiones + "&RapidaInicial=" + RapidaInicial + "&RapidaFinal=" + RapidaFinal + "&LentaInicial=" + LentaInicial + "&LentaFinal=" + LentaFinal + "",
+            data: JSON.stringify(objData),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (d) {
+
+                var exists = false;
+                var count = 0;
+                $.each(d, function (index, item) {
+                    exists = true;
+
+                    document.getElementById('aDescarga').style.display = "inline";
+                    swal('Terminamos..!', 'El proceso ha concluido correctamente, haga click en ok y luego descargue el resultado!', 'success');
+                });
+
+                if (!exists)
+                    swal('Proceso no terminando', 'El proceso no terminó correctamente', 'error');
+                
+
+            },
+            failure: function (r) {
+
+                swal('Error:', 'No podemos generar el proceso de cálculo en este momento', 'error');
+                return false;
+            },
+            error: function (r) {
+                swal('Error:', 'No podemos generar el proceso de cálculo en este momento', 'error');
+                return false;
+            }
+
+        });
+
+    }
+    catch (err) {
+
+        swal('Error:', 'No podemos cargar tus datos en este momento', 'error');
+        return false;
+    }
+    return false;
+
+}
+
+function confirmar() {
+
     document.getElementById('divConfirm').style.display = "none";
     document.getElementById('divResultados').style.display = "inline";
     window.scrollTo(0, 0);
@@ -6,7 +55,7 @@
     var ApiKeyList = document.getElementById('spanApiKeys').innerHTML;
     var Keys = ApiKeyList.split('|');
     var countCall = 0;
-    var TotalCall = 60;
+    var TotalCall = document.getElementById('txtMMLentaFinal').value;
     var periodo = 2;
     for (var i = 0; i < Keys.length; i++) {
         //Keys[i]
@@ -100,6 +149,11 @@ function ApiTechnicalAnalysis(apikey, series_type, time_period, interval, symbol
 
     //swal('Incia el proceso', 'Por favor espere, este proceso puede tardar varios minutos...', 'warning');
     var Sesiones = document.getElementById('txtSesiones').value;
+    var RapidaInicial = document.getElementById('txtRapidaInicial').value;
+    var RapidaFinal = document.getElementById('txtRapidaFinal').value;
+    var LentaInicial = document.getElementById('txtMMLenta').value;
+    var LentaFinal = document.getElementById('txtMMLentaFinal').value;
+
     var Filas = parseInt(Sesiones);
     var  ConsultaInicial = document.getElementById('spanTotal').innerHTML;
     var ValCell = document.getElementById("TableResult").rows[Filas -1 ].cells;
@@ -108,7 +162,7 @@ function ApiTechnicalAnalysis(apikey, series_type, time_period, interval, symbol
     try {
         $.ajax({
             type: "POST",
-            url: "Simulador.aspx.ashx?Action=TechnicalAnalysis&apikey=" + apikey + "&series_type=" + series_type + "&time_period=" + time_period + "&interval=" + interval + "&symbol=" + symbol + "&indicador=" + indicador + "&Sesiones=" + Sesiones + "",
+            url: "Simulador.aspx.ashx?Action=TechnicalAnalysis&apikey=" + apikey + "&series_type=" + series_type + "&time_period=" + time_period + "&interval=" + interval + "&symbol=" + symbol + "&indicador=" + indicador + "&Sesiones=" + Sesiones + "&LentaFinal=" + columna + "",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -154,8 +208,50 @@ function ApiTechnicalAnalysis(apikey, series_type, time_period, interval, symbol
                     TotalConsultasEjecutadas += 1;
                     document.getElementById('spanTotal').innerHTML = TotalConsultasEjecutadas;
 
-                    if (TotalConsultasEjecutadas >=59)
+                    if (TotalConsultasEjecutadas >= (LentaFinal - 1)) {
                         document.getElementById('spanEsperando').innerHTML = "El proceso ha terminado, puede continuar"; 
+
+                        var keys = [], arrayObj = [];
+                        $("#TableResult thead tr th").each(function () {
+                            keys.push($(this).html());
+                        });
+
+                        $("#TableResult tbody tr").each(function () {
+                            var obj = {}, i = 0;
+                            $(this).children("td").each(function () {
+                                obj[keys[i]] = $(this).html();
+                                i++;
+                            })
+                            arrayObj.push(obj);
+                        });
+
+                        
+                        //Convertir tabla a Array
+                        var table = document.getElementById("TableResult");
+                        var result = []
+                        var rows = table.rows;
+                        var cells, t;
+                        
+                        // Iterate over rows
+                        for (var i = 0, iLen = rows.length; i < iLen; i++) {
+                            cells = rows[i].cells;
+                            t = [];
+
+                            // Iterate over cells
+                            for (var j = 0, jLen = cells.length; j < jLen; j++) {
+                                t.push(cells[j].textContent);
+                            }
+                            result.push(t);
+                        }
+
+                        LlenarExel(result, Sesiones, RapidaInicial, RapidaFinal, LentaInicial, LentaFinal);
+                        //var sJSON = JSON.stringify(result);
+
+                       // document.getElementById("demoDiv").innerHTML = sJSON;
+                    }
+                        
+
+                    return false;
                 }
                    
 
@@ -200,80 +296,75 @@ function CrearTablaDinamicamente() {
         this.parentNode.removeChild(this);
     });
 
-    var Tabl = document.getElementById('TableResult');
+    var Tabl = document.getElementById('TableResult').style.backgroundColor;
     var Sesiones = document.getElementById('txtSesiones').value;
-    //Agrego las filas de acuerdo a las sessiones especificadas en el formulario 
-    for (row = 1; row <= Sesiones; row++) {
-        $('#TableResult').append($('<tr>')
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
 
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
+    //swal('Configurando parámetros', 'Por favor espere...', 'success');
+    var columnas = document.getElementById('txtMMLentaFinal').value;
+    //Agregar columna 
+    
+    $("#TableResult tbody tr").each(function () {
+        this.parentNode.removeChild(this);
+    });
 
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
+    var table = document.getElementById('TableResult').insertRow(0);
+    var ColumnasCount = 2; 
+    for (c = 0; c <= columnas; c++) {
 
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
+        
+        var y = table.insertCell(c);
+        if (c == 0) {
 
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
+            y.style.backgroundColor = "#009688";
+            y.innerHTML = "Waiting";
 
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-            .append($('<td>').append("Waiting..."))
-
-
-        )
+        }
+        else {
+            y.innerHTML = "Waiting";
+            ColumnasCount++;
+        }
+            
     }
+    
+    //Agrego las filas de acuerdo a las sessiones especificadas en el formulario  Waiting
+    for (row = 1; row < Sesiones; row++) {
+        
+        var table = document.getElementById('TableResult');       
+
+        var x = table.insertRow(0);
+        var e = table.rows.length - 1;
+        var l = table.rows[e].cells.length;        
+
+        var ColumnasCount = 2;
+        for (var c = 0, m = l; c < m; c++) {           
+            table.rows[0].insertCell(c);
+            table.rows[0].cells[c].innerHTML = "Waiting";
+        }
+
+    }
+
+    ColumnasCount = 2;
+    var table = document.getElementById("TableResult");
+    var header = table.createTHead();
+    var row = header.insertRow(0);
+    for (c2 = 0; c2 <= columnas; c2++) {
+        if (c2 == 0) {
+            var cell = row.insertCell(c2);
+            cell.innerHTML = "<b>Fecha</b>";
+        }
+        else if (c2 == 1)
+        {
+            var cell = row.insertCell(c2);
+            cell.innerHTML = "<b>Price</b>";
+        }
+        else {
+            var cell = row.insertCell(c2);
+            cell.innerHTML = ColumnasCount;
+            ColumnasCount++;
+        }
+    }
+
+    //swal('Ok', 'Los parámetros fueron configurado correctamente...', 'success');
 
     document.getElementById('spamActivo').innerHTML = document.getElementById('SelectIndicador').value;
     document.getElementById('Symbol').innerHTML = document.getElementById('SelectActivo').value;

@@ -62,7 +62,7 @@
 
 </head>
 <body  onload="document.getElementById('bntInicio').click();">
-
+<input id="txtLinea" type="text" runat="server"  style="display:none;"/>
 <div class="cards">
 	<div class="contact" style="margin-top:-25px;width:30%;"> <i><span class="fa fa-gear" style="color:#808080; width:300px; font-size:17px; color:white; " id="ConfiguracionA">Configuración de Operación</span></i> </div>
 	<br />
@@ -77,7 +77,7 @@
 	</div>
 	<div class="contact2" style="width:65%;text-align:right;background-color:transparent;margin-top:25px;" > 
 		 <div class="box">
-		  <select id="SelectGrupo" onchange="OPResgistradasSelect();OPResgistradasSelectTable(); CambiarNumeroDeLineas(document.getElementById('SelectGrupo').selectedIndex);">
+		  <select id="SelectGrupo" runat="server" onchange="OPResgistradasSelect();OPResgistradasSelectTable(); CambiarNumeroDeLineas(document.getElementById('SelectGrupo').selectedIndex);">
 			<option value="L1L2L3">Grupo L1 L2 L3</option>
 			<option value="L4L5L6">Grupo L4 L5 L6</option>
 			<option value="L7L8L9">Grupo L7 L8 L9</option>
@@ -164,8 +164,9 @@
 					<td>
 						Tipo de Lavado:
 					</td>
-					<td >
+					<td>
 						 <select id="normal-select-7" class="select-css" onchange=" CambiarLavado();" style="width:280px; " >
+							 <option value="30" class="select-dropdown__list-item">Cambio de caja</option>
 					      <option value="45" class="select-dropdown__list-item">Enjuague 45 minutos</option>
 						  <option value="75" class="select-dropdown__list-item">Enjuague intermedio 1hr:15min</option>
 						  <option value="135" class="select-dropdown__list-item">CIP 2hrs:15min</option>
@@ -175,7 +176,7 @@
 					<td style="text-align:center;">
 						<span style="color:#4FC3A1;display:none; " id="spLavado" ><strong>45 minutos</strong> </span>
 					</td>
-	       </tr>
+	        </tr>
 
 		</table>
 		
@@ -247,8 +248,7 @@
 				<br />
 				<br />
 				<h3 style="color:#5f0909;font-size:15px;"><strong>En proceso L3:</strong> </h3>	--%>
-				<div class="left col" style="				        text-align: left;
-				">					
+				<div class="left col" style="text-align: left;">					
 				 	
 				  
 				  <div class="progress-factor flexy-item" style="margin-top:-30px;width:500px;cursor:pointer;border-radius:40px;" >
@@ -401,11 +401,12 @@
 		</div>
 	</div>
 
-	<div class="card" id="IncioTab" style="display:none;">
-		<a style="background-color:white" class="card-toggle"  onclick="document.getElementById('bntInicio').click(); document.getElementById('IncioTab').style.display = 'none';"><i ><span class="fa fa-home" id="btnIncioTab"></span></i></a>		
+	<div class="card" id="IncioTab" style="display:none;">		
+		<a style="background-color:white" class="card-toggle"  onclick="HomeLoad();"><i ><span class="fa fa-home" id="btnIncioTab"></span></i></a>		
+
 	</div>
 
-	<div class="card" id="twitter2" >
+	<div class="card" id="twitter2">
 		
 		<div class="card-content">
 			<div class="row">				
@@ -459,6 +460,7 @@
 		<br />
 		
 		<br />
+
 		
 	</div>
 </div>
@@ -657,7 +659,16 @@
         OPResgistradasSelect();					
 	</script>
 
-
+	<script>
+        function HomeLoad() {
+            location.href = "Linestart?LineSelected=" + document.getElementById('SelectGrupo').value;
+           // document.getElementById('IncioTab').style.display = 'none'; 
+        }
+	</script>
+	<script>
+		
+	</script>
+    
 </body>
 </html>
 
