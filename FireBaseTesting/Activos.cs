@@ -19,4 +19,6 @@ namespace FireBaseTesting
         public string matchScore { get; set; }
         public DateTime creationDate { get; set; }
     }
+
+
 }

@@ -1533,8 +1533,11 @@ function ParadaLineasdeProduccion(tiempo) {
 
 function OPMonitoreadaSiguientesUpdates() {
     
-    document.getElementById('NombreProducto').value = ""; document.getElementById('NAVI').value = ""; 
-
+    document.getElementById('NombreProducto').value = "";
+    document.getElementById('NAVI').value = ""; 
+    document.getElementById('txtPouchPorCaja').value = ""; 
+    document.getElementById('txtPersonasPorMesa').value = ""; 
+    
     document.getElementById('messageUpdateData').innerHTML = "";
 
     try {

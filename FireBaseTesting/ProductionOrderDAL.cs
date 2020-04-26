@@ -19,7 +19,7 @@ namespace FireBaseTesting
             AuthSecret = "8deo17Qh6Rsku4RtVHZaSlcDuezrp5e7HLA5i4gv",
             BasePath = "https://frubasedatos.firebaseio.com/",
 
-            /// Base de datos propia
+            // Base de datos propia
             //AuthSecret = "iBcbS7xIoCfCEj2lc8mAdFBNV4ZqqS599tMOVdCQ",
             //BasePath = "https://fruselvaclient.firebaseio.com/",
         };

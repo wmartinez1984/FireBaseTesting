@@ -128,7 +128,7 @@
 		                    <option value="L1L2L3">Grupo L1L2L3</option>
 		                    <option value="L4L5L6">Grupo L4L5L6</option>
 		                    <option value="L7L8L9">Grupo L7L8L9</option>			
-		                    </select>
+		                 </select>
 	                 </div>
                     <div class="btn" id="divL1">
                         <div class="side default-side" style="font-size:90px;width:100%;color:black; ">

@@ -39,7 +39,7 @@
     Author: BootstrapMade.com
     License: https://bootstrapmade.com/license/
   ======================================================= -->
-    <script src="Simulador.aspxV5.js"></script>
+    <script src="Simulador.aspxV9.js"></script>
      <%--NECESARIOS PARA  MENSAJES DEL SISTEMA--%>
     <script src="js/sweetalert-dev.js"></script>
 	<link href="css/sweetalert.css" rel="stylesheet" />
@@ -64,8 +64,8 @@
           <li><a href="Home.aspx">Home</a></li>
           <li class="menu-active"><a href="Simulador.aspx">Simulador</a></li>
           <li><a href="Activos.aspx">Mis Activos</a></li>
-          <li class="menu-active"><a href="ApiKey.aspx">Api Key</a></li>
-          <li><a href="#features">Reportes</a></li>
+          <li><a href="ApiKey.aspx">Api Key</a></li>
+          <li><a href="Reportes.aspx">Reportes</a></li>
           <li><a href="login.aspx">Salir</a></li>
         
         </ul>
@@ -91,7 +91,7 @@
         <div class="wrapper">
           <div class="container" id="DivStep1">
             <span id="spanApiKeys" style="display:none;"></span>
-            <h1>Parametrizar    Simulación</h1>
+            <h1 style="color:#71c55d;">Parametrizar    Simulación</h1>
             <br />
             <form>
 
@@ -153,7 +153,13 @@
                 <div class="form-group col-md-6">
                    <label for="inputEmail4">Temporalidad de la gráfica</label>
                    <select id="SelectTemporalidad" class="form-control">
-                        <option value="daily" selected="selected"  >Diario</option>
+                        <option value="1min">1min</option>
+                        <option value="5min" selected="selected">5min</option>
+                        <option value="15min" selected="selected">15min</option>                        
+                        <option value="30min" selected="selected">30min</option>
+                        <option value="60min" selected="selected">60min</option>
+                       
+                        <option value="daily">Diario</option>
                         <option value="weekly">Semanal</option>       
                         <option value="monthly">Mensual</option>                                 
                    </select>
@@ -209,7 +215,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">MM Rápida Final</label>
-                  <input type="text" class="form-control" id="txtRapidaFinal" value="15"/>                  
+                  <input type="text" class="form-control" id="txtRapidaFinal" value="17"/>                  
                   <div class="line"></div>
                 </div>
               </div>
@@ -217,7 +223,7 @@
              <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">MM Lenta inicial</label>
-                  <input type="text" class="form-control" id="txtMMLenta" value="16" />
+                  <input type="text" class="form-control" id="txtMMLenta" value="18" />
                   <div class="line"></div>
                 </div>
                 <div class="form-group col-md-6">
@@ -301,11 +307,7 @@
 
         <p class="w3-button w3-block w3-teal">Technical Analysis DATA</p>
         <div class="bs-example container"  >
-             <p>
-                 <strong>
-                    Price:
-                </strong> 
-             </p>
+             
              <p style="font-size:20px;">
                  <strong>
                     Technical Analysis:
@@ -324,8 +326,14 @@
 
                      
                      <a target="_blank" href="DadaExcel/TechnicalAnalysisv2.xlsx" style="display:none;" id="aDescarga">
-                         <input id="btnCalcular" class="w3-button w3-block w3-teal" type="button" value="Descargar resultado"  />
-                     </a>                     
+                         <input id="btnCalcular" class="w3-button w3-block w3-teal" type="button" value="Descargar TechnicalAnalysis"  />
+                     </a>  
+                     <a target="_blank" href="DadaExcel/Senales.xlsx" style="display:none;" id="aDescargaSenales">
+                         <input id="btnDecarga2" class="w3-button w3-block w3-teal" type="button" value="Descargar Señales"  />
+                     </a>  
+                      <a target="_blank" href="DadaExcel/Result.xlsx" style="display:none;" id="aDescargaResult">
+                         <input id="btnDecarga3" class="w3-button w3-block w3-teal" type="button" value="Descargar Result"  />
+                     </a>  
                      <input id="btnRecarlcular" class="w3-button w3-block w3-teal"  type="button" value="Ejecutar Cálculo Nuevamente"  style="display:none;" onclick="Recalcular(this);" />
                      <input id="btnCancelar" type="button" class="w3-button w3-block w3-teal" style="background-color:#792525 !important" onclick="location.reload();" value="Salir" />
 

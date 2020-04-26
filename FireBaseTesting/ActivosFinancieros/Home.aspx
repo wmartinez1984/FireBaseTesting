@@ -55,7 +55,7 @@
           <li><a href="Simulador.aspx">Simulador</a></li>
           <li><a href="Activos.aspx">Mis Activos</a></li>
           <li><a href="ApiKey.aspx">Api Key</a></li>
-          <li><a href="#features">Reportes</a></li>
+          <li><a href="Reportes.aspx">Reportes</a></li>
           <li><a href="login.aspx">Salir</a></li>
         
         </ul>

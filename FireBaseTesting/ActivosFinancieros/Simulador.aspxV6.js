@@ -24,16 +24,16 @@ function Recalcular(obj) {
 
 }
 
-function LlenarExelPestana2y3(objData, Sesiones, RapidaInicial, RapidaFinal, LentaInicial, LentaFinal) {
+function LlenarExelPestana3(objData, Sesiones, RapidaInicial, RapidaFinal, LentaInicial, LentaFinal) {
 
     // swal('Ejecutando cálculos', 'No cierre hasta que el proceso termine, por favor espere...', 'warning');
     document.getElementById('spanEsperando').style.color = "#71c55d";
-    document.getElementById('spanEsperando').innerHTML = "Calculando Señales y Resultado Final  (pestaña 2 y 3)..., por favor espere...";
+    document.getElementById('spanEsperando').innerHTML = "Calculando  Resultado Final  (pestaña 3), por favor espere...";
 
     try {
         $.ajax({
             type: "POST",
-            url: "Simulador.aspx.ashx?Action=TechnicalAnalysisExcelP2y3&Sesiones=" + Sesiones + "&RapidaInicial=" + RapidaInicial + "&RapidaFinal=" + RapidaFinal + "&LentaInicial=" + LentaInicial + "&LentaFinal=" + LentaFinal + "&CapitalInicial=" + document.getElementById('txtCapitalIncial').value + "&ComisionEntrada=" + document.getElementById('txtValorComisionEntrada').value + "&ComisionSalida=" + document.getElementById('txtValorComisionSalida').value + "&Activo=" + document.getElementById('SelectActivo').value + "",
+            url: "Simulador.aspx.ashx?Action=TechnicalAnalysisExcelP3&Sesiones=" + Sesiones + "&RapidaInicial=" + RapidaInicial + "&RapidaFinal=" + RapidaFinal + "&LentaInicial=" + LentaInicial + "&LentaFinal=" + LentaFinal + "&CapitalInicial=" + document.getElementById('txtCapitalIncial').value + "&ComisionEntrada=" + document.getElementById('txtValorComisionEntrada').value + "&ComisionSalida=" + document.getElementById('txtValorComisionSalida').value + "&Activo=" + document.getElementById('SelectActivo').value + "",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (d) {
@@ -47,6 +47,76 @@ function LlenarExelPestana2y3(objData, Sesiones, RapidaInicial, RapidaFinal, Len
                     document.getElementById('aDescarga').style.display = "inline";
                     document.getElementById('btnRecarlcular').style.display = "none";
                     swal('Terminamos..!', 'El proceso ha concluido correctamente, haga click en ok y luego descargue el resultado!', 'success');
+                });
+
+                if (!exists) {
+
+                    document.getElementById('spanEsperando').style.color = "red";
+                    document.getElementById('spanEsperando').innerHTML = "El proceso no terminó correctamente, por favor vuelva a intentarlo";
+                    document.getElementById('btnRecarlcular').style.display = "inline";
+                    swal('No ha terminando el proceso', 'El proceso no terminó correctamente, por favor vuelva a intentarlo', 'error');
+                }
+
+
+
+            },
+            failure: function (r) {
+
+                document.getElementById('spanEsperando').innerHTML = "El proceso ha terminado, puede descargar el resultado";
+                document.getElementById('spanEsperando').style.color = "#2b8036";
+                document.getElementById('aDescarga').style.display = "inline";
+
+                document.getElementById('btnRecarlcular').style.display = "inline";
+                //swal('Failure:', 'El proceso no terminó correctamente, por favor vuelva a intentarlo', 'warning');
+                return false;
+            },
+            error: function (r) {
+
+                document.getElementById('spanEsperando').innerHTML = "El proceso ha terminado, puede descargar el resultado";
+                document.getElementById('spanEsperando').style.color = "#2b8036";
+                document.getElementById('aDescarga').style.display = "inline";
+
+                document.getElementById('btnRecarlcular').style.display = "inline";
+                // swal('Error:', 'El proceso no terminó correctamente, por favor vuelva a intentarlo', 'warning');
+                return false;
+            }
+
+        });
+
+    }
+    catch (err) {
+
+        swal('Error:', 'No podemos cargar tus datos en este momento', 'error');
+        return false;
+    }
+    return false;
+
+}
+
+function LlenarExelPestana2y3(objData, Sesiones, RapidaInicial, RapidaFinal, LentaInicial, LentaFinal) {
+
+    // swal('Ejecutando cálculos', 'No cierre hasta que el proceso termine, por favor espere...', 'warning');
+    document.getElementById('spanEsperando').style.color = "#71c55d";
+    document.getElementById('spanEsperando').innerHTML = "Calculando Señales  (pestaña 2), por favor espere...";
+
+    try {
+        $.ajax({
+            type: "POST",
+            url: "Simulador.aspx.ashx?Action=TechnicalAnalysisExcelP2y3&Sesiones=" + Sesiones + "&RapidaInicial=" + RapidaInicial + "&RapidaFinal=" + RapidaFinal + "&LentaInicial=" + LentaInicial + "&LentaFinal=" + LentaFinal + "&CapitalInicial=" + document.getElementById('txtCapitalIncial').value + "&ComisionEntrada=" + document.getElementById('txtValorComisionEntrada').value + "&ComisionSalida=" + document.getElementById('txtValorComisionSalida').value + "&Activo=" + document.getElementById('SelectActivo').value + "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (d) {
+
+                var exists = false;
+                var count = 0;
+                $.each(d, function (index, item) {
+                    exists = true;
+                    LlenarExelPestana3("", document.getElementById('txtSesiones').value, document.getElementById('txtRapidaInicial').value, document.getElementById('txtRapidaFinal').value, document.getElementById('txtMMLenta').value, document.getElementById('txtMMLentaFinal').value);
+
+                    //document.getElementById('spanEsperando').style.color = "#2b8036";
+                    //document.getElementById('aDescarga').style.display = "inline";
+                    document.getElementById('btnRecarlcular').style.display = "none";
+                    //swal('Terminamos..!', 'El proceso ha concluido correctamente, haga click en ok y luego descargue el resultado!', 'success');
                 });
 
                 if (!exists) {

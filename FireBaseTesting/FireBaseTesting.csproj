@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="ActivosFinancieros\ACTFDatav2.js" />
     <Content Include="ActivosFinancieros\ACTFData.js" />
     <Content Include="ActivosFinancieros\Activos.aspx" />
     <Content Include="ActivosFinancieros\ApiKey.aspx" />
@@ -155,6 +156,7 @@
     <Content Include="ActivosFinancieros\css\StyleSheet1.css" />
     <Content Include="ActivosFinancieros\css\sweetalert.css" />
     <Content Include="ActivosFinancieros\Home.aspx" />
+    <Content Include="ActivosFinancieros\HtmlPage1.html" />
     <Content Include="ActivosFinancieros\img\about-img.png" />
     <Content Include="ActivosFinancieros\img\admin.png" />
     <Content Include="ActivosFinancieros\img\apple-touch-icon.png" />
@@ -229,7 +231,13 @@
     <Content Include="ActivosFinancieros\lib\wow\wow.js" />
     <Content Include="ActivosFinancieros\lib\wow\wow.min.js" />
     <Content Include="ActivosFinancieros\login.aspx" />
+    <Content Include="ActivosFinancieros\ReporteDetalle.aspx" />
+    <Content Include="ActivosFinancieros\Reportes.aspx" />
     <Content Include="ActivosFinancieros\Simulador.aspx" />
+    <Content Include="ActivosFinancieros\Simulador.aspxV9.js" />
+    <Content Include="ActivosFinancieros\Simulador.aspxV8.js" />
+    <Content Include="ActivosFinancieros\Simulador.aspxV7.js" />
+    <Content Include="ActivosFinancieros\Simulador.aspxV6.js" />
     <Content Include="ActivosFinancieros\Simulador.aspxV5.js" />
     <Content Include="ActivosFinancieros\Simulador.aspxV4.js" />
     <Content Include="ActivosFinancieros\Simulador.aspxV3.js" />
@@ -388,6 +396,7 @@
     <Content Include="PdfLinks\pdfs\example2.pdf" />
     <Content Include="pdfs\A1_1032X_EN.pdf" />
     <Content Include="ActivosFinancieros\DadaExcel\TechnicalAnalysisv2.xlsx" />
+    <Content Include="WebForm1.aspx" />
     <None Include="ActivosFinancieros\Simulador.aspxv2ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP.pubxml" />
@@ -629,6 +638,7 @@
     <Compile Include="ACTFActivosDAL.cs" />
     <Compile Include="ACTFDALKeys.cs" />
     <Compile Include="ACTFKeyss.cs" />
+    <Compile Include="ACTFResultados.cs" />
     <Compile Include="Activos.cs" />
     <Compile Include="ActivosFinancieros\Activos.ashx.cs">
       <DependentUpon>Activos.ashx</DependentUpon>
@@ -663,6 +673,20 @@
     </Compile>
     <Compile Include="ActivosFinancieros\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFinancieros\ReporteDetalle.aspx.cs">
+      <DependentUpon>ReporteDetalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFinancieros\ReporteDetalle.aspx.designer.cs">
+      <DependentUpon>ReporteDetalle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivosFinancieros\Reportes.aspx.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivosFinancieros\Reportes.aspx.designer.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="ActivosFinancieros\Simulador.aspx - Copia.ashx.cs">
       <DependentUpon>Simulador.aspxv2ashx</DependentUpon>
@@ -755,6 +779,8 @@
     <Compile Include="ProductionOrderEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries.cs" />
+    <Compile Include="Resultados.cs" />
+    <Compile Include="ResultadosDetalle.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -913,6 +939,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

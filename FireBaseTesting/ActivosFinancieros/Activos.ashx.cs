@@ -74,6 +74,58 @@ namespace FireBaseTesting.ActivosFinancieros
 
 
             }
+
+            if (context.Request.QueryString["Action"].ToString().Equals("ResultadosList"))
+            {
+
+                string callback = context.Request.QueryString["callback"];
+                string json = ResultadosList(context);
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = string.Format("{0}({1});", callback, json);
+                }
+                context.Response.ContentType = "text/json";
+                context.Response.Write(json);
+
+            }
+
+            if (context.Request.QueryString["Action"].ToString().Equals("ResultadosDetalleList"))
+            {
+
+                string callback = context.Request.QueryString["callback"];
+                string json = ResultadosDetalleList(context);
+                if (!string.IsNullOrEmpty(callback))
+                {
+                    json = string.Format("{0}({1});", callback, json);
+                }
+                context.Response.ContentType = "text/json";
+                context.Response.Write(json);
+
+            }
+        }
+
+        public static string ResultadosDetalleList(HttpContext context)
+        {
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+            FireBaseTesting.ACTFActivosDAL activos = new FireBaseTesting.ACTFActivosDAL();
+            List<FireBaseTesting.ResultadosDetalle> list = new List<FireBaseTesting.ResultadosDetalle>();
+            list = activos.ResultadosDetalleList(new Guid(context.Request.QueryString["id"].ToString()));
+
+            return (serializer.Serialize(list));
+
+        }
+
+        public static string ResultadosList(HttpContext context)
+        {
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+            FireBaseTesting.ACTFActivosDAL activos = new FireBaseTesting.ACTFActivosDAL();
+            List<FireBaseTesting.Resultados> list = new List<FireBaseTesting.Resultados>();
+            list = activos.ResultadosList();
+
+            return (serializer.Serialize(list));
+
         }
 
         public static string DeleteActivo(HttpContext context)
