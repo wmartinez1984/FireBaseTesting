@@ -234,6 +234,7 @@
     <Content Include="ActivosFinancieros\ReporteDetalle.aspx" />
     <Content Include="ActivosFinancieros\Reportes.aspx" />
     <Content Include="ActivosFinancieros\Simulador.aspx" />
+    <Content Include="ActivosFinancieros\Simulador.aspxV10.js" />
     <Content Include="ActivosFinancieros\Simulador.aspxV9.js" />
     <Content Include="ActivosFinancieros\Simulador.aspxV8.js" />
     <Content Include="ActivosFinancieros\Simulador.aspxV7.js" />
@@ -244,6 +245,87 @@
     <Content Include="ActivosFinancieros\Simulador.aspxv2.js" />
     <Content Include="ActivosFinancieros\Simulador.aspx.js" />
     <Content Include="ActivosFinancieros\test.aspx" />
+    <Content Include="Admin\contactform\contactform.js" />
+    <Content Include="Admin\contactform\Readme.txt" />
+    <Content Include="Admin\css\botones.css" />
+    <Content Include="Admin\css\scss-files.txt" />
+    <Content Include="Admin\css\style.css" />
+    <Content Include="Admin\css\StyleSheet1.css" />
+    <Content Include="Admin\css\sweetalert.css" />
+    <Content Include="Admin\DadaExcel\log.txt" />
+    <Content Include="Admin\img\about-img.png" />
+    <Content Include="Admin\img\admin.png" />
+    <Content Include="Admin\img\apple-touch-icon.png" />
+    <Content Include="Admin\img\blog\blog-image-1.jpg" />
+    <Content Include="Admin\img\blog\blog-image-2.jpg" />
+    <Content Include="Admin\img\blog\blog-image-3.jpg" />
+    <Content Include="Admin\img\CompuData.gif" />
+    <Content Include="Admin\img\favicon.png" />
+    <Content Include="Admin\img\hero-bg.png" />
+    <Content Include="Admin\img\hero-img.png" />
+    <Content Include="Admin\img\newsletter-bg.jpg" />
+    <Content Include="Admin\img\plagc3.png" />
+    <Content Include="Admin\img\Reloj.gif" />
+    <Content Include="Admin\img\screen\1.jpg" />
+    <Content Include="Admin\img\screen\2.jpg" />
+    <Content Include="Admin\img\screen\3.jpg" />
+    <Content Include="Admin\img\screen\4.jpg" />
+    <Content Include="Admin\img\screen\5.jpg" />
+    <Content Include="Admin\img\screen\6.jpg" />
+    <Content Include="Admin\img\screen\7.jpg" />
+    <Content Include="Admin\img\screen\8.jpg" />
+    <Content Include="Admin\img\screen\9.jpg" />
+    <Content Include="Admin\img\svg\asteroid.svg" />
+    <Content Include="Admin\img\svg\cloud-computing.svg" />
+    <Content Include="Admin\img\svg\cloud.svg" />
+    <Content Include="Admin\img\svg\code.svg" />
+    <Content Include="Admin\img\svg\design-tool.svg" />
+    <Content Include="Admin\img\svg\paint-palette.svg" />
+    <Content Include="Admin\img\svg\pixel.svg" />
+    <Content Include="Admin\img\svg\planet.svg" />
+    <Content Include="Admin\img\svg\tools.svg" />
+    <Content Include="Admin\img\svg\vector.svg" />
+    <Content Include="Admin\img\team\1.jpg" />
+    <Content Include="Admin\img\team\2.jpg" />
+    <Content Include="Admin\img\team\3.jpg" />
+    <Content Include="Admin\img\team\4.jpg" />
+    <Content Include="Admin\img\video-bg.jpg" />
+    <Content Include="Admin\img\vitrine.png" />
+    <Content Include="Admin\js\main.js" />
+    <Content Include="Admin\js\sweetalert-dev.js" />
+    <Content Include="Admin\lib\animate\animate.css" />
+    <Content Include="Admin\lib\animate\animate.min.css" />
+    <Content Include="Admin\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="Admin\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Admin\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Admin\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Admin\lib\easing\easing.js" />
+    <Content Include="Admin\lib\easing\easing.min.js" />
+    <Content Include="Admin\lib\font-awesome\css\font-awesome.css" />
+    <Content Include="Admin\lib\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Admin\lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Admin\lib\jquery\jquery-migrate.min.js" />
+    <Content Include="Admin\lib\jquery\jquery.min.js" />
+    <Content Include="Admin\lib\modal-video\css\modal-video.min.css" />
+    <Content Include="Admin\lib\modal-video\js\modal-video.js" />
+    <Content Include="Admin\lib\modal-video\js\modal-video.min.js" />
+    <Content Include="Admin\lib\owlcarousel\assets\ajax-loader.gif" />
+    <Content Include="Admin\lib\owlcarousel\assets\owl.carousel.css" />
+    <Content Include="Admin\lib\owlcarousel\assets\owl.carousel.min.css" />
+    <Content Include="Admin\lib\owlcarousel\assets\owl.theme.default.css" />
+    <Content Include="Admin\lib\owlcarousel\assets\owl.theme.default.min.css" />
+    <Content Include="Admin\lib\owlcarousel\assets\owl.theme.green.css" />
+    <Content Include="Admin\lib\owlcarousel\assets\owl.theme.green.min.css" />
+    <Content Include="Admin\lib\owlcarousel\assets\owl.video.play.png" />
+    <Content Include="Admin\lib\owlcarousel\links.php" />
+    <Content Include="Admin\lib\owlcarousel\owl.carousel.js" />
+    <Content Include="Admin\lib\owlcarousel\owl.carousel.min.js" />
+    <Content Include="Admin\lib\superfish\hoverIntent.js" />
+    <Content Include="Admin\lib\superfish\superfish.js" />
+    <Content Include="Admin\lib\superfish\superfish.min.js" />
+    <Content Include="Admin\lib\wow\wow.js" />
+    <Content Include="Admin\lib\wow\wow.min.js" />
+    <Content Include="Admin\Privatedashboard.aspx" />
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\font-awesome.min.css" />
@@ -398,6 +480,15 @@
     <Content Include="ActivosFinancieros\DadaExcel\TechnicalAnalysisv2.xlsx" />
     <Content Include="WebForm1.aspx" />
     <None Include="ActivosFinancieros\Simulador.aspxv2ashx" />
+    <Content Include="Admin\DadaExcel\Result.xlsx" />
+    <Content Include="Admin\DadaExcel\Senales.xlsx" />
+    <Content Include="Admin\DadaExcel\TechnicalAnalysisv2.xlsx" />
+    <Content Include="Admin\lib\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Admin\lib\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Admin\lib\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Admin\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Admin\lib\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Admin\lib\owlcarousel\LICENSE" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\salesservice - FTP1.pubxml" />
@@ -707,6 +798,13 @@
     </Compile>
     <Compile Include="ActivosFinancieros\test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Privatedashboard.aspx.cs">
+      <DependentUpon>Privatedashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Privatedashboard.aspx.designer.cs">
+      <DependentUpon>Privatedashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

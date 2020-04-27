@@ -39,7 +39,7 @@
     Author: BootstrapMade.com
     License: https://bootstrapmade.com/license/
   ======================================================= -->
-    <script src="Simulador.aspxV9.js"></script>
+    <script src="Simulador.aspxV10.js"></script>
      <%--NECESARIOS PARA  MENSAJES DEL SISTEMA--%>
     <script src="js/sweetalert-dev.js"></script>
 	<link href="css/sweetalert.css" rel="stylesheet" />
@@ -113,10 +113,10 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Tipo de estrategia</label>
-                   <select id="SelectTipoEstrategia" class="form-control">
+                    <select id="SelectTipoEstrategia" class="form-control">
                     <option selected>Seleccione</option>
-                    <option>Largo</option>
-                    <option>Corto</option>
+                    <option value="Largo">Largo</option>
+                    <option value="Corto">Corto</option>
                     
                   </select>
                   

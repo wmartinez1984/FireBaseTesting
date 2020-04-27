@@ -120,7 +120,7 @@
           <li><a href="Activos.aspx">Mis Activos</a></li>
           <li><a href="ApiKey.aspx">Api Key</a></li>
           <li  class="menu-active"><a href="Reportes.aspx">Reportes</a></li>--%>
-          <li class="menu-active"><a onclick="window.close();">panel de resultados </a></li>
+          <li class="menu-active"><a onclick="window.close();" href="#">panel de resultados </a></li>
         
         </ul>
       </nav><!-- #nav-menu-container -->

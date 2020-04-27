@@ -279,7 +279,7 @@ namespace FireBaseTesting.ActivosFinancieros
                 decimal CapitalInicial = decimal.Parse(Context.Request.QueryString["CapitalInicial"]);
                 decimal ComisionEntrada = decimal.Parse(Context.Request.QueryString["ComisionEntrada"]);
                 decimal ComisionSalida = decimal.Parse(Context.Request.QueryString["ComisionSalida"]);
-
+                string Estrategia = Context.Request.QueryString["Estrategia"];
 
                 int RapidaInicialColum = RapidaInicial;
                 int ColumInicial = 1;             
@@ -319,85 +319,174 @@ namespace FireBaseTesting.ActivosFinancieros
                         texttoValoresAdicionales = ", Precio = " + PrecioActual + ", Cant.Acciones = " + Acciones + ", Capital.Neto = " + Capitalneto + ", Ganancia.OP = " + Ganancia + " , Ganadoras/Perdedoras = " + GanadoraPerdedora + ", Racha Ganadora = " + Ganadora + ", Racha Perdedora = " + Perdedora + " ";
                         SenalSheet1.Cells[int.Parse(Sesiones) + 1, c].Value = SenalSheet1.Cells[int.Parse(Sesiones) + 1, c].Value + texttoValoresAdicionales;
 
-                        for (int f = int.Parse(Sesiones); f >= 2; f--)
+                        if (Estrategia.Contains("Largo"))
                         {
-                            PrecioActual = decimal.Parse(workSheet.Cells[f, 2].Value.ToString());
-
-
-                            if (SenalSheet1.Cells[f, c].Value.ToString().Contains("NEUTRO"))
+                            for (int f = int.Parse(Sesiones); f >= 2; f--)
                             {
-                                Acciones = (Acciones * 1);
-                                Capitalneto = Capitalneto * 1;
-                                Ganancia = 0;
-                            }
 
-                            if (SenalSheet1.Cells[f, c].Value.ToString().Contains("SELL"))
-                            {
-                                if (Acciones != 0)
+
+
+                                PrecioActual = decimal.Parse(workSheet.Cells[f, 2].Value.ToString());
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("NEUTRO"))
                                 {
-                                    decimal CapitalnetoAnterior = Capitalneto; //antes de recalcular el Capitalneto almaceno el anterior
-                                    Capitalneto = (Acciones * PrecioActual) - (((Acciones * PrecioActual) / 100) * ComisionSalida);
-                                    Ganancia = (Capitalneto / CapitalnetoAnterior) - 1;
-                                    Acciones = 0;
+                                    Acciones = (Acciones * 1);
+                                    Capitalneto = Capitalneto * 1;
+                                    Ganancia = 0;
                                 }
-                                else
+
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("SELL"))
                                 {
-
-                                    Capitalneto = (Capitalneto * 1);
-                                    Acciones = 0;
+                                    if (Acciones != 0)
+                                    {
+                                        decimal CapitalnetoAnterior = Capitalneto; //antes de recalcular el Capitalneto almaceno el anterior
+                                        Capitalneto = (Acciones * PrecioActual) - (((Acciones * PrecioActual) / 100) * ComisionSalida);
+                                        Ganancia = (Capitalneto / CapitalnetoAnterior) - 1;
+                                        Acciones = 0;
+                                    }
+                                    else
+                                    {
+                                        Capitalneto = (Capitalneto * 1);
+                                        Acciones = 0;
+                                    }
                                 }
+
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("BUY"))
+                                {
+                                    Capitalneto = (Capitalneto - ((Capitalneto / 100) * ComisionEntrada));
+                                    Acciones = Capitalneto / PrecioActual;
+                                    Ganancia = 0;
+                                }
+
+                                if (Ganancia > 0)
+                                {
+                                    GanadoraPerdedora = "1";
+                                    Ganadora += 1;
+                                    Perdedora = 0;
+                                    CantGanadora += 1;
+                                }
+                                if (Ganancia < 0)
+                                {
+                                    GanadoraPerdedora = "-1";
+                                    Ganadora = 0;
+                                    Perdedora = (Perdedora - 1);
+                                    CantPerdedora += 1;
+                                }
+
+                                if (Ganancia == 0)
+                                {
+                                    GanadoraPerdedora = "0";
+                                }
+
+                                if (Acciones == 0)
+                                    DiasFueraMercado += 1;
+
+
+
+                                if (Ganancia > GananciaMaxima)
+                                    GananciaMaxima = Ganancia;
+
+                                if (Ganancia < PerdidaMaxima)
+                                    PerdidaMaxima = Ganancia;
+
+                                if (Ganadora > GanadoraMax)
+                                    GanadoraMax = Ganadora;
+
+                                if (Perdedora < PerdedoraMax)
+                                    PerdedoraMax = Perdedora;
+
+
+                                texttoValoresAdicionales = ", Precio = " + PrecioActual + ", Cant.Acciones = " + Decimal.Round(Acciones, 5) + ", Capital.Neto = " + Decimal.Round(Capitalneto, 5) + ", Ganancia.OP = " + Ganancia + ", Ganadoras/Perdedoras = " + GanadoraPerdedora + ", Racha Ganadora = " + Ganadora + ", Racha Perdedora = " + Perdedora + " ";
+
+                                SenalSheet1.Cells[f, c].Value = SenalSheet1.Cells[f, c].Value + texttoValoresAdicionales;
+
+
                             }
-
-                            if (SenalSheet1.Cells[f, c].Value.ToString().Contains("BUY"))
-                            {
-                                Capitalneto = (Capitalneto - ((Capitalneto / 100) * ComisionEntrada));
-                                Acciones = Capitalneto / PrecioActual;
-                                Ganancia = 0;
-                            }
-
-                            if (Ganancia > 0)
-                            {
-                                GanadoraPerdedora = "1";
-                                Ganadora += 1;
-                                Perdedora = 0;
-                                CantGanadora += 1;
-                            }
-                            if (Ganancia < 0)
-                            {
-                                GanadoraPerdedora = "-1";
-                                Ganadora = 0;
-                                Perdedora = (Perdedora - 1);
-                                CantPerdedora += 1;
-                            }
-
-                            if (Ganancia == 0)
-                            {
-                                GanadoraPerdedora = "0";
-                            }
-
-                            if (Acciones == 0)
-                                DiasFueraMercado += 1;
-
-
-
-                            if (Ganancia > GananciaMaxima)
-                                GananciaMaxima = Ganancia;
-
-                            if (Ganancia < PerdidaMaxima)
-                                PerdidaMaxima = Ganancia;
-
-                            if (Ganadora > GanadoraMax)
-                                GanadoraMax = Ganadora;
-
-                            if (Perdedora < PerdedoraMax)
-                                PerdedoraMax = Perdedora;
-
-
-                            texttoValoresAdicionales = ", Precio = " + PrecioActual + ", Cant.Acciones = " + Decimal.Round(Acciones, 5) + ", Capital.Neto = " + Decimal.Round(Capitalneto, 5) + ", Ganancia.OP = " + Ganancia + ", Ganadoras/Perdedoras = " + GanadoraPerdedora + ", Racha Ganadora = " + Ganadora + ", Racha Perdedora = " + Perdedora + " ";
-
-                            SenalSheet1.Cells[f, c].Value = SenalSheet1.Cells[f, c].Value + texttoValoresAdicionales;
-
                         }
+
+                        else //Cálculo para cortos
+                        {
+                            for (int f = int.Parse(Sesiones); f >= 2; f--)
+                            {
+
+
+
+                                PrecioActual = decimal.Parse(workSheet.Cells[f, 2].Value.ToString());
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("NEUTRO"))
+                                {
+                                    Acciones = (Acciones * 1);
+                                    Capitalneto = Capitalneto * 1;
+                                    Ganancia = 0;
+                                }
+
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("SELL"))
+                                {
+                                    Capitalneto = (Capitalneto - ((Capitalneto / 100) * ComisionEntrada));
+                                    Acciones = Capitalneto / PrecioActual;
+                                    Ganancia = 0;
+                                }
+
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("BUY"))
+                                {
+                                    if (Acciones != 0)
+                                    {
+                                        decimal CapitalnetoAnterior = Capitalneto; //antes de recalcular el Capitalneto almaceno el anterior
+                                        Capitalneto = (Acciones * PrecioActual) - (((Acciones * PrecioActual) / 100) * ComisionSalida);
+                                        Ganancia = (Capitalneto / CapitalnetoAnterior) - 1;
+                                        Acciones = 0;
+                                    }
+                                    else
+                                    {
+                                        Capitalneto = (Capitalneto * 1);
+                                        Acciones = 0;
+                                    }
+                                }
+
+                                if (Ganancia > 0)
+                                {
+                                    GanadoraPerdedora = "1";
+                                    Ganadora += 1;
+                                    Perdedora = 0;
+                                    CantGanadora += 1;
+                                }
+                                if (Ganancia < 0)
+                                {
+                                    GanadoraPerdedora = "-1";
+                                    Ganadora = 0;
+                                    Perdedora = (Perdedora - 1);
+                                    CantPerdedora += 1;
+                                }
+
+                                if (Ganancia == 0)
+                                {
+                                    GanadoraPerdedora = "0";
+                                }
+
+                                if (Acciones == 0)
+                                    DiasFueraMercado += 1;
+
+
+
+                                if (Ganancia > GananciaMaxima)
+                                    GananciaMaxima = Ganancia;
+
+                                if (Ganancia < PerdidaMaxima)
+                                    PerdidaMaxima = Ganancia;
+
+                                if (Ganadora > GanadoraMax)
+                                    GanadoraMax = Ganadora;
+
+                                if (Perdedora < PerdedoraMax)
+                                    PerdedoraMax = Perdedora;
+
+
+                                texttoValoresAdicionales = ", Precio = " + PrecioActual + ", Cant.Acciones = " + Decimal.Round(Acciones, 5) + ", Capital.Neto = " + Decimal.Round(Capitalneto, 5) + ", Ganancia.OP = " + Ganancia + ", Ganadoras/Perdedoras = " + GanadoraPerdedora + ", Racha Ganadora = " + Ganadora + ", Racha Perdedora = " + Perdedora + " ";
+
+                                SenalSheet1.Cells[f, c].Value = SenalSheet1.Cells[f, c].Value + texttoValoresAdicionales;
+
+
+                            }
+                        }
+                        
 
                         
                         FilaPestanaFinal += 1;
@@ -512,7 +601,7 @@ namespace FireBaseTesting.ActivosFinancieros
                 decimal CapitalInicial = decimal.Parse(Context.Request.QueryString["CapitalInicial"]);
                 decimal ComisionEntrada = decimal.Parse(Context.Request.QueryString["ComisionEntrada"]);
                 decimal ComisionSalida = decimal.Parse(Context.Request.QueryString["ComisionSalida"]);
-
+                string Estrategia = Context.Request.QueryString["Estrategia"];
 
                 int RapidaInicialColum = RapidaInicial;
                 int ColumInicial = 1;
@@ -572,82 +661,162 @@ namespace FireBaseTesting.ActivosFinancieros
                         decimal Acciones = 0;
                         decimal Capitalneto = CapitalInicial;
                         decimal Ganancia = 0;
-
-                        for (int f = int.Parse(Sesiones); f >= 2; f--)
+                        if (Estrategia.Contains("Largo"))
                         {
-                            PrecioActual = decimal.Parse(workSheet.Cells[f, 2].Value.ToString());
-
-
-                            if (SenalSheet1.Cells[f, c].Value.ToString().Contains("NEUTRO"))
+                            for (int f = int.Parse(Sesiones); f >= 2; f--)
                             {
-                                Acciones = (Acciones * 1);
-                                Capitalneto = Capitalneto * 1;
-                                Ganancia = 0;
-                            }
 
-                            if (SenalSheet1.Cells[f, c].Value.ToString().Contains("SELL"))
-                            {
-                                if (Acciones != 0)
+                                PrecioActual = decimal.Parse(workSheet.Cells[f, 2].Value.ToString());
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("NEUTRO"))
                                 {
-                                    decimal CapitalnetoAnterior = Capitalneto; //antes de recalcular el Capitalneto almaceno el anterior
-                                    Capitalneto = (Acciones * PrecioActual) - (((Acciones * PrecioActual) / 100) * ComisionSalida);
-                                    Ganancia = (Capitalneto / CapitalnetoAnterior) - 1;
-                                    Acciones = 0;
+                                    Acciones = (Acciones * 1);
+                                    Capitalneto = Capitalneto * 1;
+                                    Ganancia = 0;
                                 }
-                                else
+
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("SELL"))
                                 {
+                                    if (Acciones != 0)
+                                    {
+                                        decimal CapitalnetoAnterior = Capitalneto; //antes de recalcular el Capitalneto almaceno el anterior
+                                        Capitalneto = (Acciones * PrecioActual) - (((Acciones * PrecioActual) / 100) * ComisionSalida);
+                                        Ganancia = (Capitalneto / CapitalnetoAnterior) - 1;
+                                        Acciones = 0;
+                                    }
+                                    else
+                                    {
 
-                                    Capitalneto = (Capitalneto * 1);
-                                    Acciones = 0;
+                                        Capitalneto = (Capitalneto * 1);
+                                        Acciones = 0;
+                                    }
                                 }
+
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("BUY"))
+                                {
+                                    Capitalneto = (Capitalneto - ((Capitalneto / 100) * ComisionEntrada));
+                                    Acciones = Capitalneto / PrecioActual;
+                                    Ganancia = 0;
+                                }
+
+                                if (Ganancia > 0)
+                                {
+                                    GanadoraPerdedora = "1";
+                                    Ganadora += 1;
+                                    Perdedora = 0;
+                                    CantGanadora += 1;
+                                }
+                                if (Ganancia < 0)
+                                {
+                                    GanadoraPerdedora = "-1";
+                                    Ganadora = 0;
+                                    Perdedora = (Perdedora - 1);
+                                    CantPerdedora += 1;
+                                }
+
+                                if (Ganancia == 0)
+                                {
+                                    GanadoraPerdedora = "0";
+                                }
+
+                                if (Acciones == 0)
+                                    DiasFueraMercado += 1;
+
+
+
+                                if (Ganancia > GananciaMaxima)
+                                    GananciaMaxima = Ganancia;
+
+                                if (Ganancia < PerdidaMaxima)
+                                    PerdidaMaxima = Ganancia;
+
+                                if (Ganadora > GanadoraMax)
+                                    GanadoraMax = Ganadora;
+
+                                if (Perdedora < PerdedoraMax)
+                                    PerdedoraMax = Perdedora;
+
+
                             }
-
-                            if (SenalSheet1.Cells[f, c].Value.ToString().Contains("BUY"))
-                            {
-                                Capitalneto = (Capitalneto - ((Capitalneto / 100) * ComisionEntrada));
-                                Acciones = Capitalneto / PrecioActual;
-                                Ganancia = 0;
-                            }
-
-                            if (Ganancia > 0)
-                            {
-                                GanadoraPerdedora = "1";
-                                Ganadora += 1;
-                                Perdedora = 0;
-                                CantGanadora += 1;
-                            }
-                            if (Ganancia < 0)
-                            {
-                                GanadoraPerdedora = "-1";
-                                Ganadora = 0;
-                                Perdedora = (Perdedora - 1);
-                                CantPerdedora += 1;
-                            }
-
-                            if (Ganancia == 0)
-                            {
-                                GanadoraPerdedora = "0";
-                            }
-
-                            if (Acciones == 0)
-                                DiasFueraMercado += 1;
-
-
-
-                            if (Ganancia > GananciaMaxima)
-                                GananciaMaxima = Ganancia;
-
-                            if (Ganancia < PerdidaMaxima)
-                                PerdidaMaxima = Ganancia;
-
-                            if (Ganadora > GanadoraMax)
-                                GanadoraMax = Ganadora;
-
-                            if (Perdedora < PerdedoraMax)
-                                PerdedoraMax = Perdedora;
-
-
                         }
+                        else //cálculo diferente para cotos 
+                        {
+                            for (int f = int.Parse(Sesiones); f >= 2; f--)
+                            {
+
+                                PrecioActual = decimal.Parse(workSheet.Cells[f, 2].Value.ToString());
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("NEUTRO"))
+                                {
+                                    Acciones = (Acciones * 1);
+                                    Capitalneto = Capitalneto * 1;
+                                    Ganancia = 0;
+                                }
+
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("SELL"))
+                                {
+                                    Capitalneto = (Capitalneto - ((Capitalneto / 100) * ComisionEntrada));
+                                    Acciones = Capitalneto / PrecioActual;
+                                    Ganancia = 0;
+
+                                }
+
+                                if (SenalSheet1.Cells[f, c].Value.ToString().Contains("BUY"))
+                                {
+                                    if (Acciones != 0)
+                                    {
+                                        decimal CapitalnetoAnterior = Capitalneto; //antes de recalcular el Capitalneto almaceno el anterior
+                                        Capitalneto = (Acciones * PrecioActual) - (((Acciones * PrecioActual) / 100) * ComisionSalida);
+                                        Ganancia = (Capitalneto / CapitalnetoAnterior) - 1;
+                                        Acciones = 0;
+                                    }
+                                    else
+                                    {
+
+                                        Capitalneto = (Capitalneto * 1);
+                                        Acciones = 0;
+                                    }
+                                }
+
+                                if (Ganancia > 0)
+                                {
+                                    GanadoraPerdedora = "1";
+                                    Ganadora += 1;
+                                    Perdedora = 0;
+                                    CantGanadora += 1;
+                                }
+                                if (Ganancia < 0)
+                                {
+                                    GanadoraPerdedora = "-1";
+                                    Ganadora = 0;
+                                    Perdedora = (Perdedora - 1);
+                                    CantPerdedora += 1;
+                                }
+
+                                if (Ganancia == 0)
+                                {
+                                    GanadoraPerdedora = "0";
+                                }
+
+                                if (Acciones == 0)
+                                    DiasFueraMercado += 1;
+
+
+
+                                if (Ganancia > GananciaMaxima)
+                                    GananciaMaxima = Ganancia;
+
+                                if (Ganancia < PerdidaMaxima)
+                                    PerdidaMaxima = Ganancia;
+
+                                if (Ganadora > GanadoraMax)
+                                    GanadoraMax = Ganadora;
+
+                                if (Perdedora < PerdedoraMax)
+                                    PerdedoraMax = Perdedora;
+
+
+                            }
+                        }
+                        
 
                         SenalSheet2.Cells[FilaPestanaFinal, 1].Value = SenalSheet1.Cells[1, c].Value;
                         SenalSheet2.Cells[FilaPestanaFinal, 2].Value = diasTotales;
@@ -761,8 +930,6 @@ namespace FireBaseTesting.ActivosFinancieros
 
             try
             {
-
-
 
                 string Activo = Context.Request.QueryString["Activo"];
                 string Sesiones = Context.Request.QueryString["Sesiones"];
@@ -1053,7 +1220,7 @@ namespace FireBaseTesting.ActivosFinancieros
                     {
                         countCall += 1;
 
-                        //Aquí van las ejecuciones,  esto es solo para obtener el precio 
+                        //Aquí van las ejecuciones,  esto es solo para obtener la columna de precio 
                         if(LentaFinal == 1)
                         {
 
@@ -1237,7 +1404,7 @@ namespace FireBaseTesting.ActivosFinancieros
             
 
             var filteredList = from dta in dataTechnicaList
-                               where dta.count <= int.Parse(Sesiones)  //solo datos menores a la sessiones (número de registros a analizar)
+                               where dta.count <= int.Parse(Sesiones)  //solo datos menores a la sesiones (número de registros a analizar)
                                select dta;
 
             return (new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(filteredList));
@@ -1249,22 +1416,13 @@ namespace FireBaseTesting.ActivosFinancieros
         {
 
 
-            ExcelPackage excel = new ExcelPackage();
-            // name of the sheet 
+            ExcelPackage excel = new ExcelPackage();           
             var workSheet = excel.Workbook.Worksheets.Add("TechnicalAnalysis");
-
-            // setting the properties 
-            // of the work sheet  
             workSheet.TabColor = System.Drawing.Color.Black;
-            workSheet.DefaultRowHeight = 12;
-
-            // Setting the properties 
-            // of the first row 
+            workSheet.DefaultRowHeight = 12;           
             workSheet.Row(1).Height = 20;
             workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-            workSheet.Row(1).Style.Font.Bold = true;
-
-            // Header of the Excel sheet 
+            workSheet.Row(1).Style.Font.Bold = true;            
             workSheet.Cells[1, 1].Value = "Fecha";
             workSheet.Cells[2, 1].Value = "DateTimeValue";
             for (int i = 2; i <= 60; i++)
@@ -1275,11 +1433,6 @@ namespace FireBaseTesting.ActivosFinancieros
                 workSheet.Cells[1, 4].Value = "4";
             }
 
-
-            // Inserting the article data into excel 
-            // sheet by using the for each loop 
-            // As we have values to the first row  
-            // we will start with second row 
             int recordIndex = 2;
 
             foreach (var data in dataTechnicals)
@@ -1290,28 +1443,19 @@ namespace FireBaseTesting.ActivosFinancieros
                 recordIndex++;
             }
 
-            // By default, the column width is not  
-            // set to auto fit for the content 
-            // of the range, so we are using 
-            // AutoFit() method here.  
+          
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
-            workSheet.Column(3).AutoFit();
-
-
-            // file name with .xlsx extension  
+            workSheet.Column(3).AutoFit();          
             string p_strPath = context.Server.MapPath("DadaExcel/TechnicalAnalysis.xlsx").ToString();
-
             if (File.Exists(p_strPath))
                 File.Delete(p_strPath);
-
-            // Create excel file on physical disk  
+ 
             FileStream objFileStrm = File.Create(p_strPath);
             objFileStrm.Close();
-
-            // Write content to excel file  
+              
             File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
-            //Close Excel package 
+            
             excel.Dispose();
         }
 
